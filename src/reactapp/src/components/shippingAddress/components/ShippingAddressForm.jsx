@@ -1,80 +1,88 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useFormikContext } from 'formik';
 
-import { SaveButton } from '../../address';
+// import { SaveButton } from '../../address';
 import TextInput from '../../common/Form/TextInput';
 import SelectInput from '../../common/Form/SelectInput';
-import CancelButton from './shippingAddressForm/CancelButton';
-import {
-  isMostRecentAddress,
-  isValidCustomerAddressId,
-} from '../../../utils/address';
+// import CancelButton from './shippingAddressForm/CancelButton';
+// import {
+//   isMostRecentAddress,
+//   isValidCustomerAddressId,
+// } from '../../../utils/address';
 import { __ } from '../../../i18n';
-import { _keys } from '../../../utils';
-import LocalStorage from '../../../utils/localStorage';
+// import { _keys } from '../../../utils';
+// import LocalStorage from '../../../utils/localStorage';
 import useCountryState from '../../address/hooks/useCountryState';
-import useAddressWrapper from '../../address/hooks/useAddressWrapper';
-import useFormValidateThenSubmit from '../../../hook/useFormValidateThenSubmit';
-import useShippingAddressAppContext from '../hooks/useShippingAddressAppContext';
+// import useAddressWrapper from '../../address/hooks/useAddressWrapper';
+// import useFormValidateThenSubmit from '../../../hook/useFormValidateThenSubmit';
+// import useShippingAddressAppContext from '../hooks/useShippingAddressAppContext';
 import useShippingAddressFormikContext from '../hooks/useShippingAddressFormikContext';
+import NovaPoshtaCitySelect from './novaPoshta/NovaPoshtaCitySelect';
+import NovaPoshtaWarehouseSelect from './novaPoshta/NovaPoshtaWarehouseSelect';
+import NovaPoshtaAddressFieldSet from './novaPoshta/NovaPoshtaAddressFieldSet';
 
 function ShippingAddressForm() {
   const {
     fields,
-    formId,
-    viewMode,
+    // formId,
+    // viewMode,
     formikData,
-    isNewAddress,
+    // isNewAddress,
     handleKeyDown,
-    submitHandler,
-    isBillingSame,
+    // submitHandler,
+    // isBillingSame,
     setFieldValue,
-    shippingValues,
+    // shippingValues,
     selectedCountry,
-    selectedAddress,
-    setIsNewAddress,
+    // selectedAddress,
+    // setIsNewAddress,
     setFieldTouched,
-    validationSchema,
-    setSelectedAddress,
-    isBillingFormTouched,
+    // validationSchema,
+    // setSelectedAddress,
+    // isBillingFormTouched,
   } = useShippingAddressFormikContext();
-  const { isLoggedIn } = useShippingAddressAppContext();
-  const { reCalculateMostRecentAddressOptions } = useAddressWrapper();
+  // const { isLoggedIn } = useShippingAddressAppContext();
+  // const { reCalculateMostRecentAddressOptions } = useAddressWrapper();
   const { countryOptions, stateOptions, hasStateOptions } = useCountryState({
     fields,
     formikData,
   });
-  const formSubmitHandler = useFormValidateThenSubmit({
-    formId,
-    formikData,
-    submitHandler,
-    validationSchema,
-  });
+  // const formSubmitHandler = useFormValidateThenSubmit({
+  //   formId,
+  //   formikData,
+  //   submitHandler,
+  //   // validationSchema,
+  // });
 
-  const saveAddressAction = async () => {
-    await formSubmitHandler();
+  // const saveAddressAction = async () => {
+  //   await formSubmitHandler();
 
-    if (!isLoggedIn || isValidCustomerAddressId(selectedAddress)) {
-      return;
-    }
+  //   if (!isLoggedIn || isValidCustomerAddressId(selectedAddress)) {
+  //     return;
+  //   }
 
-    if (isNewAddress) {
-      const recentAddressList = LocalStorage.getMostlyRecentlyUsedAddressList();
-      const newAddressId = `new_address_${_keys(recentAddressList).length + 1}`;
-      LocalStorage.addAddressToMostRecentlyUsedList(shippingValues);
-      setIsNewAddress(false);
-      setSelectedAddress(newAddressId);
-      LocalStorage.saveCustomerAddressInfo(newAddressId, isBillingSame);
-      reCalculateMostRecentAddressOptions();
-    }
+  //   if (isNewAddress) {
+  //     const recentAddressList = LocalStorage.getMostlyRecentlyUsedAddressList();
+  //     const newAddressId = `new_address_${_keys(recentAddressList).length + 1}`;
+  //     LocalStorage.addAddressToMostRecentlyUsedList(shippingValues);
+  //     setIsNewAddress(false);
+  //     setSelectedAddress(newAddressId);
+  //     LocalStorage.saveCustomerAddressInfo(newAddressId, isBillingSame);
+  //     reCalculateMostRecentAddressOptions();
+  //   }
 
-    if (isMostRecentAddress(selectedAddress)) {
-      LocalStorage.updateMostRecentlyAddedAddress(
-        selectedAddress,
-        shippingValues
-      );
-      reCalculateMostRecentAddressOptions();
-    }
-  };
+  //   if (isMostRecentAddress(selectedAddress)) {
+  //     LocalStorage.updateMostRecentlyAddedAddress(
+  //       selectedAddress,
+  //       shippingValues
+  //     );
+  //     reCalculateMostRecentAddressOptions();
+  //   }
+  // };
+
+  const { values } = useFormikContext();
+
+  const selectedShippingMethod = values?.shipping_method?.methodCode;
 
   const handleCountryChange = (event) => {
     const newValue = event.target.value;
@@ -84,13 +92,96 @@ function ShippingAddressForm() {
     setFieldValue(fields.region, '');
   };
 
-  if (viewMode) {
-    return <></>;
-  }
+  ///
+  const [selectedCityId, setSelectedCityId] = useState('');
+  const handleChangeCityId = (id) => {
+    setSelectedCityId(id);
+  };
+  // const { placeOrderInit, setPlaceOrderInit } = useCheckoutFormContext();
+  // console.log(
+  //   `placeOrder: ${placeOrderInit}`,
+  //   `setPlaceOrderInit ${setPlaceOrderInit}`
+  // );
+  ///
+  // React.useEffect(() => {
+  //   if (placeOrderInit) {
+  //     submitHandler();
+  //   }
+  // }, [placeOrderInit]);
+
+  // if (viewMode) {
+  //   return <></>;
+  // }
 
   return (
     <>
       <div className="py-2">
+        {/* <TextInput
+          required
+          label={__('Населённый пункт')}
+          formikData={formikData}
+          onKeyDown={handleKeyDown}
+          placeholder={__('Street')}
+          name={`${fields.street}[0]`}
+        /> */}
+        {selectedShippingMethod === 'novaposhta_to_warehouse' && (
+          <div>
+            <NovaPoshtaCitySelect
+              formikData={formikData}
+              // name={`${fields.street}[1]`}
+              name={`${fields.street}[1]`}
+              handleChangeCityId={handleChangeCityId}
+            />
+            <NovaPoshtaWarehouseSelect
+              selectedCityId={selectedCityId}
+              formikData={formikData}
+              name={`${fields.street}[2]`}
+            />
+          </div>
+        )}
+        {selectedShippingMethod === 'novaposhta_to_door' && (
+          <div>
+            <NovaPoshtaCitySelect
+              formikData={formikData}
+              // name={`${fields.street}[0]`}
+              name={`${fields.street}[1]`}
+              handleChangeCityId={handleChangeCityId}
+            />
+            <NovaPoshtaAddressFieldSet />
+          </div>
+        )}
+        <TextInput
+          required
+          name={fields.firstname}
+          formikData={formikData}
+          label={__('Имя')}
+          onKeyDown={handleKeyDown}
+          placeholder={__('First name')}
+        />
+        <TextInput
+          required
+          name={fields.lastname}
+          label={__('Фамилия')}
+          formikData={formikData}
+          onKeyDown={handleKeyDown}
+          placeholder={__('Last name')}
+        />
+        <TextInput
+          required
+          label={__('Телефон (обязательно)')}
+          name={fields.phone}
+          formikData={formikData}
+          onKeyDown={handleKeyDown}
+          placeholder={__('+32 000 000 000')}
+        />
+        <TextInput
+          required
+          name={`${fields.street}[0]`}
+          formikData={formikData}
+          label={__('Street')}
+          onKeyDown={handleKeyDown}
+          placeholder={__('Street')}
+        />
         <TextInput
           required
           label={__('Company')}
@@ -98,30 +189,6 @@ function ShippingAddressForm() {
           formikData={formikData}
           onKeyDown={handleKeyDown}
           placeholder={__('Company')}
-        />
-        <TextInput
-          required
-          name={fields.firstname}
-          formikData={formikData}
-          label={__('First name')}
-          onKeyDown={handleKeyDown}
-          placeholder={__('First name')}
-        />
-        <TextInput
-          required
-          name={fields.lastname}
-          label={__('Last name')}
-          formikData={formikData}
-          onKeyDown={handleKeyDown}
-          placeholder={__('Last name')}
-        />
-        <TextInput
-          required
-          label={__('Street')}
-          formikData={formikData}
-          onKeyDown={handleKeyDown}
-          placeholder={__('Street')}
-          name={`${fields.street}[0]`}
         />
         <TextInput
           required
@@ -157,23 +224,17 @@ function ShippingAddressForm() {
           formikData={formikData}
           isHidden={!selectedCountry || !hasStateOptions}
         />
-
-        <TextInput
-          required
-          label={__('Phone')}
-          name={fields.phone}
-          formikData={formikData}
-          onKeyDown={handleKeyDown}
-          placeholder={__('+32 000 000 000')}
-        />
       </div>
 
       <div className="flex items-center justify-around mt-2">
-        <CancelButton />
+        {/* <CancelButton />
         <SaveButton
           isFormValid={isBillingFormTouched}
           actions={{ saveAddress: saveAddressAction }}
         />
+        <button type="button" onClick={() => submitHandler()}>
+          123123
+        </button> */}
       </div>
     </>
   );

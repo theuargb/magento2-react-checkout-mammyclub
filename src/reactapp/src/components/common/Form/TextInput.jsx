@@ -1,6 +1,7 @@
 import React from 'react';
 import _get from 'lodash.get';
-import { bool, string } from 'prop-types';
+import { bool, string, func, shape } from 'prop-types';
+
 import { ErrorMessage, Field } from 'formik';
 
 import { _replace } from '../../../utils';
@@ -18,6 +19,7 @@ function TextInput({
   className,
   formikData,
   placeholder,
+  actions,
   ...rest
 }) {
   const {
@@ -64,6 +66,7 @@ function TextInput({
           const newValue = event.target.value;
           setFieldTouched(name, newValue);
           setFieldValue(name, newValue);
+          actions.saveAddress();
         }}
         className={`form-input max-w-md ${
           hasError ? 'border-dashed border-red-500' : ''
@@ -87,6 +90,9 @@ TextInput.propTypes = {
   placeholder: string,
   name: string.isRequired,
   formikData: formikDataShape.isRequired,
+  actions: shape({
+    saveAddress: func,
+  }),
 };
 
 TextInput.defaultProps = {
@@ -99,6 +105,9 @@ TextInput.defaultProps = {
   required: false,
   placeholder: '',
   isHidden: false,
+  actions: {
+    saveAddress: () => {},
+  },
 };
 
 export default TextInput;

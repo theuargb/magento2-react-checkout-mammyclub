@@ -78,6 +78,7 @@ export default function fetchGuestCartModifier(result, dataMethod) {
   const paymentMethods = _get(cartData, 'available_payment_methods', []);
   const selectedPaymentMethod = _get(cartData, 'selected_payment_method', {});
   const appliedCoupon = _get(cartData, 'applied_coupons[0].code') || '';
+  console.log(cartData);
 
   return {
     id: cartData.id,

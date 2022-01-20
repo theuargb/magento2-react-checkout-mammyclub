@@ -9,7 +9,7 @@ import { Form } from 'formik';
 import { node } from 'prop-types';
 
 import {
-  initialCountry,
+  // initialCountry,
   isCartAddressValid,
   isValidCustomerAddressId,
 } from '../../../utils/address';
@@ -40,14 +40,16 @@ const initialValues = {
   zipcode: '',
   city: '',
   region: '',
-  country: initialCountry,
+  country: '',
+  city_novaposhta_ref: '',
+  warehouse_novaposhta_id: '',
 };
 
 const requiredMessage = __('%1 is required');
 
 const initValidationSchema = {
-  company: YupString().required(requiredMessage),
-  firstname: YupString().required(requiredMessage),
+  company: YupString(),
+  firstname: YupString(),
   lastname: YupString().required(requiredMessage),
   street: YupArray().test(
     'street1Required',
@@ -60,6 +62,7 @@ const initValidationSchema = {
   region: YupString().nullable(),
   country: YupString().required(requiredMessage),
   isSameAsShipping: YupBoolean(),
+  city_novaposhta_ref: YupString(),
 };
 
 const addressIdInCache = _toString(LocalStorage.getCustomerShippingAddressId());

@@ -60,11 +60,9 @@ export function modifyShippingMethods(addressList) {
 
 export function modifyShippingAddressList(addressList) {
   const shippingAddress = _get(addressList, '0');
-
   if (!shippingAddress) {
     return {};
   }
-
   const {
     city,
     street,

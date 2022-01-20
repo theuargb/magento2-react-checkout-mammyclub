@@ -1,11 +1,9 @@
 import React from 'react';
-
-import RadioInput from '../../common/Form/RadioInput';
-import { __ } from '../../../i18n';
-import { _objToArray } from '../../../utils';
+import SelectInput from './ShippingMethodSelect';
 import { SHIPPING_METHOD } from '../../../config';
 import useShippingMethodFormContext from '../hooks/useShippingMethodFormContext';
 import useShippingMethodCartContext from '../hooks/useShippingMethodCartContext';
+import { _objToArray } from '../../../utils';
 
 function ShippingMethodList() {
   const {
@@ -16,9 +14,12 @@ function ShippingMethodList() {
     setFieldTouched,
   } = useShippingMethodFormContext();
   const { methodsAvailable, methodList } = useShippingMethodCartContext();
+
   const { carrierCode: methodCarrierCode, methodCode: methodMethodCode } =
     selectedMethod || {};
   const selectedMethodId = `${methodCarrierCode}__${methodMethodCode}`;
+
+  // const [selectedShippingMethod, changeShippingMethod] = useState('');
 
   const handleShippingMethodSelection = async (event) => {
     const methodSelected = methodList[event.target.value];
@@ -40,27 +41,12 @@ function ShippingMethodList() {
 
   return (
     <div className="py-4">
-      <ul>
-        {_objToArray(methodList).map((method) => {
-          const { id: methodId, carrierTitle, methodTitle, price } = method;
-          const methodName = `${carrierTitle} (${methodTitle}): `;
-
-          return (
-            <li key={methodId} className="flex">
-              <RadioInput
-                value={methodId}
-                label={methodName}
-                name="shippingMethod"
-                checked={selectedMethodId === methodId}
-                onChange={handleShippingMethodSelection}
-              />
-              <span className="pt-2 pl-3 font-semibold">
-                {__('Price: %1', price)}
-              </span>
-            </li>
-          );
-        })}
-      </ul>
+      <SelectInput
+        label="Способ доставки"
+        name="shippingMethod"
+        options={_objToArray(methodList)}
+        onChange={handleShippingMethodSelection}
+      />
     </div>
   );
 }

@@ -74,8 +74,8 @@ function CheckoutForm() {
                 <AddressWrapper>
                   {!isVirtualCart && (
                     <>
-                      <ShippingAddress />
                       <ShippingMethodsForm />
+                      <ShippingAddress />
                     </>
                   )}
                   <BillingAddress />

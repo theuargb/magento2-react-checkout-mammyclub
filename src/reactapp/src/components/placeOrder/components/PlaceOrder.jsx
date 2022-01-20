@@ -20,27 +20,50 @@ import {
   hasTermsAndConditionsAgreed,
 } from '../utility';
 import { __ } from '../../../i18n';
-import usePlaceOrder from '../hooks/usePlaceOrder';
 import useAddressSave from '../hooks/useAddressSave';
 import useEmailInfoSave from '../hooks/useEmailInfoSave';
 import usePlaceOrderAppContext from '../hooks/usePlaceOrderAppContext';
+import usePlaceOrder from '../hooks/usePlaceOrder';
 import usePlaceOrderCartContext from '../hooks/usePlaceOrderCartContext';
 import { focusOnFormErrorElement, scrollToElement } from '../../../utils/form';
+import { _makePromise, _emptyFunc } from '../../../utils';
 
 const customerWantsToSignInField = `${LOGIN_FORM}.customerWantsToSignIn`;
 
 function PlaceOrder() {
+  const validateThenPlaceOrder = usePlaceOrder();
   const { values, errors } = useFormikContext();
   const saveEmailAddressInfo = useEmailInfoSave();
   const saveBillingShippingAddress = useAddressSave();
-  const validateThenPlaceOrder = usePlaceOrder();
   const { isVirtualCart } = usePlaceOrderCartContext();
   const { setMessage, setErrorMessage, setPageLoader } =
     usePlaceOrderAppContext();
 
+  const { addCartShippingAddress, setCartBillingAddress } =
+    usePlaceOrderCartContext();
+  const addressToSave = values?.shipping_address;
+  // const isBillingSame = values?.billing_address?.isSameAsShipping;
+
+  /* ОБРАБОТЧИК ПОЛЕЙ ShippingAddress */
+  const handleSubmitAddressForm = async () => {
+    let updateBillingAddress = _emptyFunc();
+    const updateShippingAddress = _makePromise(
+      addCartShippingAddress,
+      addressToSave
+    );
+    // if (isBillingSame) {
+    updateBillingAddress = _makePromise(setCartBillingAddress, {
+      ...addressToSave,
+    });
+    // }
+
+    await updateShippingAddress();
+    await updateBillingAddress();
+  };
+  /*  ========================================================  */
+
   const handlePerformPlaceOrder = async () => {
     setMessage(false);
-
     if (hasLoginErrors(errors)) {
       const customerWantsToSignIn = _get(values, customerWantsToSignInField);
       setErrorMessage(
@@ -68,6 +91,9 @@ function PlaceOrder() {
 
     if (hasShippingMethodErrors(errors)) {
       setErrorMessage(__('Please select your shipping method.'));
+      //  УДАЛИТЬ ПОТОМ
+      await handleSubmitAddressForm();
+      /*  ======================= */
       scrollToElement(SHIPPING_METHOD);
       return;
     }
@@ -86,9 +112,15 @@ function PlaceOrder() {
 
     try {
       setPageLoader(true);
+
+      await handleSubmitAddressForm();
+
       await saveEmailAddressInfo(values);
+
       await saveBillingShippingAddress(values);
+
       await validateThenPlaceOrder(values);
+
       setPageLoader(false);
     } catch (error) {
       console.error(error);
