@@ -33,7 +33,7 @@ function ShippingAddressForm() {
     // isBillingSame,
     setFieldValue,
     // shippingValues,
-    selectedCountry,
+    // selectedCountry,
     // selectedAddress,
     // setIsNewAddress,
     setFieldTouched,
@@ -43,7 +43,8 @@ function ShippingAddressForm() {
   } = useShippingAddressFormikContext();
   // const { isLoggedIn } = useShippingAddressAppContext();
   // const { reCalculateMostRecentAddressOptions } = useAddressWrapper();
-  const { countryOptions, stateOptions, hasStateOptions } = useCountryState({
+  // const { countryOptions, stateOptions, hasStateOptions } = useCountryState({
+  const { countryOptions } = useCountryState({
     fields,
     formikData,
   });
@@ -79,7 +80,6 @@ function ShippingAddressForm() {
   //     reCalculateMostRecentAddressOptions();
   //   }
   // };
-
   const { values } = useFormikContext();
 
   const selectedShippingMethod = values?.shipping_method?.methodCode;
@@ -97,21 +97,6 @@ function ShippingAddressForm() {
   const handleChangeCityId = (id) => {
     setSelectedCityId(id);
   };
-  // const { placeOrderInit, setPlaceOrderInit } = useCheckoutFormContext();
-  // console.log(
-  //   `placeOrder: ${placeOrderInit}`,
-  //   `setPlaceOrderInit ${setPlaceOrderInit}`
-  // );
-  ///
-  // React.useEffect(() => {
-  //   if (placeOrderInit) {
-  //     submitHandler();
-  //   }
-  // }, [placeOrderInit]);
-
-  // if (viewMode) {
-  //   return <></>;
-  // }
 
   return (
     <>
@@ -174,7 +159,7 @@ function ShippingAddressForm() {
           onKeyDown={handleKeyDown}
           placeholder={__('+32 000 000 000')}
         />
-        <TextInput
+        {/* <TextInput
           required
           name={`${fields.street}[0]`}
           formikData={formikData}
@@ -205,7 +190,7 @@ function ShippingAddressForm() {
           formikData={formikData}
           placeholder={__('City')}
           onKeyDown={handleKeyDown}
-        />
+        /> */}
 
         <SelectInput
           required
@@ -216,14 +201,14 @@ function ShippingAddressForm() {
           onChange={handleCountryChange}
         />
 
-        <SelectInput
+        {/* <SelectInput
           required
           label={__('State')}
           name={fields.region}
           options={stateOptions}
           formikData={formikData}
           isHidden={!selectedCountry || !hasStateOptions}
-        />
+        /> */}
       </div>
 
       <div className="flex items-center justify-around mt-2">

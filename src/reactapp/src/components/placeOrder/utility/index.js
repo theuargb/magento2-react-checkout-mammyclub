@@ -19,7 +19,7 @@ export function hasLoginErrors(errors) {
 export function hasShippingAddressErrors(errors) {
   const shippingAddressErrors = _get(errors, SHIPPING_ADDR_FORM);
   console.log(shippingAddressErrors);
-  return !_isObjEmpty(shippingAddressErrors);
+  // return !_isObjEmpty(shippingAddressErrors);
 }
 
 export function hasBillingAddressErrors(errors, values, isVirtualCart) {

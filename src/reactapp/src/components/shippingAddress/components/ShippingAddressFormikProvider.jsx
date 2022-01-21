@@ -32,15 +32,15 @@ import useShippingAddressCartContext from '../hooks/useShippingAddressCartContex
 import useFillDefaultAddresses from '../hooks/useFillDefaultAddresses';
 
 const initialValues = {
-  company: '',
+  company: '\u00A0',
   firstname: '',
   lastname: '',
-  street: [''],
+  street: ['\u00A0'],
   phone: '',
-  zipcode: '',
-  city: '',
-  region: '',
-  country: '',
+  zipcode: '\u00A0',
+  city: '\u00A0',
+  region: '\u00A0',
+  country: '\u00A0',
   city_novaposhta_ref: '',
   warehouse_novaposhta_id: '',
 };
