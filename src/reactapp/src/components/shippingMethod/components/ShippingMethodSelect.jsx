@@ -19,7 +19,7 @@ function ShippingMethodSelect({
   return (
     <div className={`mt-2 form-control ${isHidden && 'hidden'}`}>
       <div className="flex items-center justify-between">
-        <label htmlFor={inputId} className="md:text-sm">
+        <label htmlFor={inputId} className="text-gray text-base mb-0.5">
           {label}
           {required && <sup> *</sup>}
         </label>
@@ -37,14 +37,14 @@ function ShippingMethodSelect({
         name={name}
         id={inputId}
         placeholder={placeholder}
-        className={`w-full p-2 border form-select xs:block max-w-md `}
+        className="w-full border form-select xs:block form-input form-select text-base"
         {...rest}
       >
-        <option value="">{__('-- Please Select --')}</option>
+        <option value="">{__('-Пожалуйста, выберите-')}</option>
         {options.map((option) => {
           const methodName = `${option.carrierTitle} (${option.methodTitle}): `;
           return (
-            <option key={option.value} value={option.id}>
+            <option key={option.value} value={option.id} className="p-0 m-0">
               {methodName}
             </option>
           );

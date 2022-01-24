@@ -5,6 +5,8 @@ import { prepareFullName } from '../../../utils/customer';
 
 export function modifySelectedShippingMethod(addressList) {
   const selectedMethod = _get(addressList, '0.selected_shipping_method');
+  // const additionalInfo = _get(addressList);
+  // console.log(additionalInfo);
 
   if (!selectedMethod) {
     return {};

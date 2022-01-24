@@ -32,25 +32,29 @@ import useShippingAddressCartContext from '../hooks/useShippingAddressCartContex
 import useFillDefaultAddresses from '../hooks/useFillDefaultAddresses';
 
 const initialValues = {
+  /*  Пробелы в начальные значения полей добавлены для того, чтобы при первой подгрузке
+  страницы бек отдал возможные методы оплаты и доставки, т.к без заполненных полей 
+  Shipping address данные о методах оплаты и оставки бек не возвращает  */
   company: '\u00A0',
-  firstname: '',
-  lastname: '',
+  firstname: '\u00A0',
+  lastname: '\u00A0',
   street: ['\u00A0'],
-  phone: '',
+  phone: '\u00A0',
   zipcode: '\u00A0',
   city: '\u00A0',
   region: '\u00A0',
-  country: '\u00A0',
+  country: 'UA',
   city_novaposhta_ref: '',
   warehouse_novaposhta_id: '',
+  additional: '',
 };
 
-const requiredMessage = __('%1 is required');
+const requiredMessage = __('%1 - обязательное поле');
 
 const initValidationSchema = {
   company: YupString(),
   firstname: YupString(),
-  lastname: YupString().required(requiredMessage),
+  lastname: YupString(),
   street: YupArray().test(
     'street1Required',
     requiredMessage,

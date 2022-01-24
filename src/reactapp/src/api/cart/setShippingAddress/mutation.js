@@ -11,7 +11,8 @@ mutation setShippingAddress(
   $region: String,
   $zipcode: String!,
   $country: String!,
-  $phone: String!
+  $phone: String!,
+  $orderComment: String
 ) {
   setShippingAddressesOnCart(
     input: {
@@ -28,6 +29,9 @@ mutation setShippingAddress(
           country_code: $country
           telephone: $phone
           save_in_address_book: false
+        }
+        additional:{
+          comment: $orderComment
         }
       }]
     }

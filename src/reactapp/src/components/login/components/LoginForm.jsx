@@ -1,32 +1,32 @@
 import React from 'react';
 import _get from 'lodash.get';
 
-import Button from '../../common/Button';
+// import Button from '../../common/Button';
 import TextInput from '../../common/Form/TextInput';
 import { __ } from '../../../i18n';
 import useLoginFormContext from '../hooks/useLoginFormContext';
-import useFormValidateThenSubmit from '../../../hook/useFormValidateThenSubmit';
+// import useFormValidateThenSubmit from '../../../hook/useFormValidateThenSubmit';
 
 function LoginForm() {
   const {
     fields,
-    formId,
+    // formId,
     editMode,
     formikData,
-    submitHandler,
+    // submitHandler,
     handleKeyDown,
     loginFormValues,
-    validationSchema,
-    formSectionTouched,
+    // validationSchema,
+    // formSectionTouched,
   } = useLoginFormContext();
   const customerWantsToSignIn = _get(loginFormValues, 'customerWantsToSignIn');
-  const isLoginFormTouched = _get(formSectionTouched, 'email') || false;
-  const handleButtonClick = useFormValidateThenSubmit({
-    formId,
-    formikData,
-    submitHandler,
-    validationSchema,
-  });
+  // const isLoginFormTouched = _get(formSectionTouched, 'email') || false;
+  // const handleButtonClick = useFormValidateThenSubmit({
+  //   formId,
+  //   formikData,
+  //   submitHandler,
+  //   validationSchema,
+  // });
 
   if (!editMode) {
     return <></>;
@@ -34,11 +34,11 @@ function LoginForm() {
 
   return (
     <>
-      <div className="py-2">
+      <div>
         <TextInput
           required
           type="email"
-          label={__('Email')}
+          label={__('Электронная почта')}
           name={fields.email}
           formikData={formikData}
           onKeyDown={handleKeyDown}
@@ -60,7 +60,7 @@ function LoginForm() {
           </div>
         )}
       </div>
-      <div className="flex items-center justify-center">
+      {/* <div className="flex items-center justify-center">
         <Button
           variant="primary"
           click={handleButtonClick}
@@ -68,7 +68,7 @@ function LoginForm() {
         >
           {customerWantsToSignIn ? __('Sign In') : __('Update')}
         </Button>
-      </div>
+      </div> */}
     </>
   );
 }

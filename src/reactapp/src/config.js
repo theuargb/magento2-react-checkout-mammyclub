@@ -66,7 +66,7 @@ export const config = {
   },
   storageSource: activeSource,
   defaultPaymentMethod: 'checkmo',
-  defaultCountry: env.defaultCountry || 'US',
+  defaultCountry: env.defaultCountry || 'UA',
   isProductionMode: nodeEnv === 'production',
   isDevelopmentMode: nodeEnv === 'development',
   cartId: getConfigFromLocalStorage(activeSource.cartId),
@@ -85,3 +85,5 @@ export const BILLING_ADDR_FORM = 'billing_address';
 export const PAYMENT_METHOD_FORM = 'payment_method';
 export const SHIPPING_ADDR_FORM = 'shipping_address';
 export const CHECKOUT_AGREEMENTS_FORM = 'agreements';
+
+export const ADDITIONALS_FORM = 'additionals';

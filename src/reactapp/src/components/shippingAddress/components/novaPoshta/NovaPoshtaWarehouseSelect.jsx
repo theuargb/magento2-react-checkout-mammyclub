@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { string } from 'prop-types';
+import { string, object } from 'prop-types';
 import Select from 'react-select';
 import { formikDataShape } from '../../../../utils/propTypes';
 
 const options = [{ value: 'void', label: 'Введите название города....' }];
 
-function NovaPoshtaWarehouseSelect({ selectedCityId, name, formikData }) {
+function NovaPoshtaWarehouseSelect({
+  selectedCityId,
+  name,
+  formikData,
+  customStyles,
+}) {
   const [selectList, setSelectList] = useState(options);
   const { setFieldValue, setFieldTouched } = formikData;
 
@@ -40,7 +45,15 @@ function NovaPoshtaWarehouseSelect({ selectedCityId, name, formikData }) {
 
   return (
     <div className="react-select">
-      <Select options={selectList} onChange={(e) => handleFormChange(e)} />
+      <p className="text-base text-gray mb-0.5">
+        Номер склада Новой Почты <br /> (українською мовою):
+      </p>
+      <Select
+        options={selectList}
+        placeholder=""
+        onChange={(e) => handleFormChange(e)}
+        styles={customStyles}
+      />
     </div>
   );
 }
@@ -49,6 +62,11 @@ NovaPoshtaWarehouseSelect.propTypes = {
   selectedCityId: string.isRequired,
   formikData: formikDataShape.isRequired,
   name: string.isRequired,
+  customStyles: object,
+};
+
+NovaPoshtaWarehouseSelect.defaultProps = {
+  customStyles: {},
 };
 
 export default NovaPoshtaWarehouseSelect;

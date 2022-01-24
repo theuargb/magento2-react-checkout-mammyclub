@@ -1,28 +1,36 @@
 import React from 'react';
 
 import Card from '../common/Card';
-import ToggleBox from '../common/ToggleBox';
 import PaymentMethodList from './components/PaymentMethodList';
 import NoPaymentMethodInfoBox from './components/NoPaymentMethodInfoBox';
 import PaymentMethodFormManager from './components/PaymentMethodFormManager';
-import { __ } from '../../i18n';
 import { formikDataShape } from '../../utils/propTypes';
 import customRenderers from '../../paymentMethods/customRenderers';
 import usePaymentMethodCartContext from './hooks/usePaymentMethodCartContext';
+import useAppContext from '../../hook/useAppContext';
+// import LiqPayWidget from './components/LiqPayWidget';
 
 const PaymentMethodMemorized = React.memo(({ formikData }) => {
   const { isPaymentAvailable } = usePaymentMethodCartContext();
+  const { setPageLoader } = useAppContext();
+
+  React.useEffect(() => {
+    if (!isPaymentAvailable) {
+      setPageLoader(true);
+    } else {
+      setPageLoader(false);
+    }
+  }, [isPaymentAvailable]);
 
   return (
     <PaymentMethodFormManager formikData={formikData}>
       <Card classes={isPaymentAvailable ? '' : 'opacity-75'}>
-        <ToggleBox show title={__('Payment Methods')}>
-          {isPaymentAvailable ? (
-            <PaymentMethodList methodRenderers={customRenderers} />
-          ) : (
-            <NoPaymentMethodInfoBox />
-          )}
-        </ToggleBox>
+        {isPaymentAvailable ? (
+          <PaymentMethodList methodRenderers={customRenderers} />
+        ) : (
+          <NoPaymentMethodInfoBox />
+        )}
+        {/* <LiqPayWidget /> */}
       </Card>
     </PaymentMethodFormManager>
   );

@@ -8,10 +8,10 @@ function StickyRightSidebar({ children }) {
 
   return (
     <div
-      className="sticky self-start w-full lg:w-2/5"
+      className="sticky self-start w-full lg:w-1/2 border border-container"
       style={{ top: message ? '100px' : '0px' }}
     >
-      <div className="space-y-2">{children}</div>
+      <div className="">{children}</div>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import _get from 'lodash.get';
 // import _set from 'lodash.set';
 import { useFormikContext } from 'formik';
+import { node } from 'prop-types';
 
 import ShippingAddressMemorized from './ShippingAddressMemorized';
 // import { __ } from '../../i18n';
@@ -21,7 +22,7 @@ import { billingSameAsShippingField } from '../../utils/address';
  * Using useFormikContext hook render the component almost always. So use the
  * memorized data here inside the child components.
  */
-function ShippingAddress() {
+function ShippingAddress({ children }) {
   const { values } = useFormikContext();
   const sectionFormikData = useFormikMemorizer(SHIPPING_ADDR_FORM);
   const isBillingSame = !!_get(values, billingSameAsShippingField);
@@ -40,7 +41,6 @@ function ShippingAddress() {
   //     __('%1 is required', 'Street Address')
   //   );
   // }
-
   const shippingFormikData = useMemo(
     () => ({
       ...sectionFormikData,
@@ -62,7 +62,15 @@ function ShippingAddress() {
     ]
   );
 
-  return <ShippingAddressMemorized formikData={shippingFormikData} />;
+  return (
+    <ShippingAddressMemorized formikData={shippingFormikData}>
+      {children}
+    </ShippingAddressMemorized>
+  );
 }
+
+ShippingAddress.propTypes = {
+  children: node.isRequired,
+};
 
 export default ShippingAddress;

@@ -12,9 +12,9 @@ function UserInfoBox() {
     useLoginFormContext();
   const customerEmail = _get(customer, 'email', '');
 
-  if (editMode) {
-    return <></>;
-  }
+  // if (editMode) {
+  //   return <></>;
+  // }
 
   return (
     <>

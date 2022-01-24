@@ -9,6 +9,7 @@ import { __ } from '../../../i18n';
 import { _emptyFunc } from '../../../utils';
 import { CART_ITEMS_FORM } from '../../../config';
 import useItemsFormContext from '../hooks/useItemsFormContext';
+import useTotalsCartContext from '../../totals/hooks/useTotalsCartContext';
 
 function CartItem({ item, isLastItem, actions }) {
   const { formikData, handleKeyDown, cartItemsTouched, itemUpdateHandler } =
@@ -17,46 +18,67 @@ function CartItem({ item, isLastItem, actions }) {
   const itemQtyField = `${CART_ITEMS_FORM}.${qtyField}`;
   const isQtyFieldTouched = _get(cartItemsTouched, qtyField);
 
+  const { subTotal, hasSubTotal } = useTotalsCartContext();
+
   return (
     <tr className={`border-2 md:border-0 ${isLastItem ? '' : 'md:border-b-2'}`}>
       {/** DESKTOP TD ELEMENTS */}
-      <td className="hidden w-1/3 md:table-cell">
-        <div className="py-2 pl-2">
-          <img
-            className="w-12 h-auto"
-            alt={item.productSku}
-            src={item.productSmallImgUrl}
-          />
-          <div className="text-xs">
+      <td className="hidden w-2/5 md:table-cell">
+        <div className="py-2 pl-2 flex">
+          <div className="flex-none h-20 mr-1 shrink-0">
+            <img
+              className="object-contain w-20 h-full"
+              alt={item.productSku}
+              src={item.productSmallImgUrl}
+            />
+          </div>
+
+          <div className="text-xs text-left">
             <div>{item.productName}</div>
-            <div>{item.productSku}</div>
+            {/* <div>{item.productSku}</div> */}
           </div>
         </div>
       </td>
-      <td className="hidden md:table-cell">
+      <td className="hidden md:table-cell text-md text-green w-1/5 align-middle">
+        {item.price}
+      </td>
+
+      <td className="hidden w-1/6 md:table-cell align-middle">
         <TextInput
           min="0"
-          width="w-20"
-          type="number"
+          width="w-10"
           name={itemQtyField}
           formikData={formikData}
           onKeyDown={handleKeyDown}
           id={`${itemQtyField}-desktop`}
+          // onChange={actions.handleQtyUpdate}
+          className="-mt-4 block mx-auto text-center"
           onChange={actions.handleQtyUpdate}
         />
-      </td>
-      <td className="hidden md:table-cell">{item.price}</td>
-      <td className="hidden xl:table-cell">{item.rowTotal}</td>
-      <td className="hidden md:table-cell">
-        <Button
+        <button className="text-xs" onClick={itemUpdateHandler} type="button">
+          Обновить
+        </button>
+        {/* <Button
           size="sm"
           variant="secondary"
           click={itemUpdateHandler}
           disable={!isQtyFieldTouched}
         >
-          <RefreshIcon className="w-5 h-5 text-black" />
-          <span className="sr-only">{__('Update')}</span>
-        </Button>
+          <span>{__('Обновить')}</span>
+        </Button> */}
+      </td>
+      {/* <td className="hidden w-1/5 xl:table-cell text-md text-green">
+        {item.rowTotal}
+      </td> */}
+
+      <td className="hidden w-1/6 md:table-cell text-md text-green align-middle">
+        <div className="">
+          {hasSubTotal && (
+            <div className="flex justify-between ">
+              <div>{subTotal}</div>
+            </div>
+          )}
+        </div>
       </td>
 
       {/** MOBILE TD ELEMENTS */}

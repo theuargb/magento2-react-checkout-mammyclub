@@ -12,7 +12,6 @@ const colors = require('tailwindcss/colors');
 const forms = require('@tailwindcss/forms');
 
 module.exports = {
-  
   important: true,
   theme: {
     extend: {
@@ -78,7 +77,7 @@ module.exports = {
           lighter: '#f5f5f5',
           DEFAULT: '#e7e7e7',
           darker: '#ffffff',
-          gray: '#cccccf'
+          gray: '#cccccf',
         },
       },
       screens: {

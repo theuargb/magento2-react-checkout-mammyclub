@@ -20,19 +20,27 @@ module.exports = {
           DEFAULT: colors.blue["200"],
           darker: colors.blue["300"],
         },
+        gray: {
+          lighter: "#777777",
+          DEFAULT: "#999999",
+        },
       },
       textColor: {
         orange: colors.orange,
         primary: {
-          lighter: colors.gray["700"],
-          DEFAULT: colors.gray["800"],
-          darker: colors.gray["900"],
+          lighter: "#111111",
+          DEFAULT: "#999999",
+          darker: "#777777",
         },
         secondary: {
           lighter: colors.gray["400"],
           DEFAULT: colors.gray["600"],
           darker: colors.gray["800"],
         },
+        green: {
+          DEFAULT: "#5DBA5D",
+        },
+        link : "#2b89b4",
       },
       backgroundColor: {
         primary: {
@@ -46,10 +54,13 @@ module.exports = {
           darker: colors.blue["300"],
         },
         container: {
-          lighter: "#ffffff",
+          lighter: "#f2f2f2",
           DEFAULT: "#fafafa",
           darker: "#f5f5f5",
         },
+        orange: {
+          DEFAULT: "#e86720"
+        }
       },
       borderColor: {
         primary: {
@@ -63,10 +74,11 @@ module.exports = {
           darker: colors.blue["300"],
         },
         container: {
-          lighter: "#f5f5f5",
-          DEFAULT: "#e7e7e7",
+          lighter: "#eeeeee",
+          DEFAULT: "#cccccc",
           darker: "#b6b6b6",
         },
+        orange: "#d0751a",
       },
       screens: {
         sm: "640px",
@@ -77,6 +89,18 @@ module.exports = {
         // => @media (min-width: 1024px) { ... }
         xl: "1280px",
         // => @media (min-width: 1280px) { ... }
+      },
+      fontSize: {
+        xs: ["12px", "12px"],
+        base: ["13px", "13px"],
+        md: ["15px", "15px"],
+        lg: ["16px", "16px"],
+        xlg: ["20px", "20px"],
+      },
+    },
+    container: {
+      screens: {
+        lg: "1024px",
       },
     },
   },

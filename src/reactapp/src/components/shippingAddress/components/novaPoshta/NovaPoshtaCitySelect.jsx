@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import { func, string } from 'prop-types';
+import { func, string, object } from 'prop-types';
 import Select from 'react-select';
 import { formikDataShape } from '../../../../utils/propTypes';
 
 const options = [{ value: 'void', label: 'Введите название города....' }];
 
-function NovaPoshtaCitySelect({ handleChangeCityId, formikData, name }) {
+function NovaPoshtaCitySelect({
+  handleChangeCityId,
+  formikData,
+  name,
+  customStyles,
+}) {
   const [selectList, setSelectList] = useState(options);
   const { setFieldValue, setFieldTouched } = formikData;
 
@@ -39,14 +44,15 @@ function NovaPoshtaCitySelect({ handleChangeCityId, formikData, name }) {
   };
 
   return (
-    <div className="react-select">
-      <p>Населенный пункт</p>
+    <div className="react-select py-5">
+      <p className="text-base text-gray mb-0.5">Населенный пункт</p>
       <Select
         options={selectList}
         onInputChange={(inputValue) => changeCityOptions(inputValue)}
         onChange={(e) => handleFormChange(e)}
         inputId="city"
         placeholder=""
+        styles={customStyles}
       />
     </div>
   );
@@ -56,6 +62,11 @@ NovaPoshtaCitySelect.propTypes = {
   handleChangeCityId: func.isRequired,
   formikData: formikDataShape.isRequired,
   name: string.isRequired,
+  customStyles: object,
+};
+
+NovaPoshtaCitySelect.defaultProps = {
+  customStyles: {},
 };
 
 export default NovaPoshtaCitySelect;

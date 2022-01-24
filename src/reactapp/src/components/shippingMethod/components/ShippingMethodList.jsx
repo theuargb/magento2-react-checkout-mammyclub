@@ -40,7 +40,7 @@ function ShippingMethodList() {
   }
 
   return (
-    <div className="py-4">
+    <div className="py-4 border-b-2 border-container-lightner">
       <SelectInput
         label="Способ доставки"
         name="shippingMethod"

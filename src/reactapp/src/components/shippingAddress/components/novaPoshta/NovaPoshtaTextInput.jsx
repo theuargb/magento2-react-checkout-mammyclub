@@ -21,6 +21,8 @@ const NovaPoshtaTextInput = ({
   return (
     <form onSubmit={formik.handleSubmit}>
       <label htmlFor={id}>
+        <p className="text-base text-gray">{label}</p>
+
         <input
           id={id}
           name={name}
@@ -29,7 +31,6 @@ const NovaPoshtaTextInput = ({
           value={value}
           className={className}
         />
-        {label}
       </label>
     </form>
   );

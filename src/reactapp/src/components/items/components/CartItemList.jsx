@@ -21,22 +21,27 @@ function CartItemList() {
   };
 
   return (
-    <div className="py-4">
+    <div className="">
       <div className="">
         <table className="table w-full text-left">
-          <thead className="hidden text-left md:table-header-group">
+          <thead className="bg-container-lighter hidden text-left md:table-header-group text-center text-primary-darker text-md ">
             <tr>
-              <th>{__('Item')}</th>
-              <th>{__('Qty')}</th>
-              <th>{__('Price')}</th>
-              <th className="hidden xl:table-cell">{__('Subtotal')}</th>
-              <th>
+              <th className="p-2">{__('Товар')}</th>
+              <th className="p-2">
+                Цена <br /> <span className="text-base">(грн. с НДС)</span>
+              </th>
+              <th className="p-2">
+                Кол-во <br /> (шт.)
+              </th>
+
+              <th className="p-2">Сумма</th>
+              {/* <th>
                 <span className="sr-only">{__('Actions')}</span>
                 &nbsp;
-              </th>
+              </th> */}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-center border-b-2 border-container-lightner">
             {cartItems.map((cartItem, index) => (
               <CartItem
                 item={cartItem}

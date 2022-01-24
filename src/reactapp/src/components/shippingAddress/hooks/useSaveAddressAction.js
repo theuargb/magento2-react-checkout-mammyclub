@@ -27,7 +27,6 @@ export default function useSaveAddressAction(shippingAddressFormContext) {
     setShippingAddressFormFields,
     shippingValues: shippingAddressToSave,
   } = shippingAddressFormContext;
-  // console.log(setShippingAddressFormFields());
   const {
     isLoggedIn,
     setMessage,

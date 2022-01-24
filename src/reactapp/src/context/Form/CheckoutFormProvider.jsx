@@ -47,7 +47,6 @@ function CheckoutFormProvider({ children }) {
    * Holds individual form sections which constitutes the entire checkout-form-formik
    */
   const [sections, updateSections] = useState([]);
-
   /**
    * if any of the payment method has any custom action needs to be carried out
    * during "Place Order" action, then it must be added here

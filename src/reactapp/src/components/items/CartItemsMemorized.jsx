@@ -1,11 +1,9 @@
 import React from 'react';
 
-import Card from '../common/Card';
-import ToggleBox from '../common/ToggleBox';
+// import Card from '../common/Card';
 import CartItemList from './components/CartItemList';
 import NoItemsInfoBox from './components/NoItemsInfoBox';
 import CartItemsFormManager from './components/CartItemsFormManager';
-import { __ } from '../../i18n';
 import { formikDataShape } from '../../utils/propTypes';
 import useItemsCartContext from './hooks/useItemsCartContext';
 
@@ -14,11 +12,9 @@ const CartItemsMemorized = React.memo(({ formikData }) => {
 
   return (
     <CartItemsFormManager formikData={formikData}>
-      <Card classes={cartItemsAvailable ? '' : 'opacity-75'}>
-        <ToggleBox show title={__('Product Details')}>
-          {cartItemsAvailable ? <CartItemList /> : <NoItemsInfoBox />}
-        </ToggleBox>
-      </Card>
+      {/* <Card classes={cartItemsAvailable ? '' : 'opacity-75'}> */}
+      {cartItemsAvailable ? <CartItemList /> : <NoItemsInfoBox />}
+      {/* </Card> */}
     </CartItemsFormManager>
   );
 });

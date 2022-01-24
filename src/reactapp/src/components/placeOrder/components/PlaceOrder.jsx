@@ -2,7 +2,7 @@ import React from 'react';
 import _get from 'lodash.get';
 import { useFormikContext } from 'formik';
 
-import Button from '../../common/Button';
+// import Button from '../../common/Button';
 import {
   LOGIN_FORM,
   SHIPPING_METHOD,
@@ -27,6 +27,7 @@ import usePlaceOrder from '../hooks/usePlaceOrder';
 import usePlaceOrderCartContext from '../hooks/usePlaceOrderCartContext';
 import { focusOnFormErrorElement, scrollToElement } from '../../../utils/form';
 import { _makePromise, _emptyFunc } from '../../../utils';
+import TermsInfo from './TermsInfo';
 
 const customerWantsToSignInField = `${LOGIN_FORM}.customerWantsToSignIn`;
 
@@ -41,7 +42,13 @@ function PlaceOrder() {
 
   const { addCartShippingAddress, setCartBillingAddress } =
     usePlaceOrderCartContext();
-  const addressToSave = values?.shipping_address;
+
+  let addressToSave = values?.shipping_address;
+  const additionalFields = values?.additionals?.orderComment;
+  /* Дополнительная информация в виде комментария добавляется в переменную addressToSave для того, чтобы 
+  в последующем не отправлять её отдельным запросом */
+  addressToSave = { ...addressToSave, additional_comment: additionalFields };
+  /* ======================================== */
   // const isBillingSame = values?.billing_address?.isSameAsShipping;
 
   /* ОБРАБОТЧИК ПОЛЕЙ ShippingAddress */
@@ -118,8 +125,10 @@ function PlaceOrder() {
       await saveEmailAddressInfo(values);
 
       await saveBillingShippingAddress(values);
-
-      await validateThenPlaceOrder(values);
+      console.log(values);
+      if (false) {
+        await validateThenPlaceOrder(values);
+      }
 
       setPageLoader(false);
     } catch (error) {
@@ -129,10 +138,23 @@ function PlaceOrder() {
   };
 
   return (
-    <div className="flex items-center justify-center py-4">
-      <Button variant="primary" size="lg" click={handlePerformPlaceOrder}>
-        {__('Place Order')}
-      </Button>
+    <div className="flex items-center justify-between pt-4 px-4">
+      <TermsInfo />
+      <button
+        onClick={handlePerformPlaceOrder}
+        className="orange-but"
+        type="submit"
+      >
+        Заказать
+      </button>
+      {/* <Button
+        // variant="primary"
+        // size="lg"
+        click={handlePerformPlaceOrder}
+        
+      >
+        {__('Заказать')}
+      </Button> */}
     </div>
   );
 }

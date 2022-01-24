@@ -1,5 +1,5 @@
 body {
-    @apply bg-container;
+    /* @apply bg-container; */
 }
 
 #cart-drawer {
@@ -42,4 +42,9 @@ body {
     &:hover {
         @apply bg-container;
     }
+}
+
+h3{
+    @apply text-lg;
+    @apply text-gray;
 }

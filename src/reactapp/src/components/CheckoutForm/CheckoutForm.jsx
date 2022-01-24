@@ -4,7 +4,7 @@ import Login from '../login';
 import Totals from '../totals';
 import CartItemsForm from '../items';
 import PlaceOrder from '../placeOrder';
-import CouponCode from '../couponCode';
+// import CouponCode from '../couponCode';
 import Message from '../common/Message';
 import PageLoader from '../common/Loader';
 import { AddressWrapper } from '../address';
@@ -15,6 +15,7 @@ import ShippingMethodsForm from '../shippingMethod';
 import StickyRightSidebar from '../StickyRightSidebar';
 import CheckoutAgreements from '../checkoutAgreements';
 import CheckoutFormWrapper from './CheckoutFormWrapper';
+import OrderAdditionals from '../additionals/OrderAdditionals';
 import { config } from '../../config';
 import { aggregatedQueryRequest } from '../../api';
 import useCheckoutFormAppContext from './hooks/useCheckoutFormAppContext';
@@ -24,8 +25,8 @@ function CheckoutForm() {
   const [initialData, setInitialData] = useState(false);
   const { pageLoader, appDispatch, setPageLoader, storeAggregatedAppStates } =
     useCheckoutFormAppContext();
-  const { orderId, isVirtualCart, storeAggregatedCartStates } =
-    useCheckoutFormCartContext();
+  // const { orderId, isVirtualCart, storeAggregatedCartStates } =
+  const { orderId, storeAggregatedCartStates } = useCheckoutFormCartContext();
 
   /**
    * Collect App, Cart data when the page loads.
@@ -66,21 +67,24 @@ function CheckoutForm() {
     <CheckoutFormWrapper initialData={initialData}>
       <Message />
       <div className="flex justify-center">
-        <div className="container">
-          <div className="flex flex-col my-6 space-y-2 md:flex-row md:space-y-0">
-            <div className="w-full lg:w-3/5 md:mr-2">
-              <div className="w-full space-y-2 md:max-w-md xl:max-w-full">
-                <Login />
+        <div className="container w-full mx-auto py-2 md:py-5 md:px-6">
+          <div className="flex flex-col my-6 space-y-2 md:flex-row md:space-y-0 ">
+            <div className="w-full lg:w-1/2 md:mr-6 border border-container py-5">
+              <div className="w-full xl:max-w-full">
                 <AddressWrapper>
-                  {!isVirtualCart && (
-                    <>
-                      <ShippingMethodsForm />
-                      <ShippingAddress />
-                    </>
-                  )}
+                  {/* {!isVirtualCart && (
+                    <> */}
+                  <ShippingAddress>
+                    <Login />
+                    <ShippingMethodsForm />
+                  </ShippingAddress>
+                  {/* </>
+                  )} */}
                   <BillingAddress />
                   <PaymentMethod />
-                  <CouponCode />
+                  {/* <CouponCode /> */}
+                  <OrderAdditionals />
+                  <PlaceOrder />
                 </AddressWrapper>
               </div>
             </div>
@@ -89,7 +93,6 @@ function CheckoutForm() {
               <CartItemsForm />
               <Totals />
               <CheckoutAgreements />
-              <PlaceOrder />
             </StickyRightSidebar>
           </div>
           {pageLoader && <PageLoader />}

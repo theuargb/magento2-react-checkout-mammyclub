@@ -38,10 +38,10 @@ function TextInput({
   const hasError = hasFieldError && hasFieldTouched;
 
   return (
-    <div className={`mt-2 form-control ${isHidden ? 'hidden' : ''}`}>
+    <div className={`mt-4 form-control ${isHidden ? 'hidden' : ''}`}>
       <div className="flex items-center justify-between">
         {label && (
-          <label htmlFor={inputId} className="md:text-sm">
+          <label htmlFor={inputId} className="mb-0.5 text-base text-gray">
             {label}
             {required && <sup> *</sup>}
           </label>
@@ -68,7 +68,7 @@ function TextInput({
           setFieldValue(name, newValue);
           actions.saveAddress();
         }}
-        className={`form-input max-w-md ${
+        className={`form-input ${
           hasError ? 'border-dashed border-red-500' : ''
         } ${className} ${width || 'w-full'}`}
         {...rest}

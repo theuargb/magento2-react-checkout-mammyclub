@@ -4,7 +4,7 @@ import { node, oneOf, string } from 'prop-types';
 function Card({ children, bg, classes }) {
   return (
     <div
-      className={`card w-full px-4 py-4 relative ${
+      className={`w-full px-4 relative pb-4${
         bg === 'dark' ? 'bg-container' : ''
       } ${bg === 'darker' ? 'bg-container-darker' : ''} ${
         bg === 'white' ? 'bg-white' : ''
