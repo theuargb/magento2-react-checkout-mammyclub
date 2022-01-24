@@ -73,7 +73,7 @@ function TextInput({
         } ${className} ${width || 'w-full'}`}
         {...rest}
       />
-      <div className="text-xs">{helpText}</div>
+      <div className="text-xs ">{helpText}</div>
     </div>
   );
 }

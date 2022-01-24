@@ -55,7 +55,11 @@ function CartItem({ item, isLastItem, actions }) {
           className="-mt-4 block mx-auto text-center"
           onChange={actions.handleQtyUpdate}
         />
-        <button className="text-xs" onClick={itemUpdateHandler} type="button">
+        <button
+          className="text-xs text-link"
+          onClick={itemUpdateHandler}
+          type="button"
+        >
           Обновить
         </button>
         {/* <Button

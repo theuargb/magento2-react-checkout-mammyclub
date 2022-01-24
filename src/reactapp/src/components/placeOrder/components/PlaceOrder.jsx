@@ -44,10 +44,11 @@ function PlaceOrder() {
     usePlaceOrderCartContext();
 
   let addressToSave = values?.shipping_address;
-  const additionalFields = values?.additionals?.orderComment;
+  const additionalFields = values?.additionals;
+  console.log(additionalFields);
   /* Дополнительная информация в виде комментария добавляется в переменную addressToSave для того, чтобы 
   в последующем не отправлять её отдельным запросом */
-  addressToSave = { ...addressToSave, additional_comment: additionalFields };
+  addressToSave = { ...addressToSave, additional: additionalFields };
   /* ======================================== */
   // const isBillingSame = values?.billing_address?.isSameAsShipping;
 

@@ -31,6 +31,10 @@ import useShippingAddressAppContext from '../hooks/useShippingAddressAppContext'
 import useShippingAddressCartContext from '../hooks/useShippingAddressCartContext';
 import useFillDefaultAddresses from '../hooks/useFillDefaultAddresses';
 
+/* eslint-disable */
+const phoneRegExp = /^((\+)?(3)?(8)?[\- ]?)?(\(?\d{3}\)?[\- ]?)?\d{3}[\- ]?\d{2}[\- ]?\d{2}$/;
+/* eslint-enable */
+
 const initialValues = {
   /*  Пробелы в начальные значения полей добавлены для того, чтобы при первой подгрузке
   страницы бек отдал возможные методы оплаты и доставки, т.к без заполненных полей 
@@ -60,7 +64,9 @@ const initValidationSchema = {
     requiredMessage,
     (value) => !!_get(value, 0)
   ),
-  phone: YupString().required(requiredMessage),
+  phone: YupString()
+    .matches(phoneRegExp, 'Проверьте правильность введённого номера')
+    .required(requiredMessage),
   zipcode: YupString().required(requiredMessage),
   city: YupString().required(requiredMessage),
   region: YupString().nullable(),

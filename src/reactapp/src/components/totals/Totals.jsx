@@ -26,9 +26,11 @@ function Totals() {
             )} */}
 
           {hasShippingRate && (
-            <div className="flex justify-between">
-              <div>{__('Shipping')}</div>
-              <div>{shippingMethodRate}</div>
+            <div className="px-4 py-3 flex justify-end text-xl font-bold text-gray">
+              <div className="text-lg text-gray">
+                {__('Доставка по Украине: ')}
+              </div>
+              <div className="text-lg text-green"> {shippingMethodRate}</div>
             </div>
           )}
           {hasDiscounts &&
@@ -41,18 +43,9 @@ function Totals() {
         </div>
 
         <div className="">
-          <div className="px-4 py-3 flex justify-end text-xl font-bold text-gray ">
-            <div className="text-lg text-gray">
-              {__('Доставка по Украине:')}
-            </div>
-            <div className="text-lg text-green">60.00</div>
-          </div>
-        </div>
-
-        <div className="">
           <div className="px-4 py-3 flex justify-end text-xl font-bold border-t-2 text-gray ">
-            <div className="text-lg text-gray">{__('Итого:')}</div>
-            <div className="text-lg text-green">{grandTotal || '0'}</div>
+            <div className="text-lg text-gray">{__('Итого: ')}</div>
+            <div className="text-lg text-green"> {grandTotal || '0'}</div>
           </div>
         </div>
       </div>

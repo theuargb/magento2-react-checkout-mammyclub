@@ -20,7 +20,6 @@ function OrderAdditionalsForm({ children }) {
 
   // const { values } = useFormikContext();
   // const [addressFormSubmited, setAddressFormSubmited] = useState(false);
-  console.log(fields);
 
   /*  =======================================================================================  */
 
