@@ -8,7 +8,7 @@ import useEnterActionInForm from '../../hook/useEnterActionInForm';
 import OrderAdditionalsFormikContext from './context/OrderAdditionalsFormikContext';
 
 const initialValues = {
-  orderComment: '',
+  customer_notes: '',
 };
 
 function OrderAdditionalsFormikProvider({ children, formikData }) {

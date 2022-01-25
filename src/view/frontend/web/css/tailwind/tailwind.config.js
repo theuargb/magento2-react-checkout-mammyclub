@@ -21,6 +21,7 @@ module.exports = {
           darker: colors.blue["300"],
         },
         gray: {
+          extralighter: "#cccccc",
           lighter: "#777777",
           DEFAULT: "#999999",
         },
@@ -91,11 +92,13 @@ module.exports = {
         // => @media (min-width: 1280px) { ... }
       },
       fontSize: {
+        xxs: ["11px", "11px"],
         xs: ["12px", "12px"],
         base: ["13px", "13px"],
         md: ["15px", "15px"],
         lg: ["16px", "16px"],
         xlg: ["20px", "20px"],
+        xxlg: ["24px", "24px"],
       },
     },
     container: {

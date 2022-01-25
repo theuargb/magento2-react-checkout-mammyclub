@@ -2,9 +2,6 @@ import React, { useMemo } from 'react';
 import { node } from 'prop-types';
 import { ADDITIONALS_FORM } from '../../config';
 import OrderAdditionalsForm from './components/OrderAdditionalsForm';
-
-// import ShippingAddressForm from './components/ShippingAddressForm';
-// import ShippingAddressView from './components/ShippingAddressView';
 import OrderAdditionalsFormikProvider from './OrderAdditionalsFormikProvider';
 import useFormikMemorizer from '../../hook/useFormikMemorizer';
 

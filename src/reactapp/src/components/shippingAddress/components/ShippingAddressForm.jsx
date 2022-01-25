@@ -19,6 +19,7 @@ import useFormValidateThenSubmit from '../../../hook/useFormValidateThenSubmit';
 // import useShippingAddressAppContext from '../hooks/useShippingAddressAppContext';
 import useShippingAddressFormikContext from '../hooks/useShippingAddressFormikContext';
 import NovaPoshtaCitySelect from './novaPoshta/NovaPoshtaCitySelect';
+import NovaPoshtaStreetSelect from './novaPoshta/NovaPoshtaStreetSelect';
 import NovaPoshtaWarehouseSelect from './novaPoshta/NovaPoshtaWarehouseSelect';
 import NovaPoshtaAddressFieldSet from './novaPoshta/NovaPoshtaAddressFieldSet';
 
@@ -88,13 +89,13 @@ function ShippingAddressForm({ children }) {
     control: (provided) => ({
       ...provided,
       borderRadius: '5px',
-      height: '26px',
+      height: '23px',
       minHeight: 'none',
       boxShadow: '0px 0px 4px 0px #ccc inset',
     }),
     container: (provided) => ({
       ...provided,
-      height: '24px',
+      height: '23px',
       minHeight: 'none',
     }),
     indicatorsContainer: (provided) => ({
@@ -169,7 +170,6 @@ function ShippingAddressForm({ children }) {
   const handleChangeCityId = (id) => {
     setSelectedCityId(id);
   };
-
   return (
     <>
       <div className="">
@@ -205,7 +205,11 @@ function ShippingAddressForm({ children }) {
           formikData={formikData}
           onKeyDown={handleKeyDown}
           placeholder={__('+32 000 000 000')}
+          type="tel"
         />
+        <p className="text-gray-extralighter text-base mt-1">
+          {__('Наши менеджеры перезвонят для уточнения деталей заказа')}
+        </p>
         {/* <TextInput
           required
           name={`${fields.street}[0]`}
@@ -274,7 +278,18 @@ function ShippingAddressForm({ children }) {
         )}
         {selectedShippingMethod === 'novaposhta_to_door' && (
           <div>
-            <NovaPoshtaAddressFieldSet />
+            <NovaPoshtaAddressFieldSet
+              formikData={formikData}
+              selectedCityId={selectedCityId}
+            >
+              <NovaPoshtaStreetSelect
+                formikData={formikData}
+                name={`${fields.street}[0]`}
+                // handleChangeStreetId={handleChangeCityId}
+                customStyles={customSelectStyles}
+                cityId={selectedCityId}
+              />
+            </NovaPoshtaAddressFieldSet>
           </div>
         )}
       </div>

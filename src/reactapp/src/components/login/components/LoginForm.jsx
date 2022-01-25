@@ -11,7 +11,7 @@ function LoginForm() {
   const {
     fields,
     // formId,
-    editMode,
+    // editMode,
     formikData,
     // submitHandler,
     handleKeyDown,
@@ -28,9 +28,9 @@ function LoginForm() {
   //   validationSchema,
   // });
 
-  if (!editMode) {
-    return <></>;
-  }
+  // if (!editMode) {
+  //   return <></>;
+  // }
 
   return (
     <>
@@ -44,6 +44,9 @@ function LoginForm() {
           onKeyDown={handleKeyDown}
           placeholder={__('john.doe@gmail.com')}
         />
+        <p className="text-gray-extralighter text-base mt-1">
+          {__('Сюда пришлем все документы подтверждающие покупку')}
+        </p>
 
         {customerWantsToSignIn && (
           <div>

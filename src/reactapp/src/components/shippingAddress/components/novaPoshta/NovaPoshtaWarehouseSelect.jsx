@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { string, object } from 'prop-types';
 import Select from 'react-select';
 import { formikDataShape } from '../../../../utils/propTypes';
+import { __ } from '../../../../i18n';
 
 const options = [{ value: 'void', label: 'Введите название города....' }];
 
@@ -46,7 +47,7 @@ function NovaPoshtaWarehouseSelect({
   return (
     <div className="react-select">
       <p className="text-base text-gray mb-0.5">
-        Номер склада Новой Почты <br /> (українською мовою):
+        {__('Номер склада Новой Почты')}
       </p>
       <Select
         options={selectList}

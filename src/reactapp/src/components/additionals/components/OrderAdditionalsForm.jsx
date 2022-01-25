@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-// import { useFormikContext } from 'formik';
 import { node } from 'prop-types';
 import useFormValidateThenSubmit from '../../../hook/useFormValidateThenSubmit';
 import OrderAdditionalsFormikContext from '../context/OrderAdditionalsFormikContext';
 import TextInput from '../../common/Form/TextInput';
+import { __ } from '../../../i18n';
 
 function OrderAdditionalsForm({ children }) {
   const { fields, formId, formikData, submitHandler, handleKeyDown } =
@@ -18,19 +18,14 @@ function OrderAdditionalsForm({ children }) {
     formSubmitHandler();
   }
 
-  // const { values } = useFormikContext();
-  // const [addressFormSubmited, setAddressFormSubmited] = useState(false);
-
-  /*  =======================================================================================  */
-
   return (
     <div className="px-4">
       <div>{children}</div>
       <TextInput
         required
-        name={fields.orderComment}
+        name={fields.customer_notes}
         formikData={formikData}
-        label="Комментарий к заказу"
+        label={__('Комментарий к заказу')}
         onKeyDown={handleKeyDown}
         placeholder=""
         as="textarea"

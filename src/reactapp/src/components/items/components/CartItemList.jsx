@@ -24,17 +24,18 @@ function CartItemList() {
     <div className="">
       <div className="">
         <table className="table w-full text-left">
-          <thead className="bg-container-lighter hidden text-left md:table-header-group text-center text-primary-darker text-md ">
+          <thead className="bg-container-lighter text-left table-header-group text-center text-primary-darker text-md ">
             <tr>
-              <th className="p-2">{__('Товар')}</th>
-              <th className="p-2">
-                Цена <br /> <span className="text-base">(грн. с НДС)</span>
+              <th className="p-2 font-normal">{__('Товар')}</th>
+              <th className="p-2 hidden md:table-cell font-normal">
+                {__('Цена')} <br />{' '}
+                <span className="text-base">{__('(грн. с НДС)')}</span>
               </th>
-              <th className="p-2">
-                Кол-во <br /> (шт.)
+              <th className="p-2 font-normal">
+                {__('Кол-во')} <br /> {__('(шт.)')}
               </th>
 
-              <th className="p-2">Сумма</th>
+              <th className="p-2 font-normal">{__('Сумма')}</th>
               {/* <th>
                 <span className="sr-only">{__('Actions')}</span>
                 &nbsp;

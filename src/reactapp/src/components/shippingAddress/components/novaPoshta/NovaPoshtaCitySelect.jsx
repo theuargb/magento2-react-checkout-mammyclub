@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { func, string, object } from 'prop-types';
 import Select from 'react-select';
 import { formikDataShape } from '../../../../utils/propTypes';
+import { __ } from '../../../../i18n';
 
 const options = [{ value: 'void', label: 'Введите название города....' }];
 
@@ -20,8 +21,9 @@ function NovaPoshtaCitySelect({
     setFieldValue(name, newValue);
     handleChangeCityId(e.value);
   };
+
   const changeCityOptions = (inputValue) => {
-    const cityList = [];
+    let cityList = [];
     fetch(
       `https://mammyclub.perspective.net.ua/rest/V1/novaposhta/cities?name=${inputValue}`
     )
@@ -39,13 +41,14 @@ function NovaPoshtaCitySelect({
             })
           : console.log(JSON.parse(data))
       )
-      .then(() => setSelectList(cityList));
-    // setSelectList([]);
+      .then(() => {
+        setSelectList(cityList);
+        cityList = [];
+      });
   };
-
   return (
     <div className="react-select py-5">
-      <p className="text-base text-gray mb-0.5">Населенный пункт</p>
+      <p className="text-base text-gray mb-0.5">{__('Населенный пункт')}</p>
       <Select
         options={selectList}
         onInputChange={(inputValue) => changeCityOptions(inputValue)}
@@ -53,6 +56,8 @@ function NovaPoshtaCitySelect({
         inputId="city"
         placeholder=""
         styles={customStyles}
+        // isSearchable={false}
+        filterOption={(selectOptions) => selectOptions}
       />
     </div>
   );

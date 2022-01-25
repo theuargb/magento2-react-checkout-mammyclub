@@ -48,9 +48,9 @@ const initialValues = {
   city: '\u00A0',
   region: '\u00A0',
   country: 'UA',
-  city_novaposhta_ref: '',
-  warehouse_novaposhta_id: '',
-  additional: '',
+  // city_novaposhta_ref: '',
+  // warehouse_novaposhta_id: '',
+  customerNotes: '',
 };
 
 const requiredMessage = __('%1 - обязательное поле');

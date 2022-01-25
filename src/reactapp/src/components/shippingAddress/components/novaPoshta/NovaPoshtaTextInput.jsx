@@ -1,23 +1,29 @@
 import React from 'react';
 
+import _get from 'lodash.get';
 import { useFormik } from 'formik';
 import { string } from 'prop-types';
+import { formikDataShape } from '../../../../utils/propTypes';
+import { _replace } from '../../../../utils';
 
 const NovaPoshtaTextInput = ({
   id,
   name,
   type,
-  value,
-  onChange,
   className,
   label,
+  formikData,
 }) => {
   const formik = useFormik({
     initialValues: {
       street: '',
     },
   });
+  const { setFieldValue, setFieldTouched, formSectionValues, formSectionId } =
+    formikData;
 
+  const relativeFieldName = _replace(name, formSectionId).replace('.', '');
+  const value = _get(formSectionValues, relativeFieldName, '') || '';
   return (
     <form onSubmit={formik.handleSubmit}>
       <label htmlFor={id}>
@@ -26,10 +32,14 @@ const NovaPoshtaTextInput = ({
         <input
           id={id}
           name={name}
-          type={type}
-          onChange={onChange}
+          type={type || 'text'}
           value={value}
           className={className}
+          onChange={(event) => {
+            const newValue = event.target.value;
+            setFieldTouched(name, newValue);
+            setFieldValue(name, newValue);
+          }}
         />
       </label>
     </form>
@@ -41,18 +51,16 @@ NovaPoshtaTextInput.propTypes = {
   type: string,
   name: string,
   label: string,
-  onChange: string,
-  value: string,
   className: string,
+  formikData: formikDataShape.isRequired,
 };
 
 NovaPoshtaTextInput.defaultProps = {
   id: '',
   type: '',
   label: '',
-  onChange: '',
-  value: '',
   className: '',
   name: '',
+  // formikData: '',
 };
 export default NovaPoshtaTextInput;

@@ -21,6 +21,7 @@ shipping_addresses {
   }
   street
   telephone
+  customer_notes
   ${cartShippingMethods}
 }`;
 

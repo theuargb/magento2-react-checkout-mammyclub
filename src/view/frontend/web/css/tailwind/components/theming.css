@@ -45,6 +45,6 @@ body {
 }
 
 h3{
-    @apply text-lg;
+    @apply text-xlg;
     @apply text-gray;
 }

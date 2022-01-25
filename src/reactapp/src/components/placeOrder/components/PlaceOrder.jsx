@@ -44,11 +44,10 @@ function PlaceOrder() {
     usePlaceOrderCartContext();
 
   let addressToSave = values?.shipping_address;
-  const additionalFields = values?.additionals;
-  console.log(additionalFields);
+  const additionalFields = values?.additionals?.customer_notes;
   /* Дополнительная информация в виде комментария добавляется в переменную addressToSave для того, чтобы 
   в последующем не отправлять её отдельным запросом */
-  addressToSave = { ...addressToSave, additional: additionalFields };
+  addressToSave = { ...addressToSave, customer_notes: additionalFields };
   /* ======================================== */
   // const isBillingSame = values?.billing_address?.isSameAsShipping;
 
@@ -126,10 +125,8 @@ function PlaceOrder() {
       await saveEmailAddressInfo(values);
 
       await saveBillingShippingAddress(values);
-      console.log(values);
-      if (false) {
-        await validateThenPlaceOrder(values);
-      }
+
+      await validateThenPlaceOrder(values);
 
       setPageLoader(false);
     } catch (error) {
@@ -146,16 +143,8 @@ function PlaceOrder() {
         className="orange-but"
         type="submit"
       >
-        Заказать
-      </button>
-      {/* <Button
-        // variant="primary"
-        // size="lg"
-        click={handlePerformPlaceOrder}
-        
-      >
         {__('Заказать')}
-      </Button> */}
+      </button>
     </div>
   );
 }

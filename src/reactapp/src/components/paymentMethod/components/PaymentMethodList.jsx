@@ -2,6 +2,7 @@ import React from 'react';
 import _get from 'lodash.get';
 import { object } from 'prop-types';
 import Select from 'react-select';
+import { __ } from '../../../i18n';
 
 // import RadioInput from '../../common/Form/RadioInput';
 // import { __ } from '../../../i18n';
@@ -22,7 +23,6 @@ function PaymentMethodList({ methodRenderers }) {
 
   const handlePaymentMethodSelection = async (event) => {
     const methodSelected = _get(methodList, `${event.value}.code`);
-    console.log(methodSelected);
 
     if (!methodSelected) {
       return;
@@ -139,7 +139,9 @@ function PaymentMethodList({ methodRenderers }) {
         })}
       </ul>   */
     <div className="react-select py-5 border-t-2 border-b-2 border-container-lightner">
-      <p className="text-base text-gray mb-0.5">Способ оплаты (обязательно)</p>
+      <p className="text-base text-gray mb-0.5">
+        {__('Способ оплаты (обязательно)')}
+      </p>
       <Select
         options={methodListForSelect}
         onChange={(event) => handlePaymentMethodSelection(event)}

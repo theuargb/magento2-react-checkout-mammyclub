@@ -8,7 +8,6 @@ import { formikDataShape } from '../../utils/propTypes';
 import customRenderers from '../../paymentMethods/customRenderers';
 import usePaymentMethodCartContext from './hooks/usePaymentMethodCartContext';
 import useAppContext from '../../hook/useAppContext';
-// import LiqPayWidget from './components/LiqPayWidget';
 
 const PaymentMethodMemorized = React.memo(({ formikData }) => {
   const { isPaymentAvailable } = usePaymentMethodCartContext();
@@ -30,7 +29,6 @@ const PaymentMethodMemorized = React.memo(({ formikData }) => {
         ) : (
           <NoPaymentMethodInfoBox />
         )}
-        {/* <LiqPayWidget /> */}
       </Card>
     </PaymentMethodFormManager>
   );
