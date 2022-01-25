@@ -1,5 +1,5 @@
 {
-  "name": "hyva-themes/magento2-react-checkout",
+  "name": "perspective/mammyclub-react-checkout",
   "description": "Highly customizable Magento 2 Checkout, built with React",
   "type": "magento2-module",
   "require": {
