@@ -11,7 +11,6 @@
   ],
   "author": "Hyvä Themes BV",
   "license": "BSD-3-Clause",
-  "proxy": "https://mammyclub.perspective.net.ua",
   "private": true,
   "dependencies": {
     "@heroicons/react": "^1.0.5",

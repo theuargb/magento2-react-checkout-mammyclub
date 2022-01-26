@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/../../view/frontend/web/js/react-checkout.js",
+    "index.html": "/index.html",
+    "react-checkout.js.map": "/../../view/frontend/web/js/react-checkout.js.map"
+  },
+  "entrypoints": [
+    "../../view/frontend/web/js/react-checkout.js"
+  ]
+}
