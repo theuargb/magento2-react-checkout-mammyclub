@@ -10,7 +10,7 @@ const LiqPayWidget = React.memo(({ orderId }) => {
   const [liqPayData, setLiqPayData] = useState({});
   const fetchLiqPayWidget = () => {
     fetch(
-      `https://mammyclub.perspective.net.ua/rest/V1/liqpay/hydrateWidget?orderId=#${orderId}`
+      `https://mammyclub.perspective.net.ua/rest/V1/liqpay/hydrateWidget?orderId=${orderId}`
     )
       .then((response) => response.json())
       .then((data) => JSON.parse(data))

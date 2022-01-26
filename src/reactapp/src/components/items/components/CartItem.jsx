@@ -19,6 +19,7 @@ function CartItem({ item, isLastItem, actions }) {
   const qtyField = `${item.id}_qty`;
   const itemQtyField = `${CART_ITEMS_FORM}.${qtyField}`;
   // const isQtyFieldTouched = _get(cartItemsTouched, qtyField);
+  /* eslint-disable */ 
   const { subTotal, hasSubTotal } = useTotalsCartContext();
 
   return (
@@ -53,7 +54,7 @@ function CartItem({ item, isLastItem, actions }) {
           onKeyDown={handleKeyDown}
           id={`${itemQtyField}-desktop`}
           // onChange={actions.handleQtyUpdate}
-          className="-mt-4 block mx-auto text-center"
+          className="-mt-4 block mx-auto text-center form-select"
           onChange={actions.handleQtyUpdate}
         />
         <button
@@ -73,14 +74,14 @@ function CartItem({ item, isLastItem, actions }) {
         </Button> */}
       </td>
       {/* <td className="hidden w-1/5 xl:table-cell text-md text-green">
-        {item.rowTotal}
+        {item.rowTotal} {subTotal}
       </td> */}
 
       <td className="w-1/6 table-cell text-md text-green align-middle">
         <div className="">
           {hasSubTotal && (
             <div className="flex justify-between items-center">
-              <div className="mx-auto">{subTotal}</div>
+              <div className="mx-auto">{item.rowTotal}</div>
             </div>
           )}
         </div>

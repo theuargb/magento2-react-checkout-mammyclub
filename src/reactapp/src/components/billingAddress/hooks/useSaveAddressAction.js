@@ -17,7 +17,7 @@ export default function useSaveAddressAction(billingFormikContext) {
     setMessage,
     setPageLoader,
     setErrorMessage,
-    setSuccessMessage,
+    // setSuccessMessage,
     updateCustomerAddress,
   } = useBillingAddressAppContext();
   const {
@@ -96,7 +96,7 @@ export default function useSaveAddressAction(billingFormikContext) {
         setFieldValue(billingSameAsShippingField, true);
       }
 
-      setSuccessMessage(__('Billing address updated successfully.'));
+      // setSuccessMessage(__('Billing address updated successfully.'));
       setPageLoader(false);
     } catch (error) {
       console.error(error);

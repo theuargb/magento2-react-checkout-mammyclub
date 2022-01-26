@@ -43,6 +43,8 @@ function PaymentMethodList({ methodRenderers }) {
   const customSelectStyles = {
     option: (provided) => ({
       ...provided,
+      fontSize: '13px',
+      lineHeight: '13px',
     }),
     control: (provided) => ({
       ...provided,
@@ -61,6 +63,7 @@ function PaymentMethodList({ methodRenderers }) {
       height: '24px',
       minHeight: 'none',
       borderLeft: 'none',
+      padding: '0',
     }),
     indicatorSeparator: (provided) => ({
       ...provided,
@@ -138,7 +141,7 @@ function PaymentMethodList({ methodRenderers }) {
           );
         })}
       </ul>   */
-    <div className="react-select py-5 border-t-2 border-b-2 border-container-lightner">
+    <div className="react-select pt-4 pb-5 border-t-2 border-b-2 border-container-lightner">
       <p className="text-base text-gray mb-0.5">
         {__('Способ оплаты (обязательно)')}
       </p>

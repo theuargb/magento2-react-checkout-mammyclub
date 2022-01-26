@@ -32,7 +32,7 @@ export default function useSaveAddressAction(shippingAddressFormContext) {
     setMessage,
     setPageLoader,
     setErrorMessage,
-    setSuccessMessage,
+    // setSuccessMessage,
     updateCustomerAddress,
   } = useShippingAddressAppContext();
   const {
@@ -139,7 +139,7 @@ export default function useSaveAddressAction(shippingAddressFormContext) {
       }
 
       LocalStorage.saveCustomerAddressInfo(addressIdContext, isBillingSame);
-      setSuccessMessage(__('Shipping address updated successfully.'));
+      // setSuccessMessage(__('Shipping address updated successfully.'));
       setPageLoader(false);
     } catch (error) {
       console.error(error);

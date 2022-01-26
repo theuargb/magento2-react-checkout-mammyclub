@@ -85,17 +85,19 @@ function ShippingAddressForm({ children }) {
   const customSelectStyles = {
     option: (provided) => ({
       ...provided,
+      fontSize: '13px',
+      lineHeight: '13px',
     }),
     control: (provided) => ({
       ...provided,
       borderRadius: '5px',
-      height: '23px',
+      height: '22px',
       minHeight: 'none',
       boxShadow: '0px 0px 4px 0px #ccc inset',
     }),
     container: (provided) => ({
       ...provided,
-      height: '23px',
+      height: '22px',
       minHeight: 'none',
     }),
     indicatorsContainer: (provided) => ({
@@ -110,7 +112,7 @@ function ShippingAddressForm({ children }) {
     }),
     valueContainer: (provided) => ({
       ...provided,
-      height: '24px',
+      height: '22px',
       minHeight: 'none',
       padding: '0 5px',
     }),
@@ -120,6 +122,7 @@ function ShippingAddressForm({ children }) {
       fontSize: '13px',
       lineHeight: '13px',
       outline: 'none',
+      margin: '0',
     }),
     singleValue: (provided, state) => {
       const opacity = state.isDisabled ? 0.5 : 1;
@@ -128,7 +131,7 @@ function ShippingAddressForm({ children }) {
         ...provided,
         opacity,
         transition,
-        height: '13px',
+        height: '18px',
         fontSize: '13px',
         lineHeight: '13px',
         alighSelf: 'center',

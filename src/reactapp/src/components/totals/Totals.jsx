@@ -25,14 +25,15 @@ function Totals() {
               </div>
             )} */}
 
-          {hasShippingRate && (
-            <div className="px-4 py-3 flex justify-end text-xl font-bold text-gray">
-              <div className="text-lg text-gray">
-                {__('Доставка по Украине: ')}
-              </div>
-              <div className="text-lg text-green"> {shippingMethodRate}</div>
+          <div className="px-4 py-3 flex justify-end text-xl font-bold text-gray">
+            <div className="text-lg text-gray">
+              {__('Доставка по Украине:\u00A0')}
             </div>
-          )}
+            <div className="text-lg text-green">
+              {(hasShippingRate && shippingMethodRate) || 0}
+            </div>
+          </div>
+
           {hasDiscounts &&
             discounts.map((discount) => (
               <div key={discount.label} className="flex justify-between">
@@ -44,7 +45,7 @@ function Totals() {
 
         <div className="">
           <div className="px-4 py-3 flex justify-end text-xl font-bold border-t-2 text-gray ">
-            <div className="text-lg text-gray">{__('Итого: ')}</div>
+            <div className="text-lg text-gray">{__('Итого:\u00A0')}</div>
             <div className="text-lg text-green"> {grandTotal || '0'}</div>
           </div>
         </div>

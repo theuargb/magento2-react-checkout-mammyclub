@@ -47,7 +47,7 @@ function NovaPoshtaCitySelect({
       });
   };
   return (
-    <div className="react-select py-5">
+    <div className="react-select pt-5 pb-3">
       <p className="text-base text-gray mb-0.5">{__('Населенный пункт')}</p>
       <Select
         options={selectList}

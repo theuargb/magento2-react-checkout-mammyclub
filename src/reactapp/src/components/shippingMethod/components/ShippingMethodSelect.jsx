@@ -37,7 +37,7 @@ function ShippingMethodSelect({
         name={name}
         id={inputId}
         placeholder={placeholder}
-        className="w-full border form-select xs:block form-input form-select text-base"
+        className="indent-0 w-full border form-select xs:block form-input text-base "
         {...rest}
       >
         <option value="">{__('-Пожалуйста, выберите-')}</option>

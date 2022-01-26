@@ -29,7 +29,7 @@ function OrderAdditionalsForm({ children }) {
         onKeyDown={handleKeyDown}
         placeholder=""
         as="textarea"
-        className="h-32 py-2"
+        className="h-28 py-2"
       />
     </div>
   );

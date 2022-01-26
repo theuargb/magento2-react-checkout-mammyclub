@@ -57,6 +57,8 @@ function CheckoutFormProvider({ children }) {
   const { setPageLoader } = useAppContext();
 
   const [liqPayReadyToInit, setLiqPayReadyToInit] = useState(false);
+  const [isLiqPaySuccess, setLiqPayStatus] = useState(false);
+
   /**
    * This will help any custom payment method renderer component to register
    * a custom payment action. Custom payment action will be triggered when
@@ -92,15 +94,25 @@ function CheckoutFormProvider({ children }) {
         if (selectedPaymentMethod === 'liqpaymagento_liqpay') {
           setLiqPayReadyToInit(true);
         }
-        LocalStorage.clearCheckoutStorage();
-        // window.location.replace(config.successPageRedirectUrl);
+        if (
+          selectedPaymentMethod === 'liqpaymagento_liqpay' &&
+          isLiqPaySuccess === true
+        ) {
+          LocalStorage.clearCheckoutStorage();
+          window.location.replace(config.successPageRedirectUrl);
+        }
       }
 
       if (orderNumber && config.isDevelopmentMode) {
         if (selectedPaymentMethod === 'liqpaymagento_liqpay') {
           setLiqPayReadyToInit(true);
         }
-        LocalStorage.clearCheckoutStorage();
+        if (
+          selectedPaymentMethod === 'liqpaymagento_liqpay' &&
+          isLiqPaySuccess === true
+        ) {
+          LocalStorage.clearCheckoutStorage();
+        }
       }
 
       setPageLoader(false);
@@ -155,6 +167,8 @@ function CheckoutFormProvider({ children }) {
         submitHandler: formSubmit,
         registerPaymentAction,
         liqPayReadyToInit,
+        isLiqPaySuccess,
+        setLiqPayStatus,
       }}
     >
       <Formik
