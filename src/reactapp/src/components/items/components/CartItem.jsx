@@ -25,7 +25,7 @@ function CartItem({ item, isLastItem, actions }) {
   return (
     <tr className={`border-2 md:border-0 ${isLastItem ? '' : 'md:border-b-2'}`}>
       {/** DESKTOP TD ELEMENTS */}
-      <td className="w-2/5 table-cell">
+      <td className="w-2/5 table-cell bg-white">
         <div className="py-2 pl-2 flex">
           <div className="flex-none h-20 mr-1 shrink-0">
             <img
@@ -41,11 +41,11 @@ function CartItem({ item, isLastItem, actions }) {
           </div>
         </div>
       </td>
-      <td className="table-cell text-md text-green w-1/5 align-middle hidden md:table-cell">
+      <td className="table-cell text-md text-green w-1/5 align-middle hidden md:table-cell bg-white">
         {item.price}
       </td>
 
-      <td className="w-1/6 table-cell align-middle">
+      <td className="w-1/6 table-cell align-middle bg-white">
         <TextInput
           min="0"
           width="w-10"
@@ -77,7 +77,7 @@ function CartItem({ item, isLastItem, actions }) {
         {item.rowTotal} {subTotal}
       </td> */}
 
-      <td className="w-1/6 table-cell text-md text-green align-middle">
+      <td className="w-1/6 table-cell text-md text-green align-middle bg-white">
         <div className="">
           {hasSubTotal && (
             <div className="flex justify-between items-center">

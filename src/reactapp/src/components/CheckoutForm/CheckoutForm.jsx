@@ -23,6 +23,7 @@ import useCheckoutFormCartContext from './hooks/useCheckoutFormCartContext';
 import { __ } from '../../i18n';
 import LiqPayWidget from '../LiqPayWidget/LiqPayWidget';
 import CheckoutFormContext from '../../context/Form/CheckoutFormContext';
+import ContactUs from '../InfoPopups/ContactUs';
 
 function CheckoutForm() {
   const [initialData, setInitialData] = useState(false);
@@ -114,9 +115,12 @@ function CheckoutForm() {
             </p>
 
             <StickyRightSidebar>
-              <CartItemsForm />
-              <Totals />
-              <CheckoutAgreements />
+              <div className="border border-container">
+                <CartItemsForm />
+                <Totals />
+                <CheckoutAgreements />
+              </div>
+              <ContactUs />
             </StickyRightSidebar>
           </div>
           {pageLoader && <PageLoader />}

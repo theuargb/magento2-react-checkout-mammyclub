@@ -25,6 +25,9 @@ module.exports = {
           lighter: "#777777",
           DEFAULT: "#999999",
         },
+        green:{
+          DEFAULT: "#5dba5d",
+        }
       },
       textColor: {
         orange: colors.orange,
@@ -95,8 +98,10 @@ module.exports = {
         xxs: ["11px", "11px"],
         xs: ["12px", "12px"],
         base: ["13px", "13px"],
+        lbase: ["14px", "18px"],
         md: ["15px", "15px"],
         lg: ["16px", "16px"],
+        'lg+': ["18px","18px"],
         xlg: ["20px", "20px"],
         xxlg: ["24px", "24px"],
       },
