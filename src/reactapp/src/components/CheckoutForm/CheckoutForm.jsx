@@ -72,7 +72,7 @@ function CheckoutForm() {
   return (
     <CheckoutFormWrapper initialData={initialData}>
       <Message />
-      <div className="flex justify-center">
+      <div className="flex justify-center checkout-wrapper">
         <div className="container w-full mx-auto py-2 md:py-5 md:px-3">
           <div className="hidden md:grid grid-cols-2 gap-x-6">
             <p className="text-xxlg ">

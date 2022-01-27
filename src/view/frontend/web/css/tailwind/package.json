@@ -18,10 +18,11 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node_modules/postcss-cli/bin/postcss tailwind-source.css -o tailwind-output.css",
-    "minify": "node_modules/csso-cli/bin/csso tailwind-output.css --output ../styles.css",
-    "build-dev": "NODE_ENV=development npm run build && cp tailwind-output.css ../styles.css && cp ../styles.css ../../../../../reactapp/public/styles.css && npm run output-success",
-    "build-prod": "NODE_ENV=production npm run build && npm run minify && cp ../styles.css ../../../../../reactapp/public/styles.css && npm run output-success",
+    "build": "node_modules/postcss-cli/bin/postcss tailwind-source.css -o ../scss/tailwind-output.scss",
+    "scss": "node-sass scss -o .",
+    "minify": "node_modules/csso-cli/bin/csso tailwind-main.css --output ../styles_checkout.css",
+    "build-dev": "NODE_ENV=development npm run build && npm run scss && cp tailwind-main.css ../styles_checkout.css && cp ../styles.css ../../../../../reactapp/public/styles.css && npm run output-success",
+    "build-prod": "NODE_ENV=production npm run build && npm run scss && npm run minify && cp ../styles_checkout.css ../../../../../reactapp/public/styles.css && npm run output-success",
     "output-success": "echo \"\\033[0;32mDone!\\033[0m\""
   },
   "author": "Hyvä Themes B.V.",
