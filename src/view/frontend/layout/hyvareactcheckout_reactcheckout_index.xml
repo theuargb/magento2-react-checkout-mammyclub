@@ -5,6 +5,7 @@
         <script src="Hyva_ReactCheckout::js/react-checkout.js" defer="defer" />
     </head>
     <body>
+
         <referenceContainer name="content">
             <block class="Hyva\ReactCheckout\Block\CheckoutTranslator" name="checkout.translations" template="Hyva_ReactCheckout::translation.phtml">
                 <arguments>
@@ -21,20 +22,16 @@
                     </argument>
                 </arguments>
             </block>
-            <block
-                cacheable="false"
-                name="checkout.container"
-                template="Hyva_ReactCheckout::react-container.phtml"
-            >
+            <block cacheable="false" name="checkout.container" template="Hyva_ReactCheckout::react-container.phtml">
                 <arguments>
-                    <argument
-                        name="checkout_config_provider"
-                        xsi:type="object">Hyva\ReactCheckout\ViewModel\CheckoutConfigProvider</argument>
+                    <argument name="checkout_config_provider" xsi:type="object">Hyva\ReactCheckout\ViewModel\CheckoutConfigProvider</argument>
                 </arguments>
             </block>
         </referenceContainer>
         <referenceContainer name="before.body.end">
             <block name="checkout.scripts" template="Hyva_ReactCheckout::react-script.phtml" after="-"/>
         </referenceContainer>
+        <referenceBlock name="page.main.title" remove="true"/>
     </body>
+    <referenceBlock name="page.main.title" remove="true"/>
 </page>

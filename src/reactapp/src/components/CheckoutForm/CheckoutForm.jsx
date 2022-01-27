@@ -24,6 +24,7 @@ import { __ } from '../../i18n';
 import LiqPayWidget from '../LiqPayWidget/LiqPayWidget';
 import CheckoutFormContext from '../../context/Form/CheckoutFormContext';
 import ContactUs from '../InfoPopups/ContactUs';
+import DeliveryWarranty from '../magentoBlocks/DeliveryWarranty';
 
 function CheckoutForm() {
   const [initialData, setInitialData] = useState(false);
@@ -121,6 +122,7 @@ function CheckoutForm() {
                 <CheckoutAgreements />
               </div>
               <ContactUs />
+              <DeliveryWarranty />
             </StickyRightSidebar>
           </div>
           {pageLoader && <PageLoader />}
