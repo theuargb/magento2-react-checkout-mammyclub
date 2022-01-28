@@ -14,14 +14,18 @@ function NovaPoshtaWarehouseSelect({
 }) {
   const [selectList, setSelectList] = useState(options);
   const { setFieldValue, setFieldTouched } = formikData;
+  const [selectValue, setSelectValue] = useState('void');
 
   const handleFormChange = (e) => {
     const newValue = e.label;
     setFieldTouched(name, newValue);
     setFieldValue(name, newValue);
+
+    setSelectValue(e);
   };
 
   useEffect(() => {
+    setSelectValue('void');
     const postList = [];
     fetch(
       `https://mammyclub.perspective.net.ua/rest/V1/novaposhta/warehouses?cityRef=${selectedCityId}`
@@ -54,6 +58,7 @@ function NovaPoshtaWarehouseSelect({
         placeholder=""
         onChange={(e) => handleFormChange(e)}
         styles={customStyles}
+        value={selectValue}
       />
     </div>
   );

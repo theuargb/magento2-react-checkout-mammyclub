@@ -36,7 +36,6 @@ function LoginForm() {
     <>
       <div>
         <TextInput
-          required
           type="email"
           label={__('Электронная почта')}
           name={fields.email}
@@ -51,7 +50,6 @@ function LoginForm() {
         {customerWantsToSignIn && (
           <div>
             <TextInput
-              required
               type="password"
               autoComplete="on"
               label={__('Password')}

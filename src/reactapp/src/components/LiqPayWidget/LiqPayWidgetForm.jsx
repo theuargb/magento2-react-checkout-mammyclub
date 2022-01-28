@@ -32,7 +32,6 @@ const LiqPayWidgetForm = ({ liqPayData }) => {
           .on('liqpay.close', function (data) {
             console.log('close', data);
           });
-        console.log(LiqPayCheckout);
       })();
     }
   }, [data, signature]);

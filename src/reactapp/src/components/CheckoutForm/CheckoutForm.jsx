@@ -30,11 +30,12 @@ function CheckoutForm() {
   const [initialData, setInitialData] = useState(false);
   const { pageLoader, appDispatch, setPageLoader, storeAggregatedAppStates } =
     useCheckoutFormAppContext();
-  const { isLiqPaySuccess } = useContext(CheckoutFormContext);
+  const { isOrderPlaced } = useContext(CheckoutFormContext);
 
   // const { orderId, isVirtualCart, storeAggregatedCartStates } =
   const { orderId, storeAggregatedCartStates } = useCheckoutFormCartContext();
 
+  console.log(useContext(CheckoutFormContext));
   /**
    * Collect App, Cart data when the page loads.
    */
@@ -57,8 +58,7 @@ function CheckoutForm() {
     storeAggregatedAppStates,
     storeAggregatedCartStates,
   ]);
-  console.log(useCheckoutFormCartContext());
-  if (orderId && config.isDevelopmentMode && isLiqPaySuccess) {
+  if (orderId && config.isDevelopmentMode && isOrderPlaced) {
     return (
       <div className="flex flex-col items-center justify-center mx-10 my-10">
         <h1 className="text-2xl font-bold">{__('Информация о заказе')}</h1>

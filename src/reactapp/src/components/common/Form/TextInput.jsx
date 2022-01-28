@@ -43,7 +43,7 @@ function TextInput({
         {label && (
           <label htmlFor={inputId} className="mb-0.5 text-base text-gray">
             {label}
-            {required && <sup> *</sup>}
+            {required && <sup className="text-red-500"> *</sup>}
           </label>
         )}
         <div

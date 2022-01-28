@@ -49,13 +49,13 @@ function PaymentMethodList({ methodRenderers }) {
     control: (provided) => ({
       ...provided,
       borderRadius: '5px',
-      height: '26px',
+      height: '22px',
       minHeight: 'none',
       boxShadow: '0px 0px 4px 0px #ccc inset',
     }),
     container: (provided) => ({
       ...provided,
-      height: '24px',
+      height: '22px',
       minHeight: 'none',
     }),
     indicatorsContainer: (provided) => ({
@@ -63,7 +63,7 @@ function PaymentMethodList({ methodRenderers }) {
       height: '24px',
       minHeight: 'none',
       borderLeft: 'none',
-      padding: '0',
+      marginTop: '-2px',
     }),
     indicatorSeparator: (provided) => ({
       ...provided,
@@ -71,9 +71,11 @@ function PaymentMethodList({ methodRenderers }) {
     }),
     valueContainer: (provided) => ({
       ...provided,
-      height: '24px',
+      height: '20px',
       minHeight: 'none',
-      padding: '0 5px',
+      padding: '0 4px',
+      alignSelf: 'center',
+      marginTop: '-4px',
     }),
     input: (provided) => ({
       ...provided,
@@ -81,6 +83,8 @@ function PaymentMethodList({ methodRenderers }) {
       fontSize: '13px',
       lineHeight: '13px',
       outline: 'none',
+      margin: '0',
+      padding: '0',
     }),
     singleValue: (provided, state) => {
       const opacity = state.isDisabled ? 0.5 : 1;
@@ -89,14 +93,14 @@ function PaymentMethodList({ methodRenderers }) {
         ...provided,
         opacity,
         transition,
-        height: '13px',
+        height: '20px',
         fontSize: '13px',
-        lineHeight: '13px',
+        lineHeight: '20px',
         alighSelf: 'center',
+        padding: '0',
       };
     },
   };
-
   const methodListForSelect = [];
   _objToArray(methodList).forEach((method) => {
     const value = method.code;
@@ -144,6 +148,7 @@ function PaymentMethodList({ methodRenderers }) {
     <div className="react-select pt-4 pb-5 border-t-2 border-b-2 border-container-lightner">
       <p className="text-base text-gray mb-0.5">
         {__('Способ оплаты (обязательно)')}
+        <sup className="text-red-500"> *</sup>
       </p>
       <Select
         options={methodListForSelect}

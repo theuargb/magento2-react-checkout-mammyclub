@@ -22,7 +22,6 @@ function OrderAdditionalsForm({ children }) {
     <div className="px-4">
       <div>{children}</div>
       <TextInput
-        required
         name={fields.customer_notes}
         formikData={formikData}
         label={__('Комментарий к заказу')}

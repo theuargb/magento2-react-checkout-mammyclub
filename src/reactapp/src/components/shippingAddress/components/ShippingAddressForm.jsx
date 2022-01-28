@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 import { useFormikContext } from 'formik';
 import { node } from 'prop-types';
@@ -105,6 +106,7 @@ function ShippingAddressForm({ children }) {
       height: '24px',
       minHeight: 'none',
       borderLeft: 'none',
+      marginTop: '-2px',
     }),
     indicatorSeparator: (provided) => ({
       ...provided,
@@ -112,9 +114,11 @@ function ShippingAddressForm({ children }) {
     }),
     valueContainer: (provided) => ({
       ...provided,
-      height: '22px',
+      height: '20px',
       minHeight: 'none',
-      padding: '0 5px',
+      padding: '0 4px',
+      alignSelf: 'center',
+      marginTop: '-4px',
     }),
     input: (provided) => ({
       ...provided,
@@ -123,6 +127,7 @@ function ShippingAddressForm({ children }) {
       lineHeight: '13px',
       outline: 'none',
       margin: '0',
+      padding: '0',
     }),
     singleValue: (provided, state) => {
       const opacity = state.isDisabled ? 0.5 : 1;
@@ -131,10 +136,11 @@ function ShippingAddressForm({ children }) {
         ...provided,
         opacity,
         transition,
-        height: '18px',
+        height: '20px',
         fontSize: '13px',
-        lineHeight: '13px',
+        lineHeight: '20px',
         alighSelf: 'center',
+        padding: '0',
       };
     },
   };
@@ -143,10 +149,11 @@ function ShippingAddressForm({ children }) {
   const [addressFormSubmited, setAddressFormSubmited] = useState(false);
 
   /*  При заполнении полей формы ShippingAddress будет отправляться запрос на бек, с значением полей формы
-    Это нужно для того, чтобы с бека вернулись методы доставки и методы оплаты */
+    Это нужно для того, чтобы с бека вернулись методы доставки и методы оплаты (ВРЕМЕННО!!!!) */
   React.useEffect(() => {
     if (values.shipping_address) {
       const { firstname, lastname, phone } = values.shipping_address;
+
       if ((firstname, lastname, phone && addressFormSubmited === false)) {
         setAddressFormSubmited(true);
       }
@@ -156,6 +163,7 @@ function ShippingAddressForm({ children }) {
     formSubmitHandler();
     setAddressFormSubmited(null);
   }
+
   // formSubmitHandler();
   /*  =======================================================================================  */
   const selectedShippingMethod = values?.shipping_method?.methodCode;
@@ -186,7 +194,6 @@ function ShippingAddressForm({ children }) {
         /> */}
 
         <TextInput
-          required
           name={fields.firstname}
           formikData={formikData}
           label={__('Имя')}
@@ -194,7 +201,6 @@ function ShippingAddressForm({ children }) {
           placeholder={__('First name')}
         />
         <TextInput
-          required
           name={fields.lastname}
           label={__('Фамилия')}
           formikData={formikData}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import _get from 'lodash.get';
 import { bool, func, shape, string } from 'prop-types';
 // import { RefreshIcon } from '@heroicons/react/solid';
@@ -19,8 +19,19 @@ function CartItem({ item, isLastItem, actions }) {
   const qtyField = `${item.id}_qty`;
   const itemQtyField = `${CART_ITEMS_FORM}.${qtyField}`;
   // const isQtyFieldTouched = _get(cartItemsTouched, qtyField);
-  /* eslint-disable */ 
+  /* eslint-disable */
   const { subTotal, hasSubTotal } = useTotalsCartContext();
+
+  const [isQtyChange, setQtyChange] = useState(false);
+
+  const handleQtyUpdate = (e) => {
+    actions.handleQtyUpdate(e);
+    setQtyChange(true);
+  };
+  const updateQty = () => {
+    itemUpdateHandler();
+    setQtyChange(false);
+  };
 
   return (
     <tr className={`border-2 md:border-0 ${isLastItem ? '' : 'md:border-b-2'}`}>
@@ -55,15 +66,17 @@ function CartItem({ item, isLastItem, actions }) {
           id={`${itemQtyField}-desktop`}
           // onChange={actions.handleQtyUpdate}
           className="-mt-4 block mx-auto text-center form-select"
-          onChange={actions.handleQtyUpdate}
+          onChange={handleQtyUpdate}
         />
-        <button
-          className="text-xs text-link"
-          onClick={itemUpdateHandler}
-          type="button"
-        >
-          {__('Обновить')}
-        </button>
+        {isQtyChange && (
+          <button
+            className="text-xs text-link"
+            onClick={updateQty}
+            type="button"
+          >
+            {__('Обновить')}
+          </button>
+        )}
         {/* <Button
           size="sm"
           variant="secondary"
