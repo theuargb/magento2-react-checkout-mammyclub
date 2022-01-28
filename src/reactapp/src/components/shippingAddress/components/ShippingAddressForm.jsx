@@ -146,23 +146,22 @@ function ShippingAddressForm({ children }) {
   };
 
   const { values } = useFormikContext();
-  const [addressFormSubmited, setAddressFormSubmited] = useState(false);
+  // const [addressFormSubmited, setAddressFormSubmited] = useState(false);
 
-  /*  При заполнении полей формы ShippingAddress будет отправляться запрос на бек, с значением полей формы
-    Это нужно для того, чтобы с бека вернулись методы доставки и методы оплаты (ВРЕМЕННО!!!!) */
-  React.useEffect(() => {
-    if (values.shipping_address) {
-      const { firstname, lastname, phone } = values.shipping_address;
+ 
+  // React.useEffect(() => {
+  //   if (values.shipping_address) {
+  //     const { firstname, lastname, phone } = values.shipping_address;
 
-      if ((firstname, lastname, phone && addressFormSubmited === false)) {
-        setAddressFormSubmited(true);
-      }
-    }
-  }, [values]);
-  if (addressFormSubmited) {
-    formSubmitHandler();
-    setAddressFormSubmited(null);
-  }
+  //     if ((firstname, lastname, phone && addressFormSubmited === false)) {
+  //       setAddressFormSubmited(true);
+  //     }
+  //   }
+  // }, [values]);
+  // if (addressFormSubmited) {
+  //   formSubmitHandler();
+  //   setAddressFormSubmited(null);
+  // }
 
   // formSubmitHandler();
   /*  =======================================================================================  */

@@ -99,7 +99,7 @@ function PlaceOrder() {
     if (hasShippingMethodErrors(errors)) {
       setErrorMessage(__('Please select your shipping method.'));
       //  УДАЛИТЬ ПОТОМ
-      await handleSubmitAddressForm();
+      // await handleSubmitAddressForm();
       /*  ======================= */
       scrollToElement(SHIPPING_METHOD);
       return;

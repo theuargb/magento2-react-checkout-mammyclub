@@ -7,7 +7,7 @@ import { initialCountry } from '../../utils/address';
 export default async function aggregatedQuery(dispatch) {
   const token = LocalStorage.getCustomerToken();
   const variables = {
-    countryId: initialCountry,
+    countryId: 'UA',
     cartId: LocalStorage.getCartId(),
   };
   const query = getQuery(token, initialCountry);

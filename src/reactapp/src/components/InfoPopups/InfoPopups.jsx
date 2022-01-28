@@ -60,15 +60,17 @@ const InfoPopups = ({ linkToCMSBlock, label, positionStyles }) => {
     }
   `;
   let popupContent;
-  fetch(linkToCMSBlock, {
-    method: 'GET',
-    headers: {
-      Authorization: 'Bearer 6gn2y2np87chqd6zb7sjuphsluy3oq77',
-      'Content-Type': 'application/json',
-    },
-  }).then((response) => {
-    popupContent = response.content;
-  });
+  React.useEffect(() => {
+    fetch(linkToCMSBlock, {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer 6gn2y2np87chqd6zb7sjuphsluy3oq77',
+        'Content-Type': 'application/json',
+      },
+    }).then((response) => {
+      popupContent = response.content;
+    });
+  }, [linkToCMSBlock]);
 
   return (
     <StyledPopup
