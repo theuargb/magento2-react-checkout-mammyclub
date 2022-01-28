@@ -8,7 +8,7 @@ function StickyRightSidebar({ children }) {
 
   return (
     <div
-      className="md:sticky self-start w-full lg:w-1/2 order-2 md:order-2 "
+      className="md:sticky self-start w-full md:w-1/2 order-2 md:order-2 "
       style={{ top: message ? '100px' : '0px' }}
     >
       <div className="">{children}</div>

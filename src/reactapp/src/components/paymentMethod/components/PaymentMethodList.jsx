@@ -10,6 +10,7 @@ import { __ } from '../../../i18n';
 import { _objToArray } from '../../../utils';
 import usePaymentMethodCartContext from '../hooks/usePaymentMethodCartContext';
 import usePaymentMethodFormContext from '../hooks/usePaymentMethodFormContext';
+import InfoPopups from '../../InfoPopups/InfoPopups';
 
 function PaymentMethodList({ methodRenderers }) {
   const { fields, submitHandler, formikData } = usePaymentMethodFormContext();
@@ -109,42 +110,6 @@ function PaymentMethodList({ methodRenderers }) {
   });
 
   return (
-    /*  <div
-      title={
-        !paymentAvailable ? __('Please provide a shipping address first.') : ''
-      }
-      className={classNames(
-        !paymentAvailable ? 'cursor-not-allowed opacity-40' : '',
-        'py-4'
-      )}
-    >
-       <ul>
-        {_objToArray(methodList).map((method) => {
-          const MethodRenderer = methodRenderers[method.code];
-          return (
-            <>
-              <li key={method.code}>
-                {MethodRenderer ? (
-                  <MethodRenderer
-                    method={method}
-                    selected={paymentValues}
-                    actions={{ change: handlePaymentMethodSelection }}
-                  />
-                ) : (
-                  <RadioInput
-                    value={method.code}
-                    label={method.title}
-                    name="paymentMethod"
-                    disabled={!paymentAvailable}
-                    onChange={handlePaymentMethodSelection}
-                    checked={method.code === paymentValues.code}
-                  />
-                )}
-              </li>
-            </>
-          );
-        })}
-      </ul>   */
     <div className="react-select pt-4 pb-5 border-t-2 border-b-2 border-container-lightner">
       <p className="text-base text-gray mb-0.5">
         {__('Способ оплаты (обязательно)')}
@@ -156,6 +121,12 @@ function PaymentMethodList({ methodRenderers }) {
         inputId="city"
         placeholder=""
         styles={customSelectStyles}
+      />
+      <InfoPopups
+        positionStyles="absolute top-0 right-0 mt-4 mr-6"
+        label={__('Оплата')}
+        className="absolute top-0 right-0"
+        linkToCMSBlock="https://mammyclub.perspective.net.ua/rest/V1/cmsBlock/call_to_us"
       />
     </div>
   );

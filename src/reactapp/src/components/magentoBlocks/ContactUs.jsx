@@ -2,7 +2,7 @@ import React from 'react';
 import { __ } from '../../i18n';
 
 const ContactUs = () => (
-  <div className="bg-green grid grid-cols-2 gap-x-5 p-2.5 text-white mt-6">
+  <div className="bg-green grid-cols-2 gap-x-2 p-2.5 text-white mt-6 hidden md:grid">
     <div className="text-lbase">
       {__(
         'Если у Вас возникли вопросы, Вы можете обратиться к нам по телефону:'

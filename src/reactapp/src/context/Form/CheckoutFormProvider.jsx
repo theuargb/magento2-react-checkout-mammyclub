@@ -110,6 +110,9 @@ function CheckoutFormProvider({ children }) {
       if (orderNumber && config.isDevelopmentMode) {
         if (selectedPaymentMethod === 'liqpaymagento_liqpay') {
           setLiqPayReadyToInit(true);
+        } else {
+          setOrderPlacedStatus(true);
+          LocalStorage.clearCheckoutStorage();
         }
         if (
           selectedPaymentMethod === 'liqpaymagento_liqpay' &&

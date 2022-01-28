@@ -11,7 +11,6 @@
   ],
   "author": "Hyvä Themes BV",
   "license": "BSD-3-Clause",
-  "proxy": "http://mammyclub.dev",
   "private": true,
   "dependencies": {
     "@heroicons/react": "^1.0.5",
@@ -27,6 +26,8 @@
     "react-dom": "^17.0.1",
     "react-scripts": "^5.0.0",
     "react-select": "^5.2.2",
+    "reactjs-popup": "^2.0.5",
+    "styled-components": "^5.3.3",
     "watch": "^1.0.2",
     "yup": "^0.32.11"
   },

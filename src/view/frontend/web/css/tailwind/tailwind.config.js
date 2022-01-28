@@ -81,6 +81,7 @@ module.exports = {
           lighter: "#eeeeee",
           DEFAULT: "#cccccc",
           darker: "#b6b6b6",
+          green: "#5DBA5D",
         },
         orange: "#d0751a",
       },

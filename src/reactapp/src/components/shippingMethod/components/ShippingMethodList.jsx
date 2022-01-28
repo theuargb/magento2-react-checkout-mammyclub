@@ -5,6 +5,7 @@ import useShippingMethodFormContext from '../hooks/useShippingMethodFormContext'
 import useShippingMethodCartContext from '../hooks/useShippingMethodCartContext';
 import { _objToArray } from '../../../utils';
 import { __ } from '../../../i18n';
+import InfoPopups from '../../InfoPopups/InfoPopups';
 
 function ShippingMethodList() {
   const {
@@ -41,12 +42,17 @@ function ShippingMethodList() {
   }
 
   return (
-    <div className="py-4 border-b-2 border-container-lightner">
+    <div className="py-4 border-b-2 border-container-lightner relative">
       <SelectInput
         label={__('Способ доставки')}
         name="shippingMethod"
         options={_objToArray(methodList)}
         onChange={handleShippingMethodSelection}
+      />
+      <InfoPopups
+        positionStyles="absolute top-0 right-0 mt-6 pr-2"
+        label={__('Доставка')}
+        className="absolute top-0 right-0"
       />
     </div>
   );

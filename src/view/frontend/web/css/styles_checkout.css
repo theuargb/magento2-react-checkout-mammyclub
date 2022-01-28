@@ -970,8 +970,6 @@ Add the correct display in Chrome and Safari.
     display: table-cell !important; }
   .checkout-wrapper .table-header-group {
     display: table-header-group !important; }
-  .checkout-wrapper .grid {
-    display: grid !important; }
   .checkout-wrapper .hidden {
     display: none !important; }
   .checkout-wrapper .h-4 {
@@ -1097,8 +1095,6 @@ Add the correct display in Chrome and Safari.
     animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important; }
   .checkout-wrapper .cursor-pointer {
     cursor: pointer !important; }
-  .checkout-wrapper .cursor-not-allowed {
-    cursor: not-allowed !important; }
   .checkout-wrapper .select-none {
     -webkit-user-select: none !important;
     -moz-user-select: none !important;
@@ -1124,9 +1120,9 @@ Add the correct display in Chrome and Safari.
     justify-content: space-between !important; }
   .checkout-wrapper .justify-around {
     justify-content: space-around !important; }
-  .checkout-wrapper .gap-x-5 {
-    -moz-column-gap: 1.25rem !important;
-    column-gap: 1.25rem !important; }
+  .checkout-wrapper .gap-x-2 {
+    -moz-column-gap: 0.5rem !important;
+    column-gap: 0.5rem !important; }
   .checkout-wrapper .gap-x-6 {
     -moz-column-gap: 1.5rem !important;
     column-gap: 1.5rem !important; }
@@ -1425,8 +1421,6 @@ Add the correct display in Chrome and Safari.
     color: rgba(239, 68, 68, var(--tw-text-opacity)) !important; }
   .checkout-wrapper .underline {
     text-decoration: underline !important; }
-  .checkout-wrapper .opacity-40 {
-    opacity: 0.4 !important; }
   .checkout-wrapper .opacity-50 {
     opacity: 0.5 !important; }
   .checkout-wrapper .opacity-75 {
@@ -1544,6 +1538,8 @@ Add the correct display in Chrome and Safari.
       margin-right: 0.5rem !important; }
     .checkout-wrapper .md\:mr-8 {
       margin-right: 2rem !important; }
+    .checkout-wrapper .md\:-ml-8 {
+      margin-left: -2rem !important; }
     .checkout-wrapper .md\:table-cell {
       display: table-cell !important; }
     .checkout-wrapper .md\:grid {
@@ -1579,8 +1575,6 @@ Add the correct display in Chrome and Safari.
       display: flex !important; }
     .checkout-wrapper .lg\:h-96 {
       height: 24rem !important; }
-    .checkout-wrapper .lg\:w-1\/2 {
-      width: 50% !important; }
     .checkout-wrapper .lg\:w-2\/3 {
       width: 66.666667% !important; }
     .checkout-wrapper .lg\:w-2\/5 {
