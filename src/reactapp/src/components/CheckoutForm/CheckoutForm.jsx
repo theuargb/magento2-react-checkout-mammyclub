@@ -44,6 +44,7 @@ function CheckoutForm() {
       try {
         setPageLoader(true);
         const data = await aggregatedQueryRequest(appDispatch);
+
         await storeAggregatedCartStates(data);
         await storeAggregatedAppStates(data);
         setInitialData(data);
