@@ -54,6 +54,13 @@ function PlaceOrder() {
   /* ОБРАБОТЧИК ПОЛЕЙ ShippingAddress */
   const handleSubmitAddressForm = async () => {
     let updateBillingAddress = _emptyFunc();
+
+    let { firstname, lastname } = addressToSave;
+    if (lastname.length === 0) lastname = '<null>';
+    if (firstname.length === 0) firstname = '<null>';
+    console.log(firstname.length);
+    addressToSave = { ...addressToSave, firstname, lastname };
+    console.log(addressToSave);
     const updateShippingAddress = _makePromise(
       addCartShippingAddress,
       addressToSave

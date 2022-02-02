@@ -119,7 +119,6 @@ function CheckoutFormProvider({ children }) {
           isLiqPaySuccess === true
         ) {
           setOrderPlacedStatus(true);
-
           LocalStorage.clearCheckoutStorage();
         }
       }

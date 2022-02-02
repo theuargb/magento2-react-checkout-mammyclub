@@ -39,14 +39,14 @@ const initialValues = {
   /*  Пробелы в начальные значения полей добавлены для того, чтобы при первой подгрузке
   страницы бек отдал возможные методы оплаты и доставки, т.к без заполненных полей 
   Shipping address данные о методах оплаты и оставки бек не возвращает  */
-  company: '<null>',
-  firstname: '<null>',
-  lastname: '<null>',
-  street: ['<null>'],
-  phone: '<null>',
-  zipcode: '<null>',
-  city: '<null>',
-  region: '<null>',
+  company: '',
+  firstname: '',
+  lastname: '',
+  street: [''],
+  phone: '',
+  zipcode: '',
+  city: '',
+  region: '',
   country: 'UA',
   // city_novaposhta_ref: '',
   // warehouse_novaposhta_id: '',
