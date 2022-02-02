@@ -155,16 +155,18 @@ function ShippingAddressForm({ children }) {
   //     setAddressFormSubmited(true);
   //   }
   // }
-  
-  if (!addressFormSubmited) {
+
+  React.useEffect(() => {
     (async () => {
-      await formSubmitHandler();
-      setFieldValue(fields.firstname, '');
-      setFieldValue(fields.lastname, '');
-      setFieldValue(fields.phone, '');
-      setAddressFormSubmited(true);
+      if (!addressFormSubmited) {
+        await formSubmitHandler();
+        setFieldValue(fields.firstname, '');
+        setFieldValue(fields.lastname, '');
+        setFieldValue(fields.phone, '');
+        setAddressFormSubmited(true);
+      }
     })();
-  }
+  }, [values]);
 
   // if (addressFormSubmited) {
   //   (async () => {
