@@ -2,17 +2,17 @@ import { CART_DATA_FRAGMENT } from '../utility/query/cartQueryInfo';
 
 export const SET_SHIPPING_ADDR_MUTATION = `
 mutation setShippingAddress(
-  $cartId: String!,
-  $firstname: String!,
-  $lastname: String!,
-  $company: String,
-  $street: [String]!,
-  $city: String!,
-  $region: String,
-  $zipcode: String!,
+  $cartId: String="<null>",
+  $firstname: String="<null>",
+  $lastname: String="<null>",
+  $company: String="<null>",
+  $street: [String],
+  $city: String="<null>",
+  $region: String="<null>",
+  $zipcode: String="<null>",
   $country: String!,
-  $phone: String!,
-  $customer_notes: String,
+  $phone: String="<null>",
+  $customer_notes: String="<null>",
 ) {
   setShippingAddressesOnCart(
     input: {

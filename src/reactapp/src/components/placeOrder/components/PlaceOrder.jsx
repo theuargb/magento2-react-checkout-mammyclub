@@ -5,17 +5,17 @@ import { useFormikContext } from 'formik';
 // import Button from '../../common/Button';
 import {
   LOGIN_FORM,
-  SHIPPING_METHOD,
+  // SHIPPING_METHOD,
   BILLING_ADDR_FORM,
   SHIPPING_ADDR_FORM,
-  PAYMENT_METHOD_FORM,
+  // PAYMENT_METHOD_FORM,
   CHECKOUT_AGREEMENTS_FORM,
 } from '../../../config';
 import {
   hasLoginErrors,
-  hasPaymentMethodErrors,
+  // hasPaymentMethodErrors,
   hasBillingAddressErrors,
-  hasShippingMethodErrors,
+  // hasShippingMethodErrors,
   hasShippingAddressErrors,
   hasTermsAndConditionsAgreed,
 } from '../utility';
@@ -96,20 +96,17 @@ function PlaceOrder() {
       return;
     }
 
-    if (hasShippingMethodErrors(errors)) {
-      setErrorMessage(__('Please select your shipping method.'));
-      //  УДАЛИТЬ ПОТОМ
-      // await handleSubmitAddressForm();
-      /*  ======================= */
-      scrollToElement(SHIPPING_METHOD);
-      return;
-    }
+    // if (hasShippingMethodErrors(errors)) {
+    //   setErrorMessage(__('Please select your shipping method.'));
+    //   scrollToElement(SHIPPING_METHOD);
+    //   return;
+    // }
 
-    if (hasPaymentMethodErrors(errors)) {
-      setErrorMessage(__('Please select your payment method.'));
-      scrollToElement(PAYMENT_METHOD_FORM);
-      return;
-    }
+    // if (hasPaymentMethodErrors(errors)) {
+    //   setErrorMessage(__('Please select your payment method.'));
+    //   scrollToElement(PAYMENT_METHOD_FORM);
+    //   return;
+    // }
 
     if (hasTermsAndConditionsAgreed(errors)) {
       setErrorMessage(__('Please agree with the terms & conditions'));

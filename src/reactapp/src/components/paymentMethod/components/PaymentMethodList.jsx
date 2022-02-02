@@ -118,7 +118,10 @@ function PaymentMethodList({ methodRenderers }) {
 
   React.useEffect(() => {
     if (!isPaymentMethodChangeByUser) {
-      submitHandler(methodListForSelect[0].value);
+      (async () => {
+        await setFieldValue(fields.code, methodListForSelect[0].value);
+        await submitHandler(methodListForSelect[0].value);
+      })();
     }
   }, [isPaymentMethodChangeByUser]);
   /*  ========================================================================================  */

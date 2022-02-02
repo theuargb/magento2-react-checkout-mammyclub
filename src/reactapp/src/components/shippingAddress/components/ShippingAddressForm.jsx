@@ -148,25 +148,33 @@ function ShippingAddressForm({ children }) {
   const { values } = useFormikContext();
   const [addressFormSubmited, setAddressFormSubmited] = useState(false);
 
-  React.useEffect(() => {
-    if (values.shipping_address) {
-      const { firstname, lastname, phone } = values.shipping_address;
-      console.log(values);
-      if ((firstname, lastname, phone && addressFormSubmited === false)) {
-        setAddressFormSubmited(true);
-      }
-    }
-  }, [values]);
-
-  if (addressFormSubmited) {
+  // if (values.shipping_address) {
+  //   const { firstname, lastname, phone } = values.shipping_address;
+  //   console.log(values);
+  //   if ((firstname, lastname, phone && addressFormSubmited === false)) {
+  //     setAddressFormSubmited(true);
+  //   }
+  // }
+  
+  if (!addressFormSubmited) {
     (async () => {
       await formSubmitHandler();
       setFieldValue(fields.firstname, '');
       setFieldValue(fields.lastname, '');
       setFieldValue(fields.phone, '');
+      setAddressFormSubmited(true);
     })();
-    setAddressFormSubmited(null);
   }
+
+  // if (addressFormSubmited) {
+  //   (async () => {
+  //     await formSubmitHandler();
+  //     setFieldValue(fields.firstname, '');
+  //     setFieldValue(fields.lastname, '');
+  //     setFieldValue(fields.phone, '');
+  //   })();
+  //   setAddressFormSubmited(null);
+  // }
 
   // formSubmitHandler();
   /*  =======================================================================================  */
