@@ -118,6 +118,8 @@ function CheckoutFormProvider({ children }) {
           selectedPaymentMethod === 'liqpaymagento_liqpay' &&
           isLiqPaySuccess === true
         ) {
+          setOrderPlacedStatus(true);
+
           LocalStorage.clearCheckoutStorage();
         }
       }

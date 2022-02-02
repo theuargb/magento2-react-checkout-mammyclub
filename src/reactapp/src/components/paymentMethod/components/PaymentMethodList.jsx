@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import _get from 'lodash.get';
 import { object } from 'prop-types';
 import Select from 'react-select';
@@ -19,8 +19,9 @@ function PaymentMethodList({ methodRenderers }) {
   const { methodList } = usePaymentMethodCartContext();
   // const { paymentValues, setFieldValue, setFieldTouched } = formikData;
   const { setFieldValue, setFieldTouched } = formikData;
-
   // const paymentAvailable = isVirtualCart || doCartContainShippingAddress;
+  const [isPaymentMethodChangeByUser, setPaymentMethodChangeByUser] =
+    useState(false);
 
   const handlePaymentMethodSelection = async (event) => {
     const methodSelected = _get(methodList, `${event.value}.code`);
@@ -28,15 +29,18 @@ function PaymentMethodList({ methodRenderers }) {
     if (!methodSelected) {
       return;
     }
-
+    console.log(methodSelected);
     await setFieldValue(fields.code, methodSelected);
 
     setFieldTouched(fields.code, true);
+
     // don't need to save payment method in case the method opted has a custom
     // renderer. This is because custom payment renderers may have custom
     // functionalities associated with them. So if in case they want to perform
     // save payment operation upon selection, then they need to deal with it there.
     if (!methodRenderers[methodSelected]) {
+      setPaymentMethodChangeByUser(true);
+
       await submitHandler(methodSelected);
     }
   };
@@ -109,6 +113,16 @@ function PaymentMethodList({ methodRenderers }) {
     methodListForSelect.push({ label, value });
   });
 
+  /*  Сохранение первого доступного метода оплаты.
+  Если пользователем не будет выбран метод оплаты, то останется первый доступный метод - ликпей */
+
+  React.useEffect(() => {
+    if (!isPaymentMethodChangeByUser) {
+      submitHandler(methodListForSelect[0].value);
+    }
+  }, [isPaymentMethodChangeByUser]);
+  /*  ========================================================================================  */
+
   return (
     <div className="react-select pt-4 pb-5 border-t-2 border-b-2 border-container-lightner">
       <p className="text-base text-gray mb-0.5">
@@ -117,6 +131,10 @@ function PaymentMethodList({ methodRenderers }) {
       </p>
       <Select
         options={methodListForSelect}
+        defaultValue={{
+          label: methodListForSelect[0].label,
+          value: methodListForSelect[0].value,
+        }}
         onChange={(event) => handlePaymentMethodSelection(event)}
         inputId="city"
         placeholder=""
