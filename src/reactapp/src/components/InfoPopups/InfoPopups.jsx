@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
 import { string } from 'prop-types';
 import styled from 'styled-components';
@@ -58,18 +58,21 @@ const InfoPopups = ({ linkToCMSBlock, label, positionStyles }) => {
       }
     }
   `;
-  let popupContent;
-  React.useEffect(() => {
-    fetch(linkToCMSBlock, {
-      method: 'GET',
-      headers: {
-        Authorization: 'Bearer 6gn2y2np87chqd6zb7sjuphsluy3oq77',
-        'Content-Type': 'application/json',
-      },
-    }).then((response) => {
-      popupContent = response.content;
-    });
-  }, [linkToCMSBlock]);
+
+  const [htmlEl, setHtmlEl] = useState('');
+
+  const createHtmlEl = (data) => {
+    const htmlElFromResponse = data.content;
+    setHtmlEl(htmlElFromResponse);
+  };
+
+  fetch(`${linkToCMSBlock}`, {
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer 6gn2y2np87chqd6zb7sjuphsluy3oq77',
+      'Content-Type': 'application/json',
+    },
+  }).then((response) => createHtmlEl(response));
 
   return (
     <StyledPopup
@@ -93,7 +96,7 @@ const InfoPopups = ({ linkToCMSBlock, label, positionStyles }) => {
             {/* eslint-disable */}
             <button type="button" className="close" onClick={close} />
           </div>
-          <div className="content p-2 text-md leading-6">{popupContent}</div>
+          <div className="content p-2 text-md leading-6">{htmlEl}</div>
         </div>
       )}
     </StyledPopup>

@@ -23,8 +23,8 @@ import useCheckoutFormCartContext from './hooks/useCheckoutFormCartContext';
 import { __ } from '../../i18n';
 import LiqPayWidget from '../LiqPayWidget/LiqPayWidget';
 import CheckoutFormContext from '../../context/Form/CheckoutFormContext';
-import ContactUs from '../magentoBlocks/ContactUs';
-import DeliveryWarranty from '../magentoBlocks/DeliveryWarranty';
+// import ContactUs from '../magentoBlocks/ContactUs';
+import CheckoutRightSidebar from '../magentoBlocks/CheckoutRightSidebar';
 
 function CheckoutForm() {
   const [initialData, setInitialData] = useState(false);
@@ -75,9 +75,9 @@ function CheckoutForm() {
   return (
     <CheckoutFormWrapper initialData={initialData}>
       <Message />
-      <div className="flex justify-center checkout-wrapper">
+      <div className="flex justify-center">
         <div className="container w-full mx-auto py-2 md:py-5 px-0">
-          <div className="hidden md:grid grid-cols-2 gap-x-6">
+          <div className="hidden md:grid grid-cols-2 gap-x-6 checkout-wrapper">
             <p className="text-xxlg ">
               {__('Оформление заказа')}
               <p className="text-xxs text-red-500 mt-0.5">
@@ -90,8 +90,8 @@ function CheckoutForm() {
           <div className="flex flex-col my-3 space-y-2 md:flex-row md:space-y-0 px-0 sm:px-4 md:px-0 ">
             <p className="text-xxlg  md:hidden order-1">{__('Ваш заказ')}</p>
 
-            <div className="mt-8 md:mt-0 w-full md:order-1 order-4 md:w-1/2 grow-0 border border-container py-3.5 md:mr-8">
-              <div className="w-full xl:max-w-full">
+            <div className="checkout-wrapper mt-8 md:mt-0 w-full md:order-1 order-4 md:w-1/2 grow-0 md:mr-8">
+              <div className="w-full xl:max-w-full border border-container py-3.5">
                 <AddressWrapper>
                   {/* {!isVirtualCart && (
                     <> */}
@@ -118,13 +118,13 @@ function CheckoutForm() {
             </p>
 
             <StickyRightSidebar>
-              <div className="border border-container">
+              <div className="border border-container checkout-wrapper">
                 <CartItemsForm />
                 <Totals />
                 <CheckoutAgreements />
               </div>
-              <ContactUs />
-              <DeliveryWarranty />
+              {/* <ContactUs /> */}
+              <CheckoutRightSidebar />
             </StickyRightSidebar>
           </div>
           {pageLoader && <PageLoader />}
