@@ -18,6 +18,7 @@ export function focusOnFormErrorElement(formId, formSectionErrors) {
 
   if (element) {
     element.focus();
+    element.classList.add('border-dashed', 'border-red-500');
     scrollToElement(formId);
   }
 }

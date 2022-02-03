@@ -12,7 +12,6 @@ import { _isObjEmpty } from '../../../utils';
 
 export function hasLoginErrors(errors) {
   const loginErrors = _get(errors, LOGIN_FORM);
-
   return !_isObjEmpty(loginErrors);
 }
 

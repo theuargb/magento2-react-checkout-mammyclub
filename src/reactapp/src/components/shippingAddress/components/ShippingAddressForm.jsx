@@ -188,14 +188,12 @@ function ShippingAddressForm({ children }) {
           formikData={formikData}
           label={__('Имя')}
           onKeyDown={handleKeyDown}
-          placeholder={__('First name')}
         />
         <TextInput
           name={fields.lastname}
           label={__('Фамилия')}
           formikData={formikData}
           onKeyDown={handleKeyDown}
-          placeholder={__('Last name')}
         />
         <TextInput
           required
@@ -203,7 +201,6 @@ function ShippingAddressForm({ children }) {
           name={fields.phone}
           formikData={formikData}
           onKeyDown={handleKeyDown}
-          placeholder={__('+32 000 000 000')}
           type="tel"
         />
         <p className="text-gray-extralighter text-base mt-1">

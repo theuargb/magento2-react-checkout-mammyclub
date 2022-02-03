@@ -8,12 +8,12 @@ import {
   SHIPPING_METHOD,
   BILLING_ADDR_FORM,
   SHIPPING_ADDR_FORM,
-  // PAYMENT_METHOD_FORM,
+  PAYMENT_METHOD_FORM,
   CHECKOUT_AGREEMENTS_FORM,
 } from '../../../config';
 import {
   hasLoginErrors,
-  // hasPaymentMethodErrors,
+  hasPaymentMethodErrors,
   hasBillingAddressErrors,
   hasShippingMethodErrors,
   hasShippingAddressErrors,
@@ -78,6 +78,8 @@ function PlaceOrder() {
   const handlePerformPlaceOrder = async () => {
     setMessage(false);
     if (hasLoginErrors(errors)) {
+      console.log(errors, 'mail');
+
       const customerWantsToSignIn = _get(values, customerWantsToSignInField);
       setErrorMessage(
         __(
@@ -86,13 +88,14 @@ function PlaceOrder() {
             : 'Please provide your email address.'
         )
       );
-      focusOnFormErrorElement(LOGIN_FORM, errors);
+      focusOnFormErrorElement(LOGIN_FORM, errors.login);
       return;
     }
 
     if (hasShippingAddressErrors(errors)) {
       setErrorMessage(__('Please provide your shipping address information.'));
-      focusOnFormErrorElement(SHIPPING_ADDR_FORM, errors);
+      focusOnFormErrorElement(SHIPPING_ADDR_FORM, errors.shipping_address);
+      console.log(errors.shipping_address);
       return;
     }
 
@@ -105,14 +108,17 @@ function PlaceOrder() {
     if (hasShippingMethodErrors(errors)) {
       setErrorMessage(__('Please select your shipping method.'));
       scrollToElement(SHIPPING_METHOD);
+
+      focusOnFormErrorElement(SHIPPING_METHOD, errors);
+
       return;
     }
 
-    // if (hasPaymentMethodErrors(errors)) {
-    //   setErrorMessage(__('Please select your payment method.'));
-    //   scrollToElement(PAYMENT_METHOD_FORM);
-    //   return;
-    // }
+    if (hasPaymentMethodErrors(errors)) {
+      setErrorMessage(__('Please select your payment method.'));
+      scrollToElement(PAYMENT_METHOD_FORM);
+      return;
+    }
 
     if (hasTermsAndConditionsAgreed(errors)) {
       setErrorMessage(__('Please agree with the terms & conditions'));
@@ -128,8 +134,6 @@ function PlaceOrder() {
       await saveEmailAddressInfo(values);
 
       await saveBillingShippingAddress(values);
-
-      console.log(values, 'values');
 
       await validateThenPlaceOrder(values);
 

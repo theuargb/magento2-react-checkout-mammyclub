@@ -41,7 +41,6 @@ function LoginForm() {
           name={fields.email}
           formikData={formikData}
           onKeyDown={handleKeyDown}
-          placeholder={__('john.doe@gmail.com')}
         />
         <p className="text-gray-extralighter text-base mt-1">
           {__('Сюда пришлем все документы подтверждающие покупку')}
