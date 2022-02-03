@@ -1,12 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const CheckoutRightSidebar = () => {
-  let htmlEl = '';
+  const [htmlEl, setHtmlContent] = useState('');
 
-  const setHtmlContent = (data) => {
-    htmlEl = data.content;
-    console.log('fetchSuccess');
-  };
   if (!htmlEl) {
     fetch(
       'https://mammyclub.perspective.net.ua/rest/V1/crmIntegration/checkout/renderCmsPage?pageId=11',
@@ -14,14 +10,12 @@ const CheckoutRightSidebar = () => {
         method: 'GET',
         headers: {
           Authorization: 'Bearer 6gn2y2np87chqd6zb7sjuphsluy3oq77',
-          'Content-Type': 'application/json',
         },
       }
     ).then((response) => {
       if (response.ok) {
         setHtmlContent(response);
       } else {
-        htmlEl = 'Не удалось загрузить данные';
         throw new Error('Something went wrong');
       }
     });
@@ -30,4 +24,4 @@ const CheckoutRightSidebar = () => {
   return <div dangerouslySetInnerHTML={{ __html: htmlEl }} />;
 };
 
-export default CheckoutRightSidebar;
+export default React.memo(CheckoutRightSidebar);

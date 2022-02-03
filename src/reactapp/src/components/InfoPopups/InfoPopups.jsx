@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
 import { string } from 'prop-types';
 import styled from 'styled-components';
@@ -59,13 +59,9 @@ const InfoPopups = ({ linkToCMSBlock, label, positionStyles }) => {
     }
   `;
 
-  let htmlEl = '';
+  const [htmlEl, setHtmlContent] = useState('');
 
-  const setHtmlContent = (data) => {
-    htmlEl = data.content;
-  };
   if (!htmlEl) {
-    console.log('fetch');
     fetch(`${linkToCMSBlock}`, {
       method: 'GET',
       headers: {
@@ -76,7 +72,6 @@ const InfoPopups = ({ linkToCMSBlock, label, positionStyles }) => {
       if (response.ok) {
         setHtmlContent(response);
       } else {
-        htmlEl = 'Не удалось загрузить данные';
         throw new Error('Something went wrong');
       }
     });
@@ -123,4 +118,4 @@ InfoPopups.defaultProps = {
   positionStyles: '',
 };
 
-export default InfoPopups;
+export default React.memo(InfoPopups);
