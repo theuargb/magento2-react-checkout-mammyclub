@@ -157,7 +157,7 @@ function PaymentMethodList({ methodRenderers }) {
         positionStyles="absolute top-0 right-0 mt-4 mr-6"
         label={__('Оплата')}
         className="absolute top-0 right-0"
-        linkToCMSBlock="https://mammyclub.perspective.net.ua/admin/cms/page/edit/page_id/13"
+        linkToCMSBlock="https://mammyclub.perspective.net.ua/rest/V1/crmIntegration/checkout/renderCmsPage?pageId=13"
       />
     </div>
   );

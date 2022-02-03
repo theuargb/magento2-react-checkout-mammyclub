@@ -75,7 +75,7 @@ function ShippingMethodList() {
         positionStyles="absolute top-0 right-0 mt-6 pr-2"
         label={__('Доставка')}
         className="absolute top-0 right-0"
-        linkToCMSBlock="https://mammyclub.perspective.net.ua/admin/cms/page/edit/page_id/12"
+        linkToCMSBlock="https://mammyclub.perspective.net.ua/rest/V1/crmIntegration/checkout/renderCmsPage?pageId=12"
       />
     </div>
   );

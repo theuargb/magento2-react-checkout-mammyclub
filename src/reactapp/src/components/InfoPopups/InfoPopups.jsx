@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Popup from 'reactjs-popup';
 import { string } from 'prop-types';
 import styled from 'styled-components';
@@ -59,20 +59,28 @@ const InfoPopups = ({ linkToCMSBlock, label, positionStyles }) => {
     }
   `;
 
-  const [htmlEl, setHtmlEl] = useState('');
+  let htmlEl = '';
 
-  const createHtmlEl = (data) => {
-    const htmlElFromResponse = data.content;
-    setHtmlEl(htmlElFromResponse);
+  const setHtmlContent = (data) => {
+    htmlEl = data.content;
   };
-
-  fetch(`${linkToCMSBlock}`, {
-    method: 'GET',
-    headers: {
-      Authorization: 'Bearer 6gn2y2np87chqd6zb7sjuphsluy3oq77',
-      'Content-Type': 'application/json',
-    },
-  }).then((response) => createHtmlEl(response));
+  if (!htmlEl) {
+    console.log('fetch');
+    fetch(`${linkToCMSBlock}`, {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer 6gn2y2np87chqd6zb7sjuphsluy3oq77',
+        'Content-Type': 'application/json',
+      },
+    }).then((response) => {
+      if (response.ok) {
+        setHtmlContent(response);
+      } else {
+        htmlEl = 'Не удалось загрузить данные';
+        throw new Error('Something went wrong');
+      }
+    });
+  }
 
   return (
     <StyledPopup
