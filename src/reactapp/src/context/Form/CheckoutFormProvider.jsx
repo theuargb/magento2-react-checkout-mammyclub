@@ -90,7 +90,6 @@ function CheckoutFormProvider({ children }) {
       const order = await placeOrder(values, paymentActionList);
 
       const orderNumber = _get(order, 'order_number');
-
       if (orderNumber && config.isProductionMode) {
         if (selectedPaymentMethod === 'liqpaymagento_liqpay') {
           setLiqPayReadyToInit(true);

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { node } from 'prop-types';
 import { Form } from 'formik';
 import { string as YupString } from 'yup';
@@ -10,7 +10,7 @@ import { formikDataShape } from '../../../utils/propTypes';
 import ShippingMethodFormContext from '../context/ShippingMethodFormContext';
 import useShippingMethodAppContext from '../hooks/useShippingMethodAppContext';
 import useShippingMethodCartContext from '../hooks/useShippingMethodCartContext';
-import { _isObjEmpty } from '../../../utils';
+// import { _isObjEmpty } from '../../../utils';
 
 const initialValues = {
   methodCode: '',
@@ -27,8 +27,10 @@ const validationSchema = {
 function ShippingMethodFormManager({ children, formikData }) {
   const { setMessage, setPageLoader, setErrorMessage, setSuccessMessage } =
     useShippingMethodAppContext();
-  const { selectedMethod, setShippingMethod } = useShippingMethodCartContext();
-  const { setFieldValue } = formikData;
+
+  const { setShippingMethod } = useShippingMethodCartContext();
+  // const { selectedMethod, setShippingMethod } = useShippingMethodCartContext();
+  // const { setFieldValue } = formikData;
 
   const formSubmit = async (shippingMethod) => {
     setMessage(false);
@@ -56,11 +58,11 @@ function ShippingMethodFormManager({ children, formikData }) {
    * missing selected shipping method. This can happen when we update shipping
    * address which will eventually reset shipping method on quote.
    */
-  useEffect(() => {
-    if (_isObjEmpty(selectedMethod)) {
-      setFieldValue(SHIPPING_METHOD, { ...initialValues });
-    }
-  }, [selectedMethod]);
+  // useEffect(() => {
+  //   if (_isObjEmpty(selectedMethod)) {
+  //     setFieldValue(SHIPPING_METHOD, { ...initialValues });
+  //   }
+  // }, [selectedMethod]);
 
   let context = useFormSection({
     formikData,

@@ -5,7 +5,7 @@ import { useFormikContext } from 'formik';
 // import Button from '../../common/Button';
 import {
   LOGIN_FORM,
-  // SHIPPING_METHOD,
+  SHIPPING_METHOD,
   BILLING_ADDR_FORM,
   SHIPPING_ADDR_FORM,
   // PAYMENT_METHOD_FORM,
@@ -15,7 +15,7 @@ import {
   hasLoginErrors,
   // hasPaymentMethodErrors,
   hasBillingAddressErrors,
-  // hasShippingMethodErrors,
+  hasShippingMethodErrors,
   hasShippingAddressErrors,
   hasTermsAndConditionsAgreed,
 } from '../utility';
@@ -58,9 +58,8 @@ function PlaceOrder() {
     let { firstname, lastname } = addressToSave;
     if (lastname.length === 0) lastname = '<null>';
     if (firstname.length === 0) firstname = '<null>';
-    console.log(firstname.length);
+
     addressToSave = { ...addressToSave, firstname, lastname };
-    console.log(addressToSave);
     const updateShippingAddress = _makePromise(
       addCartShippingAddress,
       addressToSave
@@ -103,11 +102,11 @@ function PlaceOrder() {
       return;
     }
 
-    // if (hasShippingMethodErrors(errors)) {
-    //   setErrorMessage(__('Please select your shipping method.'));
-    //   scrollToElement(SHIPPING_METHOD);
-    //   return;
-    // }
+    if (hasShippingMethodErrors(errors)) {
+      setErrorMessage(__('Please select your shipping method.'));
+      scrollToElement(SHIPPING_METHOD);
+      return;
+    }
 
     // if (hasPaymentMethodErrors(errors)) {
     //   setErrorMessage(__('Please select your payment method.'));
@@ -129,6 +128,8 @@ function PlaceOrder() {
       await saveEmailAddressInfo(values);
 
       await saveBillingShippingAddress(values);
+
+      console.log(values, 'values');
 
       await validateThenPlaceOrder(values);
 

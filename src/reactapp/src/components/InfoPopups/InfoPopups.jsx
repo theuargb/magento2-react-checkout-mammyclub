@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { __ } from '../../i18n';
 
 const InfoPopups = ({ linkToCMSBlock, label, positionStyles }) => {
-  console.log(label, linkToCMSBlock);
   const StyledPopup = styled(Popup)`
     @keyframes animateModal {
       0% {

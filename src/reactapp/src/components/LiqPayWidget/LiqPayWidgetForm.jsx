@@ -23,8 +23,6 @@ const LiqPayWidgetForm = ({ liqPayData }) => {
             if (data.status === 'success') {
               setLiqPayStatus(true);
             }
-            // console.log(data.status);
-            // console.log(data);
           })
           .on('liqpay.ready', function (data) {
             console.log('ready', data);

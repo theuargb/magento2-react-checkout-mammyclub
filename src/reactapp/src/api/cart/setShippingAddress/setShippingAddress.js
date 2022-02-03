@@ -5,7 +5,7 @@ import { SET_SHIPPING_ADDR_MUTATION } from './mutation';
 // import { last } from 'lodash';
 
 export default async function setShippingAddress(dispatch, shippingAddress) {
-  const variables = { ...shippingAddress, cartId: LocalStorage.getCartId() };
+  let variables = { ...shippingAddress, cartId: LocalStorage.getCartId() };
 
   let { firstname, lastname, company, street, phone, city, region, zipcode } =
     variables;
@@ -19,7 +19,7 @@ export default async function setShippingAddress(dispatch, shippingAddress) {
   if (!region) region = '<null>';
   if (!zipcode) zipcode = '<null>';
 
-  // variables = { firstname, lastname, ...variables };
+  variables = { firstname, lastname, ...variables };
 
   return modifier(
     await sendRequest(dispatch, {

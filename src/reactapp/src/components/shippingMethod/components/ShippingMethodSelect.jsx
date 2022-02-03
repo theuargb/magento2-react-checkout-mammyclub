@@ -1,7 +1,6 @@
 import React from 'react';
 import { ErrorMessage, Field } from 'formik';
 import { arrayOf, bool, shape, string } from 'prop-types';
-import { __ } from '../../../i18n';
 
 function ShippingMethodSelect({
   id,
@@ -40,7 +39,6 @@ function ShippingMethodSelect({
         className="indent-0 w-full border form-select xs:block form-input text-base "
         {...rest}
       >
-        <option value="">{__('-Пожалуйста, выберите-')}</option>
         {options.map((option) => {
           const methodName = `${option.carrierTitle} (${option.methodTitle}): `;
           return (

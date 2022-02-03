@@ -148,37 +148,22 @@ function ShippingAddressForm({ children }) {
   const { values } = useFormikContext();
   const [addressFormSubmited, setAddressFormSubmited] = useState(false);
 
-  // if (values.shipping_address) {
-  //   const { firstname, lastname, phone } = values.shipping_address;
-  //   console.log(values);
-  //   if ((firstname, lastname, phone && addressFormSubmited === false)) {
-  //     setAddressFormSubmited(true);
-  //   }
-  // }
-
   React.useEffect(() => {
-    (async () => {
-      if (!addressFormSubmited) {
-        await formSubmitHandler();
-        setFieldValue(fields.firstname, '');
-        setFieldValue(fields.lastname, '');
-        setFieldValue(fields.phone, '');
-        setAddressFormSubmited(true);
-      }
-    })();
-  }, [values]);
+    if (!addressFormSubmited && values?.shipping_address) {
+      (async () => {
+        await submitHandler();
+      })();
+      setAddressFormSubmited(true);
+    }
+  },[values]);
 
-  // if (addressFormSubmited) {
-  //   (async () => {
-  //     await formSubmitHandler();
-  //     setFieldValue(fields.firstname, '');
-  //     setFieldValue(fields.lastname, '');
-  //     setFieldValue(fields.phone, '');
-  //   })();
-  //   setAddressFormSubmited(null);
-  // }
+  if (values?.shipping_address && addressFormSubmited) {
+    const { firstname, lastname, phone } = values?.shipping_address;
+    if (firstname === '<null>') setFieldValue(fields.firstname, '');
+    if (lastname === '<null>') setFieldValue(fields.lastname, '');
+    if (phone === '<null>') setFieldValue(fields.phone, '');
+  }
 
-  // formSubmitHandler();
   /*  =======================================================================================  */
   const selectedShippingMethod = values?.shipping_method?.methodCode;
 
@@ -198,15 +183,6 @@ function ShippingAddressForm({ children }) {
   return (
     <>
       <div className="">
-        {/* <TextInput
-          required
-          label={__('Населённый пункт')}
-          formikData={formikData}
-          onKeyDown={handleKeyDown}
-          placeholder={__('Street')}
-          name={`${fields.street}[0]`}
-        /> */}
-
         <TextInput
           name={fields.firstname}
           formikData={formikData}
@@ -233,58 +209,9 @@ function ShippingAddressForm({ children }) {
         <p className="text-gray-extralighter text-base mt-1">
           {__('Наши менеджеры перезвонят для уточнения деталей заказа')}
         </p>
-        {/* <TextInput
-          required
-          name={`${fields.street}[0]`}
-          formikData={formikData}
-          label={__('Street')}
-          onKeyDown={handleKeyDown}
-          placeholder={__('Street')}
-        />
-        <TextInput
-          required
-          label={__('Company')}
-          name={fields.company}
-          formikData={formikData}
-          onKeyDown={handleKeyDown}
-          placeholder={__('Company')}
-        />
-        <TextInput
-          required
-          placeholder="12345"
-          name={fields.zipcode}
-          formikData={formikData}
-          label={__('Postal Code')}
-          onKeyDown={handleKeyDown}
-        />
-        <TextInput
-          required
-          label={__('City')}
-          name={fields.city}
-          formikData={formikData}
-          placeholder={__('City')}
-          onKeyDown={handleKeyDown}
-        /> */}
-        {/* <SelectInput
-          required
-          label={__('Country')}
-          name={fields.country}
-          formikData={formikData}
-          options={countryOptions}
-          onChange={handleCountryChange}
-        /> */}
-        {/* <SelectInput
-          required
-          label={__('State')}
-          name={fields.region}
-          options={stateOptions}
-          formikData={formikData}
-          isHidden={!selectedCountry || !hasStateOptions}
-        /> */}
         {children}
         <NovaPoshtaCitySelect
           formikData={formikData}
-          // name={`${fields.street}[1]`}
           name={fields.city}
           handleChangeCityId={handleChangeCityId}
           customStyles={customSelectStyles}
@@ -315,17 +242,6 @@ function ShippingAddressForm({ children }) {
             </NovaPoshtaAddressFieldSet>
           </div>
         )}
-      </div>
-
-      <div className="flex items-center justify-around mt-2">
-        {/* <CancelButton />
-        <SaveButton
-          isFormValid={isBillingFormTouched}
-          actions={{ saveAddress: saveAddressAction }}
-        />
-        <button type="button" onClick={() => submitHandler()}>
-          123123
-        </button> */}
       </div>
     </>
   );

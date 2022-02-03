@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SelectInput from './ShippingMethodSelect';
 import { SHIPPING_METHOD } from '../../../config';
 import useShippingMethodFormContext from '../hooks/useShippingMethodFormContext';
@@ -22,6 +22,8 @@ function ShippingMethodList() {
   const selectedMethodId = `${methodCarrierCode}__${methodMethodCode}`;
 
   // const [selectedShippingMethod, changeShippingMethod] = useState('');
+  const [isShippingMethodChangeByUser, setShippingMethodChangeByUser] =
+    useState(false);
 
   const handleShippingMethodSelection = async (event) => {
     const methodSelected = methodList[event.target.value];
@@ -34,8 +36,28 @@ function ShippingMethodList() {
     setFieldValue(SHIPPING_METHOD, { carrierCode, methodCode });
     setFieldTouched(fields.carrierCode, true);
     setFieldTouched(fields.methodCode, true);
+
+    setShippingMethodChangeByUser(true);
     await submitHandler({ carrierCode, methodCode });
   };
+  /*  Сохранение метода доставки.
+  Если пользователем не будет выбран метод доставки, то методом доставки останется метод - flat rate */
+  /* eslint-disable */
+  if (!isShippingMethodChangeByUser && methodsAvailable) {
+    setFieldTouched(fields.carrierCode, true);
+    setFieldTouched(fields.methodCode, true);
+
+    (async () => {
+      const methodSelected = methodList['flatrate__flatrate'];
+      const { carrierCode, methodCode, id: methodId } = methodSelected;
+      if (methodId === selectedMethodId) {
+        return;
+      }
+      await setFieldValue(SHIPPING_METHOD, { carrierCode, methodCode });
+      await submitHandler({ carrierCode, methodCode });
+    })();
+  }
+  /*  ========================================================================================  */
 
   if (!methodsAvailable) {
     return <></>;

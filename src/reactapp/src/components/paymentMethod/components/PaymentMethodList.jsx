@@ -25,11 +25,11 @@ function PaymentMethodList({ methodRenderers }) {
 
   const handlePaymentMethodSelection = async (event) => {
     const methodSelected = _get(methodList, `${event.value}.code`);
+    console.log(formikData, 'formikDataAfter');
 
     if (!methodSelected) {
       return;
     }
-    console.log(methodSelected);
     await setFieldValue(fields.code, methodSelected);
 
     setFieldTouched(fields.code, true);
@@ -39,9 +39,8 @@ function PaymentMethodList({ methodRenderers }) {
     // functionalities associated with them. So if in case they want to perform
     // save payment operation upon selection, then they need to deal with it there.
     if (!methodRenderers[methodSelected]) {
-      setPaymentMethodChangeByUser(true);
-
       await submitHandler(methodSelected);
+      setPaymentMethodChangeByUser(true);
     }
   };
 
@@ -113,17 +112,28 @@ function PaymentMethodList({ methodRenderers }) {
     methodListForSelect.push({ label, value });
   });
 
-  /*  Сохранение первого доступного метода оплаты.
-  Если пользователем не будет выбран метод оплаты, то останется первый доступный метод - ликпей */
+  /*  Сохранение метода оплаты.
+  Если пользователем не будет выбран метод оплаты, то выбранный метод будет - ликпей */
 
-  React.useEffect(() => {
-    if (!isPaymentMethodChangeByUser) {
-      (async () => {
-        await setFieldValue(fields.code, methodListForSelect[0].value);
-        await submitHandler(methodListForSelect[0].value);
-      })();
-    }
-  }, [isPaymentMethodChangeByUser]);
+  // React.useEffect(() => {
+  if (
+    !isPaymentMethodChangeByUser &&
+    methodList &&
+    formikData?.formSectionValues.code.length === 0
+  ) {
+    console.log(formikData, 'formikDataBefore');
+    setFieldTouched(fields.code, true);
+    const methodSelected = _get(methodList, methodListForSelect[0].value);
+
+    (async () => {
+      if (methodRenderers[methodSelected]) {
+        return;
+      }
+      await setFieldValue(fields.code, methodListForSelect[0].value);
+      await submitHandler(methodListForSelect[0].value);
+    })();
+  }
+  // }, [formikData]);
   /*  ========================================================================================  */
 
   return (
