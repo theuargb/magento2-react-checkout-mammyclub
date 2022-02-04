@@ -1,6 +1,4 @@
 import { number as YupNumber, object as YupObject } from 'yup';
-
-import { __ } from '../../../../../i18n';
 import { _keys } from '../../../../../utils';
 
 export function prepareCartItemsUniqueId(cartItems) {
@@ -19,9 +17,8 @@ export function prepareCartItemsValidationSchema(cartItemFormData) {
   const validationSchema = {};
 
   _keys(cartItemFormData).forEach((itemKey) => {
-    validationSchema[itemKey] = YupNumber()
-      .required(__('Required'))
-      .min(1, __('Invalid qty'));
+    validationSchema[itemKey] = YupNumber().required();
+    // .min(0, __('Invalid qty'));
   });
 
   return validationSchema;
@@ -38,6 +35,8 @@ export function prepareCartDataToUpdate(cartItemsValue) {
       cart_item_id: itemId,
       quantity: parseFloat(cartItemsValue[itemKey]),
     });
+    console.log(accumulator, 'prepareCartDataaccumulator');
+
     return accumulator;
   }, []);
 }

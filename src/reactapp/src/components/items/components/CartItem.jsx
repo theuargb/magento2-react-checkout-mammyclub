@@ -10,6 +10,7 @@ import { _emptyFunc } from '../../../utils';
 import { CART_ITEMS_FORM } from '../../../config';
 import useItemsFormContext from '../hooks/useItemsFormContext';
 import useTotalsCartContext from '../../totals/hooks/useTotalsCartContext';
+import RemoveProductButton from './RemoveProductButton';
 
 function CartItem({ item, isLastItem, actions }) {
   // const { formikData, handleKeyDown, cartItemsTouched, itemUpdateHandler } =
@@ -26,15 +27,24 @@ function CartItem({ item, isLastItem, actions }) {
 
   const handleQtyUpdate = (e) => {
     actions.handleQtyUpdate(e);
+    console.log(e);
     setQtyChange(true);
   };
   const updateQty = () => {
     itemUpdateHandler();
     setQtyChange(false);
   };
+  const handleRemoveProductClick = (e) => {
+    handleQtyUpdate(e);
+    updateQty();
+  };
 
   return (
-    <tr className={`border-2 md:border-0 ${isLastItem ? '' : 'md:border-b-2'}`}>
+    <tr
+      className={`border-2 md:border-0 relative ${
+        isLastItem ? '' : 'md:border-b-2'
+      }`}
+    >
       {/** DESKTOP TD ELEMENTS */}
       <td className="w-2/5 table-cell bg-white">
         <div className="py-2 pl-2 flex">
@@ -77,19 +87,10 @@ function CartItem({ item, isLastItem, actions }) {
             {__('Обновить')}
           </button>
         )}
-        {/* <Button
-          size="sm"
-          variant="secondary"
-          click={itemUpdateHandler}
-          disable={!isQtyFieldTouched}
-        >
-          <span>{__('Обновить')}</span>
-        </Button> */}
       </td>
       {/* <td className="hidden w-1/5 xl:table-cell text-md text-green">
         {item.rowTotal} {subTotal}
       </td> */}
-
       <td className="w-1/6 table-cell text-md text-green align-middle bg-white">
         <div className="">
           {hasSubTotal && (
@@ -98,78 +99,15 @@ function CartItem({ item, isLastItem, actions }) {
             </div>
           )}
         </div>
+        <div className="absolute right-0 top-0">
+          <RemoveProductButton
+            formikData={formikData}
+            value=""
+            handleRemoveProductClick={handleRemoveProductClick}
+            name={itemQtyField}
+          />
+        </div>
       </td>
-
-      {/** MOBILE TD ELEMENTS */}
-      {/* <td className="px-2 py-2 md:hidden">
-        <table className="w-full">
-          <tbody>
-            <tr className="">
-              <td>
-                <table className="text-xs">
-                  <tbody>
-                    <tr className="border-b">
-                      <th className="px-2 py-2">{__('Name')}</th>
-                      <td className="pl-1 text-sm">
-                        <div className="flex items-center py-1">
-                          <img
-                            className="w-8 h-8"
-                            alt={item.productSku}
-                            src={item.productSmallImgUrl}
-                          />
-                          <div className="pl-2">{item.productName}</div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr className="border-b">
-                      <th className="px-2 py-2">{__('SKU')}</th>
-                      <td className="pl-2 text-sm">{item.productSku}</td>
-                    </tr>
-                    <tr className="border-b">
-                      <th className="px-2 py-2">{__('Price')}</th>
-                      <td className="pl-2 text-sm">{item.price}</td>
-                    </tr>
-                    <tr className="border-b">
-                      <th className="px-2 py-2">{__('Qty')}</th>
-                      <td className="px-1 pb-2">
-                        <div className="flex items-center justify-between">
-                          <TextInput
-                            min="0"
-                            type="number"
-                            className="w-20"
-                            name={itemQtyField}
-                            formikData={formikData}
-                            onKeyDown={handleKeyDown}
-                            id={`${itemQtyField}-mobile`}
-                            onChange={actions.handleQtyUpdate}
-                          />
-                          <div className="mt-2 ml-2">
-                            <Button
-                              size="sm"
-                              variant="secondary"
-                              click={itemUpdateHandler}
-                              disable={!isQtyFieldTouched}
-                            >
-                              <RefreshIcon className="w-5 h-5 text-black" />
-                              <span className="sr-only">{__('Update')}</span>
-                            </Button>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="px-2 py-2 text-base">{__('Subtotal')}</th>
-                      <td className="pl-2 text-base text-right">
-                        {item.rowTotal}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </td> */}
     </tr>
   );
 }

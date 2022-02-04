@@ -39,6 +39,18 @@ function CartItemsFormManager({ children, formikData }) {
       setMessage(false);
       const isValid = await validate(validationSchema, cartItemsValue);
       const cartItemsToUpdate = prepareCartDataToUpdate(cartItemsValue);
+      /* Проверка на то, если ли в корзине продукт, количество которого будет обновляться, если нет -
+         из массива cartItemsToUpdate удаляется этот продукт */
+      cartItemsToUpdate.forEach((itemToUpdate, itemToUpdateIndex) => {
+        const itemsID = Object.keys(cartItems);
+        if (
+          !itemsID.some((id) => parseInt(id, 10) === itemToUpdate.cart_item_id)
+        ) {
+          cartItemsToUpdate.splice(itemToUpdateIndex);
+        }
+      });
+
+      /* ========================================================================================= */
 
       if (!isValid) {
         return;
@@ -51,7 +63,7 @@ function CartItemsFormManager({ children, formikData }) {
         setPageLoader(false);
       }
     } catch (error) {
-      console.error(error);
+      console.error(error, 'error');
       setErrorMessage(error.message);
       setPageLoader(false);
     }
