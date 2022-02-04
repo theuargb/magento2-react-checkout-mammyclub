@@ -1177,8 +1177,6 @@ Add the correct display in Chrome and Safari.
     border-top-width: 4px !important; }
   .checkout-wrapper .border-b-2 {
     border-bottom-width: 2px !important; }
-  .checkout-wrapper .border-b {
-    border-bottom-width: 1px !important; }
   .checkout-wrapper .border-dashed {
     border-style: dashed !important; }
   .checkout-wrapper .border-transparent {
@@ -1256,9 +1254,6 @@ Add the correct display in Chrome and Safari.
   .checkout-wrapper .px-0 {
     padding-left: 0px !important;
     padding-right: 0px !important; }
-  .checkout-wrapper .px-1 {
-    padding-left: 0.25rem !important;
-    padding-right: 0.25rem !important; }
   .checkout-wrapper .px-2 {
     padding-left: 0.5rem !important;
     padding-right: 0.5rem !important; }
@@ -1306,8 +1301,6 @@ Add the correct display in Chrome and Safari.
     padding-bottom: 1.25rem !important; }
   .checkout-wrapper .pb-20 {
     padding-bottom: 5rem !important; }
-  .checkout-wrapper .pl-1 {
-    padding-left: 0.25rem !important; }
   .checkout-wrapper .pl-2 {
     padding-left: 0.5rem !important; }
   .checkout-wrapper .text-left {

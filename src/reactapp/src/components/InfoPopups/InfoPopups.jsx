@@ -70,7 +70,7 @@ const InfoPopups = ({ linkToCMSBlock, label, positionStyles }) => {
       },
     }).then((response) => {
       if (response.ok) {
-        setHtmlContent(response);
+        setHtmlContent(response.content);
       } else {
         throw new Error('Something went wrong');
       }
