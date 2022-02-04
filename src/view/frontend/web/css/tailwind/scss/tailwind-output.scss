@@ -946,6 +946,34 @@ section#messages a {
   text-shadow: 1px 1px 1px #d0751a;
 }
 
+.product-close-but {
+  background: red;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+}
+
+.product-close-but:before,
+.product-close-but:after {
+  position: absolute;
+  left: 4px;
+  content: " ";
+  height: 8px;
+  width: 1px;
+  background-color: #333;
+}
+
+.product-close-but:before {
+  transform: rotate(45deg);
+}
+
+.product-close-but:after {
+  transform: rotate(-45deg);
+}
+
 .modal {
   /*
      * TODO: add tailwind classes used for the cart and modal styles
@@ -1767,10 +1795,6 @@ body {
   border-bottom-width: 2px !important;
 }
 
-.border-b {
-  border-bottom-width: 1px !important;
-}
-
 .border-dashed {
   border-style: dashed !important;
 }
@@ -1904,11 +1928,6 @@ body {
   padding-right: 0px !important;
 }
 
-.px-1 {
-  padding-left: 0.25rem !important;
-  padding-right: 0.25rem !important;
-}
-
 .px-2 {
   padding-left: 0.5rem !important;
   padding-right: 0.5rem !important;
@@ -1992,10 +2011,6 @@ body {
 
 .pb-20 {
   padding-bottom: 5rem !important;
-}
-
-.pl-1 {
-  padding-left: 0.25rem !important;
 }
 
 .pl-2 {
@@ -2427,10 +2442,6 @@ body {
     --tw-space-y-reverse: 0 !important;
     margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse))) !important;
     margin-bottom: calc(0px * var(--tw-space-y-reverse)) !important;
-  }
-
-  .md\:border-0 {
-    border-width: 0px !important;
   }
 
   .md\:border-b-2 {

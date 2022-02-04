@@ -32,6 +32,7 @@ function RemoveProductButton({
       type="submit"
       className={className}
       formikData={formikData}
+      style={{ background: 'red', width: '12px', height: '12px' }}
     >
       x
     </button>

@@ -41,8 +41,8 @@ function CartItem({ item, isLastItem, actions }) {
 
   return (
     <tr
-      className={`border-2 md:border-0 relative ${
-        isLastItem ? '' : 'md:border-b-2'
+      className={`border-2 relative ${
+        isLastItem ? '' : 'md:border-b-2 md:border-container-lightner'
       }`}
     >
       {/** DESKTOP TD ELEMENTS */}
@@ -99,14 +99,13 @@ function CartItem({ item, isLastItem, actions }) {
             </div>
           )}
         </div>
-        <div className="absolute right-0 top-0">
-          <RemoveProductButton
-            formikData={formikData}
-            value=""
-            handleRemoveProductClick={handleRemoveProductClick}
-            name={itemQtyField}
-          />
-        </div>
+        <RemoveProductButton
+          className=" absolute mr-1 rounded-full text-xxs leading-0 text-white top-0 right-0 mt-2"
+          formikData={formikData}
+          value=""
+          handleRemoveProductClick={handleRemoveProductClick}
+          name={itemQtyField}
+        />
       </td>
     </tr>
   );

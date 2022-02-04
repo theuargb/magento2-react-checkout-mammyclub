@@ -68,3 +68,28 @@
   box-shadow: 0px 0px 4px 0px #d0751a inset;
   text-shadow: 1px 1px 1px #d0751a;
 }
+
+.product-close-but {
+  background: red;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+}
+.product-close-but:before,
+.product-close-but:after {
+  position: absolute;
+  left: 4px;
+  content: " ";
+  height: 8px;
+  width: 1px;
+  background-color: #333;
+}
+.product-close-but:before {
+  transform: rotate(45deg);
+}
+.product-close-but:after {
+  transform: rotate(-45deg);
+}

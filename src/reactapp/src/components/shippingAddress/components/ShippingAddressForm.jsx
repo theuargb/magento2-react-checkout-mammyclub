@@ -23,6 +23,7 @@ import NovaPoshtaCitySelect from './novaPoshta/NovaPoshtaCitySelect';
 import NovaPoshtaStreetSelect from './novaPoshta/NovaPoshtaStreetSelect';
 import NovaPoshtaWarehouseSelect from './novaPoshta/NovaPoshtaWarehouseSelect';
 import NovaPoshtaAddressFieldSet from './novaPoshta/NovaPoshtaAddressFieldSet';
+import TextInputPhoneMask from '../../common/Form/TextnputPhoneMask';
 
 function ShippingAddressForm({ children }) {
   const {
@@ -195,7 +196,7 @@ function ShippingAddressForm({ children }) {
           formikData={formikData}
           onKeyDown={handleKeyDown}
         />
-        <TextInput
+        <TextInputPhoneMask
           required
           label={__('Телефон (обязательно)')}
           name={fields.phone}

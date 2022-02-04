@@ -46,7 +46,7 @@ function CartItemsFormManager({ children, formikData }) {
         if (
           !itemsID.some((id) => parseInt(id, 10) === itemToUpdate.cart_item_id)
         ) {
-          cartItemsToUpdate.splice(itemToUpdateIndex);
+          cartItemsToUpdate.splice(itemToUpdateIndex, 1);
         }
       });
 

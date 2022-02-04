@@ -703,6 +703,26 @@ Add the correct display in Chrome and Safari.
     background-image: linear-gradient(to bottom, #f0861e, #e86720);
     box-shadow: 0px 0px 4px 0px #d0751a inset;
     text-shadow: 1px 1px 1px #d0751a; }
+  .checkout-wrapper .product-close-but {
+    background: red;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px; }
+  .checkout-wrapper .product-close-but:before,
+  .checkout-wrapper .product-close-but:after {
+    position: absolute;
+    left: 4px;
+    content: " ";
+    height: 8px;
+    width: 1px;
+    background-color: #333; }
+  .checkout-wrapper .product-close-but:before {
+    transform: rotate(45deg); }
+  .checkout-wrapper .product-close-but:after {
+    transform: rotate(-45deg); }
   .checkout-wrapper .modal {
     /*
      * TODO: add tailwind classes used for the cart and modal styles
@@ -1545,8 +1565,6 @@ Add the correct display in Chrome and Safari.
       --tw-space-y-reverse: 0 !important;
       margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse))) !important;
       margin-bottom: calc(0px * var(--tw-space-y-reverse)) !important; }
-    .checkout-wrapper .md\:border-0 {
-      border-width: 0px !important; }
     .checkout-wrapper .md\:border-b-2 {
       border-bottom-width: 2px !important; }
     .checkout-wrapper .md\:px-0 {
