@@ -14,7 +14,7 @@ const CheckoutRightSidebar = () => {
       }
     ).then((response) => {
       if (response.ok) {
-        setHtmlContent(response.content);
+        response.json().then((data) => setHtmlContent(data.content));
       } else {
         throw new Error('Something went wrong');
       }

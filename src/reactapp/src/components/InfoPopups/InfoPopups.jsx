@@ -57,6 +57,10 @@ const InfoPopups = ({ linkToCMSBlock, label, positionStyles }) => {
         transform: rotate(135deg);
       }
     }
+    &-content .content {
+      overflow: auto;
+      max-height: 50vh;
+    }
   `;
 
   const [htmlEl, setHtmlContent] = useState('');
@@ -70,7 +74,7 @@ const InfoPopups = ({ linkToCMSBlock, label, positionStyles }) => {
       },
     }).then((response) => {
       if (response.ok) {
-        setHtmlContent(response.content);
+        response.json().then((data) => setHtmlContent(data.content));
       } else {
         throw new Error('Something went wrong');
       }
@@ -99,7 +103,9 @@ const InfoPopups = ({ linkToCMSBlock, label, positionStyles }) => {
             {/* eslint-disable */}
             <button type="button" className="close" onClick={close} />
           </div>
-          <div className="content p-2 text-md leading-6">{htmlEl}</div>
+          <div className="content p-2 text-md leading-6">
+            <div dangerouslySetInnerHTML={{ __html: htmlEl }} />
+          </div>
         </div>
       )}
     </StyledPopup>
