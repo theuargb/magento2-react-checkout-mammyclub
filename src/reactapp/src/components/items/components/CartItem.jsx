@@ -94,18 +94,20 @@ function CartItem({ item, isLastItem, actions }) {
       <td className="w-1/6 table-cell text-md text-green align-middle bg-white">
         <div className="">
           {hasSubTotal && (
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center pr-4">
               <div className="mx-auto">{item.rowTotal}</div>
             </div>
           )}
         </div>
-        <RemoveProductButton
-          className=" absolute mr-1 rounded-full text-xxs leading-0 text-white top-0 right-0 mt-2"
-          formikData={formikData}
-          value=""
-          handleRemoveProductClick={handleRemoveProductClick}
-          name={itemQtyField}
-        />
+        <div className="absolute h-full top-0 right-0 mr-1 grid items-center">
+          <RemoveProductButton
+            className="rounded-full text-xxs leading-0 text-white "
+            formikData={formikData}
+            value=""
+            handleRemoveProductClick={handleRemoveProductClick}
+            name={itemQtyField}
+          />
+        </div>
       </td>
     </tr>
   );

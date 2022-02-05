@@ -1432,6 +1432,10 @@ body {
   display: table-header-group !important;
 }
 
+.grid {
+  display: grid !important;
+}
+
 .hidden {
   display: none !important;
 }
@@ -1991,6 +1995,10 @@ body {
 
 .pr-2 {
   padding-right: 0.5rem !important;
+}
+
+.pr-4 {
+  padding-right: 1rem !important;
 }
 
 .pb-2 {
