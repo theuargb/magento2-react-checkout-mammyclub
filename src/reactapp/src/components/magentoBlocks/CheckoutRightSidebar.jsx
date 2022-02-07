@@ -22,10 +22,7 @@ const CheckoutRightSidebar = () => {
   }
 
   return (
-    <div
-      className="hidden  md:block"
-      dangerouslySetInnerHTML={{ __html: htmlEl }}
-    />
+    <div className=" md:block" dangerouslySetInnerHTML={{ __html: htmlEl }} />
   );
 };
 
