@@ -27,7 +27,6 @@ function CartItem({ item, isLastItem, actions }) {
 
   const handleQtyUpdate = (e) => {
     actions.handleQtyUpdate(e);
-    console.log(e);
     setQtyChange(true);
   };
   const updateQty = () => {

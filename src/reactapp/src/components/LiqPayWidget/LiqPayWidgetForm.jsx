@@ -23,12 +23,13 @@ const LiqPayWidgetForm = ({ liqPayData }) => {
             if (data.status === 'success') {
               setLiqPayStatus(true);
             }
+            console.log('liqPay callback');
           })
           .on('liqpay.ready', function (data) {
-            console.log('ready', data);
+            console.log('liqPay ready', data);
           })
           .on('liqpay.close', function (data) {
-            console.log('close', data);
+            console.log('liqPay close', data);
           });
       })();
     }

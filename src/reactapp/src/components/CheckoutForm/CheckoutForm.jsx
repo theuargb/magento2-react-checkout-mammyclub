@@ -35,7 +35,6 @@ function CheckoutForm() {
   // const { orderId, isVirtualCart, storeAggregatedCartStates } =
   const { orderId, storeAggregatedCartStates } = useCheckoutFormCartContext();
 
-  console.log(`isIrderPlaced : ${isOrderPlaced}`);
   /**
    * Collect App, Cart data when the page loads.
    */
@@ -60,7 +59,7 @@ function CheckoutForm() {
     storeAggregatedCartStates,
   ]);
   if (orderId && isOrderPlaced) {
-    console.log(`isIrderPlaced : ${isOrderPlaced}`);
+    console.log(`isOrderPlaced : ${isOrderPlaced}`);
     return (
       <div className="flex flex-col items-center justify-center mx-10 my-10">
         <h1 className="text-2xl font-bold">{__('Информация о заказе')}</h1>

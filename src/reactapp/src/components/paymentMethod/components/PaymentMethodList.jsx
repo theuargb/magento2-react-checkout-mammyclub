@@ -25,7 +25,6 @@ function PaymentMethodList({ methodRenderers }) {
 
   const handlePaymentMethodSelection = async (event) => {
     const methodSelected = _get(methodList, `${event.value}.code`);
-    console.log(formikData, 'formikDataAfter');
 
     if (!methodSelected) {
       return;
@@ -121,7 +120,6 @@ function PaymentMethodList({ methodRenderers }) {
     methodList &&
     formikData?.formSectionValues.code.length === 0
   ) {
-    console.log(formikData, 'formikDataBefore');
     setFieldTouched(fields.code, true);
     const methodSelected = _get(methodList, methodListForSelect[0].value);
 

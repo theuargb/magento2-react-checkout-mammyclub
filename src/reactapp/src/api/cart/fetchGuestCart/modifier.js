@@ -21,7 +21,6 @@ function modifyCartItemsData(cartItems) {
     const productName = _get(product, 'name');
     const productUrl = _get(product, 'url_key');
     const productSmallImgUrl = _get(product, 'small_image.url');
-    console.log(product);
 
     accumulator[id] = {
       id,

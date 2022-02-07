@@ -35,7 +35,6 @@ export function prepareCartDataToUpdate(cartItemsValue) {
       cart_item_id: itemId,
       quantity: parseFloat(cartItemsValue[itemKey]),
     });
-    console.log(accumulator, 'prepareCartDataaccumulator');
 
     return accumulator;
   }, []);

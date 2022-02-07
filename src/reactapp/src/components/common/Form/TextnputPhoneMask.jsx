@@ -124,7 +124,6 @@ function TextInputPhoneMask({
               setFieldTouched(name, newValue);
               setFieldValue(name, newValue);
               actions.saveAddress();
-              console.log('123123');
               setFocusState(true);
             }}
             onBlur={() => setFocusState(false)}
