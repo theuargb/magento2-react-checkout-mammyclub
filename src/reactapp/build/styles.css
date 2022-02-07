@@ -1555,6 +1555,8 @@ Add the correct display in Chrome and Safari.
       margin-right: 0.5rem !important; }
     .checkout-wrapper .md\:mr-8 {
       margin-right: 2rem !important; }
+    .checkout-wrapper .md\:block {
+      display: block !important; }
     .checkout-wrapper .md\:table-cell {
       display: table-cell !important; }
     .checkout-wrapper .md\:grid {
