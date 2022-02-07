@@ -21,7 +21,12 @@ const CheckoutRightSidebar = () => {
     });
   }
 
-  return <div dangerouslySetInnerHTML={{ __html: htmlEl }} />;
+  return (
+    <div
+      className="md:block hidden"
+      dangerouslySetInnerHTML={{ __html: htmlEl }}
+    />
+  );
 };
 
 export default React.memo(CheckoutRightSidebar);

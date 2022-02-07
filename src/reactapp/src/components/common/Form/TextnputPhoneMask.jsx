@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import _get from 'lodash.get';
 import { bool, string, func, shape } from 'prop-types';
 import InputMask from 'react-input-mask';
@@ -36,7 +36,9 @@ function TextInputPhoneMask({
   const hasFieldError = !!_get(formSectionErrors, relativeFieldName);
   const value = _get(formSectionValues, relativeFieldName, '') || '';
   const hasFieldTouched = !!_get(formSectionTouched, relativeFieldName);
-  const hasError = hasFieldError && hasFieldTouched;
+
+  const [fieldInFocus, setFocusState] = useState(false);
+  const hasError = hasFieldError && hasFieldTouched && !fieldInFocus;
 
   return (
     <div className={`mt-4 form-control ${isHidden ? 'hidden' : ''}`}>
@@ -77,7 +79,10 @@ function TextInputPhoneMask({
               setFieldTouched(name, newValue);
               setFieldValue(name, newValue);
               actions.saveAddress();
+              console.log('123123');
+              setFocusState(true);
             }}
+            onBlur={() => setFocusState(false)}
           />
         )}
       />
