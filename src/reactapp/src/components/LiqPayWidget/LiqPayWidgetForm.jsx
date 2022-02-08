@@ -22,6 +22,7 @@ const LiqPayWidgetForm = ({ liqPayData }) => {
           .on('liqpay.callback', function (data) {
             if (data.status === 'success') {
               setLiqPayStatus(true);
+              console.log('liqPay success');
             }
             console.log('liqPay callback');
           })

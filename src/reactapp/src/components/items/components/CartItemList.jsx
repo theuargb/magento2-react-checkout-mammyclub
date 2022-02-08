@@ -20,6 +20,12 @@ function CartItemList() {
     setFieldValue(fieldName, newValue);
   };
 
+  const handleQtyDelete = (event) => {
+    const fieldName = `items.${event.target.name}`;
+    setFieldTouched(fieldName, 0);
+    setFieldValue(fieldName, 0);
+  };
+
   return (
     <div className="">
       <div className="">
@@ -47,7 +53,7 @@ function CartItemList() {
               <CartItem
                 item={cartItem}
                 key={cartItem.id}
-                actions={{ handleQtyUpdate }}
+                actions={{ handleQtyUpdate, handleQtyDelete }}
                 isLastItem={index === cartItems.length - 1}
               />
             ))}

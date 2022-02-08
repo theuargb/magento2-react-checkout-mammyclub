@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
-// import _get from 'lodash.get';
 import { bool, func, shape, string } from 'prop-types';
-// import { RefreshIcon } from '@heroicons/react/solid';
-
-// import Button from '../../common/Button';
 import TextInput from '../../common/Form/TextInput';
 import { __ } from '../../../i18n';
 import { _emptyFunc } from '../../../utils';
 import { CART_ITEMS_FORM } from '../../../config';
 import useItemsFormContext from '../hooks/useItemsFormContext';
 import useTotalsCartContext from '../../totals/hooks/useTotalsCartContext';
-import RemoveProductButton from './RemoveProductButton';
 
 function CartItem({ item, isLastItem, actions }) {
   // const { formikData, handleKeyDown, cartItemsTouched, itemUpdateHandler } =
@@ -19,7 +14,6 @@ function CartItem({ item, isLastItem, actions }) {
     useItemsFormContext();
   const qtyField = `${item.id}_qty`;
   const itemQtyField = `${CART_ITEMS_FORM}.${qtyField}`;
-  // const isQtyFieldTouched = _get(cartItemsTouched, qtyField);
   /* eslint-disable */
   const { subTotal, hasSubTotal } = useTotalsCartContext();
 
@@ -33,8 +27,11 @@ function CartItem({ item, isLastItem, actions }) {
     itemUpdateHandler();
     setQtyChange(false);
   };
+
   const handleRemoveProductClick = (e) => {
-    handleQtyUpdate(e);
+    const fieldName = `${CART_ITEMS_FORM}.${e.target.name}`;
+    formikData.cartItemsValue[e.target.name] = 0;
+    actions.handleQtyDelete(e);
     updateQty();
   };
 
@@ -73,7 +70,6 @@ function CartItem({ item, isLastItem, actions }) {
           formikData={formikData}
           onKeyDown={handleKeyDown}
           id={`${itemQtyField}-desktop`}
-          // onChange={actions.handleQtyUpdate}
           className="-mt-4 block mx-auto text-center form-select"
           onChange={handleQtyUpdate}
         />
@@ -99,13 +95,16 @@ function CartItem({ item, isLastItem, actions }) {
           )}
         </div>
         <div className="absolute h-full top-0 right-0 mr-1 grid items-center">
-          <RemoveProductButton
+          <button
+            onClick={handleRemoveProductClick}
+            name={qtyField}
+            type="submit"
             className="rounded-full text-xxs leading-0 text-white "
             formikData={formikData}
-            value=""
-            handleRemoveProductClick={handleRemoveProductClick}
-            name={itemQtyField}
-          />
+            style={{ background: 'red', width: '12px', height: '12px' }}
+          >
+            x
+          </button>
         </div>
       </td>
     </tr>

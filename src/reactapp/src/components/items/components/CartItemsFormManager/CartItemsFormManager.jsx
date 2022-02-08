@@ -39,6 +39,8 @@ function CartItemsFormManager({ children, formikData }) {
       setMessage(false);
       const isValid = await validate(validationSchema, cartItemsValue);
       const cartItemsToUpdate = prepareCartDataToUpdate(cartItemsValue);
+      // console.log(cartItemsToUpdate);
+      // console.log(cartItemsValue);
       /* Проверка на то, если ли в корзине продукт, количество которого будет обновляться, если нет -
          из массива cartItemsToUpdate удаляется этот продукт */
       cartItemsToUpdate.forEach((itemToUpdate, itemToUpdateIndex) => {
