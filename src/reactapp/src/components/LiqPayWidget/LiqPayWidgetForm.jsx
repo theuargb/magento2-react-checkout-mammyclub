@@ -31,7 +31,10 @@ const LiqPayWidgetForm = ({ liqPayData, orderId }) => {
                   Authorization: 'Bearer 6gn2y2np87chqd6zb7sjuphsluy3oq77',
                 },
               }
-            ).then((response) => location.replace(response));
+              // ).then((response) => location.replace(response));
+            )
+              .then((response) => response.json())
+              .then((data) => location.replace(data));
             console.log('liqPay callback');
           })
           .on('liqpay.ready', function (data) {

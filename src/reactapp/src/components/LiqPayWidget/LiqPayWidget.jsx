@@ -13,7 +13,7 @@ const LiqPayWidget = React.memo(({ orderId }) => {
       `https://mammyclub.perspective.net.ua/rest/V1/liqpay/hydrateWidget?orderId=${orderId}`
     )
       .then((response) => response.json())
-      .then((data) => JSON.parse(data))
+      .then((data) => data)
       .then((liqPayInitValues) =>
         setLiqPayData({
           data: liqPayInitValues.data,
