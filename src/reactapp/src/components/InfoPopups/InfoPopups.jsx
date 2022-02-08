@@ -99,7 +99,10 @@ const InfoPopups = ({ linkToCMSBlock, label, positionStyles }) => {
       {(close) => (
         <div className="modal w-5/6 bg-white md:w-1/2 mx-auto">
           <div className="header flex justify-between border-b-2 pb-2">
-            <div className="text-xlg text-green"> {label}</div>
+            <div className="text-lg text-green text-old_green-main">
+              {' '}
+              {label}
+            </div>
             {/* eslint-disable */}
             <button type="button" className="close" onClick={close} />
           </div>

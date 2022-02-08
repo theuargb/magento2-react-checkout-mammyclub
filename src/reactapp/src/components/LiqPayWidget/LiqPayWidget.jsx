@@ -26,7 +26,7 @@ const LiqPayWidget = React.memo(({ orderId }) => {
       fetchLiqPayWidget();
     }
   }, [liqPayReadyToInit]);
-  return <LiqPayWidgetForm liqPayData={liqPayData} />;
+  return <LiqPayWidgetForm liqPayData={liqPayData} orderId={orderId} />;
 });
 
 export default LiqPayWidget;

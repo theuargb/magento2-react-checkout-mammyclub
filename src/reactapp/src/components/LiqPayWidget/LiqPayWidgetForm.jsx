@@ -2,13 +2,12 @@
 import React, { useContext } from 'react';
 import _get from 'lodash.get';
 import CheckoutFormContext from '../../context/Form/CheckoutFormContext';
-import { object } from 'prop-types';
+import { object, string } from 'prop-types';
 import { useEffect } from 'react';
 
-const LiqPayWidgetForm = ({ liqPayData }) => {
+const LiqPayWidgetForm = ({ liqPayData, orderId }) => {
   const { data, signature } = liqPayData;
   const { setLiqPayStatus } = useContext(CheckoutFormContext);
-
   useEffect(() => {
     if (data && signature) {
       window.LiqPayCheckoutCallback = (function () {
@@ -24,10 +23,19 @@ const LiqPayWidgetForm = ({ liqPayData }) => {
               setLiqPayStatus(true);
               console.log('liqPay success');
             }
+            fetch(
+              `https://mammyclub.perspective.net.ua/rest/V1/liqpay/getRedirectUrl?orderId=${orderId}`,
+              {
+                method: 'GET',
+                headers: {
+                  Authorization: 'Bearer 6gn2y2np87chqd6zb7sjuphsluy3oq77',
+                },
+              }
+            ).then((response) => location.replace(response));
             console.log('liqPay callback');
           })
           .on('liqpay.ready', function (data) {
-            console.log('liqPay ready', data);
+            console.log('liqPay ready');
           })
           .on('liqpay.close', function (data) {
             console.log('liqPay close', data);
@@ -41,9 +49,11 @@ const LiqPayWidgetForm = ({ liqPayData }) => {
 
 LiqPayWidgetForm.propTypes = {
   liqPayData: object,
+  orderId: string,
 };
 LiqPayWidgetForm.defaultProps = {
   liqPayData: {},
+  orderId: '',
 };
 
 export default LiqPayWidgetForm;
