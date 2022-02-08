@@ -59,9 +59,6 @@ class Index extends Action implements HttpGetActionInterface
         }
 
         $quote = $checkoutHelper->getQuote();
-        if (!$quote->hasItems() || !$quote->validateMinimumAmount()) {
-            return $this->resultRedirectFactory->create()->setPath('checkout/cart');
-        }
 
         if (!$this->_customerSession->isLoggedIn() && !$checkoutHelper->isAllowedGuestCheckout($quote)) {
             $this->messageManager->addErrorMessage(__('Guest checkout is disabled.'));
