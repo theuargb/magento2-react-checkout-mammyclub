@@ -8,11 +8,12 @@ export default function useItemsCartContext() {
   const [cartData, cartActions] = useContext(CartContext);
   const cart = _get(cartData, 'cart');
   const cartItems = _get(cart, 'items', {});
-  const { updateCartItem } = cartActions;
+  const { updateCartItem, removeCartItemAction } = cartActions;
 
   return {
     cartItems,
     updateCartItem,
+    removeCartItemAction,
     cartItemsAvailable: !_isObjEmpty(cartItems),
   };
 }

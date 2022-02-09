@@ -28,37 +28,55 @@ function CartItemsFormManager({ children, formikData }) {
   const [validationSchema, setValidationSchema] = useState({});
   const { setMessage, setPageLoader, setErrorMessage, setSuccessMessage } =
     useItemsAppContext();
-  const { cartItems, updateCartItem, cartItemsAvailable } =
-    useItemsCartContext();
+  const {
+    cartItems,
+    updateCartItem,
+    cartItemsAvailable,
+    removeCartItemAction,
+  } = useItemsCartContext();
   const { cartItemsValue, setFieldValue } = formikData;
   const cartItemsArray = _objToArray(cartItems);
   const cartItemIds = prepareCartItemsUniqueId(cartItemsArray);
-
   const itemUpdateHandler = async () => {
     try {
       setMessage(false);
       const isValid = await validate(validationSchema, cartItemsValue);
-      const cartItemsToUpdate = prepareCartDataToUpdate(cartItemsValue);
-      // console.log(cartItemsToUpdate);
-      // console.log(cartItemsValue);
-      /* Проверка на то, если ли в корзине продукт, количество которого будет обновляться, если нет -
-         из массива cartItemsToUpdate удаляется этот продукт */
-      cartItemsToUpdate.forEach((itemToUpdate, itemToUpdateIndex) => {
+      const prepareCartItemsToUpdate = prepareCartDataToUpdate(cartItemsValue);
+
+      let cartItemToDelete;
+      let cartItemsToUpdate = [];
+      /*eslint-disable */
+
+      /* Проверка на соотвествие товаров в компонентах cartItems и cartItemsToUpdate , если нет соответствия -
+         из массива cartItemsToUpdate удаляется этот продукт ( без этой проверки метод обновления/удаления продуктов в корзине
+        выдаст ошибку, т.к. formikSectionData в компоненте CartItemsForm не обновляется при удалении товаров ( из-за этого
+        фактически удалённые товары присутствуют в cartItemsValue) */
+      cartItemsToUpdate = prepareCartItemsToUpdate.filter((item) => {
         const itemsID = Object.keys(cartItems);
         if (
-          !itemsID.some((id) => parseInt(id, 10) === itemToUpdate.cart_item_id)
+          itemsID.some((id) => parseInt(id, 10) === item.cart_item_id)
         ) {
-          cartItemsToUpdate.splice(itemToUpdateIndex, 1);
+          return item;
         }
       });
-
+      cartItemsToUpdate.forEach((itemToUpdate) => {
+        if (itemToUpdate.quantity === 0) {
+          cartItemToDelete = itemToUpdate.cart_item_id;
+        }
+      });
       /* ========================================================================================= */
 
       if (!isValid) {
         return;
       }
-
-      if (cartItemsToUpdate.length) {
+      if (cartItemToDelete) {
+        setPageLoader(true);
+        await removeCartItemAction({
+          cartItem: cartItemToDelete,
+        });
+        cartItemToDelete = undefined;
+        setPageLoader(false);
+      } else if (cartItemsToUpdate.length) {
         setPageLoader(true);
         await updateCartItem({ cartItems: cartItemsToUpdate });
         setSuccessMessage(__('Cart updated successfully.'));

@@ -23,6 +23,9 @@ import restSetGuestPaymentMethod from './cart/restSetGuestPaymentMethod';
 import { applyCouponCodeToCart, removeCouponCodeFromCart } from './cart/coupon';
 import setCustomerAddressOnCartBilling from './cart/setCustomerAddressOnBilling';
 import setCustomerAddrOnShippingAddr from './cart/setCustomerAddrOnShippingAddr';
+import removeItemFromCart from './cart/removeItemFromCart/removeItemFromCart';
+
+export const removeItemFromCartRequest = removeItemFromCart;
 
 export const generateCustomerToken = generateToken;
 

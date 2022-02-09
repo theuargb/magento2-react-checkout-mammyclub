@@ -7,7 +7,6 @@ import useItemsFormContext from '../hooks/useItemsFormContext';
 
 function CartItemList() {
   const { cartItems, setFieldValue, setFieldTouched } = useItemsFormContext();
-
   /**
    * Handler function deals with qty update.
    *
@@ -22,8 +21,8 @@ function CartItemList() {
 
   const handleQtyDelete = (event) => {
     const fieldName = `items.${event.target.name}`;
-    setFieldTouched(fieldName, 0);
-    setFieldValue(fieldName, 0);
+    // setFieldTouched(fieldName, 0);
+    setFieldValue(fieldName, undefined);
   };
 
   return (

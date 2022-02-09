@@ -23,13 +23,17 @@ import {
   setSelectedShippingAddressAction,
   setCustomerAddrAsShippingAddrAction,
 } from './shippingAddress/actions';
-import { updateCartItemAction } from './cartItems/actions';
+import {
+  updateCartItemAction,
+  removeCartItemAction,
+} from './cartItems/actions';
 import { setEmailOnGuestCartAction } from './email/actions';
 import { setShippingMethodAction } from './shippingMethod/actions';
 import { placeOrderAction, setOrderInfoAction } from './order/actions';
 import { storeAggregatedCartStatesAction } from './aggregated/actions';
 
 const dispatchMapper = {
+  removeCartItemAction,
   placeOrder: placeOrderAction,
   mergeCarts: mergeCartsAction,
   setCartInfo: setCartInfoAction,

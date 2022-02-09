@@ -8,12 +8,12 @@ import useItemsFormContext from '../hooks/useItemsFormContext';
 import useTotalsCartContext from '../../totals/hooks/useTotalsCartContext';
 
 function CartItem({ item, isLastItem, actions }) {
-  // const { formikData, handleKeyDown, cartItemsTouched, itemUpdateHandler } =
-  //   useItemsFormContext();
   const { formikData, handleKeyDown, itemUpdateHandler } =
     useItemsFormContext();
+
   const qtyField = `${item.id}_qty`;
   const itemQtyField = `${CART_ITEMS_FORM}.${qtyField}`;
+
   /* eslint-disable */
   const { subTotal, hasSubTotal } = useTotalsCartContext();
 
@@ -29,9 +29,8 @@ function CartItem({ item, isLastItem, actions }) {
   };
 
   const handleRemoveProductClick = (e) => {
-    const fieldName = `${CART_ITEMS_FORM}.${e.target.name}`;
     formikData.cartItemsValue[e.target.name] = 0;
-    actions.handleQtyDelete(e);
+    actions.handleQtyUpdate(e);
     updateQty();
   };
 

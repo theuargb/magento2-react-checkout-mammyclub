@@ -1475,6 +1475,17 @@ Add the correct display in Chrome and Safari.
     --tw-ring-color: rgba(16, 185, 129, var(--tw-ring-opacity)) !important; }
   .checkout-wrapper .focus\:ring-offset-2:focus {
     --tw-ring-offset-width: 2px !important; }
+  .checkout-wrapper .filter {
+    --tw-blur: var(--tw-empty,/*!*/ /*!*/) !important;
+    --tw-brightness: var(--tw-empty,/*!*/ /*!*/) !important;
+    --tw-contrast: var(--tw-empty,/*!*/ /*!*/) !important;
+    --tw-grayscale: var(--tw-empty,/*!*/ /*!*/) !important;
+    --tw-hue-rotate: var(--tw-empty,/*!*/ /*!*/) !important;
+    --tw-invert: var(--tw-empty,/*!*/ /*!*/) !important;
+    --tw-saturate: var(--tw-empty,/*!*/ /*!*/) !important;
+    --tw-sepia: var(--tw-empty,/*!*/ /*!*/) !important;
+    --tw-drop-shadow: var(--tw-empty,/*!*/ /*!*/) !important;
+    filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important; }
   .checkout-wrapper .transition-all {
     transition-property: all !important;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
