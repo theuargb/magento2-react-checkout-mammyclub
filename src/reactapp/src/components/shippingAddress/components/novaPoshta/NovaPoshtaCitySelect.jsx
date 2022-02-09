@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { func, string, object } from 'prop-types';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
 import { formikDataShape } from '../../../../utils/propTypes';
 import { __ } from '../../../../i18n';
 
 const options = [{ value: 'void', label: 'Введите название города....' }];
+const Input = (props) => <components.Input {...props} isHidden={false} />;
 
 function NovaPoshtaCitySelect({
   handleChangeCityId,
@@ -15,12 +16,9 @@ function NovaPoshtaCitySelect({
   const [selectList, setSelectList] = useState(options);
   const { setFieldValue, setFieldTouched } = formikData;
 
-  const handleFormChange = (e) => {
-    const newValue = e.label;
-    setFieldTouched(name, newValue);
-    setFieldValue(name, newValue);
-    handleChangeCityId(e.value);
-  };
+  const [value, setValue] = useState();
+  const [selectInputValue, setInputValue] = useState('');
+  const selectRef = useRef();
 
   const changeCityOptions = (inputValue) => {
     let cityList = [];
@@ -46,18 +44,42 @@ function NovaPoshtaCitySelect({
         cityList = [];
       });
   };
+  const handleFormChange = (e) => {
+    const newValue = e.label;
+    setFieldTouched(name, newValue);
+    setFieldValue(name, newValue);
+    handleChangeCityId(e.value);
+
+    setValue(e);
+    setInputValue(e ? e.label : '');
+  };
+  const handleInputChange = (inputValue, { action }) => {
+    changeCityOptions(inputValue);
+    if (action === 'input-change') {
+      setInputValue(inputValue);
+    }
+  };
+  const onFocus = () => value && selectRef.current.select.inputRef.select();
+
   return (
     <div className="react-select pt-5 pb-3">
       <p className="text-base text-gray mb-0.5">{__('Населенный пункт')}</p>
       <Select
         options={selectList}
-        onInputChange={(inputValue) => changeCityOptions(inputValue)}
+        onInputChange={(inputValue, action) =>
+          handleInputChange(inputValue, action)
+        }
         onChange={(e) => handleFormChange(e)}
         inputId="city"
         placeholder=""
         styles={customStyles}
-        // isSearchable={false}
+        value={value}
+        inputValue={selectInputValue}
         filterOption={(selectOptions) => selectOptions}
+        onFocus={onFocus}
+        components={{
+          Input,
+        }}
       />
     </div>
   );

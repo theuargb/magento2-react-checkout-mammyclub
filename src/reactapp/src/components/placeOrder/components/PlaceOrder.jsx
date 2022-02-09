@@ -89,6 +89,8 @@ function PlaceOrder() {
         )
       );
       focusOnFormErrorElement(LOGIN_FORM, errors.login);
+      scrollToElement(LOGIN_FORM);
+
       return;
     }
 
@@ -96,6 +98,7 @@ function PlaceOrder() {
       setErrorMessage(__('Please provide your shipping address information.'));
       focusOnFormErrorElement(SHIPPING_ADDR_FORM, errors.shipping_address);
       console.log(errors.shipping_address);
+      scrollToElement(SHIPPING_ADDR_FORM);
       return;
     }
 
