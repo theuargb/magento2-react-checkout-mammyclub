@@ -70,7 +70,10 @@ export const config = {
   isProductionMode: nodeEnv === 'production',
   isDevelopmentMode: nodeEnv === 'development',
   cartId: getConfigFromLocalStorage(activeSource.cartId),
-  baseUrl: env.baseUrl || RootElement.getBaseUrl() || 'https://mammyclub.perspective.net.ua',
+  baseUrl:
+    env.baseUrl ||
+    RootElement.getBaseUrl() ||
+    'https://mammyclub.perspective.net.ua',
   signInToken: getConfigFromLocalStorage(activeSource.token),
   hyvaStorageSource: magentoDataSources.hyvaCheckoutCacheStorage,
 };

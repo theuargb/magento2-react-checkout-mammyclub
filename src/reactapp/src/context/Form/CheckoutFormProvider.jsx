@@ -114,7 +114,6 @@ function CheckoutFormProvider({ children }) {
           setOrderPlacedStatus(true);
           LocalStorage.clearCheckoutStorage();
           window.location.replace(config.successPageRedirectUrl);
-
         }
         if (
           selectedPaymentMethod === 'liqpaymagento_liqpay' &&
@@ -123,7 +122,6 @@ function CheckoutFormProvider({ children }) {
           setOrderPlacedStatus(true);
           LocalStorage.clearCheckoutStorage();
           window.location.replace(config.successPageRedirectUrl);
-
         }
       }
 
