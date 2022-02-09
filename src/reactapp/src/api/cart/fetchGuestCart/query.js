@@ -1,4 +1,4 @@
-import cartItemsInfo from '../utility/query/cartItemsInfo';
+import {cartItemsInfo, cartItemsFragments} from '../utility/query/cartItemsInfo';
 import cartPriceInfo from '../utility/query/cartPriceInfo';
 import cartBillingAddrInfo from '../utility/query/cartBillingAddrInfo';
 import cartShippingAddrInfo from '../utility/query/cartShippingAddrInfo';
@@ -24,4 +24,8 @@ export const GET_GUEST_CART_QUERY = `
   query getGuestCartQuery($cartId: String!) {
     ${CART_QUERY_PART}
   }
+`;
+
+export const CART_FRAGMENTS_PART = `
+${cartItemsFragments}
 `;
