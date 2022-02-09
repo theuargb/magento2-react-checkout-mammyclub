@@ -1,4 +1,4 @@
-export const cartItemsInfo = `
+const cartItemsInfo = `
 items {
   id
   quantity
@@ -6,44 +6,85 @@ items {
     price {
       value
       currency
-    }
+    },
     row_total {
       value
       currency
     }
   }
-
   ... on SimpleCartItem {
     product {
-      ...productFields
+      id
+      name
+      sku
+      small_image {
+        label
+        url
+      }
+      canonical_url
     }
   }
 
   ... on VirtualCartItem {
     product {
-      ...productFields
+      id
+      name
+      sku
+      small_image {
+        label
+        url
+      }
+      canonical_url
     }
   }
 
   ... on DownloadableCartItem {
     product {
-      ...productFields
+      id
+      name
+      sku
+      small_image {
+        label
+        url
+      }
+      canonical_url
     }
   }
 
   ... on ConfigurableCartItem {
     product: configured_variant {
-      ...productFields
+      id
+      name
+      sku
+      small_image {
+        label
+        url
+      }
+      canonical_url
     }
 
     parent: product {
-      ...productFields
+      id
+      name
+      sku
+      small_image {
+        label
+        url
+      }
+      canonical_url
     }
   }
 
   ... on BundleCartItem {
     product {
-      ...productFields
+      id
+      name
+      sku
+      small_image {
+        label
+        url
+      }
+      canonical_url
     }
 
     bundle_options {
@@ -57,14 +98,4 @@ items {
   }
 }`;
 
-export const cartItemsFragments = `
-fragment productFields on ProductInterface {
-    id
-    name
-    sku
-    small_image {
-        label
-        url
-    }
-    canonical_url
-}`;
+export default cartItemsInfo;
