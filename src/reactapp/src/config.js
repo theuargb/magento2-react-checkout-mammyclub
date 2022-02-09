@@ -70,12 +70,12 @@ export const config = {
   isProductionMode: nodeEnv === 'production',
   isDevelopmentMode: nodeEnv === 'development',
   cartId: getConfigFromLocalStorage(activeSource.cartId),
-  baseUrl: env.baseUrl || RootElement.getBaseUrl() || '',
+  baseUrl: env.baseUrl || RootElement.getBaseUrl() || 'https://mammyclub.perspective.net.ua',
   signInToken: getConfigFromLocalStorage(activeSource.token),
   hyvaStorageSource: magentoDataSources.hyvaCheckoutCacheStorage,
 };
 
-config.successPageRedirectUrl = `${config.baseUrl}/checkout/onepage/success`;
+config.successPageRedirectUrl = `${config.baseUrl}/checkout/success`;
 
 export const LOGIN_FORM = 'login';
 export const CART_ITEMS_FORM = 'items';
