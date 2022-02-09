@@ -12,15 +12,89 @@ items {
       currency
     }
   }
-  product {
-    id
-    name
-    sku
-    small_image {
-      label
-      url
+  ... on SimpleCartItem {
+    product {
+      id
+      name
+      sku
+      small_image {
+        label
+        url
+      }
+      canonical_url
     }
-    url_key
+  }
+
+  ... on VirtualCartItem {
+    product {
+      id
+      name
+      sku
+      small_image {
+        label
+        url
+      }
+      canonical_url
+    }
+  }
+
+  ... on DownloadableCartItem {
+    product {
+      id
+      name
+      sku
+      small_image {
+        label
+        url
+      }
+      canonical_url
+    }
+  }
+
+  ... on ConfigurableCartItem {
+    product: configured_variant {
+      id
+      name
+      sku
+      small_image {
+        label
+        url
+      }
+      canonical_url
+    }
+
+    parent: product {
+      id
+      name
+      sku
+      small_image {
+        label
+        url
+      }
+      canonical_url
+    }
+  }
+
+  ... on BundleCartItem {
+    product {
+      id
+      name
+      sku
+      small_image {
+        label
+        url
+      }
+      canonical_url
+    }
+
+    bundle_options {
+      label
+      values {
+        label
+        price
+        quantity
+      }
+    }
   }
 }`;
 
