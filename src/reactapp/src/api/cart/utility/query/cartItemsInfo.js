@@ -6,21 +6,54 @@ items {
     price {
       value
       currency
-    },
+    }
     row_total {
       value
       currency
     }
   }
-  product {
-    id
-    name
-    sku
-    small_image {
-      label
-      url
+
+  ... on SimpleCartItem {
+    product {
+      ...productFields
     }
-    url_key
+  }
+
+  ... on VirtualCartItem {
+    product {
+      ...productFields
+    }
+  }
+
+  ... on DownloadableCartItem {
+    product {
+      ...productFields
+    }
+  }
+
+  ... on ConfigurableCartItem {
+    product: configured_variant {
+      ...productFields
+    }
+
+    parent: product {
+      ...productFields
+    }
+  }
+
+  ... on BundleCartItem {
+    product {
+      ...productFields
+    }
+
+    bundle_options {
+      label
+      values {
+        label
+        price
+        quantity
+      }
+    }
   }
 }`;
 
