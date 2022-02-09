@@ -1,4 +1,4 @@
-export const cartItemsInfo = `
+const cartItemsInfo = `
 items {
   id
   quantity
@@ -57,14 +57,4 @@ items {
   }
 }`;
 
-export const cartItemsFragments = `
-fragment productFields on ProductInterface {
-    id
-    name
-    sku
-    small_image {
-        label
-        url
-    }
-    canonical_url
-}`;
+export default cartItemsInfo;
