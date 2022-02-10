@@ -992,8 +992,6 @@ Add the correct display in Chrome and Safari.
     display: table-cell !important; }
   .checkout-wrapper .table-header-group {
     display: table-header-group !important; }
-  .checkout-wrapper .grid {
-    display: grid !important; }
   .checkout-wrapper .hidden {
     display: none !important; }
   .checkout-wrapper .h-4 {
@@ -1315,8 +1313,8 @@ Add the correct display in Chrome and Safari.
     padding-right: 0.25rem !important; }
   .checkout-wrapper .pr-2 {
     padding-right: 0.5rem !important; }
-  .checkout-wrapper .pr-4 {
-    padding-right: 1rem !important; }
+  .checkout-wrapper .pb-1 {
+    padding-bottom: 0.25rem !important; }
   .checkout-wrapper .pb-2 {
     padding-bottom: 0.5rem !important; }
   .checkout-wrapper .pb-3 {

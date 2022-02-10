@@ -88,22 +88,22 @@ function CartItem({ item, isLastItem, actions }) {
       <td className="w-1/6 table-cell text-md text-green align-middle bg-white">
         <div className="">
           {hasSubTotal && (
-            <div className="flex justify-between items-center pr-4">
-              <div className="mx-auto">{item.rowTotal}</div>
+            <div className="flex justify-between items-center">
+              <div className="mr-1">{item.rowTotal}</div>
+              <div className="h-full pb-1">
+                <button
+                  onClick={handleRemoveProductClick}
+                  name={qtyField}
+                  type="submit"
+                  className="rounded-full text-xxs leading-0 text-white "
+                  formikData={formikData}
+                  style={{ background: 'red', width: '12px', height: '12px' }}
+                >
+                  x
+                </button>
+              </div>
             </div>
           )}
-        </div>
-        <div className="absolute h-full top-0 right-0 mr-1 grid items-center">
-          <button
-            onClick={handleRemoveProductClick}
-            name={qtyField}
-            type="submit"
-            className="rounded-full text-xxs leading-0 text-white "
-            formikData={formikData}
-            style={{ background: 'red', width: '12px', height: '12px' }}
-          >
-            x
-          </button>
         </div>
       </td>
     </tr>
