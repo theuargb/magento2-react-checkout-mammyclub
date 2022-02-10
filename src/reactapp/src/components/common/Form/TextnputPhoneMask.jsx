@@ -107,7 +107,7 @@ function TextInputPhoneMask({
       <Field
         name={name}
         value={value}
-        type={type || 'text'}
+        type={type || 'tel'}
         placeholder={placeholder}
         render={({ field }) => (
           <InputMask
@@ -118,7 +118,7 @@ function TextInputPhoneMask({
             } ${className} ${width || 'w-full'}`}
             {...rest}
             mask="+38(999) 999-99-99"
-            type="text"
+            type="tel"
             onChange={(event) => {
               const newValue = event.target.value;
               setFieldTouched(name, newValue);
