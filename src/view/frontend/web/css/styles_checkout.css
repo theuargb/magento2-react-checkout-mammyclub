@@ -890,6 +890,8 @@ Add the correct display in Chrome and Safari.
     left: 0px !important; }
   .checkout-wrapper .top-0 {
     top: 0px !important; }
+  .checkout-wrapper .top-12 {
+    top: 3rem !important; }
   .checkout-wrapper .right-0 {
     right: 0px !important; }
   .checkout-wrapper .z-10 {

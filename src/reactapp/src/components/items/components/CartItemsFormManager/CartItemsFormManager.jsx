@@ -24,6 +24,7 @@ let initialValues = {};
 const formSubmit = () => {};
 
 function CartItemsFormManager({ children, formikData }) {
+  const [hasError, setHasError] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
   const [validationSchema, setValidationSchema] = useState({});
   const { setMessage, setPageLoader, setErrorMessage, setSuccessMessage } =
@@ -78,12 +79,17 @@ function CartItemsFormManager({ children, formikData }) {
         setPageLoader(false);
       } else if (cartItemsToUpdate.length) {
         setPageLoader(true);
+
         await updateCartItem({ cartItems: cartItemsToUpdate });
+
         setSuccessMessage(__('Cart updated successfully.'));
+        setHasError(false);
         setPageLoader(false);
       }
     } catch (error) {
       console.error(error, 'error');
+      console.log(formikData);
+      setHasError(true);
       setErrorMessage(error.message);
       setPageLoader(false);
     }
@@ -129,6 +135,8 @@ function CartItemsFormManager({ children, formikData }) {
     itemUpdateHandler,
     cartItems: cartItemsArray,
     cartItemsAvailable: !!cartItemsArray.length,
+    hasError,
+    setHasError,
   };
 
   return (

@@ -106,13 +106,13 @@ function TextInputPhoneMask({
       </div>
       <Field
         name={name}
-        id={inputId}
         value={value}
         type={type || 'text'}
         placeholder={placeholder}
         render={({ field }) => (
           <InputMask
             {...field}
+            id={inputId}
             className={`form-input ${
               hasError ? 'border-dashed border-red-500' : ''
             } ${className} ${width || 'w-full'}`}
@@ -125,6 +125,12 @@ function TextInputPhoneMask({
               setFieldValue(name, newValue);
               actions.saveAddress();
               setFocusState(true);
+              if (newValue !== '+38(___) ___-__-__') {
+                event.target.classList.remove(
+                  'border-dashed',
+                  'border-red-500'
+                );
+              }
             }}
             onBlur={() => setFocusState(false)}
           />

@@ -197,6 +197,7 @@ function ShippingAddressForm({ children }) {
           onKeyDown={handleKeyDown}
         />
         <TextInputPhoneMask
+          id="shipping_address.phone"
           required
           label={__('Телефон (обязательно)')}
           name={fields.phone}

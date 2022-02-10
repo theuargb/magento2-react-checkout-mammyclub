@@ -6,7 +6,8 @@ import { _abs } from '../../../utils';
 import useItemsFormContext from '../hooks/useItemsFormContext';
 
 function CartItemList() {
-  const { cartItems, setFieldValue, setFieldTouched } = useItemsFormContext();
+  const { cartItems, setFieldValue, setFieldTouched, hasError, setHasError } =
+    useItemsFormContext();
   /**
    * Handler function deals with qty update.
    *
@@ -25,10 +26,16 @@ function CartItemList() {
     setFieldValue(fieldName, undefined);
   };
 
+  if (hasError) {
+    setTimeout(() => {
+      setHasError(false);
+    }, 3000);
+  }
+
   return (
     <div className="">
       <div className="">
-        <table className="table w-full text-left">
+        <table className="table w-full text-left relative">
           <thead className="bg-container-lighter text-left table-header-group text-center text-primary-darker text-md ">
             <tr>
               <th className="p-2 font-normal">{__('Товар')}</th>
@@ -57,6 +64,11 @@ function CartItemList() {
               />
             ))}
           </tbody>
+          {hasError && (
+            <p className="text-red-500 text-xs absolute top-12 bg-white">
+              {__('В данный момент в наличии нет такого количества товаров')}
+            </p>
+          )}
         </table>
       </div>
     </div>
