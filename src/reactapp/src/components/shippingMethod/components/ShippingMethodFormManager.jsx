@@ -13,8 +13,8 @@ import useShippingMethodCartContext from '../hooks/useShippingMethodCartContext'
 // import { _isObjEmpty } from '../../../utils';
 
 const initialValues = {
-  methodCode: 'flatrate',
-  carrierCode: 'flatrate',
+  methodCode: '',
+  carrierCode: '',
 };
 
 const requiredMessage = __('Required');

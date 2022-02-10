@@ -41,14 +41,16 @@ function ShippingMethodList() {
     await submitHandler({ carrierCode, methodCode });
   };
   /*  Сохранение метода доставки.
-  Если пользователем не будет выбран метод доставки, то методом доставки останется метод - flat rate */
+  Если пользователем не будет выбран метод доставки, то методом доставки останется первый доступный */
   /* eslint-disable */
   if (!isShippingMethodChangeByUser && methodsAvailable) {
     setFieldTouched(fields.carrierCode, true);
     setFieldTouched(fields.methodCode, true);
 
     (async () => {
-      const methodSelected = methodList['flatrate__flatrate'];
+      const methodListKeys =  Object.keys(methodList);
+      const methodSelected = methodList[methodListKeys[0]];
+
       const { carrierCode, methodCode, id: methodId } = methodSelected;
       if (methodId === selectedMethodId) {
         return;

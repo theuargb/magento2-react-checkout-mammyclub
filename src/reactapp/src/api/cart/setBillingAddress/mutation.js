@@ -12,13 +12,13 @@ mutation setBillingAddress(
   $zipcode: String!,
   $country: String!,
   $phone: String!,
-  $isSameAsShipping: Boolean
+
 ) {
   setBillingAddressOnCart(
     input: {
       cart_id: $cartId
       billing_address: {
-        same_as_shipping: $isSameAsShipping
+        same_as_shipping: false 
       	address: {
           firstname: $firstname
           lastname: $lastname
