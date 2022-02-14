@@ -9,7 +9,7 @@ import PlaceOrder from '../placeOrder';
 import PageLoader from '../common/Loader';
 import { AddressWrapper } from '../address';
 import PaymentMethod from '../paymentMethod';
-import BillingAddress from '../billingAddress';
+// import BillingAddress from '../billingAddress';
 import ShippingAddress from '../shippingAddress';
 import ShippingMethodsForm from '../shippingMethod';
 import StickyRightSidebar from '../StickyRightSidebar';
@@ -100,7 +100,7 @@ function CheckoutForm() {
                   </ShippingAddress>
                   {/* </>
                   )} */}
-                  <BillingAddress />
+                  {/* <BillingAddress /> */}
                   <PaymentMethod />
                   {/* <CouponCode /> */}
                   <OrderAdditionals />
