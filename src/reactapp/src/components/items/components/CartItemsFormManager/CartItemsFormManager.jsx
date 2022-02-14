@@ -54,9 +54,7 @@ function CartItemsFormManager({ children, formikData }) {
         фактически удалённые товары присутствуют в cartItemsValue) */
       cartItemsToUpdate = prepareCartItemsToUpdate.filter((item) => {
         const itemsID = Object.keys(cartItems);
-        if (
-          itemsID.some((id) => parseInt(id, 10) === item.cart_item_id)
-        ) {
+        if (itemsID.some((id) => parseInt(id, 10) === item.cart_item_id)) {
           return item;
         }
       });
@@ -86,6 +84,11 @@ function CartItemsFormManager({ children, formikData }) {
         setHasError(false);
         setPageLoader(false);
       }
+
+      /* создаётся новый ивент, по срабатыванию которого будет обновляться число товаров над иконкой корзины в хедере */
+      const updateCartCounter = new CustomEvent('update-cart-counter');
+      window.dispatchEvent(updateCartCounter);
+      /* =================================================================================================== */
     } catch (error) {
       console.error(error, 'error');
       console.log(formikData);
