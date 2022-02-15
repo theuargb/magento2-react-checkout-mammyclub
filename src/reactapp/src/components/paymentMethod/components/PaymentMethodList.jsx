@@ -37,67 +37,6 @@ function PaymentMethodList({ methodRenderers }) {
     }
   };
 
-  const customSelectStyles = {
-    option: (provided) => ({
-      ...provided,
-      fontSize: '13px',
-      lineHeight: '13px',
-    }),
-    control: (provided) => ({
-      ...provided,
-      borderRadius: '5px',
-      height: '22px',
-      minHeight: 'none',
-      boxShadow: '0px 0px 4px 0px #ccc inset',
-    }),
-    container: (provided) => ({
-      ...provided,
-      height: '22px',
-      minHeight: 'none',
-    }),
-    indicatorsContainer: (provided) => ({
-      ...provided,
-      height: '24px',
-      minHeight: 'none',
-      borderLeft: 'none',
-      marginTop: '-2px',
-    }),
-    indicatorSeparator: (provided) => ({
-      ...provided,
-      display: 'none',
-    }),
-    valueContainer: (provided) => ({
-      ...provided,
-      height: '20px',
-      minHeight: 'none',
-      padding: '0 4px',
-      alignSelf: 'center',
-      marginTop: '-4px',
-    }),
-    input: (provided) => ({
-      ...provided,
-      height: '20px',
-      fontSize: '13px',
-      lineHeight: '13px',
-      outline: 'none',
-      margin: '0',
-      padding: '0',
-    }),
-    singleValue: (provided, state) => {
-      const opacity = state.isDisabled ? 0.5 : 1;
-      const transition = 'opacity 300ms';
-      return {
-        ...provided,
-        opacity,
-        transition,
-        height: '20px',
-        fontSize: '13px',
-        lineHeight: '20px',
-        alighSelf: 'center',
-        padding: '0',
-      };
-    },
-  };
   const methodListForSelect = [];
   _objToArray(methodList).forEach((method) => {
     const value = method.code;
@@ -132,16 +71,9 @@ function PaymentMethodList({ methodRenderers }) {
         <sup className="text-red-500"> *</sup>
       </p>
       <SelectInput
-        className="indent-0 w-full border form-select xs:block form-input text-base "
         options={methodListForSelect}
-        defaultValue={{
-          label: methodListForSelect[0].label,
-          value: methodListForSelect[0].value,
-        }}
         onChange={handlePaymentMethodSelection}
         name="city"
-        placeholder=""
-        styles={customSelectStyles}
       />
       <InfoPopups
         positionStyles="absolute top-0 right-0 mt-4 mr-6"

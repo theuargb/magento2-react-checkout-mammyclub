@@ -48,7 +48,7 @@ PaymentMethodSelect.propTypes = {
   helpText: string,
   placeholder: string,
   name: string.isRequired,
-  label: string.isRequired,
+  label: string,
   options: arrayOf(
     shape({
       value: string,
@@ -64,6 +64,7 @@ PaymentMethodSelect.defaultProps = {
   required: false,
   placeholder: '',
   isHidden: false,
+  label: '',
 };
 
 export default PaymentMethodSelect;

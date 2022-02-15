@@ -1,7 +1,6 @@
 import React from 'react';
-
-import { __ } from '../../../i18n';
 import useShippingMethodCartContext from '../hooks/useShippingMethodCartContext';
+import { __ } from '../../../i18n';
 
 function NoShippingMethodInfoBox() {
   const { methodsAvailable } = useShippingMethodCartContext();
@@ -11,10 +10,19 @@ function NoShippingMethodInfoBox() {
   }
 
   return (
-    <div className="h-32 py-4 min-h-12">
-      <div className="flex items-center justify-center w-full h-full">
-        <div>{__('No shipping methods available at the moment')}</div>
-      </div>
+    <div className="py-4 border-b-2 border-container-lightner relative">
+      <label
+        htmlFor="no-shipping-methods"
+        className="text-gray text-base mb-0.5"
+      >
+        {__('Способ доставки')}
+      </label>
+      <input
+        label={__('Способ доставки')}
+        id="no-shipping-methods"
+        type="text"
+        className="indent-0 w-full border form-select xs:block form-input text-base "
+      />
     </div>
   );
 }
