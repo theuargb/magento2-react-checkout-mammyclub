@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import _get from 'lodash.get';
 import { object } from 'prop-types';
-import Select from 'react-select';
+import SelectInput from './PaymentMethodSelect';
 import { __ } from '../../../i18n';
-
-// import RadioInput from '../../common/Form/RadioInput';
-// import { __ } from '../../../i18n';
-// import { classNames, _objToArray } from '../../../utils';
 import { _objToArray } from '../../../utils';
 import usePaymentMethodCartContext from '../hooks/usePaymentMethodCartContext';
 import usePaymentMethodFormContext from '../hooks/usePaymentMethodFormContext';
@@ -14,17 +10,15 @@ import InfoPopups from '../../InfoPopups/InfoPopups';
 
 function PaymentMethodList({ methodRenderers }) {
   const { fields, submitHandler, formikData } = usePaymentMethodFormContext();
-  // const { methodList, isVirtualCart, doCartContainShippingAddress } =
-  //   usePaymentMethodCartContext();
   const { methodList } = usePaymentMethodCartContext();
-  // const { paymentValues, setFieldValue, setFieldTouched } = formikData;
   const { setFieldValue, setFieldTouched } = formikData;
-  // const paymentAvailable = isVirtualCart || doCartContainShippingAddress;
+
   const [isPaymentMethodChangeByUser, setPaymentMethodChangeByUser] =
     useState(false);
 
   const handlePaymentMethodSelection = async (event) => {
-    const methodSelected = _get(methodList, `${event.value}.code`);
+    const methodSelected = _get(methodList, `${event.target.value}.code`);
+    console.log(methodSelected);
 
     if (!methodSelected) {
       return;
@@ -113,8 +107,6 @@ function PaymentMethodList({ methodRenderers }) {
 
   /*  Сохранение метода оплаты.
   Если пользователем не будет выбран метод оплаты, то выбранный метод будет - ликпей */
-
-  // React.useEffect(() => {
   if (
     !isPaymentMethodChangeByUser &&
     methodList &&
@@ -131,7 +123,6 @@ function PaymentMethodList({ methodRenderers }) {
       await submitHandler(methodListForSelect[0].value);
     })();
   }
-  // }, [formikData]);
   /*  ========================================================================================  */
 
   return (
@@ -140,14 +131,15 @@ function PaymentMethodList({ methodRenderers }) {
         {__('Способ оплаты (обязательно)')}
         <sup className="text-red-500"> *</sup>
       </p>
-      <Select
+      <SelectInput
+        className="indent-0 w-full border form-select xs:block form-input text-base "
         options={methodListForSelect}
         defaultValue={{
           label: methodListForSelect[0].label,
           value: methodListForSelect[0].value,
         }}
-        onChange={(event) => handlePaymentMethodSelection(event)}
-        inputId="city"
+        onChange={handlePaymentMethodSelection}
+        name="city"
         placeholder=""
         styles={customSelectStyles}
       />
