@@ -78,7 +78,7 @@ export const config = {
   hyvaStorageSource: magentoDataSources.hyvaCheckoutCacheStorage,
 };
 
-config.successPageRedirectUrl = `${config.baseUrl}/checkout/success`;
+config.successPageRedirectUrl = `${config.baseUrl}/hyva/reactcheckout/success/`;
 
 export const LOGIN_FORM = 'login';
 export const CART_ITEMS_FORM = 'items';

@@ -1,11 +1,9 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Login from '../login';
 import Totals from '../totals';
 import CartItemsForm from '../items';
 import PlaceOrder from '../placeOrder';
-// import CouponCode from '../couponCode';
-// import Message from '../common/Message';
 import PageLoader from '../common/Loader';
 import { AddressWrapper } from '../address';
 import PaymentMethod from '../paymentMethod';
@@ -16,23 +14,19 @@ import StickyRightSidebar from '../StickyRightSidebar';
 import CheckoutAgreements from '../checkoutAgreements';
 import CheckoutFormWrapper from './CheckoutFormWrapper';
 import OrderAdditionals from '../additionals/OrderAdditionals';
-// import { config } from '../../config';
 import { aggregatedQueryRequest } from '../../api';
 import useCheckoutFormAppContext from './hooks/useCheckoutFormAppContext';
 import useCheckoutFormCartContext from './hooks/useCheckoutFormCartContext';
 import { __ } from '../../i18n';
 import LiqPayWidget from '../LiqPayWidget/LiqPayWidget';
-import CheckoutFormContext from '../../context/Form/CheckoutFormContext';
-// import ContactUs from '../magentoBlocks/ContactUs';
+
 import CheckoutRightSidebar from '../magentoBlocks/CheckoutRightSidebar';
 
 function CheckoutForm() {
   const [initialData, setInitialData] = useState(false);
   const { pageLoader, appDispatch, setPageLoader, storeAggregatedAppStates } =
     useCheckoutFormAppContext();
-  const { isOrderPlaced } = useContext(CheckoutFormContext);
 
-  // const { orderId, isVirtualCart, storeAggregatedCartStates } =
   const { orderId, storeAggregatedCartStates } = useCheckoutFormCartContext();
 
   /**
@@ -58,22 +52,9 @@ function CheckoutForm() {
     storeAggregatedAppStates,
     storeAggregatedCartStates,
   ]);
-  if (orderId && isOrderPlaced) {
-    console.log(`isOrderPlaced : ${isOrderPlaced}`);
-    return (
-      <div className="flex flex-col items-center justify-center mx-10 my-10">
-        <h1 className="text-2xl font-bold">{__('Информация о заказе')}</h1>
-        <div className="flex flex-col items-center justify-center mt-4 space-y-3">
-          <div>{__('Заказ размещён!')}</div>
-          <div>{`${__('Номер заказа :')} #${orderId}`}</div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <CheckoutFormWrapper initialData={initialData}>
-      {/* <Message /> */}
       <div className="flex justify-center">
         <div className="container w-full mx-auto py-2 md:py-5 px-0">
           <div className="hidden md:grid grid-cols-2 gap-x-6 checkout-wrapper">
@@ -92,14 +73,11 @@ function CheckoutForm() {
             <div className="checkout-wrapper mt-8 md:mt-0 w-full md:order-1 order-4 md:w-1/2 grow-0 md:mr-8">
               <div className="w-full xl:max-w-full border border-container py-3.5">
                 <AddressWrapper>
-                  {/* {!isVirtualCart && (
-                    <> */}
                   <ShippingAddress>
                     <Login />
                     <ShippingMethodsForm />
                   </ShippingAddress>
-                  {/* </>
-                  )} */}
+
                   {/* <BillingAddress /> */}
                   <PaymentMethod />
                   {/* <CouponCode /> */}
@@ -122,7 +100,6 @@ function CheckoutForm() {
                 <Totals />
                 <CheckoutAgreements />
               </div>
-              {/* <ContactUs /> */}
               <CheckoutRightSidebar />
             </StickyRightSidebar>
           </div>

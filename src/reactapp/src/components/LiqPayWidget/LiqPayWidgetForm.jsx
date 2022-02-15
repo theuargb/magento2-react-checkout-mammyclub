@@ -1,9 +1,8 @@
 /* eslint-disable */
-import React, { useContext } from 'react';
-import _get from 'lodash.get';
-import CheckoutFormContext from '../../context/Form/CheckoutFormContext';
+import React, { useContext, useEffect } from 'react';
 import { object, string } from 'prop-types';
-import { useEffect } from 'react';
+import CheckoutFormContext from '../../context/Form/CheckoutFormContext';
+import { config } from '../../config';
 
 const LiqPayWidgetForm = ({ liqPayData, orderId }) => {
   const { data, signature } = liqPayData;
@@ -42,6 +41,7 @@ const LiqPayWidgetForm = ({ liqPayData, orderId }) => {
           })
           .on('liqpay.close', function (data) {
             console.log('liqPay close', data);
+            window.location.replace(config.successPageRedirectUrl);
           });
       })();
     }

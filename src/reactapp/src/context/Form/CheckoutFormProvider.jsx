@@ -97,14 +97,14 @@ function CheckoutFormProvider({ children }) {
           setOrderPlacedStatus(true);
           window.location.replace(config.successPageRedirectUrl);
         }
-        if (
-          selectedPaymentMethod === 'liqpaymagento_liqpay' &&
-          isLiqPaySuccess === true
-        ) {
-          setOrderPlacedStatus(true);
-          LocalStorage.clearCheckoutStorage();
-          window.location.replace(config.successPageRedirectUrl);
-        }
+        // if (
+        //   selectedPaymentMethod === 'liqpaymagento_liqpay' &&
+        //   isLiqPaySuccess === true
+        // ) {
+        //   setOrderPlacedStatus(true);
+        //   LocalStorage.clearCheckoutStorage();
+        //   window.location.replace(config.successPageRedirectUrl);
+        // }
       }
 
       if (orderNumber && config.isDevelopmentMode) {
@@ -115,14 +115,14 @@ function CheckoutFormProvider({ children }) {
           LocalStorage.clearCheckoutStorage();
           window.location.replace(config.successPageRedirectUrl);
         }
-        if (
-          selectedPaymentMethod === 'liqpaymagento_liqpay' &&
-          isLiqPaySuccess === true
-        ) {
-          setOrderPlacedStatus(true);
-          LocalStorage.clearCheckoutStorage();
-          window.location.replace(config.successPageRedirectUrl);
-        }
+        // if (
+        //   selectedPaymentMethod === 'liqpaymagento_liqpay' &&
+        //   isLiqPaySuccess === true
+        // ) {
+        //   setOrderPlacedStatus(true);
+        //   LocalStorage.clearCheckoutStorage();
+        //   window.location.replace(config.successPageRedirectUrl);
+        // }
       }
 
       setPageLoader(false);
