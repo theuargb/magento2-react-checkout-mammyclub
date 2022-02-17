@@ -4,7 +4,9 @@ import Select, { components } from 'react-select';
 import { formikDataShape } from '../../../../utils/propTypes';
 import { __ } from '../../../../i18n';
 
-const options = [{ value: 'void', label: 'Введите название города....' }];
+const options = [
+  { value: 'void', label: __('Type city name...'), disabled: true },
+];
 const Input = (props) => <components.Input {...props} isHidden={false} />;
 
 function NovaPoshtaCitySelect({
@@ -40,7 +42,11 @@ function NovaPoshtaCitySelect({
           : console.log(JSON.parse(data))
       )
       .then(() => {
-        setSelectList(cityList);
+        if (cityList.length > 0) {
+          setSelectList(cityList);
+        } else {
+          setSelectList(options);
+        }
         cityList = [];
       });
   };
@@ -49,12 +55,13 @@ function NovaPoshtaCitySelect({
     setFieldTouched(name, newValue);
     setFieldValue(name, newValue);
     handleChangeCityId(e.value);
-
     setValue(e);
-    setInputValue(e ? e.label : '');
+    setInputValue(e ? e.label : '1');
   };
   const handleInputChange = (inputValue, { action }) => {
-    changeCityOptions(inputValue);
+    if (inputValue.length > 2) {
+      changeCityOptions(inputValue);
+    }
     if (action === 'input-change') {
       setInputValue(inputValue);
     }
@@ -72,7 +79,12 @@ function NovaPoshtaCitySelect({
         onChange={(e) => handleFormChange(e)}
         inputId="city"
         placeholder=""
-        styles={customStyles}
+        styles={{
+          ...customStyles,
+          singleValue: () => ({
+            display: 'none',
+          }),
+        }}
         value={value}
         inputValue={selectInputValue}
         filterOption={(selectOptions) => selectOptions}
@@ -80,6 +92,7 @@ function NovaPoshtaCitySelect({
         components={{
           Input,
         }}
+        isOptionDisabled={(option) => option.disabled}
       />
     </div>
   );

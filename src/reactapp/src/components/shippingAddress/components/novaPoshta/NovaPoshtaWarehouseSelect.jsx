@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import escapeRegExp from 'lodash/escapeRegExp';
+import React, { useState, useEffect, useMemo } from 'react';
 import { string, object } from 'prop-types';
 import Select from 'react-select';
 import { formikDataShape } from '../../../../utils/propTypes';
 import { __ } from '../../../../i18n';
 
-const options = [{ value: 'void', label: 'Введите название города....' }];
+const options = [
+  { value: 'void', label: __('Type warehouse number or address...') },
+];
 
 function NovaPoshtaWarehouseSelect({
   selectedCityId,
@@ -12,15 +15,16 @@ function NovaPoshtaWarehouseSelect({
   formikData,
   customStyles,
 }) {
+  const MAX_DISPLAYED_OPTIONS = 100;
   const [selectList, setSelectList] = useState(options);
   const { setFieldValue, setFieldTouched } = formikData;
   const [selectValue, setSelectValue] = useState('void');
+  const [inputValue, setInputValue] = useState('');
 
   const handleFormChange = (e) => {
     const newValue = e.label;
     setFieldTouched(name, newValue);
     setFieldValue(name, newValue);
-
     setSelectValue(e);
   };
 
@@ -44,9 +48,43 @@ function NovaPoshtaWarehouseSelect({
             })
           : console.log(JSON.parse(data))
       )
-      .then(() => setSelectList(postList));
-    // setSelectList([]);
+      .then(() => {
+        if (postList.length > 0) {
+          setSelectList(postList);
+        } else {
+          setSelectList(options);
+        }
+      });
   }, [selectedCityId]);
+
+  const filteredSelectList = useMemo(() => {
+    if (!inputValue) {
+      return selectList;
+    }
+
+    const matchByStart = [];
+    const matchByInclusion = [];
+
+    const regByInclusion = new RegExp(escapeRegExp(inputValue), 'i');
+    const regByStart = new RegExp(`^${escapeRegExp(inputValue)}`, 'i');
+    /* eslint-disable */
+    for (const option of selectList) {
+      if (regByInclusion.test(option.label)) {
+        if (regByStart.test(option.label)) {
+          matchByStart.push(option);
+        } else {
+          matchByInclusion.push(option);
+        }
+      }
+    }
+
+    return [...matchByStart, ...matchByInclusion];
+  }, [inputValue, selectedCityId]);
+
+  const slicedOptions = useMemo(
+    () => filteredSelectList.slice(0, MAX_DISPLAYED_OPTIONS),
+    [filteredSelectList]
+  );
 
   return (
     <div className="react-select">
@@ -54,9 +92,10 @@ function NovaPoshtaWarehouseSelect({
         {__('Номер склада Новой Почты')}
       </p>
       <Select
-        options={selectList}
+        options={slicedOptions}
         placeholder=""
         onChange={(e) => handleFormChange(e)}
+        onInputChange={(value) => setInputValue(value)}
         styles={customStyles}
         value={selectValue}
       />

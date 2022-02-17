@@ -4,6 +4,7 @@
         <css src="Hyva_ReactCheckout::css/styles_checkout.css" defer="defer" />
         <script src="Hyva_ReactCheckout::js/react-checkout.js" defer="defer" />
         <script src="https://static.liqpay.ua/libjs/checkout.js" src_type="url"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
     </head>
     <body>
 

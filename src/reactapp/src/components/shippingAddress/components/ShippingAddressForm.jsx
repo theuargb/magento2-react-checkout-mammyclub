@@ -2,22 +2,9 @@
 import React, { useState } from 'react';
 import { useFormikContext } from 'formik';
 import { node } from 'prop-types';
-
-// import { SaveButton } from '../../address';
 import TextInput from '../../common/Form/TextInput';
-// import SelectInput from '../../common/Form/SelectInput';
-// import CancelButton from './shippingAddressForm/CancelButton';
-// import {
-//   isMostRecentAddress,
-//   isValidCustomerAddressId,
-// } from '../../../utils/address';
 import { __ } from '../../../i18n';
-// import { _keys } from '../../../utils';
-// import LocalStorage from '../../../utils/localStorage';
-// import useCountryState from '../../address/hooks/useCountryState';
-// import useAddressWrapper from '../../address/hooks/useAddressWrapper';
 import useFormValidateThenSubmit from '../../../hook/useFormValidateThenSubmit';
-// import useShippingAddressAppContext from '../hooks/useShippingAddressAppContext';
 import useShippingAddressFormikContext from '../hooks/useShippingAddressFormikContext';
 import NovaPoshtaCitySelect from './novaPoshta/NovaPoshtaCitySelect';
 import NovaPoshtaStreetSelect from './novaPoshta/NovaPoshtaStreetSelect';
@@ -29,24 +16,12 @@ function ShippingAddressForm({ children }) {
   const {
     fields,
     formId,
-    // viewMode,
     formikData,
-    // isNewAddress,
     handleKeyDown,
     submitHandler,
-    // isBillingSame,
     setFieldValue,
-    // shippingValues,
-    // selectedCountry,
-    // selectedAddress,
-    // setIsNewAddress,
-    // setFieldTouched,
-    // validationSchema,
-    // setSelectedAddress,
-    // isBillingFormTouched,
   } = useShippingAddressFormikContext();
   // const { isLoggedIn } = useShippingAddressAppContext();
-  // const { reCalculateMostRecentAddressOptions } = useAddressWrapper();
   // const { countryOptions, stateOptions, hasStateOptions } = useCountryState({
   // const { countryOptions } = useCountryState({
   //   fields,
@@ -85,10 +60,11 @@ function ShippingAddressForm({ children }) {
   // };
 
   const customSelectStyles = {
-    option: (provided) => ({
+    option: (provided, { isDisabled }) => ({
       ...provided,
       fontSize: '13px',
       lineHeight: '13px',
+      color: isDisabled ? '#000' : '',
     }),
     control: (provided) => ({
       ...provided,
@@ -117,7 +93,7 @@ function ShippingAddressForm({ children }) {
       ...provided,
       height: '20px',
       minHeight: 'none',
-      padding: '0 4px',
+      padding: '0 0px',
       alignSelf: 'center',
       marginTop: '-4px',
     }),
@@ -156,7 +132,7 @@ function ShippingAddressForm({ children }) {
       })();
       setAddressFormSubmited(true);
     }
-  },[values]);
+  }, [values]);
 
   if (values?.shipping_address && addressFormSubmited) {
     const { firstname, lastname, phone } = values?.shipping_address;
@@ -167,16 +143,6 @@ function ShippingAddressForm({ children }) {
 
   /*  =======================================================================================  */
   const selectedShippingMethod = values?.shipping_method?.methodCode;
-
-  // const handleCountryChange = (event) => {
-  //   const newValue = event.target.value;
-  //   setFieldTouched(fields.country, newValue);
-  //   setFieldValue(fields.country, newValue);
-  //   // when country is changed, then always reset region field.
-  //   setFieldValue(fields.region, '');
-  // };
-
-  ///
   const [selectedCityId, setSelectedCityId] = useState('');
   const handleChangeCityId = (id) => {
     setSelectedCityId(id);
@@ -234,7 +200,6 @@ function ShippingAddressForm({ children }) {
               <NovaPoshtaStreetSelect
                 formikData={formikData}
                 name={`${fields.street}[0]`}
-                // handleChangeStreetId={handleChangeCityId}
                 customStyles={customSelectStyles}
                 cityId={selectedCityId}
               />
