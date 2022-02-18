@@ -1,6 +1,9 @@
 <div className="flex flex-col items-center justify-center mx-10 my-10">
     <div className="flex flex-col items-center justify-center mt-4 space-y-3">
-        <div class="text-center"><?= __('Your order has been successfully placed!') ?></div>
-        <div class="text-center"><?= __('Thank you for your purchase') ?></div>
+        <div class="text-center md:text-3xl text-2xl font-semibold my-3"><?= __('Thanks for your order!') ?></div>
+        <div class="text-center text-xm mb-3"><?= __('Our managers will contact you shortly') ?>.</div>
+        <a class="block w-full text-center text-old_blue-main text-xm" href="<?= $block->getUrl(''); ?>">
+            <?= __('Go back to the main page'); ?>
+        </a>
     </div>
 </div>
