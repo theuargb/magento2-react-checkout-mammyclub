@@ -20,6 +20,7 @@ function modifyCartItemsData(cartItems) {
     const productSku = _get(product, 'sku');
     const productName = _get(product, 'name');
     const productUrl = _get(product, 'url_key');
+    const canonicalUrl = _get(product, 'canonical_url');
     const productSmallImgUrl = _get(product, 'small_image.url');
 
     accumulator[id] = {
@@ -33,6 +34,7 @@ function modifyCartItemsData(cartItems) {
       productSku,
       productName,
       productUrl,
+      canonicalUrl,
       productSmallImgUrl,
     };
 

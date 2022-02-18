@@ -52,7 +52,7 @@ function CartItem({ item, isLastItem, actions }) {
           </div>
 
           <div className="text-xs text-left text-link">
-            <div>{item.productName}</div>
+            <a href={item.canonicalUrl}>{item.productName}</a>
             {/* <div>{item.productSku}</div> */}
           </div>
         </div>
