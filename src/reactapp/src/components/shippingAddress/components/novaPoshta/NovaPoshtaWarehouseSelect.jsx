@@ -6,7 +6,7 @@ import { formikDataShape } from '../../../../utils/propTypes';
 import { __ } from '../../../../i18n';
 
 const options = [
-  { value: 'void', label: __('Type warehouse number or address...') },
+  { value: 'void', label: __('Введите номер или адрес отделения...') },
 ];
 
 function NovaPoshtaWarehouseSelect({

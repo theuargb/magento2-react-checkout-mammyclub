@@ -5,7 +5,7 @@ import { formikDataShape } from '../../../../utils/propTypes';
 import { __ } from '../../../../i18n';
 
 const options = [
-  { value: 'void', label: __('Type city name...'), disabled: true },
+  { value: 'void', label: __('Введите название города...'), disabled: true },
 ];
 const Input = (props) => <components.Input {...props} isHidden={false} />;
 

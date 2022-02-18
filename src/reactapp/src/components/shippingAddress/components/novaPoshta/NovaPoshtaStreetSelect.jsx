@@ -4,7 +4,7 @@ import Select from 'react-select';
 import { formikDataShape } from '../../../../utils/propTypes';
 import { __ } from '../../../../i18n';
 
-const options = [{ value: 'void', label: __('Type street name...') }];
+const options = [{ value: 'void', label: __('Введите улицу...') }];
 
 function NovaPoshtaStreetSelect({ formikData, name, customStyles, cityId }) {
   const [selectList, setSelectList] = useState(options);
