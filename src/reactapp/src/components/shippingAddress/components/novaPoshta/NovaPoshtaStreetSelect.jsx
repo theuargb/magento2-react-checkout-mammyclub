@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { string, object } from 'prop-types';
 import Select from 'react-select';
 import { formikDataShape } from '../../../../utils/propTypes';
@@ -44,6 +44,9 @@ function NovaPoshtaStreetSelect({ formikData, name, customStyles, cityId }) {
         });
     }
   };
+  useEffect(() => {
+    changeStreetOptions('');
+  }, [cityId]);
   return (
     <div className="react-select">
       <p className="text-base text-gray mb-0.5">{__('Улица')}</p>

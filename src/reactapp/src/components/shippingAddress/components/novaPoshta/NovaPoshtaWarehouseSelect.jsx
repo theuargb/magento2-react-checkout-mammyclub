@@ -79,11 +79,11 @@ function NovaPoshtaWarehouseSelect({
     }
 
     return [...matchByStart, ...matchByInclusion];
-  }, [inputValue, selectedCityId]);
+  }, [inputValue, selectList]);
 
   const slicedOptions = useMemo(
     () => filteredSelectList.slice(0, MAX_DISPLAYED_OPTIONS),
-    [filteredSelectList]
+    [filteredSelectList, selectedCityId]
   );
 
   return (
