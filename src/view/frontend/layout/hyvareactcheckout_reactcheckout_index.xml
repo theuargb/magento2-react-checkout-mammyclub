@@ -34,6 +34,8 @@
             <block name="checkout.scripts" template="Hyva_ReactCheckout::react-script.phtml" after="-"/>
         </referenceContainer>
         <referenceBlock name="page.main.title" remove="true"/>
+
+        <referenceContainer name="footer-content-top" remove="true" />
     </body>
     <referenceBlock name="page.main.title" remove="true"/>
 </page>

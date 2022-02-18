@@ -56,7 +56,7 @@ function CheckoutForm() {
   return (
     <CheckoutFormWrapper initialData={initialData}>
       <div className="flex justify-center">
-        <div className="container w-full mx-auto py-2 md:py-5 px-0">
+        <div className="container w-full mx-auto py-0 sm:py-2 md:py-5 px-0">
           <div className="hidden md:grid grid-cols-2 gap-x-6 checkout-wrapper">
             <p className="text-xxlg ">
               {__('Оформление заказа')}
