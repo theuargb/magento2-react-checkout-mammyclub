@@ -5,7 +5,7 @@ function TermsInfo() {
   return (
     <div className="pt-4">
       <p className="text-xs text-gray">
-        {__('Заполняя контактную информацию')}
+        {__('Заполняя контактную информацию')},
       </p>
       <p className="text-xs text-gray">
         {__('Вы соглашаетесь с')}
