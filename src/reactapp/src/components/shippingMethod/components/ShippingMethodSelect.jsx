@@ -40,7 +40,13 @@ function ShippingMethodSelect({
         {...rest}
       >
         {options.map((option) => {
-          const methodName = `${option.carrierTitle} (${option.methodTitle}): `;
+          const { carrierCode, methodCode } = option;
+
+          const methodName =
+            carrierCode === methodCode
+              ? option.carrierTitle
+              : `${option.carrierTitle} (${option.methodTitle}): `;
+
           return (
             <option key={option.value} value={option.id} className="p-0 m-0">
               {methodName}
