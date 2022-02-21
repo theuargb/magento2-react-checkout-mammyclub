@@ -93,7 +93,7 @@ function NovaPoshtaCitySelect({
           Input,
         }}
         isOptionDisabled={(option) => option.disabled}
-        noOptionsMessage={() => __('No options...')}
+        noOptionsMessage={() => __('Нет вариантов...')}
       />
     </div>
   );
