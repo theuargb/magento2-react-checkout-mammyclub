@@ -98,6 +98,7 @@ function NovaPoshtaWarehouseSelect({
         onInputChange={(value) => setInputValue(value)}
         styles={customStyles}
         value={selectValue}
+        noOptionsMessage={() => __('No options...')}
       />
     </div>
   );

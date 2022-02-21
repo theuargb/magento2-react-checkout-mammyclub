@@ -962,6 +962,8 @@ Add the correct display in Chrome and Safari.
     margin-right: 2rem !important; }
   .checkout-wrapper .mb-0 {
     margin-bottom: 0px !important; }
+  .checkout-wrapper .mb-3 {
+    margin-bottom: 0.75rem !important; }
   .checkout-wrapper .mb-4 {
     margin-bottom: 1rem !important; }
   .checkout-wrapper .mb-6 {
@@ -1601,7 +1603,10 @@ Add the correct display in Chrome and Safari.
       line-height: 12px !important; }
     .checkout-wrapper .md\:text-sm {
       font-size: 0.875rem !important;
-      line-height: 1.25rem !important; } }
+      line-height: 1.25rem !important; }
+    .checkout-wrapper .md\:text-3xl {
+      font-size: 1.875rem !important;
+      line-height: 2.25rem !important; } }
   @media (min-width: 1024px) {
     .checkout-wrapper .lg\:flex {
       display: flex !important; }

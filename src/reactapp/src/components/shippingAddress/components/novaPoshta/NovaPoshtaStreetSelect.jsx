@@ -57,6 +57,7 @@ function NovaPoshtaStreetSelect({ formikData, name, customStyles, cityId }) {
         inputId="city"
         placeholder=""
         styles={customStyles}
+        noOptionsMessage={() => __('No options...')}
       />
     </div>
   );
