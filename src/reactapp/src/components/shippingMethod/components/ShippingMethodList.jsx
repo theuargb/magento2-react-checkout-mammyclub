@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SelectInput from './ShippingMethodSelect';
-import { SHIPPING_METHOD } from '../../../config';
+import { SHIPPING_METHOD, config } from '../../../config';
 import useShippingMethodFormContext from '../hooks/useShippingMethodFormContext';
 import useShippingMethodCartContext from '../hooks/useShippingMethodCartContext';
 import { _objToArray } from '../../../utils';
@@ -48,7 +48,7 @@ function ShippingMethodList() {
     setFieldTouched(fields.methodCode, true);
 
     (async () => {
-      const methodListKeys =  Object.keys(methodList);
+      const methodListKeys = Object.keys(methodList);
       const methodSelected = methodList[methodListKeys[0]];
 
       const { carrierCode, methodCode, id: methodId } = methodSelected;
@@ -77,7 +77,7 @@ function ShippingMethodList() {
         positionStyles="absolute top-0 right-0 mt-6 pr-2"
         label={__('Доставка')}
         className="absolute top-0 right-0"
-        linkToCMSBlock="https://mammyclub.perspective.net.ua/rest/V1/crmIntegration/checkout/renderCmsPage?pageId=12"
+        linkToCMSBlock={`${config.baseUrl}/rest/V1/crmIntegration/checkout/renderCmsPage?pageId=12`}
       />
     </div>
   );

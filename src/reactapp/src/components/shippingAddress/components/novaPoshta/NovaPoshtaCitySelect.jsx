@@ -3,6 +3,7 @@ import { func, string, object } from 'prop-types';
 import Select, { components } from 'react-select';
 import { formikDataShape } from '../../../../utils/propTypes';
 import { __ } from '../../../../i18n';
+import { config } from '../../../../config';
 
 const options = [
   { value: 'void', label: __('Введите название города...'), disabled: true },
@@ -24,9 +25,7 @@ function NovaPoshtaCitySelect({
 
   const changeCityOptions = (inputValue) => {
     let cityList = [];
-    fetch(
-      `https://mammyclub.perspective.net.ua/rest/V1/novaposhta/cities?name=${inputValue}`
-    )
+    fetch(`${config.baseUrl}/rest/V1/novaposhta/cities?name=${inputValue}`)
       .then((response) => response.json())
       .then((data) =>
         Array.isArray(JSON.parse(data))

@@ -3,6 +3,7 @@ import { string, object } from 'prop-types';
 import Select from 'react-select';
 import { formikDataShape } from '../../../../utils/propTypes';
 import { __ } from '../../../../i18n';
+import { config } from '../../../../config';
 
 const options = [{ value: 'void', label: __('Введите улицу...') }];
 
@@ -19,7 +20,7 @@ function NovaPoshtaStreetSelect({ formikData, name, customStyles, cityId }) {
     const streetsList = [];
     if (cityId) {
       fetch(
-        `https://mammyclub.perspective.net.ua/rest/V1/novaposhta/streets?cityRef=${cityId}&text=${inputValue}`
+        `${config.baseUrl}/rest/V1/novaposhta/streets?cityRef=${cityId}&text=${inputValue}`
       )
         .then((response) => response.json())
         .then((data) =>

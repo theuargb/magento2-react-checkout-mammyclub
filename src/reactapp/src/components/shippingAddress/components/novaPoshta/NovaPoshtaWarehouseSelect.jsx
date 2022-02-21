@@ -4,6 +4,7 @@ import { string, object } from 'prop-types';
 import Select from 'react-select';
 import { formikDataShape } from '../../../../utils/propTypes';
 import { __ } from '../../../../i18n';
+import { config } from '../../../../config';
 
 const options = [
   { value: 'void', label: __('Введите номер или адрес отделения...') },
@@ -32,7 +33,7 @@ function NovaPoshtaWarehouseSelect({
     setSelectValue('void');
     const postList = [];
     fetch(
-      `https://mammyclub.perspective.net.ua/rest/V1/novaposhta/warehouses?cityRef=${selectedCityId}`
+      `${config.baseUrl}/rest/V1/novaposhta/warehouses?cityRef=${selectedCityId}`
     )
       .then((response) => response.json())
       .then((data) =>

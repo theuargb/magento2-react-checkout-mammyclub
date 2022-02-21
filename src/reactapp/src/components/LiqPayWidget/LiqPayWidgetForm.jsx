@@ -23,14 +23,13 @@ const LiqPayWidgetForm = ({ liqPayData, orderId }) => {
               console.log('liqPay success');
             }
             fetch(
-              `https://mammyclub.perspective.net.ua/rest/V1/liqpay/getRedirectUrl?orderId=${orderId}`,
+              `${config.baseUrl}/rest/V1/liqpay/getRedirectUrl?orderId=${orderId}`,
               {
                 method: 'GET',
                 headers: {
                   Authorization: 'Bearer 6gn2y2np87chqd6zb7sjuphsluy3oq77',
                 },
               }
-              // ).then((response) => location.replace(response));
             )
               .then((response) => response.json())
               .then((data) => location.replace(data));

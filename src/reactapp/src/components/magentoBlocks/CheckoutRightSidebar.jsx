@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { config } from '../../config';
 
 const CheckoutRightSidebar = () => {
   const [htmlEl, setHtmlContent] = useState('');
 
   if (!htmlEl) {
     fetch(
-      'https://mammyclub.perspective.net.ua/rest/V1/crmIntegration/checkout/renderCmsPage?pageId=11',
+      `${config.baseUrl}/rest/V1/crmIntegration/checkout/renderCmsPage?pageId=11`,
       {
         method: 'GET',
         headers: {

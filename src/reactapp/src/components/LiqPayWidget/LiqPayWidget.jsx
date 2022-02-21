@@ -4,13 +4,15 @@ import CheckoutFormContext from '../../context/Form/CheckoutFormContext';
 import _get from 'lodash.get';
 import LiqPayWidgetForm from './LiqPayWidgetForm';
 import { useState } from 'react';
+import { __ } from '../../i18n';
+import { config } from '../../config'
 
 const LiqPayWidget = React.memo(({ orderId }) => {
   const { liqPayReadyToInit } = useContext(CheckoutFormContext);
   const [liqPayData, setLiqPayData] = useState({});
   const fetchLiqPayWidget = () => {
     fetch(
-      `https://mammyclub.perspective.net.ua/rest/V1/liqpay/hydrateWidget?orderId=${orderId}`
+      `${config.baseUrl}/rest/V1/liqpay/hydrateWidget?orderId=${orderId}`
     )
       .then((response) => response.json())
       .then((data) => data)
