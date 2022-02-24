@@ -1,7 +1,6 @@
-import escapeRegExp from 'lodash/escapeRegExp';
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { string, object } from 'prop-types';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
 import { formikDataShape } from '../../../../utils/propTypes';
 import { __ } from '../../../../i18n';
 import { config } from '../../../../config';
@@ -16,11 +15,9 @@ function NovaPoshtaWarehouseSelect({
   formikData,
   customStyles,
 }) {
-  const MAX_DISPLAYED_OPTIONS = 100;
   const [selectList, setSelectList] = useState(options);
   const { setFieldValue, setFieldTouched } = formikData;
   const [selectValue, setSelectValue] = useState('void');
-  const [inputValue, setInputValue] = useState('');
 
   const handleFormChange = (e) => {
     const newValue = e.label;
@@ -58,34 +55,13 @@ function NovaPoshtaWarehouseSelect({
       });
   }, [selectedCityId]);
 
-  const filteredSelectList = useMemo(() => {
-    if (!inputValue) {
-      return selectList;
-    }
+  /*eslint-disable*/
 
-    const matchByStart = [];
-    const matchByInclusion = [];
-
-    const regByInclusion = new RegExp(escapeRegExp(inputValue), 'i');
-    const regByStart = new RegExp(`^${escapeRegExp(inputValue)}`, 'i');
-    /* eslint-disable */
-    for (const option of selectList) {
-      if (regByInclusion.test(option.label)) {
-        if (regByStart.test(option.label)) {
-          matchByStart.push(option);
-        } else {
-          matchByInclusion.push(option);
-        }
-      }
-    }
-
-    return [...matchByStart, ...matchByInclusion];
-  }, [inputValue, selectList]);
-
-  const slicedOptions = useMemo(
-    () => filteredSelectList.slice(0, MAX_DISPLAYED_OPTIONS),
-    [filteredSelectList, selectedCityId]
-  );
+  const CustomOption = ({ children, ...props }) => {
+    const { onMouseMove, onMouseOver, ...rest } = props.innerProps;
+    const newProps = { ...props, innerProps: rest };
+    return <components.Option {...newProps}>{children}</components.Option>;
+  };
 
   return (
     <div className="react-select">
@@ -93,13 +69,24 @@ function NovaPoshtaWarehouseSelect({
         {__('Номер склада Новой Почты')}
       </p>
       <Select
-        options={slicedOptions}
+        options={selectList}
         placeholder=""
         onChange={(e) => handleFormChange(e)}
-        onInputChange={(value) => setInputValue(value)}
-        styles={customStyles}
+        styles={{
+          ...customStyles,
+          option: (provided, { isDisabled }) => ({
+            ...provided,
+            fontSize: '13px',
+            lineHeight: '13px',
+            color: isDisabled ? '#000' : '',
+            '&:hover': {
+              background: 'rgb(128,191,255, 0.3)',
+            },
+          }),
+        }}
         value={selectValue}
         noOptionsMessage={() => __('No options...')}
+        components={{ Option: CustomOption }}
       />
     </div>
   );
