@@ -24,7 +24,7 @@ function OrderAdditionalsForm({ children }) {
       <TextInput
         name={fields.customer_notes}
         formikData={formikData}
-        label={__('Комментарий к заказу')}
+        label={__('Comment to the order')}
         onKeyDown={handleKeyDown}
         placeholder=""
         as="textarea"

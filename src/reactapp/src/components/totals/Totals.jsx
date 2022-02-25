@@ -5,10 +5,8 @@ import useTotalsCartContext from './hooks/useTotalsCartContext';
 
 function Totals() {
   const {
-    // subTotal,
     discounts,
     grandTotal,
-    // hasSubTotal,
     hasDiscounts,
     hasShippingRate,
     shippingMethodRate,
@@ -18,16 +16,9 @@ function Totals() {
     <div className="p-0 mt-0">
       <div>
         <div className="space-y-3">
-          {/* {hasSubTotal && (
-              <div className="flex justify-between">
-                <div>{__('Cart Subtotal')}</div>
-                <div>{subTotal}</div>
-              </div>
-            )} */}
-
           <div className="px-4 py-3 flex justify-end text-xl font-bold text-gray">
             <div className="text-lg text-gray">
-              {__('Доставка по Украине:\u00A0')}
+              {__('Delivery within Ukraine:\u00A0')}
             </div>
             <div className="text-lg text-green">
               {(hasShippingRate && shippingMethodRate) || 0}
@@ -45,7 +36,7 @@ function Totals() {
 
         <div className="">
           <div className="px-4 py-3 flex justify-end text-xl font-bold border-t-2 text-gray ">
-            <div className="text-lg text-gray">{__('Итого:\u00A0')}</div>
+            <div className="text-lg text-gray">{__('Total:\u00A0')}</div>
             <div className="text-lg text-green"> {grandTotal || '0'}</div>
           </div>
         </div>

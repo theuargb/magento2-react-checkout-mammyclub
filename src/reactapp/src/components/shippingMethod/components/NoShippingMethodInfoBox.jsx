@@ -15,10 +15,10 @@ function NoShippingMethodInfoBox() {
         htmlFor="no-shipping-methods"
         className="text-gray text-base mb-0.5"
       >
-        {__('Способ доставки')}
+        {__('Shipping method')}
       </label>
       <input
-        label={__('Способ доставки')}
+        label={__('Shipping method')}
         id="no-shipping-methods"
         type="text"
         className="indent-0 w-full border form-select xs:block form-input text-base "

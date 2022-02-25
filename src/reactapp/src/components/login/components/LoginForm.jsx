@@ -37,13 +37,13 @@ function LoginForm() {
       <div>
         <TextInput
           type="email"
-          label={__('Электронная почта')}
+          label={__('Email')}
           name={fields.email}
           formikData={formikData}
           onKeyDown={handleKeyDown}
         />
         <p className="text-gray-extralighter text-base mt-1">
-          {__('Сюда пришлем все документы подтверждающие покупку')}
+          {__('Here we will send all documents confirming the purchase')}
         </p>
 
         {customerWantsToSignIn && (

@@ -48,12 +48,10 @@ const initialValues = {
   city: '<null>',
   region: '<null>',
   country: 'UA',
-  // city_novaposhta_ref: '',
-  // warehouse_novaposhta_id: '',
   customerNotes: '',
 };
 
-const requiredMessage = __('%1 - обязательное поле');
+const requiredMessage = __('%1 - required field');
 
 const initValidationSchema = {
   company: YupString(),
@@ -65,7 +63,7 @@ const initValidationSchema = {
     (value) => !!_get(value, 0)
   ),
   phone: YupString()
-    .matches(phoneRegExp, 'Проверьте правильность введённого номера')
+    .matches(phoneRegExp, 'Require correct number entered')
     .required(requiredMessage),
   zipcode: YupString().required(requiredMessage),
   city: YupString().required(requiredMessage),

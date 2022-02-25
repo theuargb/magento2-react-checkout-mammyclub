@@ -6,7 +6,11 @@ import { __ } from '../../../../i18n';
 import { config } from '../../../../config';
 
 const options = [
-  { value: 'void', label: __('Введите название города...'), disabled: true },
+  {
+    value: 'void',
+    label: __('Type city name...'),
+    disabled: true,
+  },
 ];
 const Input = (props) => <components.Input {...props} isHidden={false} />;
 
@@ -69,7 +73,7 @@ function NovaPoshtaCitySelect({
 
   return (
     <div className="react-select pt-5 pb-3">
-      <p className="text-base text-gray mb-0.5">{__('Населенный пункт')}</p>
+      <p className="text-base text-gray mb-0.5">{__('City')}</p>
       <Select
         options={selectList}
         onInputChange={(inputValue, action) =>
@@ -92,7 +96,7 @@ function NovaPoshtaCitySelect({
           Input,
         }}
         isOptionDisabled={(option) => option.disabled}
-        noOptionsMessage={() => __('Нет вариантов...')}
+        noOptionsMessage={() => __('No options')}
       />
     </div>
   );

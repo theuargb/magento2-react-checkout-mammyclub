@@ -68,14 +68,14 @@ function ShippingMethodList() {
   return (
     <div className="py-4 border-b-2 border-container-lightner relative">
       <SelectInput
-        label={__('Способ доставки')}
+        label={__('Shipping method')}
         name="shippingMethod"
         options={_objToArray(methodList)}
         onChange={handleShippingMethodSelection}
       />
       <InfoPopups
         positionStyles="absolute top-0 right-0 mt-6 pr-2"
-        label={__('Доставка')}
+        label={__('Delivery')}
         className="absolute top-0 right-0"
         linkToCMSBlock={`${config.baseUrl}/rest/V1/crmIntegration/checkout/renderCmsPage?pageId=12`}
       />

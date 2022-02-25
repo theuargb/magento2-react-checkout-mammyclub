@@ -1196,18 +1196,6 @@ body {
     width: 100%;
   }
 
-.sr-only {
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  padding: 0 !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  clip: rect(0, 0, 0, 0) !important;
-  white-space: nowrap !important;
-  border-width: 0 !important;
-}
-
 .pointer-events-none {
   pointer-events: none !important;
 }
@@ -1702,11 +1690,6 @@ body {
   justify-content: space-around !important;
 }
 
-.gap-x-2 {
-  -moz-column-gap: 0.5rem !important;
-       column-gap: 0.5rem !important;
-}
-
 .gap-x-6 {
   -moz-column-gap: 1.5rem !important;
        column-gap: 1.5rem !important;
@@ -1876,11 +1859,6 @@ body {
   background-color: rgba(5, 150, 105, var(--tw-bg-opacity)) !important;
 }
 
-.bg-green {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgba(93, 186, 93, var(--tw-bg-opacity)) !important;
-}
-
 .bg-container-lighter {
   --tw-bg-opacity: 1 !important;
   background-color: rgba(242, 242, 242, var(--tw-bg-opacity)) !important;
@@ -1925,10 +1903,6 @@ body {
 
 .p-2 {
   padding: 0.5rem !important;
-}
-
-.p-2\.5 {
-  padding: 0.625rem !important;
 }
 
 .px-0 {
@@ -2089,19 +2063,9 @@ body {
   line-height: 11px !important;
 }
 
-.text-lbase {
-  font-size: 14px !important;
-  line-height: 18px !important;
-}
-
 .text-md {
   font-size: 15px !important;
   line-height: 15px !important;
-}
-
-.text-lg\+ {
-  font-size: 18px !important;
-  line-height: 18px !important;
 }
 
 .text-xlg {
@@ -2136,10 +2100,6 @@ body {
 
 .italic {
   font-style: italic !important;
-}
-
-.leading-4 {
-  line-height: 1rem !important;
 }
 
 .leading-6 {
@@ -2560,10 +2520,6 @@ body {
 }
 
 @media (min-width: 1280px) {
-  .xl\:table-cell {
-    display: table-cell !important;
-  }
-
   .xl\:max-w-full {
     max-width: 100% !important;
   }

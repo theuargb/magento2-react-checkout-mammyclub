@@ -5,7 +5,7 @@ function NoPaymentMethodInfoBox() {
   return (
     <div className="py-4 border-b-2 border-container-lightner relative">
       <p className="text-base text-gray mb-0.5">
-        {__('Способ оплаты (обязательно)')}
+        {__('Payment method (required)')}
         <sup className="text-red-500"> *</sup>
       </p>
       <input

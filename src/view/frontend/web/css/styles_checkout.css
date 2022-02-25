@@ -862,16 +862,6 @@ Add the correct display in Chrome and Safari.
     width: 100% !important; }
   .checkout-wrapper .product-image-container img {
     width: 100%; }
-  .checkout-wrapper .sr-only {
-    position: absolute !important;
-    width: 1px !important;
-    height: 1px !important;
-    padding: 0 !important;
-    margin: -1px !important;
-    overflow: hidden !important;
-    clip: rect(0, 0, 0, 0) !important;
-    white-space: nowrap !important;
-    border-width: 0 !important; }
   .checkout-wrapper .pointer-events-none {
     pointer-events: none !important; }
   .checkout-wrapper .fixed {
@@ -1144,9 +1134,6 @@ Add the correct display in Chrome and Safari.
     justify-content: space-between !important; }
   .checkout-wrapper .justify-around {
     justify-content: space-around !important; }
-  .checkout-wrapper .gap-x-2 {
-    -moz-column-gap: 0.5rem !important;
-    column-gap: 0.5rem !important; }
   .checkout-wrapper .gap-x-6 {
     -moz-column-gap: 1.5rem !important;
     column-gap: 1.5rem !important; }
@@ -1244,9 +1231,6 @@ Add the correct display in Chrome and Safari.
   .checkout-wrapper .bg-green-600 {
     --tw-bg-opacity: 1 !important;
     background-color: rgba(5, 150, 105, var(--tw-bg-opacity)) !important; }
-  .checkout-wrapper .bg-green {
-    --tw-bg-opacity: 1 !important;
-    background-color: rgba(93, 186, 93, var(--tw-bg-opacity)) !important; }
   .checkout-wrapper .bg-container-lighter {
     --tw-bg-opacity: 1 !important;
     background-color: rgba(242, 242, 242, var(--tw-bg-opacity)) !important; }
@@ -1273,8 +1257,6 @@ Add the correct display in Chrome and Safari.
     padding: 0px !important; }
   .checkout-wrapper .p-2 {
     padding: 0.5rem !important; }
-  .checkout-wrapper .p-2\.5 {
-    padding: 0.625rem !important; }
   .checkout-wrapper .px-0 {
     padding-left: 0px !important;
     padding-right: 0px !important; }
@@ -1363,15 +1345,9 @@ Add the correct display in Chrome and Safari.
   .checkout-wrapper .text-xxs {
     font-size: 11px !important;
     line-height: 11px !important; }
-  .checkout-wrapper .text-lbase {
-    font-size: 14px !important;
-    line-height: 18px !important; }
   .checkout-wrapper .text-md {
     font-size: 15px !important;
     line-height: 15px !important; }
-  .checkout-wrapper .text-lg\+ {
-    font-size: 18px !important;
-    line-height: 18px !important; }
   .checkout-wrapper .text-xlg {
     font-size: 20px !important;
     line-height: 20px !important; }
@@ -1390,8 +1366,6 @@ Add the correct display in Chrome and Safari.
     text-transform: capitalize !important; }
   .checkout-wrapper .italic {
     font-style: italic !important; }
-  .checkout-wrapper .leading-4 {
-    line-height: 1rem !important; }
   .checkout-wrapper .leading-6 {
     line-height: 1.5rem !important; }
   .checkout-wrapper .leading-none {
@@ -1633,7 +1607,5 @@ Add the correct display in Chrome and Safari.
       margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse))) !important;
       margin-bottom: calc(0px * var(--tw-space-y-reverse)) !important; } }
   @media (min-width: 1280px) {
-    .checkout-wrapper .xl\:table-cell {
-      display: table-cell !important; }
     .checkout-wrapper .xl\:max-w-full {
       max-width: 100% !important; } }

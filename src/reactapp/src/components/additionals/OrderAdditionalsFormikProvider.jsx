@@ -35,16 +35,13 @@ function OrderAdditionalsFormikProvider({ children, formikData }) {
     resetAdditionalsFormFields,
   };
 
-  // const formSubmit = useSaveAddressAction(context);
   const handleKeyDown = useEnterActionInForm({
     formikData,
-    // submitHandler: formSubmit,
   });
   const formSectionContext = useFormSection({
     formikData,
     initialValues,
     id: ADDITIONALS_FORM,
-    // submitHandler: formSubmit,
   });
 
   context = {
@@ -52,7 +49,6 @@ function OrderAdditionalsFormikProvider({ children, formikData }) {
     ...formikData,
     ...formSectionContext,
     formikData,
-    // formSubmit,
     handleKeyDown,
   };
 

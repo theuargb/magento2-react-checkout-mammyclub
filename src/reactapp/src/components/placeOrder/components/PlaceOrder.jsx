@@ -155,7 +155,7 @@ function PlaceOrder() {
         className="orange-but"
         type="submit"
       >
-        {__('Заказать')}
+        {__('Place order')}
       </button>
     </div>
   );

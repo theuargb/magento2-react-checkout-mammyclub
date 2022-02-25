@@ -12,9 +12,7 @@ const CartItemsMemorized = React.memo(({ formikData }) => {
 
   return (
     <CartItemsFormManager formikData={formikData}>
-      {/* <Card classes={cartItemsAvailable ? '' : 'opacity-75'}> */}
       {cartItemsAvailable ? <CartItemList /> : <NoItemsInfoBox />}
-      {/* </Card> */}
     </CartItemsFormManager>
   );
 });

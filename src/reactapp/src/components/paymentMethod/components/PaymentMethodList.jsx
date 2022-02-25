@@ -69,7 +69,7 @@ function PaymentMethodList({ methodRenderers }) {
   return (
     <div className="react-select pt-4 pb-5 border-t-2 border-b-2 border-container-lightner">
       <p className="text-base text-gray mb-0.5">
-        {__('Способ оплаты (обязательно)')}
+        {__('Payment method (required)')}
         <sup className="text-red-500"> *</sup>
       </p>
       <SelectInput
@@ -78,8 +78,8 @@ function PaymentMethodList({ methodRenderers }) {
         name="city"
       />
       <InfoPopups
-        positionStyles="absolute top-0 right-0 mt-4 mr-6"
-        label={__('Оплата')}
+        positionStyles="absolute top-0 right-0 mt-6 mr-6"
+        label={__('Payment')}
         className="absolute top-0 right-0"
         linkToCMSBlock={`${config.baseUrl}/rest/V1/crmIntegration/checkout/renderCmsPage?pageId=13`}
       />

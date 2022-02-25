@@ -78,13 +78,11 @@ function CartItem({ item, isLastItem, actions }) {
             onClick={updateQty}
             type="button"
           >
-            {__('Обновить')}
+            {__('Update')}
           </button>
         )}
       </td>
-      {/* <td className="hidden w-1/5 xl:table-cell text-md text-green">
-        {item.rowTotal} {subTotal}
-      </td> */}
+
       <td className="w-1/6 table-cell text-md text-green align-middle bg-white">
         <div className="">
           {hasSubTotal && (

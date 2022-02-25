@@ -22,7 +22,6 @@ function CartItemList() {
 
   const handleQtyDelete = (event) => {
     const fieldName = `items.${event.target.name}`;
-    // setFieldTouched(fieldName, 0);
     setFieldValue(fieldName, undefined);
   };
 
@@ -38,20 +37,16 @@ function CartItemList() {
         <table className="table w-full text-left relative">
           <thead className="bg-container-lighter text-left table-header-group text-center text-primary-darker text-md ">
             <tr>
-              <th className="p-2 font-normal">{__('Товар')}</th>
+              <th className="p-2 font-normal">{__('Product')}</th>
               <th className="p-2 hidden md:table-cell font-normal">
-                {__('Цена')} <br />{' '}
-                <span className="text-base">{__('(грн. с НДС)')}</span>
+                {__('Price')} <br />{' '}
+                <span className="text-base">{__('(UAH VAT included)')}</span>
               </th>
               <th className="p-2 font-normal">
-                {__('Кол-во')} <br /> {__('(шт.)')}
+                {__('qty')} <br /> {__('(items)')}
               </th>
 
-              <th className="p-2 font-normal">{__('Сумма')}</th>
-              {/* <th>
-                <span className="sr-only">{__('Actions')}</span>
-                &nbsp;
-              </th> */}
+              <th className="p-2 font-normal">{__('Total')}</th>
             </tr>
           </thead>
           <tbody className="text-center border-b-2 border-container-lightner">
@@ -66,7 +61,7 @@ function CartItemList() {
           </tbody>
           {hasError && (
             <p className="text-red-500 text-xs absolute top-12 bg-white">
-              {__('В данный момент в наличии нет такого количества товаров')}
+              {__('The requested qty is not available')}
             </p>
           )}
         </table>

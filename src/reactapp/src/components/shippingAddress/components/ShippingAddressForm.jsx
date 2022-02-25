@@ -153,26 +153,26 @@ function ShippingAddressForm({ children }) {
         <TextInput
           name={fields.firstname}
           formikData={formikData}
-          label={__('Имя')}
+          label={__('Name')}
           onKeyDown={handleKeyDown}
         />
         <TextInput
           name={fields.lastname}
-          label={__('Фамилия')}
+          label={__('Lastname')}
           formikData={formikData}
           onKeyDown={handleKeyDown}
         />
         <TextInputPhoneMask
           id="shipping_address.phone"
           required
-          label={__('Телефон (обязательно)')}
+          label={__('Phone (required)')}
           name={fields.phone}
           formikData={formikData}
           onKeyDown={handleKeyDown}
           type="tel"
         />
         <p className="text-gray-extralighter text-base mt-1">
-          {__('Наши менеджеры перезвонят для уточнения деталей заказа')}
+          {__('Our managers will call you back to clarify the details of the order')}
         </p>
         {children}
         <NovaPoshtaCitySelect

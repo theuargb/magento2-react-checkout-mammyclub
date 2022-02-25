@@ -5,7 +5,7 @@ import { formikDataShape } from '../../../../utils/propTypes';
 import { __ } from '../../../../i18n';
 import { config } from '../../../../config';
 
-const options = [{ value: 'void', label: __('Введите улицу...') }];
+const options = [{ value: 'void', label: __('Type street name...') }];
 
 function NovaPoshtaStreetSelect({ formikData, name, customStyles, cityId }) {
   const [selectList, setSelectList] = useState(options);
@@ -50,7 +50,7 @@ function NovaPoshtaStreetSelect({ formikData, name, customStyles, cityId }) {
   }, [cityId]);
   return (
     <div className="react-select">
-      <p className="text-base text-gray mb-0.5">{__('Улица')}</p>
+      <p className="text-base text-gray mb-0.5">{__('Street')}</p>
       <Select
         options={selectList}
         onInputChange={(inputValue) => changeStreetOptions(inputValue)}
@@ -58,7 +58,7 @@ function NovaPoshtaStreetSelect({ formikData, name, customStyles, cityId }) {
         inputId="city"
         placeholder=""
         styles={customStyles}
-        noOptionsMessage={() => __('Нет вариантов')}
+        noOptionsMessage={() => __('No options')}
       />
     </div>
   );

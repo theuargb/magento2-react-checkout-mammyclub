@@ -89,7 +89,7 @@ const InfoPopups = ({ linkToCMSBlock, label, positionStyles }) => {
           className={`text-link text-base ${positionStyles}`}
         >
           {' '}
-          {__('подробнее')}
+          {__('more')}
         </button>
       }
       position="right center"

@@ -6,7 +6,7 @@ import { __ } from '../../../../i18n';
 import { config } from '../../../../config';
 
 const options = [
-  { value: 'void', label: __('Введите номер или адрес отделения...') },
+  { value: 'void', label: __('Type warehouse number or address...') },
 ];
 
 function NovaPoshtaWarehouseSelect({
@@ -66,7 +66,7 @@ function NovaPoshtaWarehouseSelect({
   return (
     <div className="react-select">
       <p className="text-base text-gray mb-0.5">
-        {__('Номер склада Новой Почты')}
+        {__('Nova Poshta warehouse number')}
       </p>
       <Select
         options={selectList}
@@ -85,7 +85,7 @@ function NovaPoshtaWarehouseSelect({
           }),
         }}
         value={selectValue}
-        noOptionsMessage={() => __('No options...')}
+        noOptionsMessage={() => __('No options')}
         components={{ Option: CustomOption }}
       />
     </div>

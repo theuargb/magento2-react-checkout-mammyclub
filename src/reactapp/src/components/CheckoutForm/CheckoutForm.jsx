@@ -59,17 +59,17 @@ function CheckoutForm() {
         <div className="container w-full mx-auto py-0 sm:py-2 md:py-5 px-0">
           <div className="hidden md:grid grid-cols-2 gap-x-6 checkout-wrapper">
             <p className="text-xxlg ">
-              {__('Оформление заказа')}
+              {__('Checkout')}
               <p className="text-xxs text-red-500 mt-0.5">
-                {__('Обязательные поля отмечены звездочкой *')}
+                {__('Required fields are marked with an asterisk *')}
               </p>
             </p>
-            <p className="text-xxlg ">{__('Ваш заказ')}</p>
+            <p className="text-xxlg ">{__('Your order')}</p>
           </div>
 
           <div className="flex flex-col my-3 space-y-2 md:flex-row md:space-y-0 px-0 sm:px-4 md:px-0 ">
             <div className="checkout-wrapper order-1 md:hidden ">
-              <p className="text-xxlg ">{__('Ваш заказ')}</p>
+              <p className="text-xxlg ">{__('Your order')}</p>
             </div>
 
             <div className="checkout-wrapper mt-8 md:mt-0 w-full md:order-1 order-4 md:w-1/2 grow-0 md:mr-8">
@@ -91,9 +91,9 @@ function CheckoutForm() {
 
             <div className="checkout-wrapper order-3">
               <p className="text-xxlg  md:hidden mt-5">
-                {__('Оформление заказа')}
+                {__('Checkout')}
                 <p className="text-xxs text-red-500 mt-0.5">
-                  {__('Обязательные поля отмечены звездочкой *')}
+                  {__('Required fields are marked with an asterisk *')}
                 </p>
               </p>
             </div>
