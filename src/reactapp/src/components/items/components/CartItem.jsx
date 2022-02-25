@@ -43,9 +43,9 @@ function CartItem({ item, isLastItem, actions }) {
       {/** DESKTOP TD ELEMENTS */}
       <td className="w-2/5 table-cell bg-white">
         <div className="py-2 pl-2 flex">
-          <div className="flex-none h-20 mr-1 shrink-0">
+          <div className="flex-none w-1/2 sm:w-auto md:w-1/2 h-20 mr-1 shrink-0">
             <img
-              className="object-contain w-20 h-full"
+              className="object-contain object-top w-full h-full"
               alt={item.productSku}
               src={item.productSmallImgUrl}
             />

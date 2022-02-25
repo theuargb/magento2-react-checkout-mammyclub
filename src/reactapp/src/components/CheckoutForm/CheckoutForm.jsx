@@ -72,7 +72,7 @@ function CheckoutForm() {
               <p className="text-xxlg ">{__('Your order')}</p>
             </div>
 
-            <div className="checkout-wrapper mt-8 md:mt-0 w-full md:order-1 order-4 md:w-1/2 grow-0 md:mr-8">
+            <div className="checkout-wrapper mt-8 md:mt-0 w-full md:order-1 order-4 md:w-1/2 grow-0 md:mr-4 lg:mr-8">
               <div className="w-full xl:max-w-full border border-container py-3.5">
                 <AddressWrapper>
                   <ShippingAddress>
