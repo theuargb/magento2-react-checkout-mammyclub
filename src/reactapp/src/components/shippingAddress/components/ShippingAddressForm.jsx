@@ -120,6 +120,12 @@ function ShippingAddressForm({ children }) {
         padding: '0',
       };
     },
+    MenuList: (provided) => {
+      return {
+        ...provided,
+        overscrollBehavior: 'none',
+      };
+    },
   };
 
   const { values } = useFormikContext();
@@ -172,7 +178,9 @@ function ShippingAddressForm({ children }) {
           type="tel"
         />
         <p className="text-gray-extralighter text-base mt-1">
-          {__('Our managers will call you back to clarify the details of the order')}
+          {__(
+            'Our managers will call you back to clarify the details of the order'
+          )}
         </p>
         {children}
         <NovaPoshtaCitySelect
