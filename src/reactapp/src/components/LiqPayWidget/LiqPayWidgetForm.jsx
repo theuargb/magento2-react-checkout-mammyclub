@@ -32,7 +32,12 @@ const LiqPayWidgetForm = ({ liqPayData, orderId }) => {
               }
             )
               .then((response) => response.json())
-              .then((data) => location.replace(data));
+              .then((data) =>
+                setTimeout(() => {
+                  location.replace(data);
+                }, 10000)
+              );
+
             console.log('liqPay callback');
           })
           .on('liqpay.ready', function (data) {
