@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { List, CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 import { string, object } from 'prop-types';
 import Select, { components, createFilter } from 'react-select';
@@ -20,6 +20,7 @@ function NovaPoshtaWarehouseSelect({
   const { setFieldValue, setFieldTouched } = formikData;
   const [selectValue, setSelectValue] = useState('void');
   const [isLoading, setIsLoading] = useState(false);
+  const selectListEl = useRef(null);
 
   const handleFormChange = (e) => {
     const newValue = e.label;
@@ -63,7 +64,7 @@ function NovaPoshtaWarehouseSelect({
   /*eslint-disable*/
   const cache = new CellMeasurerCache({
     fixedWidth: true,
-    minHeight: 20,
+    minHeight: 25,
   });
 
   const CustomOption = ({ children, ...props }) => {
@@ -92,9 +93,18 @@ function NovaPoshtaWarehouseSelect({
       );
     };
 
+    useEffect(() => {
+      if (selectListEl) {
+        cache.clearAll();
+        selectListEl.current.recomputeRowHeights();
+        console.log('recomputed');
+      }
+    }, []);
+    
     if(props.children.length){
       return (
         <List
+          ref={selectListEl}
           style={{ width: '100%' }}
           width={1000}
           height={300}
