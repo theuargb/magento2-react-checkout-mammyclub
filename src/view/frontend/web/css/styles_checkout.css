@@ -1161,6 +1161,8 @@ Add the correct display in Chrome and Safari.
     overflow: hidden !important; }
   .checkout-wrapper .overflow-y-auto {
     overflow-y: auto !important; }
+  .checkout-wrapper .whitespace-nowrap {
+    white-space: nowrap !important; }
   .checkout-wrapper .rounded {
     border-radius: 0.25rem !important; }
   .checkout-wrapper .rounded-md {
@@ -1551,8 +1553,6 @@ Add the correct display in Chrome and Safari.
       margin-right: 1rem !important; }
     .checkout-wrapper .md\:block {
       display: block !important; }
-    .checkout-wrapper .md\:table-cell {
-      display: table-cell !important; }
     .checkout-wrapper .md\:grid {
       display: grid !important; }
     .checkout-wrapper .md\:hidden {
@@ -1587,6 +1587,8 @@ Add the correct display in Chrome and Safari.
       margin-right: 2rem !important; }
     .checkout-wrapper .lg\:flex {
       display: flex !important; }
+    .checkout-wrapper .lg\:table-cell {
+      display: table-cell !important; }
     .checkout-wrapper .lg\:h-96 {
       height: 24rem !important; }
     .checkout-wrapper .lg\:w-2\/3 {

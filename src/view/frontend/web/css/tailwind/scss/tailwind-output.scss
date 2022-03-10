@@ -1733,6 +1733,10 @@ body {
   overflow-y: auto !important;
 }
 
+.whitespace-nowrap {
+  white-space: nowrap !important;
+}
+
 .rounded {
   border-radius: 0.25rem !important;
 }
@@ -2418,10 +2422,6 @@ body {
     display: block !important;
   }
 
-  .md\:table-cell {
-    display: table-cell !important;
-  }
-
   .md\:grid {
     display: grid !important;
   }
@@ -2481,6 +2481,10 @@ body {
 
   .lg\:flex {
     display: flex !important;
+  }
+
+  .lg\:table-cell {
+    display: table-cell !important;
   }
 
   .lg\:h-96 {

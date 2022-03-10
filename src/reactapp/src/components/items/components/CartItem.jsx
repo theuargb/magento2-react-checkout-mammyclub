@@ -53,7 +53,7 @@ function CartItem({ item, isLastItem, actions }) {
 
           <div className="text-xs text-left text-link flex flex-col	justify-between">
             <a href={item.canonicalUrl}>{item.productName}</a>
-            <div className="mt-2 text-old_gray-main">
+            <div className="mt-2 text-old_gray-main whitespace-nowrap">
               {item?.productConfigurableOptions
                 ? item.productConfigurableOptions.map((option) => (
                     <div>
@@ -65,7 +65,7 @@ function CartItem({ item, isLastItem, actions }) {
           </div>
         </div>
       </td>
-      <td className="table-cell text-md text-green w-1/5 align-middle hidden md:table-cell bg-white">
+      <td className="table-cell text-md text-green w-1/5 align-middle hidden lg:table-cell bg-white">
         {item.price}
       </td>
 

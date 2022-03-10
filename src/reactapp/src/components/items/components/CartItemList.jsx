@@ -38,7 +38,7 @@ function CartItemList() {
           <thead className="bg-container-lighter text-left table-header-group text-center text-primary-darker text-md ">
             <tr>
               <th className="p-2 font-normal">{__('Product')}</th>
-              <th className="p-2 hidden md:table-cell font-normal">
+              <th className="p-2 hidden lg:table-cell font-normal">
                 {__('Price')} <br />{' '}
                 <span className="text-base">{__('(UAH VAT included)')}</span>
               </th>
