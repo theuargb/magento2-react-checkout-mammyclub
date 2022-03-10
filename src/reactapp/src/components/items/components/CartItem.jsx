@@ -51,9 +51,17 @@ function CartItem({ item, isLastItem, actions }) {
             />
           </div>
 
-          <div className="text-xs text-left text-link">
+          <div className="text-xs text-left text-link flex flex-col	justify-between">
             <a href={item.canonicalUrl}>{item.productName}</a>
-            {/* <div>{item.productSku}</div> */}
+            <div className="mt-2 text-old_gray-main">
+              {item?.productConfigurableOptions
+                ? item.productConfigurableOptions.map((option) => (
+                    <div>
+                      {`${option.option_label} : ${option.value_label}`}
+                    </div>
+                  ))
+                : ''}
+            </div>
           </div>
         </div>
       </td>

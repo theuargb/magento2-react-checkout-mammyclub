@@ -9,9 +9,10 @@ import { _isArrayEmpty } from '../../../utils';
 import { formatPrice } from '../../../utils/price';
 import { modifyBillingAddressData } from '../setBillingAddress/modifier';
 
+/* eslint-disable */
 function modifyCartItemsData(cartItems) {
   return cartItems.reduce((accumulator, item) => {
-    const { id, quantity, prices, product } = item;
+    const { id, quantity, prices, product, configurable_options } = item;
     const priceAmount = _get(prices, 'price.value');
     const price = formatPrice(priceAmount);
     const rowTotalAmount = _get(prices, 'row_total.value');
@@ -22,6 +23,7 @@ function modifyCartItemsData(cartItems) {
     const productUrl = _get(product, 'url_key');
     const canonicalUrl = _get(product, 'canonical_url');
     const productSmallImgUrl = _get(product, 'small_image.url');
+    const productConfigurableOptions = configurable_options;
 
     accumulator[id] = {
       id,
@@ -36,6 +38,7 @@ function modifyCartItemsData(cartItems) {
       productUrl,
       canonicalUrl,
       productSmallImgUrl,
+      productConfigurableOptions,
     };
 
     return accumulator;

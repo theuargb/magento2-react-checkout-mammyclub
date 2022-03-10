@@ -73,6 +73,11 @@ items {
       }
       canonical_url
     }
+
+    configurable_options {
+      option_label
+      value_label
+    }
   }
 
   ... on BundleCartItem {
