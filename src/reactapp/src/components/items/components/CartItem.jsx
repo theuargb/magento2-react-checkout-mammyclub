@@ -35,13 +35,12 @@ function CartItem({ item, isLastItem, actions }) {
   };
 
   return (
-    <tr
-      className={`border-2 relative ${
-        isLastItem ? '' : 'md:border-b-2 md:border-container-lightner'
+    <div
+      className={`relative grid grid-cols-4 lg:grid-cols-5 items-center  ${
+        isLastItem ? '' : 'border-b-2 border-container-lightner'
       }`}
     >
-      {/** DESKTOP TD ELEMENTS */}
-      <td className="w-2/5 table-cell bg-white">
+      <div className="bg-white col-span-2 relative z-10">
         <div className="py-2 pl-2 flex">
           <div className="flex-none w-1/2 sm:w-auto md:w-1/2 h-20 mr-1 shrink-0">
             <img
@@ -51,7 +50,7 @@ function CartItem({ item, isLastItem, actions }) {
             />
           </div>
 
-          <div className="text-xs text-left text-link flex flex-col	justify-between">
+          <div className="text-xs text-left w-1/2 sm:w-auto md:w-1/2 text-link flex flex-col	justify-between">
             <a href={item.canonicalUrl}>{item.productName}</a>
             <div className="mt-2 text-old_gray-main whitespace-nowrap">
               {item?.productConfigurableOptions
@@ -64,12 +63,12 @@ function CartItem({ item, isLastItem, actions }) {
             </div>
           </div>
         </div>
-      </td>
-      <td className="table-cell text-md text-green w-1/5 align-middle hidden lg:table-cell bg-white">
+      </div>
+      <div className=" text-sm text-green hidden lg:block align-middlebg-white">
         {item.price}
-      </td>
+      </div>
 
-      <td className="w-1/6 table-cell align-middle bg-white">
+      <div className="align-middle bg-white">
         <TextInput
           min="0"
           width="w-10"
@@ -89,14 +88,14 @@ function CartItem({ item, isLastItem, actions }) {
             {__('Update')}
           </button>
         )}
-      </td>
+      </div>
 
-      <td className="w-1/6 table-cell text-md text-green align-middle bg-white">
+      <div className="text-sm text-green align-middle bg-white h-full flex items-center justify-center sm:justify-end relative z-0">
         <div className="">
           {hasSubTotal && (
-            <div className="flex justify-between items-center">
-              <div className="mr-1">{item.rowTotal}</div>
-              <div className="h-full pb-1">
+            <div className="flex justify-end items-center pr-0.5 sm:pr-1">
+              <div className="mr-0.5">{item.rowTotal}</div>
+              <div className="h-full mt-1 mr-1 sm:mr-0 sm:mt-0 sm:pb-1 sm:static absolute top-0 right-0">
                 <button
                   onClick={handleRemoveProductClick}
                   name={qtyField}
@@ -111,8 +110,8 @@ function CartItem({ item, isLastItem, actions }) {
             </div>
           )}
         </div>
-      </td>
-    </tr>
+      </div>
+    </div>
   );
 }
 

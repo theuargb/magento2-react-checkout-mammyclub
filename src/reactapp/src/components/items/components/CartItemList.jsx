@@ -34,37 +34,35 @@ function CartItemList() {
   return (
     <div className="">
       <div className="">
-        <table className="table w-full text-left relative">
-          <thead className="bg-container-lighter text-left table-header-group text-center text-primary-darker text-md ">
-            <tr>
-              <th className="p-2 font-normal">{__('Product')}</th>
-              <th className="p-2 hidden lg:table-cell font-normal">
-                {__('Price')} <br />{' '}
-                <span className="text-base">{__('(UAH VAT included)')}</span>
-              </th>
-              <th className="p-2 font-normal">
-                {__('qty')} <br /> {__('(items)')}
-              </th>
+        <div className="grid grid-cols-4 lg:grid-cols-5 items-center bg-container-lighter text-left text-center text-primary-darker text-md relative">
+          <div className="col-span-2 p-2 font-normal">{__('Product')}</div>
+          <div className="p-2 hidden lg:block font-normal">
+            {__('Price')} <br />{' '}
+            <span className="text-base">{__('(UAH VAT included)')}</span>
+          </div>
+          <div className="p-2 font-normal">
+            {__('qty')} <br /> {__('(items)')}
+          </div>
 
-              <th className="p-2 font-normal">{__('Total')}</th>
-            </tr>
-          </thead>
-          <tbody className="text-center border-b-2 border-container-lightner">
-            {cartItems.map((cartItem, index) => (
-              <CartItem
-                item={cartItem}
-                key={cartItem.id}
-                actions={{ handleQtyUpdate, handleQtyDelete }}
-                isLastItem={index === cartItems.length - 1}
-              />
-            ))}
-          </tbody>
-          {hasError && (
-            <p className="text-red-500 text-xs absolute top-12 bg-white">
-              {__('The requested qty is not available')}
-            </p>
-          )}
-        </table>
+          <div className="p-2 font-normal">{__('Total')}</div>
+        </div>
+
+        <div className="text-center border-b-2 border-container-lightner">
+          {cartItems.map((cartItem, index) => (
+            <CartItem
+              item={cartItem}
+              key={cartItem.id}
+              actions={{ handleQtyUpdate, handleQtyDelete }}
+              isLastItem={index === cartItems.length - 1}
+            />
+          ))}
+        </div>
+
+        {hasError && (
+          <p className="text-red-500 text-xs absolute top-12 bg-white">
+            {__('The requested qty is not available')}
+          </p>
+        )}
       </div>
     </div>
   );
