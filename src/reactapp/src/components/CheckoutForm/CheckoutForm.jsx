@@ -64,7 +64,7 @@ function CheckoutForm() {
                 {__('Required fields are marked with an asterisk *')}
               </p>
             </p>
-            <p className="text-xxlg ">{__('Your order')}</p>
+            <p className="text-xxlg md:ml-2 lg:ml-4">{__('Your order')}</p>
           </div>
 
           <div className="flex flex-col my-3 space-y-2 md:flex-row md:space-y-0 px-0 sm:px-4 md:px-0 ">
@@ -72,7 +72,7 @@ function CheckoutForm() {
               <p className="text-xxlg ">{__('Your order')}</p>
             </div>
 
-            <div className="checkout-wrapper mt-8 md:mt-0 w-full md:order-1 order-4 md:w-1/2 grow-0 md:mr-4 lg:mr-8">
+            <div className="checkout-wrapper mt-8 md:mt-0 w-full md:order-2 order-4 md:w-1/2 grow-0 md:mr-4 lg:mr-8">
               <div className="w-full xl:max-w-full border border-container py-3.5">
                 <AddressWrapper>
                   <ShippingAddress>
