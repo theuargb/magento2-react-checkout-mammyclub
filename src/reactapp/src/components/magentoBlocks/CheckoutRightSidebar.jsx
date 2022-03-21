@@ -1,12 +1,26 @@
 import React, { useState } from 'react';
 import { config } from '../../config';
+import RootElement from '../../utils/rootElement';
 
+/* eslint-disable */
 const CheckoutRightSidebar = () => {
   const [htmlEl, setHtmlContent] = useState('');
+  const storeCode = RootElement.getStoreCode();
+
+  const params = {
+    identifier: 'pravyj-sajdbar-chekauta',
+    store: storeCode,
+  };
+
+  const query = Object.keys(params)
+    .map(
+      (key) => encodeURIComponent(key) + '=' + encodeURIComponent(params[key])
+    )
+    .join('&');
 
   if (!htmlEl) {
     fetch(
-      `${config.baseUrl}/rest/V1/crmIntegration/checkout/renderCmsPage?pageId=11`,
+      `${config.baseUrl}/rest/${storeCode}/V1/crmIntegration/checkout/renderCmsPage?${query}`,
       {
         method: 'GET',
         headers: {

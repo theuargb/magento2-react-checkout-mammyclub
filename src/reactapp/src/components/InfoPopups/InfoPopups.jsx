@@ -3,8 +3,10 @@ import Popup from 'reactjs-popup';
 import { string } from 'prop-types';
 import styled from 'styled-components';
 import { __ } from '../../i18n';
+import { config } from '../../config';
+import RootElement from '../../utils/rootElement';
 
-const InfoPopups = ({ linkToCMSBlock, label, positionStyles }) => {
+const InfoPopups = ({ CmsPageIdentifier, label, positionStyles }) => {
   const StyledPopup = styled(Popup)`
     @keyframes animateModal {
       0% {
@@ -64,15 +66,31 @@ const InfoPopups = ({ linkToCMSBlock, label, positionStyles }) => {
   `;
 
   const [htmlEl, setHtmlContent] = useState('');
+  const storeCode = RootElement.getStoreCode();
+
+  const params = {
+    identifier: CmsPageIdentifier,
+    store: storeCode,
+  };
+
+  /* eslint-disable */
+  const query = Object.keys(params)
+    .map(
+      (key) => encodeURIComponent(key) + '=' + encodeURIComponent(params[key])
+    )
+    .join('&');
 
   if (!htmlEl) {
-    fetch(`${linkToCMSBlock}`, {
-      method: 'GET',
-      headers: {
-        Authorization: 'Bearer 6gn2y2np87chqd6zb7sjuphsluy3oq77',
-        'Content-Type': 'application/json',
-      },
-    }).then((response) => {
+    fetch(
+      `${config.baseUrl}/rest/${storeCode}/V1/crmIntegration/checkout/renderCmsPage?${query}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer 6gn2y2np87chqd6zb7sjuphsluy3oq77',
+          'Content-Type': 'application/json',
+        },
+      }
+    ).then((response) => {
       if (response.ok) {
         response.json().then((data) => setHtmlContent(data.content));
       } else {
@@ -116,13 +134,13 @@ const InfoPopups = ({ linkToCMSBlock, label, positionStyles }) => {
 };
 
 InfoPopups.propTypes = {
-  linkToCMSBlock: string,
+  CmsPageIdentifier: string,
   label: string,
   positionStyles: string,
 };
 
 InfoPopups.defaultProps = {
-  linkToCMSBlock: '',
+  CmsPageIdentifier: '',
   label: '',
   positionStyles: '',
 };

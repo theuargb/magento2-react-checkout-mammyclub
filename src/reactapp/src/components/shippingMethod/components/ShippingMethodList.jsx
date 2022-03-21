@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SelectInput from './ShippingMethodSelect';
-import { SHIPPING_METHOD, config } from '../../../config';
+import { SHIPPING_METHOD } from '../../../config';
 import useShippingMethodFormContext from '../hooks/useShippingMethodFormContext';
 import useShippingMethodCartContext from '../hooks/useShippingMethodCartContext';
 import { _objToArray } from '../../../utils';
@@ -77,7 +77,7 @@ function ShippingMethodList() {
         positionStyles="absolute top-0 right-0 mt-6 pr-2"
         label={__('Delivery')}
         className="absolute top-0 right-0"
-        linkToCMSBlock={`${config.baseUrl}/rest/V1/crmIntegration/checkout/renderCmsPage?pageId=12`}
+        CmsPageIdentifier='kontent-popapa-dostavka'
       />
     </div>
   );

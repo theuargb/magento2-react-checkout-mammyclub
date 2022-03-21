@@ -7,7 +7,6 @@ import { _objToArray } from '../../../utils';
 import usePaymentMethodCartContext from '../hooks/usePaymentMethodCartContext';
 import usePaymentMethodFormContext from '../hooks/usePaymentMethodFormContext';
 import InfoPopups from '../../InfoPopups/InfoPopups';
-import { config } from '../../../config';
 
 function PaymentMethodList({ methodRenderers }) {
   const { fields, submitHandler, formikData } = usePaymentMethodFormContext();
@@ -81,7 +80,7 @@ function PaymentMethodList({ methodRenderers }) {
         positionStyles="absolute top-0 right-0 mt-6 mr-6"
         label={__('Payment')}
         className="absolute top-0 right-0"
-        linkToCMSBlock={`${config.baseUrl}/rest/V1/crmIntegration/checkout/renderCmsPage?pageId=13`}
+        CmsPageIdentifier="kontent-popapa-oplata"
       />
     </div>
   );
