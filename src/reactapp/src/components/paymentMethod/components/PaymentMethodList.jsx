@@ -74,7 +74,7 @@ function PaymentMethodList({ methodRenderers }) {
       <SelectInput
         options={methodListForSelect}
         onChange={handlePaymentMethodSelection}
-        name="city"
+        name="paymentMethod"
       />
       <InfoPopups
         positionStyles="absolute top-0 right-0 mt-6 mr-6"
