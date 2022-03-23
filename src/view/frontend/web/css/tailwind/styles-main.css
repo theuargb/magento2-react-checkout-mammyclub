@@ -1420,6 +1420,8 @@ Add the correct display in Chrome and Safari.
     color: rgba(239, 68, 68, var(--tw-text-opacity)) !important; }
   .checkout-wrapper .underline {
     text-decoration: underline !important; }
+  .checkout-wrapper .line-through {
+    text-decoration: line-through !important; }
   .checkout-wrapper .opacity-50 {
     opacity: 0.5 !important; }
   .checkout-wrapper .opacity-75 {

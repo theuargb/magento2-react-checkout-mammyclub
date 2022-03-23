@@ -6,7 +6,7 @@ mutation setShippingAddress(
   $firstname: String="<null>",
   $lastname: String="<null>",
   $company: String="<null>",
-  $street: [String],
+  $street: [String]!,
   $city: String="<null>",
   $region: String="<null>",
   $zipcode: String="<null>",

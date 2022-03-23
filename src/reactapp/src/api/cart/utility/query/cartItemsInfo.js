@@ -3,10 +3,14 @@ items {
   id
   quantity
   prices {
+    base_price {
+      value
+      currency
+    }
     price {
       value
       currency
-    },
+    }
     row_total {
       value
       currency

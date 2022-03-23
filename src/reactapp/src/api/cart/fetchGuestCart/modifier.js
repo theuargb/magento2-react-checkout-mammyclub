@@ -15,6 +15,8 @@ function modifyCartItemsData(cartItems) {
     const { id, quantity, prices, product, configurable_options } = item;
     const priceAmount = _get(prices, 'price.value');
     const price = formatPrice(priceAmount);
+    const basePriceAmount = _get(prices,'base_price.value');
+    const basePrice = formatPrice(basePriceAmount);
     const rowTotalAmount = _get(prices, 'row_total.value');
     const rowTotal = formatPrice(rowTotalAmount);
     const productId = _get(product, 'id');
@@ -30,6 +32,7 @@ function modifyCartItemsData(cartItems) {
       quantity,
       priceAmount,
       price,
+      basePrice,
       rowTotal,
       rowTotalAmount,
       productId,
