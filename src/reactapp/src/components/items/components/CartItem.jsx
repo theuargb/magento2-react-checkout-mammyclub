@@ -66,7 +66,7 @@ function CartItem({ item, isLastItem, actions }) {
       </div>
 
       <div className=" text-sm text-green hidden lg:block align-middle bg-white">
-        {item.basePrice > item.price && (
+        {item.isOnSale && (
           <div className="text-sm mb-0.5 line-through text-old_gray-main">
             {item.basePrice}
           </div>

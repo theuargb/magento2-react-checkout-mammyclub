@@ -26,6 +26,7 @@ function modifyCartItemsData(cartItems) {
     const canonicalUrl = _get(product, 'canonical_url');
     const productSmallImgUrl = _get(product, 'small_image.url');
     const productConfigurableOptions = configurable_options;
+    const isOnSale = priceAmount < basePriceAmount;
 
     accumulator[id] = {
       id,
@@ -33,6 +34,7 @@ function modifyCartItemsData(cartItems) {
       priceAmount,
       price,
       basePrice,
+      isOnSale,
       rowTotal,
       rowTotalAmount,
       productId,
