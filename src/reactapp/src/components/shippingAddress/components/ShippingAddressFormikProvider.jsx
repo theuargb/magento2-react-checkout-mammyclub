@@ -32,7 +32,8 @@ import useShippingAddressCartContext from '../hooks/useShippingAddressCartContex
 import useFillDefaultAddresses from '../hooks/useFillDefaultAddresses';
 
 /* eslint-disable */
-const phoneRegExp = /^((\+)?(3)?(8)?[\- ]?)?(\(?\d{3}\)?[\- ]?)?\d{3}[\- ]?\d{2}[\- ]?\d{2}$/;
+const phoneRegExp =
+  /^((\+)?(3)?(8)?[\- ]?)?(\(?\d{3}\)?[\- ]?)?\d{3}[\- ]?\d{2}[\- ]?\d{2}$/;
 /* eslint-enable */
 
 const initialValues = {
@@ -49,11 +50,17 @@ const initialValues = {
   region: '<null>',
   country: 'UA',
   customerNotes: '',
+  street_ref: '',
+  city_ref: '',
+  warehouse_ref: '',
 };
 
 const requiredMessage = __('%1 - required field');
 
 const initValidationSchema = {
+  warehouse_ref: YupString(),
+  street_ref: YupString(),
+  city_ref: YupString(),
   company: YupString(),
   firstname: YupString(),
   lastname: YupString(),
@@ -70,7 +77,6 @@ const initValidationSchema = {
   region: YupString().nullable(),
   country: YupString().required(requiredMessage),
   isSameAsShipping: YupBoolean(),
-  city_novaposhta_ref: YupString(),
 };
 
 const addressIdInCache = _toString(LocalStorage.getCustomerShippingAddressId());

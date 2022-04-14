@@ -15,6 +15,7 @@ function NovaPoshtaWarehouseSelect({
   name,
   formikData,
   customStyles,
+  postIdField,
 }) {
   const [selectList, setSelectList] = useState(options);
   const { setFieldValue, setFieldTouched } = formikData;
@@ -24,8 +25,10 @@ function NovaPoshtaWarehouseSelect({
 
   const handleFormChange = (e) => {
     const newValue = e.label;
+    const postId = e.value;
     setFieldTouched(name, newValue);
     setFieldValue(name, newValue);
+    setFieldValue(postIdField, postId);
     setSelectValue(e);
   };
 
@@ -160,10 +163,12 @@ NovaPoshtaWarehouseSelect.propTypes = {
   formikData: formikDataShape.isRequired,
   name: string.isRequired,
   customStyles: object,
+  postIdField: string,
 };
 
 NovaPoshtaWarehouseSelect.defaultProps = {
   customStyles: {},
+  postIdField: 'shipping_address.warehouse_ref'
 };
 
 export default NovaPoshtaWarehouseSelect;

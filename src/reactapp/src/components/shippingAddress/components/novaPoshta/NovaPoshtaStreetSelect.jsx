@@ -7,14 +7,22 @@ import { config } from '../../../../config';
 
 const options = [{ value: 'void', label: __('Type street name...') }];
 
-function NovaPoshtaStreetSelect({ formikData, name, customStyles, cityId }) {
+function NovaPoshtaStreetSelect({
+  formikData,
+  name,
+  customStyles,
+  cityId,
+  streetIdField,
+}) {
   const [selectList, setSelectList] = useState(options);
   const { setFieldValue, setFieldTouched } = formikData;
 
   const handleFormChange = (e) => {
     const newValue = e.label;
+    const streetId = e.value;
     setFieldTouched(name, newValue);
     setFieldValue(name, newValue);
+    setFieldValue(streetIdField, streetId);
   };
   const changeStreetOptions = (inputValue) => {
     const streetsList = [];
@@ -69,11 +77,13 @@ NovaPoshtaStreetSelect.propTypes = {
   name: string.isRequired,
   customStyles: object,
   cityId: string,
+  streetIdField: string,
 };
 
 NovaPoshtaStreetSelect.defaultProps = {
   customStyles: {},
   cityId: '',
+  streetIdField: 'shipping_address.street_ref',
 };
 
 export default NovaPoshtaStreetSelect;

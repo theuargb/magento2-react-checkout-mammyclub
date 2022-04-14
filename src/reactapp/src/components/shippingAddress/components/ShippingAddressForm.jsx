@@ -186,6 +186,7 @@ function ShippingAddressForm({ children }) {
         <NovaPoshtaCitySelect
           formikData={formikData}
           name={fields.city}
+          cityIdField={fields.city_ref}
           handleChangeCityId={handleChangeCityId}
           customStyles={customSelectStyles}
         />
@@ -195,7 +196,9 @@ function ShippingAddressForm({ children }) {
               selectedCityId={selectedCityId}
               formikData={formikData}
               name={`${fields.street}[0]`}
+              postIdField={fields.warehouse_ref}
               customStyles={customSelectStyles}
+              streetIdField={fields.street_ref}
             />
           </div>
         )}

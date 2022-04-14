@@ -13,6 +13,9 @@ mutation setShippingAddress(
   $country: String!,
   $phone: String="<null>",
   $customer_notes: String="<null>",
+  $street_ref: String,
+  $city_ref: String,
+  $warehouse_ref: String,
 ) {
   setShippingAddressesOnCart(
     input: {
@@ -29,6 +32,11 @@ mutation setShippingAddress(
           country_code: $country
           telephone: $phone
           save_in_address_book: false
+          perspective_np: {
+            street_ref: $street_ref
+            city_ref: $city_ref
+            warehouse_ref: $warehouse_ref
+          }
         }
         customer_notes: $customer_notes
       }]
@@ -39,4 +47,5 @@ mutation setShippingAddress(
       ${CART_DATA_FRAGMENT}
     }
   }
+
 }`;
