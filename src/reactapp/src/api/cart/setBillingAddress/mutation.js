@@ -3,13 +3,13 @@ import { CART_DATA_FRAGMENT } from '../utility/query/cartQueryInfo';
 export const SET_CART_BILLING_ADDRESS_MUTATION = `
 mutation setBillingAddress(
   $cartId: String!,
-  $firstname: String!,
-  $lastname: String!,
+  $firstname: String,
+  $lastname: String,
   $company: String,
   $street: [String]!,
-  $city: String!,
+  $city: String,
   $region: String,
-  $zipcode: String!,
+  $zipcode: String,
   $country: String!,
   $phone: String!,
 

@@ -142,9 +142,7 @@ function ShippingAddressForm({ children }) {
 
   if (values?.shipping_address && addressFormSubmited) {
     const { firstname, lastname, phone } = values?.shipping_address;
-    if (firstname === '<null>') setFieldValue(fields.firstname, '');
-    if (lastname === '<null>') setFieldValue(fields.lastname, '');
-    if (phone === '<null>') setFieldValue(fields.phone, '');
+    if (phone === '<null>') setFieldValue(fields.phone, null);
   }
 
   /*  =======================================================================================  */

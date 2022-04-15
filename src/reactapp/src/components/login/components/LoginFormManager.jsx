@@ -21,10 +21,9 @@ const initialValues = {
 };
 /* Временно добавлена валидация на поле с эмейлом для вывода для вывода ошибки, т.к. сообщение об ошибке
    при не установленном емейле, которое выводилось вверху страницы, сейчас не выводится */
-const requiredMessage = __('%1 - required field');
 const validationSchema = {
   customerWantsToSignIn: YupBool(),
-  email: YupString().nullable().required(requiredMessage),
+  email: YupString().nullable(),
   password: YupString().test(
     'requiredIfSignIn',
     __('Password is required'),

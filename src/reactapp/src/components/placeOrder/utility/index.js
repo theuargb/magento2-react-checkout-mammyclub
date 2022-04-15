@@ -4,7 +4,6 @@ import {
   LOGIN_FORM,
   SHIPPING_METHOD,
   BILLING_ADDR_FORM,
-  SHIPPING_ADDR_FORM,
   PAYMENT_METHOD_FORM,
   CHECKOUT_AGREEMENTS_FORM,
 } from '../../../config';
@@ -16,9 +15,7 @@ export function hasLoginErrors(errors) {
 }
 
 export function hasShippingAddressErrors(errors) {
-  const shippingAddressErrors = _get(errors, SHIPPING_ADDR_FORM);
-  console.log(errors);
-  return !_isObjEmpty(shippingAddressErrors);
+  return !_isObjEmpty(errors);
 }
 
 export function hasBillingAddressErrors(errors, values, isVirtualCart) {

@@ -14,7 +14,9 @@ export function scrollToElement(elementId) {
 export function focusOnFormErrorElement(formId, formSectionErrors) {
   const firstErrorKey = _get(_keys(formSectionErrors), '0');
   const firstErrorElementId = `${formId}.${firstErrorKey}`;
-  const element = document.getElementById(firstErrorElementId);
+  const element = document.getElementById(
+    firstErrorElementId || 'shipping_address.phone'
+  );
 
   if (element) {
     element.focus();

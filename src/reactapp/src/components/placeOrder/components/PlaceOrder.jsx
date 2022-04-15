@@ -1,8 +1,7 @@
 import React from 'react';
-import _get from 'lodash.get';
 import { useFormikContext } from 'formik';
 
-// import Button from '../../common/Button';
+/* eslint-disable */
 import {
   LOGIN_FORM,
   SHIPPING_METHOD,
@@ -55,11 +54,6 @@ function PlaceOrder() {
   const handleSubmitAddressForm = async () => {
     let updateBillingAddress = _emptyFunc();
 
-    let { firstname, lastname } = addressToSave;
-    if (lastname.length === 0) lastname = '<null>';
-    if (firstname.length === 0) firstname = '<null>';
-
-    addressToSave = { ...addressToSave, firstname, lastname };
     const updateShippingAddress = _makePromise(
       addCartShippingAddress,
       addressToSave
@@ -77,27 +71,26 @@ function PlaceOrder() {
 
   const handlePerformPlaceOrder = async () => {
     setMessage(false);
-    if (hasLoginErrors(errors)) {
-      console.log(errors, 'mail');
+    // if (hasLoginErrors(errors)) {
+    //   console.log(errors, 'mail');
 
-      const customerWantsToSignIn = _get(values, customerWantsToSignInField);
-      setErrorMessage(
-        __(
-          customerWantsToSignIn
-            ? 'Please provide your login details.'
-            : 'Please provide your email address.'
-        )
-      );
-      focusOnFormErrorElement(LOGIN_FORM, errors.login);
-      scrollToElement(LOGIN_FORM);
+    //   const customerWantsToSignIn = _get(values, customerWantsToSignInField);
+    //   setErrorMessage(
+    //     __(
+    //       customerWantsToSignIn
+    //         ? 'Please provide your login details.'
+    //         : 'Please provide your email address.'
+    //     )
+    //   );
+    //   focusOnFormErrorElement(LOGIN_FORM, errors.login);
+    //   scrollToElement(LOGIN_FORM);
 
-      return;
-    }
+    //   return;
+    // }
 
-    if (hasShippingAddressErrors(errors)) {
+    if (hasShippingAddressErrors(errors.shipping_address.phone)) {
       setErrorMessage(__('Please provide your shipping address information.'));
       focusOnFormErrorElement(SHIPPING_ADDR_FORM, errors.shipping_address);
-      console.log(errors.shipping_address);
       scrollToElement(SHIPPING_ADDR_FORM);
       return;
     }
