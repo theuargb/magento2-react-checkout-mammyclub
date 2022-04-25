@@ -33,7 +33,7 @@ import useFillDefaultAddresses from '../hooks/useFillDefaultAddresses';
 
 /* eslint-disable */
 const phoneRegExp =
-  /^((\+)?(3)?(8)?[\- ]?)?(\(?\d{3}\)?[\- ]?)?\d{3}[\- ]?\d{2}[\- ]?\d{2}$/;
+  /^((\+)?(3)?(8)?(0)?[\- ]?)?(\(?\d{2}\)?[\- ]?)?\d{3}[\- ]?\d{2}[\- ]?\d{2}$/;
 /* eslint-enable */
 
 const initialValues = {
@@ -44,7 +44,7 @@ const initialValues = {
   firstname: '',
   lastname: '',
   street: [''],
-  phone: '<null>',
+  phone: 'undefined',
   zipcode: '',
   city: '',
   region: '',
@@ -72,7 +72,7 @@ const initValidationSchema = {
   phone: YupString()
     .matches(phoneRegExp, 'Require correct number entered')
     .required(requiredMessage),
-  zipcode: YupString().required(requiredMessage),
+  zipcode: YupString().nullable(),
   city: YupString().required(requiredMessage),
   region: YupString().nullable(),
   country: YupString().required(requiredMessage),

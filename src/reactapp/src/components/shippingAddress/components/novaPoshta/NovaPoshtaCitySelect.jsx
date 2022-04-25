@@ -19,7 +19,7 @@ function NovaPoshtaCitySelect({
   formikData,
   name,
   customStyles,
-  cityIdField,
+  cityRefField,
 }) {
   const [selectList, setSelectList] = useState(options);
   const { setFieldValue, setFieldTouched } = formikData;
@@ -38,6 +38,7 @@ function NovaPoshtaCitySelect({
               const cityItem = {
                 value: cityCode.id,
                 label: cityCode.text,
+                ref: cityCode.ref,
               };
               if (cityItem) {
                 cityList.push(cityItem);
@@ -56,11 +57,11 @@ function NovaPoshtaCitySelect({
   };
   const handleFormChange = (e) => {
     const newValue = e.label;
-    const cityId = e.value;
+    const cityRef = e.ref;
 
     setFieldTouched(name, newValue);
     setFieldValue(name, newValue);
-    setFieldValue(cityIdField, cityId);
+    setFieldValue(cityRefField, cityRef);
     handleChangeCityId(e.value);
     setValue(e);
     setInputValue(e ? e.label : '1');
@@ -111,12 +112,12 @@ NovaPoshtaCitySelect.propTypes = {
   formikData: formikDataShape.isRequired,
   name: string.isRequired,
   customStyles: object,
-  cityIdField: string,
+  cityRefField: string,
 };
 
 NovaPoshtaCitySelect.defaultProps = {
   customStyles: {},
-  cityIdField: 'shipping_address.city_ref',
+  cityRefField: 'shipping_address.city_ref',
 };
 
 export default NovaPoshtaCitySelect;

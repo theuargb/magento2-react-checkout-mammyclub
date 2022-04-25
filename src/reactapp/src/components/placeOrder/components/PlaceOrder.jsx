@@ -24,7 +24,11 @@ import useEmailInfoSave from '../hooks/useEmailInfoSave';
 import usePlaceOrderAppContext from '../hooks/usePlaceOrderAppContext';
 import usePlaceOrder from '../hooks/usePlaceOrder';
 import usePlaceOrderCartContext from '../hooks/usePlaceOrderCartContext';
-import { focusOnFormErrorElement, scrollToElement } from '../../../utils/form';
+import {
+  focusOnFormErrorElement,
+  scrollToElement,
+  focusOnPhoneErrorElement,
+} from '../../../utils/form';
 import { _makePromise, _emptyFunc } from '../../../utils';
 import TermsInfo from './TermsInfo';
 
@@ -71,26 +75,10 @@ function PlaceOrder() {
 
   const handlePerformPlaceOrder = async () => {
     setMessage(false);
-    // if (hasLoginErrors(errors)) {
-    //   console.log(errors, 'mail');
-
-    //   const customerWantsToSignIn = _get(values, customerWantsToSignInField);
-    //   setErrorMessage(
-    //     __(
-    //       customerWantsToSignIn
-    //         ? 'Please provide your login details.'
-    //         : 'Please provide your email address.'
-    //     )
-    //   );
-    //   focusOnFormErrorElement(LOGIN_FORM, errors.login);
-    //   scrollToElement(LOGIN_FORM);
-
-    //   return;
-    // }
 
     if (hasShippingAddressErrors(errors.shipping_address.phone)) {
       setErrorMessage(__('Please provide your shipping address information.'));
-      focusOnFormErrorElement(SHIPPING_ADDR_FORM, errors.shipping_address);
+      focusOnPhoneErrorElement();
       scrollToElement(SHIPPING_ADDR_FORM);
       return;
     }

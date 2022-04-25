@@ -105,6 +105,7 @@ function ShippingAddressForm({ children }) {
       outline: 'none',
       margin: '0',
       padding: '0',
+      gridTemplateColumns: '0 auto',
     }),
     singleValue: (provided, state) => {
       const opacity = state.isDisabled ? 0.5 : 1;
@@ -142,7 +143,7 @@ function ShippingAddressForm({ children }) {
 
   if (values?.shipping_address && addressFormSubmited) {
     const { firstname, lastname, phone } = values?.shipping_address;
-    if (phone === '<null>') setFieldValue(fields.phone, null);
+    if (phone === 'undefined') setFieldValue(fields.phone, null);
   }
 
   /*  =======================================================================================  */
@@ -184,7 +185,7 @@ function ShippingAddressForm({ children }) {
         <NovaPoshtaCitySelect
           formikData={formikData}
           name={fields.city}
-          cityIdField={fields.city_ref}
+          cityRefField={fields.city_ref}
           handleChangeCityId={handleChangeCityId}
           customStyles={customSelectStyles}
         />
@@ -194,7 +195,7 @@ function ShippingAddressForm({ children }) {
               selectedCityId={selectedCityId}
               formikData={formikData}
               name={`${fields.street}[0]`}
-              postIdField={fields.warehouse_ref}
+              postRefField={fields.warehouse_ref}
               customStyles={customSelectStyles}
               streetIdField={fields.street_ref}
             />
@@ -211,6 +212,7 @@ function ShippingAddressForm({ children }) {
                 name={`${fields.street}[0]`}
                 customStyles={customSelectStyles}
                 cityId={selectedCityId}
+                streetRefField={fields.street_ref}
               />
             </NovaPoshtaAddressFieldSet>
           </div>

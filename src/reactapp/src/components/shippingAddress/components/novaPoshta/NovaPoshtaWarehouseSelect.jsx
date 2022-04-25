@@ -15,7 +15,7 @@ function NovaPoshtaWarehouseSelect({
   name,
   formikData,
   customStyles,
-  postIdField,
+  postRefField,
 }) {
   const [selectList, setSelectList] = useState(options);
   const { setFieldValue, setFieldTouched } = formikData;
@@ -25,10 +25,10 @@ function NovaPoshtaWarehouseSelect({
 
   const handleFormChange = (e) => {
     const newValue = e.label;
-    const postId = e.value;
+    const postRef = e.ref;
     setFieldTouched(name, newValue);
     setFieldValue(name, newValue);
-    setFieldValue(postIdField, postId);
+    setFieldValue(postRefField, postRef);
     setSelectValue(e);
   };
 
@@ -46,6 +46,7 @@ function NovaPoshtaWarehouseSelect({
               const postItem = {
                 value: postCode.id,
                 label: postCode.text,
+                ref: postCode.ref,
               };
               if (postItem) {
                 postList.push(postItem);
@@ -124,6 +125,13 @@ function NovaPoshtaWarehouseSelect({
     
   };
 
+  const recomputeListStyles = () => {
+    if (selectListEl) {
+      cache.clearAll();
+      selectListEl.current.recomputeRowHeights();
+    }
+  }
+
   return (
     <div className="react-select">
       <p className="text-base text-gray mb-0.5">
@@ -133,6 +141,7 @@ function NovaPoshtaWarehouseSelect({
         options={selectList}
         placeholder=""
         onChange={(e) => handleFormChange(e)}
+        onInputChange={() => recomputeListStyles()}
         isLoading={isLoading}
         styles={{
           ...customStyles,
@@ -163,12 +172,12 @@ NovaPoshtaWarehouseSelect.propTypes = {
   formikData: formikDataShape.isRequired,
   name: string.isRequired,
   customStyles: object,
-  postIdField: string,
+  postRefField: string,
 };
 
 NovaPoshtaWarehouseSelect.defaultProps = {
   customStyles: {},
-  postIdField: 'shipping_address.warehouse_ref'
+  postRefField: 'shipping_address.warehouse_ref'
 };
 
 export default NovaPoshtaWarehouseSelect;

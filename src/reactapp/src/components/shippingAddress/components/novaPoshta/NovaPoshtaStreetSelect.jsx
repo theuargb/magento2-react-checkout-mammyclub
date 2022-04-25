@@ -12,17 +12,17 @@ function NovaPoshtaStreetSelect({
   name,
   customStyles,
   cityId,
-  streetIdField,
+  streetRefField,
 }) {
   const [selectList, setSelectList] = useState(options);
   const { setFieldValue, setFieldTouched } = formikData;
 
   const handleFormChange = (e) => {
     const newValue = e.label;
-    const streetId = e.value;
+    const streetRef = e.ref;
     setFieldTouched(name, newValue);
     setFieldValue(name, newValue);
-    setFieldValue(streetIdField, streetId);
+    setFieldValue(streetRefField, streetRef);
   };
   const changeStreetOptions = (inputValue) => {
     const streetsList = [];
@@ -37,6 +37,7 @@ function NovaPoshtaStreetSelect({
                 const streetItem = {
                   value: streetCode.id,
                   label: streetCode.text,
+                  ref: streetCode.ref,
                 };
                 if (streetItem) {
                   streetsList.push(streetItem);
@@ -77,13 +78,13 @@ NovaPoshtaStreetSelect.propTypes = {
   name: string.isRequired,
   customStyles: object,
   cityId: string,
-  streetIdField: string,
+  streetRefField: string,
 };
 
 NovaPoshtaStreetSelect.defaultProps = {
   customStyles: {},
   cityId: '',
-  streetIdField: 'shipping_address.street_ref',
+  streetRefField: 'shipping_address.street_ref',
 };
 
 export default NovaPoshtaStreetSelect;
