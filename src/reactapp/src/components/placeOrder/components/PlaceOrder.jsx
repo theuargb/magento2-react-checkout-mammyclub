@@ -76,7 +76,7 @@ function PlaceOrder() {
   const handlePerformPlaceOrder = async () => {
     setMessage(false);
 
-    if (hasShippingAddressErrors(errors.shipping_address.phone)) {
+    if (hasShippingAddressErrors(errors?.shipping_address?.phone)) {
       setErrorMessage(__('Please provide your shipping address information.'));
       focusOnPhoneErrorElement();
       scrollToElement(SHIPPING_ADDR_FORM);
