@@ -3,7 +3,6 @@ import { useFormikContext } from 'formik';
 
 /* eslint-disable */
 import {
-  LOGIN_FORM,
   SHIPPING_METHOD,
   BILLING_ADDR_FORM,
   SHIPPING_ADDR_FORM,
@@ -11,7 +10,6 @@ import {
   CHECKOUT_AGREEMENTS_FORM,
 } from '../../../config';
 import {
-  hasLoginErrors,
   hasPaymentMethodErrors,
   hasBillingAddressErrors,
   hasShippingMethodErrors,
@@ -19,7 +17,6 @@ import {
   hasTermsAndConditionsAgreed,
 } from '../utility';
 import { __ } from '../../../i18n';
-import useAddressSave from '../hooks/useAddressSave';
 import useEmailInfoSave from '../hooks/useEmailInfoSave';
 import usePlaceOrderAppContext from '../hooks/usePlaceOrderAppContext';
 import usePlaceOrder from '../hooks/usePlaceOrder';
@@ -32,13 +29,10 @@ import {
 import { _makePromise, _emptyFunc } from '../../../utils';
 import TermsInfo from './TermsInfo';
 
-const customerWantsToSignInField = `${LOGIN_FORM}.customerWantsToSignIn`;
-
 function PlaceOrder() {
   const validateThenPlaceOrder = usePlaceOrder();
   const { values, errors } = useFormikContext();
   const saveEmailAddressInfo = useEmailInfoSave();
-  const saveBillingShippingAddress = useAddressSave();
   const { isVirtualCart } = usePlaceOrderCartContext();
   const { setMessage, setErrorMessage, setPageLoader } =
     usePlaceOrderAppContext();
@@ -52,7 +46,6 @@ function PlaceOrder() {
   в последующем не отправлять её отдельным запросом */
   addressToSave = { ...addressToSave, customer_notes: additionalFields };
   /* ======================================== */
-  // const isBillingSame = values?.billing_address?.isSameAsShipping;
 
   /* ОБРАБОТЧИК ПОЛЕЙ ShippingAddress */
   const handleSubmitAddressForm = async () => {
@@ -62,11 +55,9 @@ function PlaceOrder() {
       addCartShippingAddress,
       addressToSave
     );
-    // if (isBillingSame) {
     updateBillingAddress = _makePromise(setCartBillingAddress, {
       ...addressToSave,
     });
-    // }
 
     await updateShippingAddress();
     await updateBillingAddress();
@@ -92,7 +83,6 @@ function PlaceOrder() {
     if (hasShippingMethodErrors(errors)) {
       setErrorMessage(__('Please select your shipping method.'));
       scrollToElement(SHIPPING_METHOD);
-
       focusOnFormErrorElement(SHIPPING_METHOD, errors);
 
       return;
@@ -116,8 +106,6 @@ function PlaceOrder() {
       await handleSubmitAddressForm();
 
       await saveEmailAddressInfo(values);
-
-      await saveBillingShippingAddress(values);
 
       await validateThenPlaceOrder(values);
 
