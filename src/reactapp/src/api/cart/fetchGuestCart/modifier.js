@@ -92,6 +92,7 @@ export default function fetchGuestCartModifier(result, dataMethod) {
   return {
     id: cartData.id,
     email: cartData.email,
+    phone: cartData.pml_otp_phone,
     isVirtualCart: cartData.is_virtual,
     appliedCoupon,
     items: modifyCartItemsData(cartItems),

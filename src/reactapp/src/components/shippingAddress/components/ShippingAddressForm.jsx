@@ -1,64 +1,25 @@
 /* eslint-disable */
 import React, { useState } from 'react';
+import _get from 'lodash.get';
 import { useFormikContext } from 'formik';
 import { node } from 'prop-types';
 import TextInput from '../../common/Form/TextInput';
 import { __ } from '../../../i18n';
-import useFormValidateThenSubmit from '../../../hook/useFormValidateThenSubmit';
 import useShippingAddressFormikContext from '../hooks/useShippingAddressFormikContext';
 import NovaPoshtaCitySelect from './novaPoshta/NovaPoshtaCitySelect';
 import NovaPoshtaStreetSelect from './novaPoshta/NovaPoshtaStreetSelect';
 import NovaPoshtaWarehouseSelect from './novaPoshta/NovaPoshtaWarehouseSelect';
 import NovaPoshtaAddressFieldSet from './novaPoshta/NovaPoshtaAddressFieldSet';
 import TextInputPhoneMask from '../../common/Form/TextnputPhoneMask';
+import useShippingAddressAppContext from '../hooks/useShippingAddressAppContext';
+import useCartContext from '../../../hook/useCartContext';
 
 function ShippingAddressForm({ children }) {
-  const {
-    fields,
-    formId,
-    formikData,
-    handleKeyDown,
-    submitHandler,
-    setFieldValue,
-  } = useShippingAddressFormikContext();
-  // const { isLoggedIn } = useShippingAddressAppContext();
-  // const { countryOptions, stateOptions, hasStateOptions } = useCountryState({
-  // const { countryOptions } = useCountryState({
-  //   fields,
-  //   formikData,
-  // });
-  const formSubmitHandler = useFormValidateThenSubmit({
-    formId,
-    formikData,
-    submitHandler,
-    // validationSchema,
-  });
-  // const saveAddressAction = async () => {
-  //   await formSubmitHandler();
+  const { fields, formikData, handleKeyDown, submitHandler, setFieldValue } =
+    useShippingAddressFormikContext();
 
-  //   if (!isLoggedIn || isValidCustomerAddressId(selectedAddress)) {
-  //     return;
-  //   }
-
-  //   if (isNewAddress) {
-  //     const recentAddressList = LocalStorage.getMostlyRecentlyUsedAddressList();
-  //     const newAddressId = `new_address_${_keys(recentAddressList).length + 1}`;
-  //     LocalStorage.addAddressToMostRecentlyUsedList(shippingValues);
-  //     setIsNewAddress(false);
-  //     setSelectedAddress(newAddressId);
-  //     LocalStorage.saveCustomerAddressInfo(newAddressId, isBillingSame);
-  //     reCalculateMostRecentAddressOptions();
-  //   }
-
-  //   if (isMostRecentAddress(selectedAddress)) {
-  //     LocalStorage.updateMostRecentlyAddedAddress(
-  //       selectedAddress,
-  //       shippingValues
-  //     );
-  //     reCalculateMostRecentAddressOptions();
-  //   }
-  // };
-
+  const { isLoggedIn } = useShippingAddressAppContext();
+  const { cart } = useCartContext();
   const customSelectStyles = {
     option: (provided, { isDisabled }) => ({
       ...provided,
@@ -132,8 +93,29 @@ function ShippingAddressForm({ children }) {
   const { values } = useFormikContext();
   const [addressFormSubmited, setAddressFormSubmited] = useState(false);
 
+
+  /* Запрос на сохранение адреса ( вызывается один раз при загрузке корзины). 
+     Вызывается для того, чтобы в корзине засейвился адрес и на фронт пришли доступные методы доставки.
+     Если кастомер авторизирован - идёт подмена номера телефона для запроса сохранения адреса, чтобы телефон кастомера
+     не перетёрся на undefined
+  */
   React.useEffect(() => {
-    if (!addressFormSubmited && values?.shipping_address) {
+    if (
+      isLoggedIn &&
+      !addressFormSubmited &&
+      values?.shipping_address &&
+      cart.phone
+    ) {
+      formikData.shippingValues.phone = cart.phone;
+      (async () => {
+        await submitHandler();
+      })();
+      setAddressFormSubmited(true);
+    } else if (
+      !addressFormSubmited &&
+      values?.shipping_address &&
+      !isLoggedIn
+    ) {
       (async () => {
         await submitHandler();
       })();
@@ -141,9 +123,11 @@ function ShippingAddressForm({ children }) {
     }
   }, [values]);
 
-  if (values?.shipping_address && addressFormSubmited) {
-    const { firstname, lastname, phone } = values?.shipping_address;
-    if (phone === 'undefined') setFieldValue(fields.phone, null);
+  if (values?.shipping_address && addressFormSubmited && !isLoggedIn) {
+    const { phone } = values?.shipping_address;
+    if (phone === 'undefined') {
+      setFieldValue(fields.phone, null);
+    }
   }
 
   /*  =======================================================================================  */

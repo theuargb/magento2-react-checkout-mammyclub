@@ -7,6 +7,7 @@ import cartShippingAddrInfo from './cartShippingAddrInfo';
 export const CART_DATA_FRAGMENT = `
   id
   email
+  pml_otp_phone
   is_virtual
   applied_coupons {
     code

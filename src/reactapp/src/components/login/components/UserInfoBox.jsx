@@ -1,21 +1,14 @@
 import React from 'react';
 import _get from 'lodash.get';
 
-// import Button from '../../common/Button';
-// import { __ } from '../../../i18n';
+
 import useLoginAppContext from '../hooks/useLoginAppContext';
 import useLoginFormContext from '../hooks/useLoginFormContext';
 
 function UserInfoBox() {
   const { isLoggedIn, customer } = useLoginAppContext();
-  // const { loginFormValues, setFormToEditMode } = useLoginFormContext();
   const { loginFormValues } = useLoginFormContext();
-
   const customerEmail = _get(customer, 'email', '');
-
-  // if (editMode) {
-  //   return <></>;
-  // }
 
   return (
     <>
@@ -30,14 +23,6 @@ function UserInfoBox() {
           {!isLoggedIn && _get(loginFormValues, 'email')}
         </span>
       </div>
-
-      {/* {!isLoggedIn && (
-        <div className="flex items-center justify-center">
-          <Button click={setFormToEditMode} variant="secondary">
-            {__('Edit')}
-          </Button>
-        </div>
-      )} */}
     </>
   );
 }

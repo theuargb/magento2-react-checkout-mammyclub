@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormikContext } from 'formik';
-
+import useLoginAppContext from '../../login/hooks/useLoginAppContext';
 /* eslint-disable */
 import {
   SHIPPING_METHOD,
@@ -39,7 +39,7 @@ function PlaceOrder() {
 
   const { addCartShippingAddress, setCartBillingAddress } =
     usePlaceOrderCartContext();
-
+  const { isLoggedIn } = useLoginAppContext();
   let addressToSave = values?.shipping_address;
   const additionalFields = values?.additionals?.customer_notes;
   /* Дополнительная информация в виде комментария добавляется в переменную addressToSave для того, чтобы 
@@ -105,7 +105,7 @@ function PlaceOrder() {
 
       await handleSubmitAddressForm();
 
-      await saveEmailAddressInfo(values);
+      !isLoggedIn && (await saveEmailAddressInfo(values));
 
       await validateThenPlaceOrder(values);
 
