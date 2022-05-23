@@ -80,20 +80,6 @@ function PlaceOrder() {
       return;
     }
 
-    if (hasShippingMethodErrors(errors)) {
-      setErrorMessage(__('Please select your shipping method.'));
-      scrollToElement(SHIPPING_METHOD);
-      focusOnFormErrorElement(SHIPPING_METHOD, errors);
-
-      return;
-    }
-
-    if (hasPaymentMethodErrors(errors)) {
-      setErrorMessage(__('Please select your payment method.'));
-      scrollToElement(PAYMENT_METHOD_FORM);
-      return;
-    }
-
     if (hasTermsAndConditionsAgreed(errors)) {
       setErrorMessage(__('Please agree with the terms & conditions'));
       scrollToElement(CHECKOUT_AGREEMENTS_FORM);
