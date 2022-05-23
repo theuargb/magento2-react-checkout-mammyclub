@@ -45,9 +45,6 @@ function ShippingMethodList() {
   /* eslint-disable */
   useMemo(() => {
     if (!isShippingMethodChangeByUser && methodsAvailable) {
-      if (methodRenderers[methodSelected]) {
-        return;
-      }
       setFieldTouched(fields.carrierCode, true);
       setFieldTouched(fields.methodCode, true);
       const methodListKeys = Object.keys(methodList);

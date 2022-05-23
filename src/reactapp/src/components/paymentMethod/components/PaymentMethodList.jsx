@@ -10,7 +10,6 @@ import InfoPopups from '../../InfoPopups/InfoPopups';
 
 function PaymentMethodList({ methodRenderers }) {
   const { fields, submitHandler, formikData } = usePaymentMethodFormContext();
-  console.log(usePaymentMethodFormContext());
   const { methodList } = usePaymentMethodCartContext();
   const { setFieldValue, setFieldTouched } = formikData;
 
@@ -50,9 +49,12 @@ function PaymentMethodList({ methodRenderers }) {
       methodList &&
       formikData?.formSectionValues.code.length === 0
     ) {
-      setFieldValue(fields.code, methodListForSelect[0].value);
-      submitHandler(methodListForSelect[0].value);
-      saveInitialPaymentMethod(true);
+      (async () => {
+        setFieldTouched(fields.code, true);
+        setFieldValue(fields.code, methodListForSelect[0].value);
+        submitHandler(methodListForSelect[0].value);
+        saveInitialPaymentMethod(true);
+      })();
     }
   }, [methodList]);
   /*  ========================================================================================  */
