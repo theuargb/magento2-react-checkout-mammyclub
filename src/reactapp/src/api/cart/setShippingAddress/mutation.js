@@ -16,6 +16,7 @@ mutation setShippingAddress(
   $street_ref: String,
   $city_ref: String,
   $warehouse_ref: String,
+  $new_customer_email: String,
 ) {
   setShippingAddressesOnCart(
     input: {
@@ -37,10 +38,12 @@ mutation setShippingAddress(
             city_ref: $city_ref
             warehouse_ref: $warehouse_ref
           }
+          amasty_order_attributes: {
+            new_customer_email: $new_customer_email
+          }
         }
         customer_notes: $customer_notes
       }]
-
     }
   ) {
     cart {
