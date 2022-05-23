@@ -165,17 +165,23 @@ function ShippingAddressForm({ children }) {
             'Our managers will call you back to clarify the details of the order'
           )}
         </p>
+        {/* ADDITIONAL EMAIL FIELD FOR LOGGED IN CUSTOMERS  */}
+        {isLoggedIn && (
+          <div>
+            <TextInput
+              type="email"
+              label={__('Email')}
+              name={fields.new_customer_email}
+              formikData={formikData}
+              onKeyDown={handleKeyDown}
+            />
+            <p className="text-gray-extralighter text-base mt-1">
+              {__('Here we will send all documents confirming the purchase')}
+            </p>
+          </div>
+        )}
 
-        <TextInput
-          type="email"
-          label={__('Email')}
-          name={fields.new_customer_email}
-          formikData={formikData}
-          onKeyDown={handleKeyDown}
-        />
-        <p className="text-gray-extralighter text-base mt-1">
-          {__('Here we will send all documents confirming the purchase')}
-        </p>
+        {/* ////////////////////////////////////////////// */}
         {children}
         <NovaPoshtaCitySelect
           formikData={formikData}

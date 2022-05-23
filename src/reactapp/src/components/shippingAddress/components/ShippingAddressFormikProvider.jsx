@@ -49,7 +49,7 @@ const initialValues = {
   street_ref: '',
   city_ref: '',
   warehouse_ref: '',
-  new_customer_email: 'test@gmail.com',
+  new_customer_email: '',
 };
 
 const requiredMessage = __('%1 - required field');

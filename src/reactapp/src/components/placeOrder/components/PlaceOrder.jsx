@@ -107,7 +107,7 @@ function PlaceOrder() {
 
       !isLoggedIn && (await saveEmailAddressInfo(values));
 
-      // await validateThenPlaceOrder(values);
+      await validateThenPlaceOrder(values);
 
       setPageLoader(false);
     } catch (error) {
