@@ -46,7 +46,6 @@ const initialValues = {
   city: '',
   region: '',
   country: 'UA',
-  customerNotes: '',
   street_ref: '',
   city_ref: '',
   warehouse_ref: '',

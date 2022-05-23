@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import SelectInput from './ShippingMethodSelect';
 import { SHIPPING_METHOD } from '../../../config';
 import useShippingMethodFormContext from '../hooks/useShippingMethodFormContext';
@@ -43,22 +43,21 @@ function ShippingMethodList() {
   /*  Сохранение метода доставки.
   Если пользователем не будет выбран метод доставки, то методом доставки останется первый доступный */
   /* eslint-disable */
-  if (!isShippingMethodChangeByUser && methodsAvailable) {
-    setFieldTouched(fields.carrierCode, true);
-    setFieldTouched(fields.methodCode, true);
-
-    (async () => {
-      const methodListKeys = Object.keys(methodList);
-      const methodSelected = methodList[methodListKeys[0]];
-
-      const { carrierCode, methodCode, id: methodId } = methodSelected;
-      if (methodId === selectedMethodId) {
-        return;
+  useMemo(
+    () => {
+      if (!isShippingMethodChangeByUser && methodsAvailable) {
+        setFieldTouched(fields.carrierCode, true);
+        setFieldTouched(fields.methodCode, true);
+        const methodListKeys = Object.keys(methodList);
+        const methodSelected = methodList[methodListKeys[0]];
+        const { carrierCode, methodCode, id: methodId } = methodSelected;
+        
+        setFieldValue(SHIPPING_METHOD, { carrierCode, methodCode });
+        submitHandler({ carrierCode, methodCode });
       }
-      await setFieldValue(SHIPPING_METHOD, { carrierCode, methodCode });
-      await submitHandler({ carrierCode, methodCode });
-    })();
-  }
+    },
+    [methodsAvailable],
+  );
   /*  ========================================================================================  */
 
   if (!methodsAvailable) {
@@ -77,7 +76,7 @@ function ShippingMethodList() {
         positionStyles="absolute top-0 right-0 mt-6 pr-2"
         label={__('Delivery')}
         className="absolute top-0 right-0"
-        CmsPageIdentifier='kontent-popapa-dostavka'
+        CmsPageIdentifier="kontent-popapa-dostavka"
       />
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import _get from 'lodash.get';
 import { object } from 'prop-types';
 import SelectInput from './PaymentMethodSelect';
@@ -10,21 +10,19 @@ import InfoPopups from '../../InfoPopups/InfoPopups';
 
 function PaymentMethodList({ methodRenderers }) {
   const { fields, submitHandler, formikData } = usePaymentMethodFormContext();
+  console.log(usePaymentMethodFormContext());
   const { methodList } = usePaymentMethodCartContext();
   const { setFieldValue, setFieldTouched } = formikData;
 
-  const [isPaymentMethodChangeByUser, setPaymentMethodChangeByUser] =
-    useState(false);
+  const [isPaymentMethodSaved, saveInitialPaymentMethod] = useState(false);
 
   const handlePaymentMethodSelection = async (event) => {
     const methodSelected = _get(methodList, `${event.target.value}.code`);
-    console.log(methodSelected);
 
     if (!methodSelected) {
       return;
     }
     await setFieldValue(fields.code, methodSelected);
-
     setFieldTouched(fields.code, true);
 
     // don't need to save payment method in case the method opted has a custom
@@ -33,7 +31,6 @@ function PaymentMethodList({ methodRenderers }) {
     // save payment operation upon selection, then they need to deal with it there.
     if (!methodRenderers[methodSelected]) {
       await submitHandler(methodSelected);
-      setPaymentMethodChangeByUser(true);
     }
   };
 
@@ -47,22 +44,17 @@ function PaymentMethodList({ methodRenderers }) {
   /*  Сохранение метода оплаты.
   Если пользователем не будет выбран метод оплаты, то выбранный метод будет 
   первый из списка доступных */
-  if (
-    !isPaymentMethodChangeByUser &&
-    methodList &&
-    formikData?.formSectionValues.code.length === 0
-  ) {
-    setFieldTouched(fields.code, true);
-    const methodSelected = _get(methodList, methodListForSelect[0].value);
-
-    (async () => {
-      if (methodRenderers[methodSelected]) {
-        return;
-      }
-      await setFieldValue(fields.code, methodListForSelect[0].value);
-      await submitHandler(methodListForSelect[0].value);
-    })();
-  }
+  useMemo(() => {
+    if (
+      !isPaymentMethodSaved &&
+      methodList &&
+      formikData?.formSectionValues.code.length === 0
+    ) {
+      setFieldValue(fields.code, methodListForSelect[0].value);
+      submitHandler(methodListForSelect[0].value);
+      saveInitialPaymentMethod(true);
+    }
+  }, [methodList]);
   /*  ========================================================================================  */
 
   return (
