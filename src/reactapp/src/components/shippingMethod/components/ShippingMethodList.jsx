@@ -45,19 +45,17 @@ function ShippingMethodList() {
   /* eslint-disable */
   useMemo(() => {
     if (!isShippingMethodChangeByUser && methodsAvailable) {
-      (async () => {
-        if (methodRenderers[methodSelected]) {
-          return;
-        }
-        setFieldTouched(fields.carrierCode, true);
-        setFieldTouched(fields.methodCode, true);
-        const methodListKeys = Object.keys(methodList);
-        const methodSelected = methodList[methodListKeys[0]];
-        const { carrierCode, methodCode, id: methodId } = methodSelected;
+      if (methodRenderers[methodSelected]) {
+        return;
+      }
+      setFieldTouched(fields.carrierCode, true);
+      setFieldTouched(fields.methodCode, true);
+      const methodListKeys = Object.keys(methodList);
+      const methodSelected = methodList[methodListKeys[0]];
+      const { carrierCode, methodCode, id: methodId } = methodSelected;
 
-        setFieldValue(SHIPPING_METHOD, { carrierCode, methodCode });
-        submitHandler({ carrierCode, methodCode });
-      })();
+      setFieldValue(SHIPPING_METHOD, { carrierCode, methodCode });
+      submitHandler({ carrierCode, methodCode });
     }
   }, [methodsAvailable]);
   /*  ========================================================================================  */

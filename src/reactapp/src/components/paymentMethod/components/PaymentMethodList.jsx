@@ -50,11 +50,9 @@ function PaymentMethodList({ methodRenderers }) {
       methodList &&
       formikData?.formSectionValues.code.length === 0
     ) {
-      (async () => {
-        setFieldValue(fields.code, methodListForSelect[0].value);
-        submitHandler(methodListForSelect[0].value);
-        saveInitialPaymentMethod(true);
-      })();
+      setFieldValue(fields.code, methodListForSelect[0].value);
+      submitHandler(methodListForSelect[0].value);
+      saveInitialPaymentMethod(true);
     }
   }, [methodList]);
   /*  ========================================================================================  */
