@@ -15,7 +15,7 @@ export const initialCountry =
 export const billingSameAsShippingField = `${BILLING_ADDR_FORM}.isSameAsShipping`;
 
 export function isCartAddressValid(address) {
-  return !!(address && address.firstname && address.country);
+  return !!(address && address.phone && address.country);
 }
 
 export function isValidCustomerAddressId(addressId) {
