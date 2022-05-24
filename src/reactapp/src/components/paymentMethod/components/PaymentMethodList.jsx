@@ -10,7 +10,8 @@ import InfoPopups from '../../InfoPopups/InfoPopups';
 
 function PaymentMethodList({ methodRenderers }) {
   const { fields, submitHandler, formikData } = usePaymentMethodFormContext();
-  const { methodList } = usePaymentMethodCartContext();
+  const { methodList, doCartContainShippingAddress } =
+    usePaymentMethodCartContext();
   const { setFieldValue, setFieldTouched } = formikData;
 
   const [isPaymentMethodSaved, saveInitialPaymentMethod] = useState(false);
@@ -44,19 +45,13 @@ function PaymentMethodList({ methodRenderers }) {
   Если пользователем не будет выбран метод оплаты, то выбранный метод будет 
   первый из списка доступных */
   useMemo(() => {
-    if (
-      !isPaymentMethodSaved &&
-      methodList &&
-      formikData?.formSectionValues.code.length === 0
-    ) {
-      (async () => {
-        setFieldTouched(fields.code, true);
-        setFieldValue(fields.code, methodListForSelect[0].value);
-        submitHandler(methodListForSelect[0].value);
-        saveInitialPaymentMethod(true);
-      })();
+    if (!isPaymentMethodSaved && methodList && doCartContainShippingAddress) {
+      setFieldTouched(fields.code, true);
+      setFieldValue(fields.code, methodListForSelect[0].value);
+      submitHandler(methodListForSelect[0].value);
+      saveInitialPaymentMethod(true);
     }
-  }, [methodList]);
+  }, [methodList, doCartContainShippingAddress]);
   /*  ========================================================================================  */
 
   return (

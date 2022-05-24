@@ -20,6 +20,7 @@ function ShippingAddressForm({ children }) {
 
   const { isLoggedIn } = useShippingAddressAppContext();
   const { cart } = useCartContext();
+  console.log(useCartContext());
   const customSelectStyles = {
     option: (provided, { isDisabled }) => ({
       ...provided,
@@ -93,7 +94,6 @@ function ShippingAddressForm({ children }) {
   const { values } = useFormikContext();
   const [addressFormSubmited, setAddressFormSubmited] = useState(false);
 
-
   /* Запрос на сохранение адреса ( вызывается один раз при загрузке корзины). 
      Вызывается для того, чтобы в корзине засейвился адрес и на фронт пришли доступные методы доставки.
      Если кастомер авторизирован - идёт подмена номера телефона для запроса сохранения адреса, чтобы телефон кастомера
@@ -107,6 +107,7 @@ function ShippingAddressForm({ children }) {
       cart.phone
     ) {
       formikData.shippingValues.phone = cart.phone;
+      cart.email ? formikData.shippingValues.new_customer_email = cart.email : '';
       (async () => {
         await submitHandler();
       })();
