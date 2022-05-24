@@ -20,7 +20,6 @@ function ShippingAddressForm({ children }) {
 
   const { isLoggedIn } = useShippingAddressAppContext();
   const { cart } = useCartContext();
-  console.log(useCartContext());
   const customSelectStyles = {
     option: (provided, { isDisabled }) => ({
       ...provided,
