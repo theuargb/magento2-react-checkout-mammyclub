@@ -42,9 +42,21 @@ function PlaceOrder() {
   const { isLoggedIn } = useLoginAppContext();
   let addressToSave = values?.shipping_address;
   const additionalFields = values?.additionals?.customer_notes;
+  const emailForGuestCart = values?.login?.email;
+  
   /* Дополнительная информация в виде комментария добавляется в переменную addressToSave для того, чтобы 
   в последующем не отправлять её отдельным запросом */
   addressToSave = { ...addressToSave, customer_notes: additionalFields };
+  /* ======================================== */
+
+  /* 
+    На гостевой корзине, если пользователем был введён email, он так же продублируется
+    в дополнительный атрибут new_customer_email ( добавлено из-за особенностей процесса обработки заказов
+    на стороне клиента).
+  */
+  if (!isLoggedIn && emailForGuestCart) {
+    addressToSave = { ...addressToSave, new_customer_email: emailForGuestCart };
+  }
   /* ======================================== */
 
   /* ОБРАБОТЧИК ПОЛЕЙ ShippingAddress */
@@ -91,6 +103,10 @@ function PlaceOrder() {
 
       await handleSubmitAddressForm();
 
+      /* 
+        saveEmailAddressInfo предназначен для гостевой корзины, для зарегистрированных пользователей
+        мыло пишется в атрибут new_customer_email как дополнительная информация в ордере
+      */
       !isLoggedIn && (await saveEmailAddressInfo(values));
 
       await validateThenPlaceOrder(values);
