@@ -8,6 +8,7 @@ import { Field } from 'formik';
 
 import { _replace } from '../../../utils';
 import { formikDataShape } from '../../../utils/propTypes';
+import { __ } from '../../../i18n';
 
 function TextInputPhoneMask({
   id,
@@ -70,7 +71,7 @@ function TextInputPhoneMask({
                   />
                 </g>
                 <g>
-                  <title>Layer 1</title>
+                  <title>{__('Invalid value')}</title>
                   <g
                     stroke="null"
                     transform="scale(2.3038599491119385) translate(-79.98338317871094,-10.48225212097168) "
