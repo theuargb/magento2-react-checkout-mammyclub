@@ -10,7 +10,12 @@ function TermsInfo() {
       </p>
       <p className="text-xs text-gray">
         {__('You agree with')}
-        <a className="text-link" href={`${config.baseUrl}/terms-of-use/`}>
+        <a
+          className="text-link"
+          rel="noreferrer"
+          target="_blank"
+          href={`${config.baseUrl}/terms-of-use/`}
+        >
           &nbsp;{__('terms of use')}
         </a>
       </p>

@@ -43,15 +43,19 @@ function CartItem({ item, isLastItem, actions }) {
       <div className="bg-white col-span-2 relative z-10">
         <div className="py-2 pl-2 flex">
           <div className="flex-none w-1/2 sm:w-auto md:w-1/2 h-20 mr-1 shrink-0">
-            <img
-              className="object-contain object-top w-full h-full"
-              alt={item.productSku}
-              src={item.productSmallImgUrl}
-            />
+            <a href={item.canonicalUrl} rel="noreferrer" target="_blank">
+              <img
+                className="object-contain object-top w-full h-full"
+                alt={item.productSku}
+                src={item.productSmallImgUrl}
+              />
+            </a>
           </div>
 
           <div className="text-xs text-left w-1/2 sm:w-auto md:w-1/2 text-link flex flex-col	justify-between">
-            <a href={item.canonicalUrl}>{item.productName}</a>
+            <a href={item.canonicalUrl} rel="noreferrer" target="_blank">
+              {item.productName}
+            </a>
             <div className="mt-2 text-old_gray-main whitespace-nowrap">
               {item?.productConfigurableOptions
                 ? item.productConfigurableOptions.map((option) => (
