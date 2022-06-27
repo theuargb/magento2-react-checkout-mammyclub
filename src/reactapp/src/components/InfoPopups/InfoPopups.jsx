@@ -3,8 +3,7 @@ import Popup from 'reactjs-popup';
 import { string } from 'prop-types';
 import styled from 'styled-components';
 import { __ } from '../../i18n';
-import { config } from '../../config';
-import RootElement from '../../utils/rootElement';
+import { fetchCmsPageRequest } from '../../api';
 
 const InfoPopups = ({ CmsPageIdentifier, label, positionStyles }) => {
   const StyledPopup = styled(Popup)`
@@ -66,37 +65,22 @@ const InfoPopups = ({ CmsPageIdentifier, label, positionStyles }) => {
   `;
 
   const [htmlEl, setHtmlContent] = useState('');
-  const storeCode = RootElement.getStoreCode();
-
-  const params = {
-    identifier: CmsPageIdentifier,
-    store: storeCode,
-  };
+  const identifier = CmsPageIdentifier;
 
   /* eslint-disable */
-  const query = Object.keys(params)
-    .map(
-      (key) => encodeURIComponent(key) + '=' + encodeURIComponent(params[key])
-    )
-    .join('&');
+  const fetchContent = async (identifier) => {
+    const data = await fetchCmsPageRequest(identifier);
+    const decodedHtml = htmlDecode(data.content);
+    setHtmlContent(decodedHtml);
+  };
+
+  const htmlDecode = (input) => {
+    const doc = new DOMParser().parseFromString(input, 'text/html');
+    return doc.documentElement.textContent;
+  };
 
   if (!htmlEl) {
-    fetch(
-      `${config.baseUrl}/rest/${storeCode}/V1/crmIntegration/checkout/renderCmsPage?${query}`,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: 'Bearer 6gn2y2np87chqd6zb7sjuphsluy3oq77',
-          'Content-Type': 'application/json',
-        },
-      }
-    ).then((response) => {
-      if (response.ok) {
-        response.json().then((data) => setHtmlContent(data.content));
-      } else {
-        throw new Error('Something went wrong');
-      }
-    });
+    fetchContent(identifier);
   }
 
   return (

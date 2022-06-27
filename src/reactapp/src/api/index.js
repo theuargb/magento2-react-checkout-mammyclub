@@ -24,6 +24,7 @@ import { applyCouponCodeToCart, removeCouponCodeFromCart } from './cart/coupon';
 import setCustomerAddressOnCartBilling from './cart/setCustomerAddressOnBilling';
 import setCustomerAddrOnShippingAddr from './cart/setCustomerAddrOnShippingAddr';
 import removeItemFromCart from './cart/removeItemFromCart/removeItemFromCart';
+import fetchCmsPage from './fetchCmsPage';
 
 export const removeItemFromCartRequest = removeItemFromCart;
 
@@ -80,3 +81,5 @@ export const aggregatedQueryRequest = aggregatedQuery;
 export const applyCouponCodeToCartRequest = applyCouponCodeToCart;
 
 export const removeCouponCodeFromCartRequest = removeCouponCodeFromCart;
+
+export const fetchCmsPageRequest = fetchCmsPage;

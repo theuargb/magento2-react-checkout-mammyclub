@@ -7,7 +7,6 @@ import PlaceOrder from '../placeOrder';
 import PageLoader from '../common/Loader';
 import { AddressWrapper } from '../address';
 import PaymentMethod from '../paymentMethod';
-// import BillingAddress from '../billingAddress';
 import ShippingAddress from '../shippingAddress';
 import ShippingMethodsForm from '../shippingMethod';
 import StickyRightSidebar from '../StickyRightSidebar';
@@ -20,7 +19,7 @@ import useCheckoutFormCartContext from './hooks/useCheckoutFormCartContext';
 import { __ } from '../../i18n';
 import LiqPayWidget from '../LiqPayWidget/LiqPayWidget';
 
-import CheckoutRightSidebar from '../magentoBlocks/CheckoutRightSidebar';
+import CmsContent from '../magentoBlocks/CmsContent';
 
 function CheckoutForm() {
   const [initialData, setInitialData] = useState(false);
@@ -104,7 +103,7 @@ function CheckoutForm() {
                 <Totals />
                 <CheckoutAgreements />
               </div>
-              <CheckoutRightSidebar />
+              <CmsContent CmsIdentifier="pravyj-sajdbar-chekauta" />
             </StickyRightSidebar>
           </div>
           {pageLoader && <PageLoader />}
