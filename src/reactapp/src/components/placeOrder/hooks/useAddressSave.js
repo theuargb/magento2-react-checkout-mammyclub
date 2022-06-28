@@ -1,6 +1,6 @@
 import _get from 'lodash.get';
 /* eslint-disable */
-import { SHIPPING_METHOD, SHIPPING_ADDR_FORM } from '../../../config';
+import { SHIPPING_METHOD } from '../../../config';
 import { __ } from '../../../i18n';
 import LocalStorage from '../../../utils/localStorage';
 import { _emptyFunc, _makePromise } from '../../../utils';

@@ -10,6 +10,7 @@ export default async function setAddresses(dispatch, shippingAddress) {
     await sendRequest(dispatch, {
       query: SET_ADDRESSES_MUTATION,
       variables,
-    })
+    }),
+    'setShippingAddressesOnCart.cart'
   );
 }
