@@ -25,7 +25,7 @@ export async function placeOrderAction(
     if (paymentSubmitAction) {
       order = await paymentSubmitAction(values);
     } else {
-      order = await placeOrderRequest(appDispatch);
+      order = await placeOrderRequest(appDispatch, values);
     }
 
     if (order) {
