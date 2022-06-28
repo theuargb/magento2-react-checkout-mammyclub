@@ -25,6 +25,7 @@ import setCustomerAddressOnCartBilling from './cart/setCustomerAddressOnBilling'
 import setCustomerAddrOnShippingAddr from './cart/setCustomerAddrOnShippingAddr';
 import removeItemFromCart from './cart/removeItemFromCart/removeItemFromCart';
 import fetchCmsPage from './fetchCmsPage';
+import setAddresses from './cart/setAddresses';
 
 export const removeItemFromCartRequest = removeItemFromCart;
 
@@ -41,6 +42,8 @@ export const updateCustomerAddressRequest = updateCustomerAddress;
 export const setEmailOnGuestCartRequest = setEmailOnGuestCart;
 
 export const setShippingAddressRequest = setShippingAddress;
+
+export const setAddressesRequest = setAddresses;
 
 export const setBillingAddressRequest = setBillingAddress;
 

@@ -10,6 +10,7 @@ export default function usePlaceOrderCartContext() {
     setEmailOnGuestCart,
     setCartBillingAddress,
     addCartShippingAddress,
+    setCartAddresses,
   } = useCartContext();
   const email = _get(cart, 'email');
   const isVirtualCart = _get(cart, 'isVirtualCart');
@@ -25,6 +26,7 @@ export default function usePlaceOrderCartContext() {
     setEmailOnGuestCart,
     setCartBillingAddress,
     addCartShippingAddress,
+    setCartAddresses,
     hasBillingAddress: !!isCartAddressValid(billingAddress),
     hasShippingAddress: !!isCartAddressValid(shippingAddress),
   };

@@ -20,6 +20,7 @@ import {
 } from './cart/actions';
 import {
   addCartShippingAddressAction,
+  setAddressesAction,
   setSelectedShippingAddressAction,
   setCustomerAddrAsShippingAddrAction,
 } from './shippingAddress/actions';
@@ -51,6 +52,7 @@ const dispatchMapper = {
   setCartBillingAddress: setBillingAddressAction,
   setRestPaymentMethod: setRestPaymentMethodAction,
   getCartInfoAfterMerge: getCartInfoAfterMergeAction,
+  setCartAddresses: setAddressesAction,
   addCartShippingAddress: addCartShippingAddressAction,
   storeAggregatedCartStates: storeAggregatedCartStatesAction,
   setCartSelectedShippingAddress: setSelectedShippingAddressAction,

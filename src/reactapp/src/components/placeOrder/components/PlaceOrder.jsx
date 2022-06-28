@@ -21,6 +21,7 @@ import useEmailInfoSave from '../hooks/useEmailInfoSave';
 import usePlaceOrderAppContext from '../hooks/usePlaceOrderAppContext';
 import usePlaceOrder from '../hooks/usePlaceOrder';
 import usePlaceOrderCartContext from '../hooks/usePlaceOrderCartContext';
+import useAddressSave from '../hooks/useAddressSave';
 import {
   focusOnFormErrorElement,
   scrollToElement,
@@ -37,13 +38,12 @@ function PlaceOrder() {
   const { setMessage, setErrorMessage, setPageLoader } =
     usePlaceOrderAppContext();
 
-  const { addCartShippingAddress, setCartBillingAddress } =
-    usePlaceOrderCartContext();
   const { isLoggedIn } = useLoginAppContext();
   let addressToSave = values?.shipping_address;
   const additionalFields = values?.additionals?.customer_notes;
   const emailForGuestCart = values?.login?.email;
-  
+  const setAddresses = useAddressSave();
+
   /* Дополнительная информация в виде комментария добавляется в переменную addressToSave для того, чтобы 
   в последующем не отправлять её отдельным запросом */
   addressToSave = { ...addressToSave, customer_notes: additionalFields };
@@ -59,23 +59,11 @@ function PlaceOrder() {
   }
   /* ======================================== */
 
-  /* ОБРАБОТЧИК ПОЛЕЙ ShippingAddress */
-  const handleSubmitAddressForm = async () => {
-    let updateBillingAddress = _emptyFunc();
-
-    const updateShippingAddress = _makePromise(
-      addCartShippingAddress,
-      addressToSave
-    );
-    updateBillingAddress = _makePromise(setCartBillingAddress, {
-      ...addressToSave,
-    });
-
-    await updateShippingAddress();
-    await updateBillingAddress();
+  const useSaveAddresses = async () => {
+    setPageLoader(true);
+    await setAddresses(addressToSave);
+    setPageLoader(false);
   };
-  /*  ========================================================  */
-
   const handlePerformPlaceOrder = async () => {
     setMessage(false);
 
@@ -101,7 +89,7 @@ function PlaceOrder() {
     try {
       setPageLoader(true);
 
-      await handleSubmitAddressForm();
+      await useSaveAddresses();
 
       /* 
         saveEmailAddressInfo предназначен для гостевой корзины, для зарегистрированных пользователей
