@@ -9,7 +9,7 @@ import usePaymentMethodFormContext from '../hooks/usePaymentMethodFormContext';
 import InfoPopups from '../../InfoPopups/InfoPopups';
 
 function PaymentMethodList({ methodRenderers }) {
-  const { fields, submitHandler, formikData } = usePaymentMethodFormContext();
+  const { fields, formikData } = usePaymentMethodFormContext();
   const { methodList, doCartContainShippingAddress } =
     usePaymentMethodCartContext();
   const { setFieldValue, setFieldTouched } = formikData;
@@ -29,9 +29,10 @@ function PaymentMethodList({ methodRenderers }) {
     // renderer. This is because custom payment renderers may have custom
     // functionalities associated with them. So if in case they want to perform
     // save payment operation upon selection, then they need to deal with it there.
-    if (!methodRenderers[methodSelected]) {
-      await submitHandler(methodSelected);
-    }
+    // if (!methodRenderers[methodSelected]) {
+    //   await submitHandler(methodSelected);
+    // }
+    console.log(methodRenderers);
   };
 
   const methodListForSelect = [];
@@ -48,7 +49,7 @@ function PaymentMethodList({ methodRenderers }) {
     if (!isPaymentMethodSaved && methodList && doCartContainShippingAddress) {
       setFieldTouched(fields.code, true);
       setFieldValue(fields.code, methodListForSelect[0].value);
-      submitHandler(methodListForSelect[0].value);
+      // submitHandler(methodListForSelect[0].value);
       saveInitialPaymentMethod(true);
     }
   }, [methodList, doCartContainShippingAddress]);
