@@ -12,14 +12,12 @@ import NovaPoshtaWarehouseSelect from './novaPoshta/NovaPoshtaWarehouseSelect';
 import NovaPoshtaAddressFieldSet from './novaPoshta/NovaPoshtaAddressFieldSet';
 import TextInputPhoneMask from '../../common/Form/TextnputPhoneMask';
 import useShippingAddressAppContext from '../hooks/useShippingAddressAppContext';
-import useCartContext from '../../../hook/useCartContext';
 
 function ShippingAddressForm({ children }) {
-  const { fields, formikData, handleKeyDown, submitHandler, setFieldValue } =
+  const { fields, formikData, handleKeyDown } =
     useShippingAddressFormikContext();
 
   const { isLoggedIn } = useShippingAddressAppContext();
-  const { cart } = useCartContext();
   const customSelectStyles = {
     option: (provided, { isDisabled }) => ({
       ...provided,
@@ -91,44 +89,6 @@ function ShippingAddressForm({ children }) {
   };
 
   const { values } = useFormikContext();
-  const [addressFormSubmited, setAddressFormSubmited] = useState(false);
-
-  /* Запрос на сохранение адреса ( вызывается один раз при загрузке корзины). 
-     Вызывается для того, чтобы в корзине засейвился адрес и на фронт пришли доступные методы доставки.
-     Если кастомер авторизирован - идёт подмена номера телефона для запроса сохранения адреса, чтобы телефон кастомера
-     не перетёрся на undefined
-  */
-  React.useEffect(() => {
-    if (
-      isLoggedIn &&
-      !addressFormSubmited &&
-      values?.shipping_address &&
-      cart.phone
-    ) {
-      formikData.shippingValues.phone = cart.phone;
-      cart.email ? formikData.shippingValues.new_customer_email = cart.email : '';
-      (async () => {
-        await submitHandler();
-      })();
-      setAddressFormSubmited(true);
-    } else if (
-      !addressFormSubmited &&
-      values?.shipping_address &&
-      !isLoggedIn
-    ) {
-      (async () => {
-        await submitHandler();
-      })();
-      setAddressFormSubmited(true);
-    }
-  }, [values]);
-
-  if (values?.shipping_address && addressFormSubmited && !isLoggedIn) {
-    const { phone } = values?.shipping_address;
-    if (phone === 'undefined') {
-      setFieldValue(fields.phone, null);
-    }
-  }
 
   /*  =======================================================================================  */
   const selectedShippingMethod = values?.shipping_method?.methodCode;
