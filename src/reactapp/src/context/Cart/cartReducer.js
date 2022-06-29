@@ -1,10 +1,12 @@
 import {
   setCartShippingAddress,
   setCartSelectedShippingAddress,
+  setAddressNeedToUpdate,
 } from './shippingAddress/reducers';
 import {
   SET_CART_SHIPPING_ADDRESS,
   SET_CART_SELECTED_SHIPPING_ADDRESS,
+  SET_ADDRESSES_REQUEST_PROCESSED,
 } from './shippingAddress/types';
 import { SET_CART_INFO } from './cart/types';
 import { setCartInfo } from './cart/reducers';
@@ -25,6 +27,7 @@ const actions = {
   [SET_CART_BILLING_ADDRESS]: setCartBillingAddress,
   [SET_CART_SHIPPING_ADDRESS]: setCartShippingAddress,
   [SET_CART_SELECTED_SHIPPING_ADDRESS]: setCartSelectedShippingAddress,
+  [SET_ADDRESSES_REQUEST_PROCESSED]: setAddressNeedToUpdate,
 };
 
 function cartReducer(state, { type, payload }) {

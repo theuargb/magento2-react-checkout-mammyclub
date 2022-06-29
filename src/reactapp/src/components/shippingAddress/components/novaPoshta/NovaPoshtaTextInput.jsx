@@ -13,6 +13,7 @@ const NovaPoshtaTextInput = ({
   className,
   label,
   formikData,
+  ...rest
 }) => {
   const formik = useFormik({
     initialValues: {
@@ -21,6 +22,7 @@ const NovaPoshtaTextInput = ({
   });
   const { setFieldValue, setFieldTouched, formSectionValues, formSectionId } =
     formikData;
+  const { onBlur, onFocus } = rest;
 
   const relativeFieldName = _replace(name, formSectionId).replace('.', '');
   const value = _get(formSectionValues, relativeFieldName, '') || '';
@@ -40,6 +42,8 @@ const NovaPoshtaTextInput = ({
             setFieldTouched(name, newValue);
             setFieldValue(name, newValue);
           }}
+          onBlur={onBlur}
+          onFocus={onFocus}
         />
       </label>
     </form>

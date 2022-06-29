@@ -22,8 +22,10 @@ import {
   addCartShippingAddressAction,
   setAddressesAction,
   setSelectedShippingAddressAction,
+  setAddressNeedToUpdate,
   setCustomerAddrAsShippingAddrAction,
 } from './shippingAddress/actions';
+
 import {
   updateCartItemAction,
   removeCartItemAction,
@@ -58,6 +60,7 @@ const dispatchMapper = {
   setCartSelectedShippingAddress: setSelectedShippingAddressAction,
   setCustomerAddressAsBillingAddress: setCustomerAddrAsBillingAddrAction,
   setCustomerAddressAsShippingAddress: setCustomerAddrAsShippingAddrAction,
+  setAddressNeedToUpdate,
 };
 
 function cartDispatchers(dispatch, appDispatch) {

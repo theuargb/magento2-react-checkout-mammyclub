@@ -13,9 +13,12 @@ function NovaPoshtaStreetSelect({
   customStyles,
   cityId,
   streetRefField,
+  ...rest
 }) {
   const [selectList, setSelectList] = useState(options);
   const { setFieldValue, setFieldTouched } = formikData;
+
+  const { onBlur, onFocus } = rest;
 
   const handleFormChange = (e) => {
     const newValue = e.label;
@@ -68,6 +71,8 @@ function NovaPoshtaStreetSelect({
         placeholder=""
         styles={customStyles}
         noOptionsMessage={() => __('No options')}
+        onBlur={onBlur}
+        onFocus={onFocus}
       />
     </div>
   );

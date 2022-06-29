@@ -6,7 +6,10 @@ import {
   setCustomerAddrAsCartShippingAddrRequest,
 } from '../../../api';
 import { SET_CART_INFO } from '../cart/types';
-import { SET_CART_SELECTED_SHIPPING_ADDRESS } from './types';
+import {
+  SET_CART_SELECTED_SHIPPING_ADDRESS,
+  SET_ADDRESSES_REQUEST_PROCESSED,
+} from './types';
 
 export function setSelectedShippingAddressAction(
   dispatch,
@@ -74,4 +77,15 @@ export async function setCustomerAddrAsShippingAddrAction(
   });
 
   return cartInfo;
+}
+
+export function setAddressNeedToUpdate(
+  dispatch,
+  appDispatch,
+  isAddressNeedToUpdate
+) {
+  dispatch({
+    type: SET_ADDRESSES_REQUEST_PROCESSED,
+    payload: isAddressNeedToUpdate,
+  });
 }

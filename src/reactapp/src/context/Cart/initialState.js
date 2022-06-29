@@ -31,6 +31,7 @@ const initialState = {
     },
     is_virtual: false,
   },
+  isAddressNeedToUpdate: false,
 };
 
 export default initialState;

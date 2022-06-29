@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { func, string, object } from 'prop-types';
 import Select, { components } from 'react-select';
 import { formikDataShape } from '../../../../utils/propTypes';
@@ -20,13 +20,15 @@ function NovaPoshtaCitySelect({
   name,
   customStyles,
   cityRefField,
+  ...rest
 }) {
   const [selectList, setSelectList] = useState(options);
   const { setFieldValue, setFieldTouched } = formikData;
 
   const [value, setValue] = useState();
   const [selectInputValue, setInputValue] = useState('');
-  const selectRef = useRef();
+
+  const { onBlur, onFocus } = rest;
 
   const changeCityOptions = (inputValue) => {
     let cityList = [];
@@ -74,7 +76,9 @@ function NovaPoshtaCitySelect({
       setInputValue(inputValue);
     }
   };
-  const onFocus = () => value && selectRef.current.select.inputRef.select();
+  const onFocusHandler = () => {
+    onFocus();
+  };
 
   return (
     <div className="react-select pt-5 pb-3">
@@ -96,12 +100,13 @@ function NovaPoshtaCitySelect({
         value={value}
         inputValue={selectInputValue}
         filterOption={(selectOptions) => selectOptions}
-        onFocus={onFocus}
+        onFocus={onFocusHandler}
         components={{
           Input,
         }}
         isOptionDisabled={(option) => option.disabled}
         noOptionsMessage={() => __('No options')}
+        onBlur={onBlur}
       />
     </div>
   );

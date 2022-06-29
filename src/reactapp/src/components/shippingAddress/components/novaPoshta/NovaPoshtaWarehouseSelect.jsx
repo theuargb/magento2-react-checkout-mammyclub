@@ -16,12 +16,15 @@ function NovaPoshtaWarehouseSelect({
   formikData,
   customStyles,
   postRefField,
+  ...rest
 }) {
   const [selectList, setSelectList] = useState(options);
   const { setFieldValue, setFieldTouched } = formikData;
   const [selectValue, setSelectValue] = useState('void');
   const [isLoading, setIsLoading] = useState(false);
   const selectListEl = useRef(null);
+
+  const { onBlur, onFocus } = rest;
 
   const handleFormChange = (e) => {
     const newValue = e.label;
@@ -162,6 +165,8 @@ function NovaPoshtaWarehouseSelect({
           MenuList: CustomMenuList,
         }}
         filterOption={createFilter({ ignoreAccents: false })}
+        onBlur={onBlur}
+        onFocus={onFocus}
       />
     </div>
   );

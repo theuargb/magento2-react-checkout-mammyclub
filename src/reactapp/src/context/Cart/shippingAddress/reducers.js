@@ -16,3 +16,10 @@ export function setCartSelectedShippingAddress(state, shippingAddressId) {
     },
   };
 }
+
+export function setAddressNeedToUpdate(state, isAddressNeedToUpdate) {
+  return {
+    ...state,
+    isAddressNeedToUpdate,
+  };
+}

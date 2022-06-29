@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from 'react';
 import _get from 'lodash.get';
-import { object } from 'prop-types';
 import SelectInput from './PaymentMethodSelect';
 import { __ } from '../../../i18n';
 import { _objToArray } from '../../../utils';
@@ -8,7 +7,7 @@ import usePaymentMethodCartContext from '../hooks/usePaymentMethodCartContext';
 import usePaymentMethodFormContext from '../hooks/usePaymentMethodFormContext';
 import InfoPopups from '../../InfoPopups/InfoPopups';
 
-function PaymentMethodList({ methodRenderers }) {
+function PaymentMethodList() {
   const { fields, formikData } = usePaymentMethodFormContext();
   const { methodList, doCartContainShippingAddress } =
     usePaymentMethodCartContext();
@@ -32,7 +31,6 @@ function PaymentMethodList({ methodRenderers }) {
     // if (!methodRenderers[methodSelected]) {
     //   await submitHandler(methodSelected);
     // }
-    console.log(methodRenderers);
   };
 
   const methodListForSelect = [];
@@ -49,7 +47,6 @@ function PaymentMethodList({ methodRenderers }) {
     if (!isPaymentMethodSaved && methodList && doCartContainShippingAddress) {
       setFieldTouched(fields.code, true);
       setFieldValue(fields.code, methodListForSelect[0].value);
-      // submitHandler(methodListForSelect[0].value);
       saveInitialPaymentMethod(true);
     }
   }, [methodList, doCartContainShippingAddress]);
@@ -75,13 +72,5 @@ function PaymentMethodList({ methodRenderers }) {
     </div>
   );
 }
-
-PaymentMethodList.propTypes = {
-  methodRenderers: object,
-};
-
-PaymentMethodList.defaultProps = {
-  methodRenderers: {},
-};
 
 export default PaymentMethodList;

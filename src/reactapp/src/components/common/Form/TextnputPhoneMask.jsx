@@ -38,9 +38,14 @@ function TextInputPhoneMask({
   const hasFieldError = !!_get(formSectionErrors, relativeFieldName);
   const value = _get(formSectionValues, relativeFieldName, '') || '';
   const hasFieldTouched = !!_get(formSectionTouched, relativeFieldName);
-
+  const { onBlur } = rest;
   const [fieldInFocus, setFocusState] = useState(false);
   const hasError = hasFieldError && hasFieldTouched && !fieldInFocus;
+
+  const handleFieldBlur = () => {
+    setFocusState(false);
+    onBlur();
+  };
 
   return (
     <div className={`mt-4 form-control ${isHidden ? 'hidden' : ''}`}>
@@ -130,7 +135,7 @@ function TextInputPhoneMask({
                 );
               }
             }}
-            onBlur={() => setFocusState(false)}
+            onBlur={handleFieldBlur}
           />
         )}
       />

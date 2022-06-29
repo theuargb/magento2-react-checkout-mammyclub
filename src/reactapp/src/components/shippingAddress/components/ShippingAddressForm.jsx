@@ -1,6 +1,4 @@
-/* eslint-disable */
-import React, { useState } from 'react';
-import _get from 'lodash.get';
+import React, { useState, useEffect } from 'react';
 import { useFormikContext } from 'formik';
 import { node } from 'prop-types';
 import TextInput from '../../common/Form/TextInput';
@@ -12,12 +10,47 @@ import NovaPoshtaWarehouseSelect from './novaPoshta/NovaPoshtaWarehouseSelect';
 import NovaPoshtaAddressFieldSet from './novaPoshta/NovaPoshtaAddressFieldSet';
 import TextInputPhoneMask from '../../common/Form/TextnputPhoneMask';
 import useShippingAddressAppContext from '../hooks/useShippingAddressAppContext';
+import useShippingAddressCartContext from '../hooks/useShippingAddressCartContext';
+import useAddressSaveOnFieldChangeStatus from '../hooks/useAddressSaveOnFieldChangeStatus';
+import useSaveAddressAction from '../hooks/useSaveAddressAction';
 
 function ShippingAddressForm({ children }) {
   const { fields, formikData, handleKeyDown } =
     useShippingAddressFormikContext();
+  const { isAddressNeedToUpdate } = useShippingAddressCartContext();
 
   const { isLoggedIn } = useShippingAddressAppContext();
+  const { values } = useFormikContext();
+  const changeFieldStatusHandler = useAddressSaveOnFieldChangeStatus();
+  const formSubmit = useSaveAddressAction();
+
+  let addressToSave = values?.shipping_address;
+  const emailForGuestCart = values?.login?.email;
+  if (!isLoggedIn && emailForGuestCart) {
+    addressToSave = { ...addressToSave, new_customer_email: emailForGuestCart };
+  }
+
+  const handleAddressFieldOnBlur = () => {
+    changeFieldStatusHandler(addressToSave, 'blur');
+  };
+
+  const handleAddressFieldOnFocus = () => {
+    changeFieldStatusHandler(addressToSave, 'focus');
+  };
+
+  useEffect(() => {
+    console.log(isAddressNeedToUpdate);
+    if (isAddressNeedToUpdate) {
+      formSubmit(addressToSave);
+    }
+  }, [isAddressNeedToUpdate]);
+
+  /*  =======================================================================================  */
+  const selectedShippingMethod = values?.shipping_method?.methodCode;
+  const [selectedCityId, setSelectedCityId] = useState('');
+  const handleChangeCityId = (id) => {
+    setSelectedCityId(id);
+  };
   const customSelectStyles = {
     option: (provided, { isDisabled }) => ({
       ...provided,
@@ -80,21 +113,10 @@ function ShippingAddressForm({ children }) {
         padding: '0',
       };
     },
-    MenuList: (provided) => {
-      return {
-        ...provided,
-        overscrollBehavior: 'none',
-      };
-    },
-  };
-
-  const { values } = useFormikContext();
-
-  /*  =======================================================================================  */
-  const selectedShippingMethod = values?.shipping_method?.methodCode;
-  const [selectedCityId, setSelectedCityId] = useState('');
-  const handleChangeCityId = (id) => {
-    setSelectedCityId(id);
+    MenuList: (provided) => ({
+      ...provided,
+      overscrollBehavior: 'none',
+    }),
   };
   return (
     <>
@@ -104,12 +126,16 @@ function ShippingAddressForm({ children }) {
           formikData={formikData}
           label={__('Name')}
           onKeyDown={handleKeyDown}
+          onBlur={handleAddressFieldOnBlur}
+          onFocus={handleAddressFieldOnFocus}
         />
         <TextInput
           name={fields.lastname}
           label={__('Lastname')}
           formikData={formikData}
           onKeyDown={handleKeyDown}
+          onBlur={handleAddressFieldOnBlur}
+          onFocus={handleAddressFieldOnFocus}
         />
         <TextInputPhoneMask
           id="shipping_address.phone"
@@ -118,6 +144,8 @@ function ShippingAddressForm({ children }) {
           name={fields.phone}
           formikData={formikData}
           onKeyDown={handleKeyDown}
+          onBlur={handleAddressFieldOnBlur}
+          onFocus={handleAddressFieldOnFocus}
           type="tel"
         />
         <p className="text-gray-extralighter text-base mt-1">
@@ -134,6 +162,8 @@ function ShippingAddressForm({ children }) {
               name={fields.new_customer_email}
               formikData={formikData}
               onKeyDown={handleKeyDown}
+              onBlur={handleAddressFieldOnBlur}
+              onFocus={handleAddressFieldOnFocus}
             />
             <p className="text-gray-extralighter text-base mt-1">
               {__('Here we will send all documents confirming the purchase')}
@@ -149,6 +179,8 @@ function ShippingAddressForm({ children }) {
           cityRefField={fields.city_ref}
           handleChangeCityId={handleChangeCityId}
           customStyles={customSelectStyles}
+          onBlur={handleAddressFieldOnBlur}
+          onFocus={handleAddressFieldOnFocus}
         />
         {selectedShippingMethod === 'novaposhta_to_warehouse' && (
           <div>
@@ -159,6 +191,8 @@ function ShippingAddressForm({ children }) {
               postRefField={fields.warehouse_ref}
               customStyles={customSelectStyles}
               streetIdField={fields.street_ref}
+              onBlur={handleAddressFieldOnBlur}
+              onFocus={handleAddressFieldOnFocus}
             />
           </div>
         )}
@@ -167,6 +201,8 @@ function ShippingAddressForm({ children }) {
             <NovaPoshtaAddressFieldSet
               formikData={formikData}
               selectedCityId={selectedCityId}
+              onBlur={handleAddressFieldOnBlur}
+              onFocus={handleAddressFieldOnFocus}
             >
               <NovaPoshtaStreetSelect
                 formikData={formikData}
@@ -174,6 +210,8 @@ function ShippingAddressForm({ children }) {
                 customStyles={customSelectStyles}
                 cityId={selectedCityId}
                 streetRefField={fields.street_ref}
+                onBlur={handleAddressFieldOnBlur}
+                onFocus={handleAddressFieldOnFocus}
               />
             </NovaPoshtaAddressFieldSet>
           </div>
