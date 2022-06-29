@@ -1,6 +1,5 @@
 import cartItemsInfo from '../utility/query/cartItemsInfo';
 import cartPriceInfo from '../utility/query/cartPriceInfo';
-import cartBillingAddrInfo from '../utility/query/cartBillingAddrInfo';
 import cartShippingAddrInfo from '../utility/query/cartShippingAddrInfo';
 import cartPaymentMethodsInfo from '../utility/query/cartPaymentMethodsInfo';
 
@@ -15,7 +14,6 @@ export const CART_QUERY_PART = `
     }
     ${cartItemsInfo}
     ${cartPriceInfo}
-    ${cartBillingAddrInfo}
     ${cartShippingAddrInfo}
     ${cartPaymentMethodsInfo}
   }
