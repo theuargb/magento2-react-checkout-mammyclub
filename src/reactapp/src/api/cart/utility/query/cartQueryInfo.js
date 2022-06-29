@@ -1,4 +1,3 @@
-import cartBillingAddrInfo from './cartBillingAddrInfo';
 import cartItemsInfo from './cartItemsInfo';
 import cartPaymentMethodsInfo from './cartPaymentMethodsInfo';
 import cartPriceInfo from './cartPriceInfo';
@@ -13,7 +12,6 @@ export const CART_DATA_FRAGMENT = `
     code
   }
   ${cartItemsInfo}
-  ${cartBillingAddrInfo}
   ${cartShippingAddrInfo}
   ${cartPriceInfo}
   ${cartPaymentMethodsInfo}
