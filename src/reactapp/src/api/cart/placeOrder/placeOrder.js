@@ -5,12 +5,10 @@ import PLACE_ORDER_MUTATION from './mutation';
 import LocalStorage from '../../../utils/localStorage';
 
 export default async function placeOrder(dispatch, values) {
-  const { carrierCode, methodCode } = _get(values, 'shipping_method');
   const { code } = _get(values, 'payment_method');
+  console.log(values);
   const variables = {
     cartId: LocalStorage.getCartId(),
-    carrierCode,
-    methodCode,
     code,
   };
 

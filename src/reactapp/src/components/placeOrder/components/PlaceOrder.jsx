@@ -61,7 +61,7 @@ function PlaceOrder() {
         saveEmailAddressInfo предназначен для гостевой корзины, для зарегистрированных пользователей
         мыло пишется в атрибут new_customer_email как дополнительная информация в ордере
       */
-      if (isLoggedIn) {
+      if (!isLoggedIn) {
         await saveEmailAddressInfo(values);
       }
 
