@@ -137,7 +137,7 @@ function NovaPoshtaWarehouseSelect({
 
   return (
     <div className="react-select">
-      <p className="text-base text-gray mb-0.5">
+      <p className="text-base text-gray mb-0.5 pb-4">
         {__('Nova Poshta warehouse number')}
       </p>
       <Select

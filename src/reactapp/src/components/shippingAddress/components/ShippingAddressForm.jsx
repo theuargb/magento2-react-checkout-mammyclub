@@ -25,6 +25,7 @@ function ShippingAddressForm({ children }) {
   const formSubmit = useSaveAddressAction();
 
   let addressToSave = values?.shipping_address;
+  addressToSave = { ...addressToSave, billingSameAsShipping: true };
   const emailForGuestCart = values?.login?.email;
   if (!isLoggedIn && emailForGuestCart) {
     addressToSave = { ...addressToSave, new_customer_email: emailForGuestCart };
@@ -183,7 +184,7 @@ function ShippingAddressForm({ children }) {
           onFocus={handleAddressFieldOnFocus}
         />
         {selectedShippingMethod === 'novaposhta_to_warehouse' && (
-          <div>
+          <div className="pb-4">
             <NovaPoshtaWarehouseSelect
               selectedCityId={selectedCityId}
               formikData={formikData}
