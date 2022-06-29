@@ -12,17 +12,16 @@ import TextInputPhoneMask from '../../common/Form/TextnputPhoneMask';
 import useShippingAddressAppContext from '../hooks/useShippingAddressAppContext';
 import useShippingAddressCartContext from '../hooks/useShippingAddressCartContext';
 import useAddressSaveOnFieldChangeStatus from '../hooks/useAddressSaveOnFieldChangeStatus';
-import useSaveAddressAction from '../hooks/useSaveAddressAction';
 
 function ShippingAddressForm({ children }) {
   const { fields, formikData, handleKeyDown } =
     useShippingAddressFormikContext();
-  const { isAddressNeedToUpdate } = useShippingAddressCartContext();
+  const { setAddressNeedToUpdate, isAddressNeedToUpdate } =
+    useShippingAddressCartContext();
 
   const { isLoggedIn } = useShippingAddressAppContext();
   const { values } = useFormikContext();
   const changeFieldStatusHandler = useAddressSaveOnFieldChangeStatus();
-  const formSubmit = useSaveAddressAction();
 
   let addressToSave = values?.shipping_address;
   addressToSave = { ...addressToSave, billingSameAsShipping: true };
@@ -32,17 +31,18 @@ function ShippingAddressForm({ children }) {
   }
 
   const handleAddressFieldOnBlur = () => {
-    changeFieldStatusHandler(addressToSave, 'blur');
+    setAddressNeedToUpdate(true);
   };
 
   const handleAddressFieldOnFocus = () => {
-    changeFieldStatusHandler(addressToSave, 'focus');
+    setAddressNeedToUpdate(false);
   };
 
   useEffect(() => {
-    console.log(isAddressNeedToUpdate);
     if (isAddressNeedToUpdate) {
-      formSubmit(addressToSave);
+      changeFieldStatusHandler(addressToSave, 'blur');
+    } else {
+      changeFieldStatusHandler(addressToSave, 'focus');
     }
   }, [isAddressNeedToUpdate]);
 

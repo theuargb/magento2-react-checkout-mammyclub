@@ -14,7 +14,6 @@ mutation placeOrderMutation(
     }
   }
   
-  
   placeOrder(input: { 
     cart_id: $cartId 
   }) {

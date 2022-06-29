@@ -15,6 +15,9 @@ function CustomerNotes() {
   const handleAddressFieldOnBlur = () => {
     setAddressNeedToUpdate(true);
   };
+  const handleAddressFieldOnFocus = () => {
+    setAddressNeedToUpdate(false);
+  };
 
   const formikData = useMemo(
     () => ({
@@ -43,6 +46,7 @@ function CustomerNotes() {
         as="textarea"
         className="h-28 py-2"
         onBlur={handleAddressFieldOnBlur}
+        onFocus={handleAddressFieldOnFocus}
       />
     </div>
   );
