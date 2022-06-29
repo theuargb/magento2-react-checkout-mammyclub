@@ -17,12 +17,25 @@ mutation SetAddresses(
   $city_ref: String,
   $warehouse_ref: String,
   $new_customer_email: String,
-  $billingSameAsShipping: Boolean,
 ) {
   setBillingAddressOnCart(
     input: {
-      billing_address: { same_as_shipping: $billingSameAsShipping }
       cart_id: $cartId
+      billing_address: {
+        same_as_shipping: false 
+      	address: {
+          firstname: $firstname
+          lastname: $lastname
+          company: $company
+          street: $street
+          city: $city
+          region: $region
+          postcode: $zipcode
+          country_code: $country
+          telephone: $phone
+          save_in_address_book: false
+        }
+      }
     }
   ) {
     cart {

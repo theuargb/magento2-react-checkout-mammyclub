@@ -68,9 +68,7 @@ function PlaceOrder() {
       if (!isLoggedIn) {
         await saveEmailAddressInfo(values);
       }
-      if (false) {
-        await validateThenPlaceOrder(values);
-      }
+      await validateThenPlaceOrder(values);
 
       setPageLoader(false);
       setOrderReadyToPlace(false);

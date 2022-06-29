@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import _get from 'lodash.get';
 import SelectInput from './PaymentMethodSelect';
 import { __ } from '../../../i18n';
@@ -9,11 +9,9 @@ import InfoPopups from '../../InfoPopups/InfoPopups';
 
 function PaymentMethodList() {
   const { fields, formikData } = usePaymentMethodFormContext();
-  const { methodList, doCartContainShippingAddress } =
+  const { methodList, doCartContainShippingAddress, selectedPaymentMethod } =
     usePaymentMethodCartContext();
   const { setFieldValue, setFieldTouched } = formikData;
-
-  const [isPaymentMethodSaved, saveInitialPaymentMethod] = useState(false);
 
   const handlePaymentMethodSelection = async (event) => {
     const methodSelected = _get(methodList, `${event.target.value}.code`);
@@ -40,14 +38,19 @@ function PaymentMethodList() {
     methodListForSelect.push({ label, value });
   });
 
+  const isPaymentMethodSelected = selectedPaymentMethod.code.lenght > 0;
+
   /*  Сохранение метода оплаты.
   Если пользователем не будет выбран метод оплаты, то выбранный метод будет 
   первый из списка доступных */
   useMemo(() => {
-    if (!isPaymentMethodSaved && methodList && doCartContainShippingAddress) {
+    if (
+      !isPaymentMethodSelected &&
+      methodList &&
+      doCartContainShippingAddress
+    ) {
       setFieldTouched(fields.code, true);
       setFieldValue(fields.code, methodListForSelect[0].value);
-      saveInitialPaymentMethod(true);
     }
   }, [methodList, doCartContainShippingAddress]);
   /*  ========================================================================================  */
