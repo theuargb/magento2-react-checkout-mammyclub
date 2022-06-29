@@ -117,7 +117,7 @@ function CartItem({ item, isLastItem, actions }) {
                   type="submit"
                   className="rounded-full text-xxs leading-0 text-white "
                   formikData={formikData}
-                  style={{ background: 'red', width: '12px', height: '12px' }}
+                  style={{ background: 'red', width: '12px', height: '12px', padding: '3px' }}
                 >
                   <svg
                     version="1.1"
