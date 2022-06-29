@@ -50,6 +50,7 @@ const initialValues = {
   city_ref: '',
   warehouse_ref: '',
   new_customer_email: '',
+  customer_notes: '',
 };
 
 const requiredMessage = __('%1 - required field');
@@ -74,6 +75,7 @@ const initValidationSchema = {
   region: YupString().nullable(),
   country: YupString().required(requiredMessage),
   isSameAsShipping: YupBoolean(),
+  customer_notes: YupString().nullable(),
 };
 
 const addressIdInCache = _toString(LocalStorage.getCustomerShippingAddressId());

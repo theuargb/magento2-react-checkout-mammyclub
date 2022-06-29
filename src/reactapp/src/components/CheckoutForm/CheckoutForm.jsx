@@ -12,7 +12,7 @@ import ShippingMethodsForm from '../shippingMethod';
 import StickyRightSidebar from '../StickyRightSidebar';
 import CheckoutAgreements from '../checkoutAgreements';
 import CheckoutFormWrapper from './CheckoutFormWrapper';
-import OrderAdditionals from '../additionals/OrderAdditionals';
+import CustomerNotes from '../shippingAddress/components/customerNotes/CustomerNotes';
 import { aggregatedQueryRequest } from '../../api';
 import useCheckoutFormAppContext from './hooks/useCheckoutFormAppContext';
 import useCheckoutFormCartContext from './hooks/useCheckoutFormCartContext';
@@ -82,7 +82,7 @@ function CheckoutForm() {
                   {/* <BillingAddress /> */}
                   <PaymentMethod />
                   {/* <CouponCode /> */}
-                  <OrderAdditionals />
+                  <CustomerNotes />
                   <PlaceOrder />
                 </AddressWrapper>
               </div>
