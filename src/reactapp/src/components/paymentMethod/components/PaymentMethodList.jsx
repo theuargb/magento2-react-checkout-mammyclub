@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import _get from 'lodash.get';
 import SelectInput from './PaymentMethodSelect';
 import { __ } from '../../../i18n';
@@ -12,6 +12,7 @@ function PaymentMethodList() {
   const { methodList, doCartContainShippingAddress, selectedPaymentMethod } =
     usePaymentMethodCartContext();
   const { setFieldValue, setFieldTouched } = formikData;
+  const [isPaymentMethodSaved, saveInitialPaymentMethod] = useState(false);
 
   const handlePaymentMethodSelection = async (event) => {
     const methodSelected = _get(methodList, `${event.target.value}.code`);
@@ -21,7 +22,6 @@ function PaymentMethodList() {
     }
     await setFieldValue(fields.code, methodSelected);
     setFieldTouched(fields.code, true);
-
     // don't need to save payment method in case the method opted has a custom
     // renderer. This is because custom payment renderers may have custom
     // functionalities associated with them. So if in case they want to perform
@@ -45,12 +45,14 @@ function PaymentMethodList() {
   первый из списка доступных */
   useMemo(() => {
     if (
+      !isPaymentMethodSaved &&
       !isPaymentMethodSelected &&
       methodList &&
       doCartContainShippingAddress
     ) {
       setFieldTouched(fields.code, true);
       setFieldValue(fields.code, methodListForSelect[0].value);
+      saveInitialPaymentMethod(true);
     }
   }, [methodList, doCartContainShippingAddress]);
   /*  ========================================================================================  */

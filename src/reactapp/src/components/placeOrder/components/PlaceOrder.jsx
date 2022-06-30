@@ -45,18 +45,24 @@ function PlaceOrder() {
       setErrorMessage(__('Please provide your shipping address information.'));
       focusOnPhoneErrorElement();
       scrollToElement(SHIPPING_ADDR_FORM);
+      setOrderReadyToPlace(false);
+      setPageLoader(false);
       return;
     }
 
     if (hasBillingAddressErrors(errors, values, isVirtualCart)) {
       setErrorMessage(__('Please provide your billing address information.'));
       focusOnFormErrorElement(BILLING_ADDR_FORM, errors);
+      setOrderReadyToPlace(false);
+      setPageLoader(false);
       return;
     }
 
     if (hasTermsAndConditionsAgreed(errors)) {
       setErrorMessage(__('Please agree with the terms & conditions'));
       scrollToElement(CHECKOUT_AGREEMENTS_FORM);
+      setPageLoader(false);
+      setOrderReadyToPlace(false);
       return;
     }
 
