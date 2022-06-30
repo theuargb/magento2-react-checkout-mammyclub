@@ -13,7 +13,7 @@ export default function useAddressSaveOnFieldChangeStatus() {
         if (!isAddressFieldInFocus.current) {
           setAddress(addressToSave);
         }
-      }, 0);
+      }, 50);
     }
     if (status === 'focus') {
       isAddressFieldInFocus.current = true;

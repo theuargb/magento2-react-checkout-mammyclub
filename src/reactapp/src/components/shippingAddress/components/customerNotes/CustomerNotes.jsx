@@ -45,6 +45,7 @@ function CustomerNotes() {
         placeholder=""
         as="textarea"
         className="h-28 py-2"
+        style={{ resize: 'none' }}
         onBlur={handleAddressFieldOnBlur}
         onFocus={handleAddressFieldOnFocus}
       />
