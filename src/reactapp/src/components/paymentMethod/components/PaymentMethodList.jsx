@@ -1,13 +1,16 @@
 import React, { useMemo, useState } from 'react';
+import { object } from 'prop-types';
 import _get from 'lodash.get';
+/* eslint-disable */
 import SelectInput from './PaymentMethodSelect';
 import { __ } from '../../../i18n';
 import { _objToArray } from '../../../utils';
 import usePaymentMethodCartContext from '../hooks/usePaymentMethodCartContext';
 import usePaymentMethodFormContext from '../hooks/usePaymentMethodFormContext';
-import InfoPopups from '../../InfoPopups/InfoPopups';
+import InfoPopups from '../../cmsPages/components/InfoPopups';
+import CmsContent from '../../cmsPages/CmsContent';
 
-function PaymentMethodList() {
+function PaymentMethodList({ cmsHtmlContent }) {
   const { fields, formikData } = usePaymentMethodFormContext();
   const { methodList, doCartContainShippingAddress, selectedPaymentMethod } =
     usePaymentMethodCartContext();
@@ -22,13 +25,6 @@ function PaymentMethodList() {
     }
     await setFieldValue(fields.code, methodSelected);
     setFieldTouched(fields.code, true);
-    // don't need to save payment method in case the method opted has a custom
-    // renderer. This is because custom payment renderers may have custom
-    // functionalities associated with them. So if in case they want to perform
-    // save payment operation upon selection, then they need to deal with it there.
-    // if (!methodRenderers[methodSelected]) {
-    //   await submitHandler(methodSelected);
-    // }
   };
 
   const methodListForSelect = [];
@@ -72,10 +68,18 @@ function PaymentMethodList() {
         positionStyles="absolute top-0 right-0 mt-6 mr-6"
         label={__('Payment')}
         className="absolute top-0 right-0"
-        CmsPageIdentifier="kontent-popapa-oplata"
+        cmsHtmlContent={cmsHtmlContent}
       />
     </div>
   );
 }
+
+PaymentMethodList.propTypes = {
+  cmsHtmlContent: object,
+};
+
+PaymentMethodList.defaultProps = {
+  cmsHtmlContent: {},
+};
 
 export default PaymentMethodList;

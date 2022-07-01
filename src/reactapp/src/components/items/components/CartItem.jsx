@@ -54,7 +54,7 @@ function CartItem({ item, isLastItem, actions }) {
 
           <div className="text-xs text-left w-1/2 sm:w-auto md:w-1/2 text-link flex flex-col	justify-between">
             <a
-              class="break-words"
+              className="break-words"
               href={item.canonicalUrl}
               rel="noreferrer"
               target="_blank"
@@ -63,8 +63,8 @@ function CartItem({ item, isLastItem, actions }) {
             </a>
             <div className="mt-2 text-old_gray-main whitespace-nowrap">
               {item?.productConfigurableOptions
-                ? item.productConfigurableOptions.map((option) => (
-                    <div>
+                ? item.productConfigurableOptions.map((option, index) => (
+                    <div key={index}>
                       {`${option.option_label} : ${option.value_label}`}
                     </div>
                   ))

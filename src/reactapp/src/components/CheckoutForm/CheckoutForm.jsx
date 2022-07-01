@@ -13,21 +13,26 @@ import StickyRightSidebar from '../StickyRightSidebar';
 import CheckoutAgreements from '../checkoutAgreements';
 import CheckoutFormWrapper from './CheckoutFormWrapper';
 import CustomerNotes from '../shippingAddress/components/customerNotes/CustomerNotes';
-import { aggregatedQueryRequest } from '../../api';
+import { aggregatedQueryRequest, fetchCmsPagesRequest } from '../../api';
 import useCheckoutFormAppContext from './hooks/useCheckoutFormAppContext';
 import useCheckoutFormCartContext from './hooks/useCheckoutFormCartContext';
 import { __ } from '../../i18n';
 import LiqPayWidget from '../LiqPayWidget/LiqPayWidget';
-
-import CmsContent from '../magentoBlocks/CmsContent';
+import CmsContent from '../cmsPages/CmsContent';
 
 function CheckoutForm() {
   const [initialData, setInitialData] = useState(false);
+  const [cmsPagesContent, setCmsPagesContent] = useState(null);
   const { pageLoader, appDispatch, setPageLoader, storeAggregatedAppStates } =
     useCheckoutFormAppContext();
 
   const { orderId, storeAggregatedCartStates } = useCheckoutFormCartContext();
 
+  const cmsPagesIds = [
+    'pravyj-sajdbar-chekauta',
+    'kontent-popapa-oplata',
+    'kontent-popapa-dostavka',
+  ];
   /**
    * Collect App, Cart data when the page loads.
    */
@@ -36,7 +41,8 @@ function CheckoutForm() {
       try {
         setPageLoader(true);
         const data = await aggregatedQueryRequest(appDispatch);
-
+        const loadedCmsPagesContent = await fetchCmsPagesRequest(cmsPagesIds);
+        setCmsPagesContent(loadedCmsPagesContent);
         await storeAggregatedCartStates(data);
         await storeAggregatedAppStates(data);
         setInitialData(data);
@@ -76,12 +82,14 @@ function CheckoutForm() {
                 <AddressWrapper>
                   <ShippingAddress>
                     <Login />
-                    <ShippingMethodsForm />
+                    <ShippingMethodsForm
+                      cmsHtmlContent={cmsPagesContent?.cmsDeliveryPopup}
+                    />
                   </ShippingAddress>
 
-                  {/* <BillingAddress /> */}
-                  <PaymentMethod />
-                  {/* <CouponCode /> */}
+                  <PaymentMethod
+                    cmsHtmlContent={cmsPagesContent?.cmsPaymentPopup}
+                  />
                   <CustomerNotes />
                   <PlaceOrder />
                 </AddressWrapper>
@@ -103,7 +111,7 @@ function CheckoutForm() {
                 <Totals />
                 <CheckoutAgreements />
               </div>
-              <CmsContent CmsIdentifier="pravyj-sajdbar-chekauta" />
+              <CmsContent cmsHtmlContent={cmsPagesContent?.cmsRightSidebar} />
             </StickyRightSidebar>
           </div>
           {pageLoader && <PageLoader />}

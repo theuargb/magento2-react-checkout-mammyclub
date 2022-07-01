@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-
+import { object } from 'prop-types';
 import ShippingMethodMemorized from './ShippingMethodMemorized';
 import useFormikMemorizer from '../../hook/useFormikMemorizer';
 import { SHIPPING_METHOD } from '../../config';
@@ -16,9 +16,8 @@ import { SHIPPING_METHOD } from '../../config';
  * Using useFormikContext hook render the component almost always. So use the
  * memorized data here inside the child components.
  */
-function ShippingMethodsForm() {
+function ShippingMethodsForm({ cmsHtmlContent }) {
   const formikSectionData = useFormikMemorizer(SHIPPING_METHOD);
-
   const shippingFormikData = useMemo(
     () => ({
       ...formikSectionData,
@@ -26,7 +25,20 @@ function ShippingMethodsForm() {
     }),
     [formikSectionData]
   );
-  return <ShippingMethodMemorized formikData={shippingFormikData} />;
+  return (
+    <ShippingMethodMemorized
+      cmsHtmlContent={cmsHtmlContent}
+      formikData={shippingFormikData}
+    />
+  );
 }
+
+ShippingMethodsForm.propTypes = {
+  cmsHtmlContent: object,
+};
+
+ShippingMethodsForm.defaultProps = {
+  cmsHtmlContent: {},
+};
 
 export default ShippingMethodsForm;

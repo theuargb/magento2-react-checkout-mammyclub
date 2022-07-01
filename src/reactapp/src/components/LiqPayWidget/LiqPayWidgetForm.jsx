@@ -20,7 +20,6 @@ const LiqPayWidgetForm = ({ liqPayData, orderId }) => {
           .on('liqpay.callback', function (data) {
             if (data.status === 'success') {
               setLiqPayStatus(true);
-              console.log('liqPay success');
             }
             fetch(
               `${config.baseUrl}/rest/V1/liqpay/getRedirectUrl?orderId=${orderId}`,
@@ -37,14 +36,10 @@ const LiqPayWidgetForm = ({ liqPayData, orderId }) => {
                   location.replace(data);
                 }, 10000)
               );
-
-            console.log('liqPay callback');
           })
           .on('liqpay.ready', function (data) {
-            console.log('liqPay ready');
           })
           .on('liqpay.close', function (data) {
-            console.log('liqPay close', data);
             window.location.replace(config.successPageRedirectUrl);
           });
       })();

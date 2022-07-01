@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
+import { object } from 'prop-types';
 import _get from 'lodash.get';
 import { useFormikContext } from 'formik';
-
 import PaymentMethodMemorized from './PaymentMethodMemorized';
 import useFormikMemorizer from '../../hook/useFormikMemorizer';
 import { CHECKOUT_AGREEMENTS_FORM, PAYMENT_METHOD_FORM } from '../../config';
@@ -18,7 +18,7 @@ import { CHECKOUT_AGREEMENTS_FORM, PAYMENT_METHOD_FORM } from '../../config';
  * Using useFormikContext hook render the component almost always. So use the
  * memorized data here inside the child components.
  */
-function PaymentMethod() {
+function PaymentMethod({ cmsHtmlContent }) {
   const { values } = useFormikContext();
   const formikSectionData = useFormikMemorizer(PAYMENT_METHOD_FORM);
   const agreementsValues = _get(values, CHECKOUT_AGREEMENTS_FORM);
@@ -32,7 +32,20 @@ function PaymentMethod() {
     [formikSectionData, agreementsValues]
   );
 
-  return <PaymentMethodMemorized formikData={paymentFormikData} />;
+  return (
+    <PaymentMethodMemorized
+      cmsHtmlContent={cmsHtmlContent}
+      formikData={paymentFormikData}
+    />
+  );
 }
+
+PaymentMethod.propTypes = {
+  cmsHtmlContent: object,
+};
+
+PaymentMethod.defaultProps = {
+  cmsHtmlContent: {},
+};
 
 export default PaymentMethod;

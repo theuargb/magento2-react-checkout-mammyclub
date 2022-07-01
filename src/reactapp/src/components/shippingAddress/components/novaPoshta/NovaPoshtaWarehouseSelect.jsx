@@ -104,7 +104,6 @@ function NovaPoshtaWarehouseSelect({
       if (selectListEl) {
         cache.clearAll();
         selectListEl.current.recomputeRowHeights();
-        console.log('recomputed');
       }
     }, []);
     
@@ -122,7 +121,7 @@ function NovaPoshtaWarehouseSelect({
       );
     }else{
       return(
-        <p class="text-sm py-2 px-3">{ __('No options')}</p>
+        <p className="text-sm py-2 px-3">{ __('No options')}</p>
       )
     }
     

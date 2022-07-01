@@ -1,13 +1,14 @@
 import React, { useState, useMemo } from 'react';
+import { object } from 'prop-types';
 import SelectInput from './ShippingMethodSelect';
 import { SHIPPING_METHOD } from '../../../config';
 import useShippingMethodFormContext from '../hooks/useShippingMethodFormContext';
 import useShippingMethodCartContext from '../hooks/useShippingMethodCartContext';
 import { _objToArray } from '../../../utils';
 import { __ } from '../../../i18n';
-import InfoPopups from '../../InfoPopups/InfoPopups';
+import InfoPopups from '../../cmsPages/components/InfoPopups';
 
-function ShippingMethodList() {
+function ShippingMethodList({ cmsHtmlContent }) {
   const {
     fields,
     submitHandler,
@@ -16,7 +17,6 @@ function ShippingMethodList() {
     setFieldTouched,
   } = useShippingMethodFormContext();
   const { methodsAvailable, methodList } = useShippingMethodCartContext();
-
   const { carrierCode: methodCarrierCode, methodCode: methodMethodCode } =
     selectedMethod || {};
   const selectedMethodId = `${methodCarrierCode}__${methodMethodCode}`;
@@ -24,7 +24,6 @@ function ShippingMethodList() {
   // const [selectedShippingMethod, changeShippingMethod] = useState('');
   const [isShippingMethodChangeByUser, setShippingMethodChangeByUser] =
     useState(false);
-
   const handleShippingMethodSelection = async (event) => {
     const methodSelected = methodList[event.target.value];
     const { carrierCode, methodCode, id: methodId } = methodSelected;
@@ -73,10 +72,18 @@ function ShippingMethodList() {
         positionStyles="absolute top-0 right-0 mt-6 pr-2"
         label={__('Delivery')}
         className="absolute top-0 right-0"
-        CmsPageIdentifier="kontent-popapa-dostavka"
+        cmsHtmlContent={cmsHtmlContent}
       />
     </div>
   );
 }
+
+ShippingMethodList.propTypes = {
+  cmsHtmlContent: object,
+};
+
+ShippingMethodList.defaultProps = {
+  cmsHtmlContent: {},
+};
 
 export default ShippingMethodList;

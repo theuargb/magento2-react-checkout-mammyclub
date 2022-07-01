@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
-import { string } from 'prop-types';
+import { object, string } from 'prop-types';
 import styled from 'styled-components';
-import { __ } from '../../i18n';
-import { fetchCmsPageRequest } from '../../api';
+import { __ } from '../../../i18n';
 
-const InfoPopups = ({ CmsPageIdentifier, label, positionStyles }) => {
+const InfoPopups = ({ cmsHtmlContent, label, positionStyles }) => {
   const StyledPopup = styled(Popup)`
     @keyframes animateModal {
       0% {
@@ -63,26 +62,16 @@ const InfoPopups = ({ CmsPageIdentifier, label, positionStyles }) => {
       max-height: 50vh;
     }
   `;
-
-  const [htmlEl, setHtmlContent] = useState('');
-  const identifier = CmsPageIdentifier;
-
-  /* eslint-disable */
-  const fetchContent = async (identifier) => {
-    const data = await fetchCmsPageRequest(identifier);
-    const decodedHtml = htmlDecode(data.content);
-    setHtmlContent(decodedHtml);
-  };
-
+  const [htmlEl, setHtmlContent] = useState(null);
   const htmlDecode = (input) => {
     const doc = new DOMParser().parseFromString(input, 'text/html');
     return doc.documentElement.textContent;
   };
 
-  if (!htmlEl) {
-    fetchContent(identifier);
+  if (!htmlEl && cmsHtmlContent?.content) {
+    const decodedHtml = htmlDecode(cmsHtmlContent?.content);
+    setHtmlContent(decodedHtml);
   }
-
   return (
     <StyledPopup
       trigger={
@@ -118,15 +107,13 @@ const InfoPopups = ({ CmsPageIdentifier, label, positionStyles }) => {
 };
 
 InfoPopups.propTypes = {
-  CmsPageIdentifier: string,
+  cmsHtmlContent: object,
   label: string,
   positionStyles: string,
 };
 
 InfoPopups.defaultProps = {
-  CmsPageIdentifier: '',
-  label: '',
-  positionStyles: '',
+  cmsHtmlContent: {},
 };
 
 export default React.memo(InfoPopups);
