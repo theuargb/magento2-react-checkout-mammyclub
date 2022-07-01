@@ -56,13 +56,12 @@ function CartItemList() {
               isLastItem={index === cartItems.length - 1}
             />
           ))}
+          {hasError && (
+            <p className="text-red-500 text-xs absolute top-12 z-20 right-0 bg-white">
+              {__('The requested qty is not available')}
+            </p>
+          )}
         </div>
-
-        {hasError && (
-          <p className="text-red-500 text-xs absolute top-12 bg-white">
-            {__('The requested qty is not available')}
-          </p>
-        )}
       </div>
     </div>
   );
