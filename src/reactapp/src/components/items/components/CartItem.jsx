@@ -14,8 +14,7 @@ function CartItem({ item, isLastItem, actions }) {
   const qtyField = `${item.id}_qty`;
   const itemQtyField = `${CART_ITEMS_FORM}.${qtyField}`;
 
-  /* eslint-disable */
-  const { subTotal, hasSubTotal } = useTotalsCartContext();
+  const { hasSubTotal } = useTotalsCartContext();
 
   const [isQtyChange, setQtyChange] = useState(false);
 
@@ -42,7 +41,10 @@ function CartItem({ item, isLastItem, actions }) {
     >
       <div className="bg-white col-span-2 relative z-10">
         <div className="py-2 pl-2 flex">
-          <div className="flex-none w-1/2 sm:w-auto md:w-1/2 h-20 mr-1 shrink-0">
+          <div
+            className="flex-none w-1/2 sm:w-auto md:w-1/2 h-20 mr-1 shrink-0"
+            style={{ maxWidth: '50%' }}
+          >
             <a href={item.canonicalUrl} rel="noreferrer" target="_blank">
               <img
                 className="object-contain object-top w-full h-full"
@@ -63,8 +65,8 @@ function CartItem({ item, isLastItem, actions }) {
             </a>
             <div className="mt-2 text-old_gray-main whitespace-nowrap">
               {item?.productConfigurableOptions
-                ? item.productConfigurableOptions.map((option, index) => (
-                    <div key={index}>
+                ? item.productConfigurableOptions.map((option) => (
+                    <div key={option.value_label}>
                       {`${option.option_label} : ${option.value_label}`}
                     </div>
                   ))
@@ -117,7 +119,12 @@ function CartItem({ item, isLastItem, actions }) {
                   type="submit"
                   className="rounded-full text-xxs leading-0 text-white "
                   formikData={formikData}
-                  style={{ background: 'red', width: '12px', height: '12px', padding: '3px' }}
+                  style={{
+                    background: 'red',
+                    width: '12px',
+                    height: '12px',
+                    padding: '3px',
+                  }}
                 >
                   <svg
                     version="1.1"
