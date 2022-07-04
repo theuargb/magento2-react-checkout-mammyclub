@@ -47,7 +47,7 @@ function CartItemList() {
           <div className="p-2 font-normal">{__('Total')}</div>
         </div>
 
-        <div className="text-center border-b-2 border-container-lightner">
+        <div className="text-center border-b-2 border-container-lightner relative">
           {cartItems.map((cartItem, index) => (
             <CartItem
               item={cartItem}
@@ -57,7 +57,7 @@ function CartItemList() {
             />
           ))}
           {hasError && (
-            <p className="text-red-500 text-xs absolute top-12 z-20 right-0 bg-white">
+            <p className="text-red-500 text-xs absolute top-0 z-20 right-0 bg-white">
               {__('The requested qty is not available')}
             </p>
           )}

@@ -1,19 +1,18 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useFormikContext } from 'formik';
 import { object } from 'prop-types';
 import _get from 'lodash.get';
-/* eslint-disable */
 import SelectInput from './PaymentMethodSelect';
 import { __ } from '../../../i18n';
 import { _objToArray } from '../../../utils';
 import usePaymentMethodCartContext from '../hooks/usePaymentMethodCartContext';
 import usePaymentMethodFormContext from '../hooks/usePaymentMethodFormContext';
 import InfoPopups from '../../cmsPages/components/InfoPopups';
-import CmsContent from '../../cmsPages/CmsContent';
 
 function PaymentMethodList({ cmsHtmlContent }) {
   const { fields, formikData } = usePaymentMethodFormContext();
-  const { methodList, doCartContainShippingAddress, selectedPaymentMethod } =
-    usePaymentMethodCartContext();
+  const { values } = useFormikContext();
+  const { methodList, selectedPaymentMethod } = usePaymentMethodCartContext();
   const { setFieldValue, setFieldTouched } = formikData;
   const [isPaymentMethodSaved, saveInitialPaymentMethod] = useState(false);
 
@@ -39,18 +38,13 @@ function PaymentMethodList({ cmsHtmlContent }) {
   /*  Сохранение метода оплаты.
   Если пользователем не будет выбран метод оплаты, то выбранный метод будет 
   первый из списка доступных */
-  useMemo(() => {
-    if (
-      !isPaymentMethodSaved &&
-      !isPaymentMethodSelected &&
-      methodList &&
-      doCartContainShippingAddress
-    ) {
+  useEffect(() => {
+    if (!isPaymentMethodSaved && !isPaymentMethodSelected && methodList) {
       setFieldTouched(fields.code, true);
-      setFieldValue(fields.code, methodListForSelect[0].value);
+      values.payment_method.code = methodListForSelect[0].value;
       saveInitialPaymentMethod(true);
     }
-  }, [methodList, doCartContainShippingAddress]);
+  }, [methodList]);
   /*  ========================================================================================  */
 
   return (

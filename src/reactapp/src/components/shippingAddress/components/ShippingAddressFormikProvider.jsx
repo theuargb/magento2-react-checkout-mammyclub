@@ -41,7 +41,7 @@ const initialValues = {
   firstname: '',
   lastname: '',
   street: [''],
-  phone: 'undefined',
+  phone: '',
   zipcode: '',
   city: '',
   region: '',

@@ -26,7 +26,8 @@ function ShippingAddressForm({ children }) {
   let addressToSave = values?.shipping_address;
   addressToSave = { ...addressToSave, billingSameAsShipping: true };
   const emailForGuestCart = values?.login?.email;
-  if (!isLoggedIn && emailForGuestCart) {
+  const newCustomerEmailValue = values?.shipping_address?.new_customer_email;
+  if (isLoggedIn && emailForGuestCart && !newCustomerEmailValue) {
     addressToSave = { ...addressToSave, new_customer_email: emailForGuestCart };
   }
 
@@ -37,6 +38,15 @@ function ShippingAddressForm({ children }) {
   const handleAddressFieldOnFocus = () => {
     setAddressNeedToUpdate(false);
   };
+
+  const [addressFormSubmited, setAddressFormSubmited] = useState(false);
+
+  useEffect(() => {
+    if (!addressFormSubmited && values?.shipping_address?.phone && isLoggedIn) {
+      setAddressNeedToUpdate(true);
+      setAddressFormSubmited(true);
+    }
+  }, [values]);
 
   useEffect(() => {
     if (isAddressNeedToUpdate) {
