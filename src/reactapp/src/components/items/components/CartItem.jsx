@@ -33,6 +33,11 @@ function CartItem({ item, isLastItem, actions }) {
     updateQty();
   };
 
+  const handleInputOnKeyDown = (e) => {
+    handleKeyDown(e);
+    setQtyChange(false);
+  };
+
   return (
     <div
       className={`relative grid grid-cols-4 lg:grid-cols-5 items-center  ${
@@ -46,11 +51,19 @@ function CartItem({ item, isLastItem, actions }) {
             style={{ maxWidth: '50%' }}
           >
             <a href={item.canonicalUrl} rel="noreferrer" target="_blank">
-              <img
-                className="object-contain object-top w-full h-full"
-                alt={item.productSku}
-                src={item.productSmallImgUrl}
-              />
+              <picture className="object-contain object-top w-full h-full">
+                <source
+                  className="object-contain object-top w-full h-full"
+                  srcSet={item.productSmallWebpImgUrl}
+                  type="image/webp"
+                />
+                <img
+                  className="object-contain object-top w-full h-full"
+                  src={item.productSmallImgUrl}
+                  alt={item.productSku}
+                  title={item.productName}
+                />
+              </picture>
             </a>
           </div>
 
@@ -91,7 +104,7 @@ function CartItem({ item, isLastItem, actions }) {
           width="w-10"
           name={itemQtyField}
           formikData={formikData}
-          onKeyDown={handleKeyDown}
+          onKeyDown={handleInputOnKeyDown}
           id={`${itemQtyField}-desktop`}
           className="-mt-4 block mx-auto text-center form-select"
           onChange={handleQtyUpdate}
