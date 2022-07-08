@@ -34,12 +34,14 @@ function CheckoutFormWrapper({ initialData, children }) {
       return _emptyFunc();
     }
 
-    const { cart } = initialData;
+    const { cart, customer } = initialData;
     const email = _get(cart, 'email', '');
     const appliedCoupon = _get(cart, 'appliedCoupon');
     const billingAddress = _get(cart, 'billing_address', {});
     const shippingAddress = _get(cart, 'shipping_address', {});
     const customerPhone = _get(cart, 'phone');
+    const customerFirstname = _get(customer, 'customer.firstname', '') ?? '';
+    const customerLastName = _get(customer, 'customer.lastname', '') ?? '';
     const shippingMethod = _get(cart, 'selected_shipping_method') || {};
 
     /**
@@ -55,6 +57,8 @@ function CheckoutFormWrapper({ initialData, children }) {
         ...shippingAddressValues,
         ...shippingAddress,
         phone: `${customerPhone}`,
+        firstname: `${customerFirstname}`,
+        lastname: `${customerLastName}`,
       });
       await setFieldValue(SHIPPING_METHOD, {
         methodCode: shippingMethod.methodCode || '',
