@@ -24,6 +24,7 @@ items {
       small_image {
         label
         url
+        url_webp
       }
       canonical_url
     }
@@ -37,6 +38,7 @@ items {
       small_image {
         label
         url
+        url_webp
       }
       canonical_url
     }
@@ -50,6 +52,7 @@ items {
       small_image {
         label
         url
+        url_webp
       }
       canonical_url
     }
@@ -63,6 +66,7 @@ items {
       small_image {
         label
         url
+        url_webp
       }
       canonical_url
     }
@@ -92,6 +96,7 @@ items {
       small_image {
         label
         url
+        url_webp
       }
       canonical_url
     }
