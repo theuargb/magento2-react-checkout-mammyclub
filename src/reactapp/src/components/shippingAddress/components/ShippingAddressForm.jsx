@@ -63,11 +63,16 @@ function ShippingAddressForm({ children }) {
     setSelectedCityId(id);
   };
   const customSelectStyles = {
-    option: (provided, { isDisabled }) => ({
+    option: (provided, { isDisabled, isSelected }) => ({
       ...provided,
       fontSize: '13px',
       lineHeight: '13px',
       color: isDisabled ? '#000' : '',
+      backgroundColor: isSelected ? 'rgb(222 235 255)' : 'rgb(255,255,255)',
+      '&:hover': {
+        backgroundColor: 'rgb(222 235 255)',
+        cursor: 'pointer',
+      },
     }),
     control: (provided) => ({
       ...provided,

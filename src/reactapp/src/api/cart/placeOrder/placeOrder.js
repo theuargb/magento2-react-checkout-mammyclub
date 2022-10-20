@@ -6,7 +6,6 @@ import LocalStorage from '../../../utils/localStorage';
 
 export default async function placeOrder(dispatch, values) {
   const { code } = _get(values, 'payment_method');
-  console.log(values);
   const variables = {
     cartId: LocalStorage.getCartId(),
     code,

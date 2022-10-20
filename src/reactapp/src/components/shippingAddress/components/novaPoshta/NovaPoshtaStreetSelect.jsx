@@ -17,7 +17,7 @@ function NovaPoshtaStreetSelect({
 }) {
   const [selectList, setSelectList] = useState(options);
   const { setFieldValue, setFieldTouched } = formikData;
-
+  const [streetValue, setStreetValue] = useState(null);
   const { onBlur, onFocus } = rest;
 
   const handleFormChange = (e) => {
@@ -26,6 +26,13 @@ function NovaPoshtaStreetSelect({
     setFieldTouched(name, newValue);
     setFieldValue(name, newValue);
     setFieldValue(streetRefField, streetRef);
+    setStreetValue(e);
+  };
+  const clearSelectedValue = () => {
+    setStreetValue(null);
+    setFieldTouched(name, '');
+    setFieldValue(name, '');
+    setFieldValue(streetRefField, '');
   };
   const changeStreetOptions = (inputValue) => {
     const streetsList = [];
@@ -59,20 +66,24 @@ function NovaPoshtaStreetSelect({
   };
   useEffect(() => {
     changeStreetOptions('');
+    clearSelectedValue();
   }, [cityId]);
+
   return (
     <div className="react-select">
       <p className="text-base text-gray mb-0.5">{__('Street')}</p>
       <Select
+        value={streetValue}
         options={selectList}
         onInputChange={(inputValue) => changeStreetOptions(inputValue)}
         onChange={(e) => handleFormChange(e)}
         inputId="city"
-        placeholder=""
+        placeholder={null}
         styles={customStyles}
         noOptionsMessage={() => __('No options')}
         onBlur={onBlur}
         onFocus={onFocus}
+        onMenuOpen={clearSelectedValue}
       />
     </div>
   );
