@@ -16,6 +16,8 @@ function CartItem({ item, isLastItem, actions }) {
     setHasError,
   } = useItemsFormContext();
 
+  const { setFieldValue } = formikData;
+
   const qtyField = `${item.id}_qty`;
   const itemQtyField = `${CART_ITEMS_FORM}.${qtyField}`;
   const { hasSubTotal } = useTotalsCartContext();
@@ -43,6 +45,7 @@ function CartItem({ item, isLastItem, actions }) {
   };
 
   if (hasError) {
+    setFieldValue(itemQtyField, item.quantity);
     setTimeout(() => {
       setHasError(false);
     }, 3000);
