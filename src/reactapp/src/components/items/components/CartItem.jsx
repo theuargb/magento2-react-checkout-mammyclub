@@ -8,12 +8,16 @@ import useItemsFormContext from '../hooks/useItemsFormContext';
 import useTotalsCartContext from '../../totals/hooks/useTotalsCartContext';
 
 function CartItem({ item, isLastItem, actions }) {
-  const { formikData, handleKeyDown, itemUpdateHandler } =
-    useItemsFormContext();
+  const {
+    formikData,
+    handleKeyDown,
+    itemUpdateHandler,
+    hasError,
+    setHasError,
+  } = useItemsFormContext();
 
   const qtyField = `${item.id}_qty`;
   const itemQtyField = `${CART_ITEMS_FORM}.${qtyField}`;
-
   const { hasSubTotal } = useTotalsCartContext();
 
   const [isQtyChange, setQtyChange] = useState(false);
@@ -37,6 +41,12 @@ function CartItem({ item, isLastItem, actions }) {
     handleKeyDown(e);
     setQtyChange(false);
   };
+
+  if (hasError) {
+    setTimeout(() => {
+      setHasError(false);
+    }, 3000);
+  }
 
   return (
     <div
@@ -99,16 +109,24 @@ function CartItem({ item, isLastItem, actions }) {
       </div>
 
       <div className="align-middle bg-white">
-        <TextInput
-          min="0"
-          width="w-10"
-          name={itemQtyField}
-          formikData={formikData}
-          onKeyDown={handleInputOnKeyDown}
-          id={`${itemQtyField}-desktop`}
-          className="-mt-4 block mx-auto text-center form-select"
-          onChange={handleQtyUpdate}
-        />
+        <div>
+          <TextInput
+            min="0"
+            width="w-10"
+            name={itemQtyField}
+            formikData={formikData}
+            onKeyDown={handleInputOnKeyDown}
+            id={`${itemQtyField}-desktop`}
+            className="-mt-4 block mx-auto text-center form-select"
+            onChange={handleQtyUpdate}
+          />
+          {hasError && hasError.includes(item.productSku) && (
+            <p className="text-red-500 text-xs absolute top-0 z-20 right-0 bg-white">
+              {__('The requested qty is not available')}
+            </p>
+          )}
+        </div>
+
         {isQtyChange && (
           <button
             className="text-xs text-link"

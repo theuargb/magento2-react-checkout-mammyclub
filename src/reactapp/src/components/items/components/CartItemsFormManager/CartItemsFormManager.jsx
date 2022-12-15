@@ -91,7 +91,7 @@ function CartItemsFormManager({ children, formikData }) {
       /* =================================================================================================== */
     } catch (error) {
       console.error(error, 'error');
-      setHasError(true);
+      setHasError(error.message);
       setErrorMessage(error.message);
       setPageLoader(false);
     }

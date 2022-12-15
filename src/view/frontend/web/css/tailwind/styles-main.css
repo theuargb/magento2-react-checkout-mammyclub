@@ -427,7 +427,7 @@ Add the correct display in Chrome and Safari.
   .checkout-wrapper *, .checkout-wrapper ::before, .checkout-wrapper ::after {
     --tw-border-opacity: 1;
     border-color: rgba(229, 231, 235, var(--tw-border-opacity)); }
-  .checkout-wrapper [type='text'], .checkout-wrapper [type='email'], .checkout-wrapper [type='password'], .checkout-wrapper [type='number'], .checkout-wrapper [type='tel'], .checkout-wrapper [type='time'], .checkout-wrapper [multiple], .checkout-wrapper textarea, .checkout-wrapper select {
+  .checkout-wrapper [type='text'], .checkout-wrapper [type='email'], .checkout-wrapper [type='url'], .checkout-wrapper [type='password'], .checkout-wrapper [type='number'], .checkout-wrapper [type='tel'], .checkout-wrapper [type='time'], .checkout-wrapper [multiple], .checkout-wrapper textarea, .checkout-wrapper select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -442,7 +442,7 @@ Add the correct display in Chrome and Safari.
     font-size: 1rem;
     line-height: 1.5rem;
     --tw-shadow: 0 0 #0000; }
-  .checkout-wrapper [type='text']:focus, .checkout-wrapper [type='email']:focus, .checkout-wrapper [type='password']:focus, .checkout-wrapper [type='number']:focus, .checkout-wrapper [type='tel']:focus, .checkout-wrapper [type='time']:focus, .checkout-wrapper [multiple]:focus, .checkout-wrapper textarea:focus, .checkout-wrapper select:focus {
+  .checkout-wrapper [type='text']:focus, .checkout-wrapper [type='email']:focus, .checkout-wrapper [type='url']:focus, .checkout-wrapper [type='password']:focus, .checkout-wrapper [type='number']:focus, .checkout-wrapper [type='tel']:focus, .checkout-wrapper [type='time']:focus, .checkout-wrapper [multiple]:focus, .checkout-wrapper textarea:focus, .checkout-wrapper select:focus {
     outline: 2px solid transparent;
     outline-offset: 2px;
     --tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);
@@ -876,8 +876,6 @@ Add the correct display in Chrome and Safari.
     left: 0px !important; }
   .checkout-wrapper .top-0 {
     top: 0px !important; }
-  .checkout-wrapper .top-12 {
-    top: 3rem !important; }
   .checkout-wrapper .right-0 {
     right: 0px !important; }
   .checkout-wrapper .z-0 {
@@ -1108,6 +1106,8 @@ Add the correct display in Chrome and Safari.
     -moz-user-select: none !important;
     -ms-user-select: none !important;
     user-select: none !important; }
+  .checkout-wrapper .resize {
+    resize: both !important; }
   .checkout-wrapper .grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   .checkout-wrapper .grid-cols-4 {
@@ -1161,6 +1161,8 @@ Add the correct display in Chrome and Safari.
     overflow-y: auto !important; }
   .checkout-wrapper .whitespace-nowrap {
     white-space: nowrap !important; }
+  .checkout-wrapper .break-words {
+    overflow-wrap: break-word !important; }
   .checkout-wrapper .rounded {
     border-radius: 0.25rem !important; }
   .checkout-wrapper .rounded-md {
@@ -1470,6 +1472,8 @@ Add the correct display in Chrome and Safari.
     --tw-sepia: var(--tw-empty,/*!*/ /*!*/) !important;
     --tw-drop-shadow: var(--tw-empty,/*!*/ /*!*/) !important;
     filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important; }
+  .checkout-wrapper .blur {
+    --tw-blur: blur(8px) !important; }
   .checkout-wrapper .transition-all {
     transition-property: all !important;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
@@ -1563,8 +1567,6 @@ Add the correct display in Chrome and Safari.
       margin-right: 1rem !important; }
     .checkout-wrapper .md\:ml-2 {
       margin-left: 0.5rem !important; }
-    .checkout-wrapper .md\:block {
-      display: block !important; }
     .checkout-wrapper .md\:grid {
       display: grid !important; }
     .checkout-wrapper .md\:hidden {

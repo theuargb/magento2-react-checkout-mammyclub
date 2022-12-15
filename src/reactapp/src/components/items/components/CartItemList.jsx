@@ -6,8 +6,7 @@ import { _abs } from '../../../utils';
 import useItemsFormContext from '../hooks/useItemsFormContext';
 
 function CartItemList() {
-  const { cartItems, setFieldValue, setFieldTouched, hasError, setHasError } =
-    useItemsFormContext();
+  const { cartItems, setFieldValue, setFieldTouched } = useItemsFormContext();
   /**
    * Handler function deals with qty update.
    *
@@ -24,12 +23,6 @@ function CartItemList() {
     const fieldName = `items.${event.target.name}`;
     setFieldValue(fieldName, undefined);
   };
-
-  if (hasError) {
-    setTimeout(() => {
-      setHasError(false);
-    }, 3000);
-  }
 
   return (
     <div className="">
@@ -56,11 +49,6 @@ function CartItemList() {
               isLastItem={index === cartItems.length - 1}
             />
           ))}
-          {hasError && (
-            <p className="text-red-500 text-xs absolute top-0 z-20 right-0 bg-white">
-              {__('The requested qty is not available')}
-            </p>
-          )}
         </div>
       </div>
     </div>
