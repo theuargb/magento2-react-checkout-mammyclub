@@ -21,7 +21,6 @@ function ShippingMethodList({ cmsHtmlContent }) {
     selectedMethod || {};
   const selectedMethodId = `${methodCarrierCode}__${methodMethodCode}`;
 
-  // const [selectedShippingMethod, changeShippingMethod] = useState('');
   const [isShippingMethodChangeByUser, setShippingMethodChangeByUser] =
     useState(false);
   const handleShippingMethodSelection = async (event) => {
@@ -61,7 +60,13 @@ function ShippingMethodList({ cmsHtmlContent }) {
   }
 
   return (
-    <div className="py-4 border-b-2 border-container-lightner relative">
+    <div
+      className={`py-4 ${
+        methodCarrierCode === methodList[Object.keys(methodList)[0]]?.carrierCode
+          ? ''
+          : 'border-b-2'
+      } border-container-lightner relative`}
+    >
       <SelectInput
         label={__('Shipping method')}
         name="shippingMethod"

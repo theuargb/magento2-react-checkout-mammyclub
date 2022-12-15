@@ -186,18 +186,19 @@ function ShippingAddressForm({ children }) {
             </p>
           </div>
         )}
-
-        {/* ////////////////////////////////////////////// */}
         {children}
-        <NovaPoshtaCitySelect
-          formikData={formikData}
-          name={fields.city}
-          cityRefField={fields.city_ref}
-          handleChangeCityId={handleChangeCityId}
-          customStyles={customSelectStyles}
-          onBlur={handleAddressFieldOnBlur}
-          onFocus={handleAddressFieldOnFocus}
-        />
+        {selectedShippingMethod !== 'flatrate' && (
+          <NovaPoshtaCitySelect
+            formikData={formikData}
+            name={fields.city}
+            cityRefField={fields.city_ref}
+            handleChangeCityId={handleChangeCityId}
+            customStyles={customSelectStyles}
+            onBlur={handleAddressFieldOnBlur}
+            onFocus={handleAddressFieldOnFocus}
+          />
+        )}
+
         {selectedShippingMethod === 'novaposhta_to_warehouse' && (
           <div className="pb-4">
             <NovaPoshtaWarehouseSelect
