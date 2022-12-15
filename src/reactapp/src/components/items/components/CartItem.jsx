@@ -116,11 +116,12 @@ function CartItem({ item, isLastItem, actions }) {
           <TextInput
             min="0"
             width="w-10"
+            type="nubmer"
             name={itemQtyField}
             formikData={formikData}
             onKeyDown={handleInputOnKeyDown}
             id={`${itemQtyField}-desktop`}
-            className="-mt-4 block mx-auto text-center form-select"
+            className="-mt-4 block mx-auto text-center form-select outline-none	"
             onChange={handleQtyUpdate}
           />
           {hasError && hasError.includes(item.productSku) && (
