@@ -37,7 +37,7 @@ class Success implements HttpGetActionInterface
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->getConfig()->getTitle()->set(__('Order Placed'));
+        $resultPage->getConfig()->getTitle()->set(__('Order placed'));
         return $resultPage;
     }
 }

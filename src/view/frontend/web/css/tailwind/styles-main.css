@@ -222,7 +222,9 @@ Add the correct display in Chrome and Safari.
  */
   /**
  * different styles can be found at https://tailwindcss-forms.vercel.app/
- **/ }
+ **/
+  /* Chrome, Safari, Edge, Opera */
+  /* Firefox */ }
   .checkout-wrapper *,
   .checkout-wrapper ::before,
   .checkout-wrapper ::after {
@@ -370,9 +372,6 @@ Add the correct display in Chrome and Safari.
   .checkout-wrapper input::-moz-placeholder, .checkout-wrapper textarea::-moz-placeholder {
     opacity: 1;
     color: #9ca3af; }
-  .checkout-wrapper input:-ms-input-placeholder, .checkout-wrapper textarea:-ms-input-placeholder {
-    opacity: 1;
-    color: #9ca3af; }
   .checkout-wrapper input::placeholder,
   .checkout-wrapper textarea::placeholder {
     opacity: 1;
@@ -456,9 +455,6 @@ Add the correct display in Chrome and Safari.
   .checkout-wrapper input::-moz-placeholder, .checkout-wrapper textarea::-moz-placeholder {
     color: #6b7280;
     opacity: 1; }
-  .checkout-wrapper input:-ms-input-placeholder, .checkout-wrapper textarea:-ms-input-placeholder {
-    color: #6b7280;
-    opacity: 1; }
   .checkout-wrapper input::placeholder, .checkout-wrapper textarea::placeholder {
     color: #6b7280;
     opacity: 1; }
@@ -494,7 +490,6 @@ Add the correct display in Chrome and Safari.
     background-origin: border-box;
     -webkit-user-select: none;
     -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
     flex-shrink: 0;
     height: 1rem;
@@ -574,8 +569,6 @@ Add the correct display in Chrome and Safari.
     line-height: 13px; }
   .checkout-wrapper .form-input::-moz-placeholder {
     font-size: 1em; }
-  .checkout-wrapper .form-input:-ms-input-placeholder {
-    font-size: 1em; }
   .checkout-wrapper .form-input::placeholder {
     font-size: 1em; }
   .checkout-wrapper .form-select > option {
@@ -584,8 +577,13 @@ Add the correct display in Chrome and Safari.
     text-indent: 1px; }
   .checkout-wrapper input[type='text']:focus {
     box-shadow: none; }
+  .checkout-wrapper input::-webkit-outer-spin-button,
+  .checkout-wrapper input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; }
+  .checkout-wrapper input[type=number] {
+    -moz-appearance: textfield; }
   .checkout-wrapper .page.messages {
-    position: -webkit-sticky;
     position: sticky;
     z-index: 10;
     top: 0px; }
@@ -867,7 +865,6 @@ Add the correct display in Chrome and Safari.
   .checkout-wrapper .relative {
     position: relative !important; }
   .checkout-wrapper .sticky {
-    position: -webkit-sticky !important;
     position: sticky !important; }
   .checkout-wrapper .inset-0 {
     top: 0px !important;
@@ -1048,63 +1045,35 @@ Add the correct display in Chrome and Safari.
     --tw-scale-y: 1 !important;
     transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important; }
 
-@-webkit-keyframes spin {
-  to {
-    transform: rotate(360deg); } }
-
 @keyframes spin {
   to {
     transform: rotate(360deg); } }
-
-@-webkit-keyframes ping {
-  75%, 100% {
-    transform: scale(2);
-    opacity: 0; } }
 
 @keyframes ping {
   75%, 100% {
     transform: scale(2);
     opacity: 0; } }
 
-@-webkit-keyframes pulse {
-  50% {
-    opacity: .5; } }
-
 @keyframes pulse {
   50% {
     opacity: .5; } }
 
-@-webkit-keyframes bounce {
-  0%, 100% {
-    transform: translateY(-25%);
-    -webkit-animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-    animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
-  50% {
-    transform: none;
-    -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-    animation-timing-function: cubic-bezier(0, 0, 0.2, 1); } }
-
 @keyframes bounce {
   0%, 100% {
     transform: translateY(-25%);
-    -webkit-animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
     animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
   50% {
     transform: none;
-    -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
     animation-timing-function: cubic-bezier(0, 0, 0.2, 1); } }
   .checkout-wrapper .animate-spin {
-    -webkit-animation: spin 1s linear infinite !important;
     animation: spin 1s linear infinite !important; }
   .checkout-wrapper .animate-pulse {
-    -webkit-animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
     animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important; }
   .checkout-wrapper .cursor-pointer {
     cursor: pointer !important; }
   .checkout-wrapper .select-none {
     -webkit-user-select: none !important;
     -moz-user-select: none !important;
-    -ms-user-select: none !important;
     user-select: none !important; }
   .checkout-wrapper .resize {
     resize: both !important; }
@@ -1182,6 +1151,8 @@ Add the correct display in Chrome and Safari.
     border-width: 4px !important; }
   .checkout-wrapper .border {
     border-width: 1px !important; }
+  .checkout-wrapper .focus\:border-0:focus {
+    border-width: 0px !important; }
   .checkout-wrapper .border-t-2 {
     border-top-width: 2px !important; }
   .checkout-wrapper .border-t-4 {
@@ -1555,7 +1526,6 @@ Add the correct display in Chrome and Safari.
       line-height: 1.25rem !important; } }
   @media (min-width: 768px) {
     .checkout-wrapper .md\:sticky {
-      position: -webkit-sticky !important;
       position: sticky !important; }
     .checkout-wrapper .md\:order-2 {
       order: 2 !important; }

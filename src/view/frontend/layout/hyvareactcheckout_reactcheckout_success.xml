@@ -6,6 +6,6 @@
         </referenceContainer>
 
         <referenceContainer name="footer-content-top" remove="true" />
-
+        <referenceBlock name="page.main.title" remove="true"/>
     </body>
 </page>
