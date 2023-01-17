@@ -120,7 +120,7 @@ function TextInputPhoneMask({
               hasError ? 'border-dashed border-red-500' : ''
             } ${className} ${width || 'w-full'}`}
             {...rest}
-            mask="+389(99)999-99-99"
+            mask={__('+389(99)999-99-99')}
             type="tel"
             onChange={(event) => {
               const newValue = event.target.value;
@@ -128,7 +128,7 @@ function TextInputPhoneMask({
               setFieldValue(name, newValue);
               actions.saveAddress();
               setFocusState(true);
-              if (newValue !== '+380(__)___-__-__') {
+              if (newValue !== __('+380(__)___-__-__')) {
                 event.target.classList.remove(
                   'border-dashed',
                   'border-red-500'

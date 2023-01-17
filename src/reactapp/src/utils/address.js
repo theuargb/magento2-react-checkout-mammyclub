@@ -12,6 +12,8 @@ export const initialCountry =
   RootElement.getDefaultCountryId() ||
   config.defaultCountry;
 
+export const storeCode = RootElement.getStoreCode() || 'default';
+
 export const billingSameAsShippingField = `${BILLING_ADDR_FORM}.isSameAsShipping`;
 
 export function isCartAddressValid(address) {
