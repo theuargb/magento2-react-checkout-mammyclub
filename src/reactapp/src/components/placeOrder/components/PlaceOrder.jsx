@@ -26,7 +26,7 @@ import TermsInfo from './TermsInfo';
 
 function PlaceOrder() {
   const validateThenPlaceOrder = usePlaceOrder();
-  const { values, errors, validateForm } = useFormikContext();
+  const { values, errors } = useFormikContext();
   const saveEmailAddressInfo = useEmailInfoSave();
   const { isVirtualCart } = usePlaceOrderCartContext();
   const { setMessage, setErrorMessage, setPageLoader } =
@@ -40,7 +40,6 @@ function PlaceOrder() {
 
   const handlePerformPlaceOrder = async () => {
     setMessage(false);
-    validateForm();
     if (hasShippingAddressErrors(errors?.shipping_address?.phone)) {
       setErrorMessage(__('Please provide your shipping address information.'));
       focusOnPhoneErrorElement();
