@@ -13,7 +13,8 @@ import StickyRightSidebar from '../StickyRightSidebar';
 import CheckoutAgreements from '../checkoutAgreements';
 import CheckoutFormWrapper from './CheckoutFormWrapper';
 import CustomerNotes from '../shippingAddress/components/customerNotes/CustomerNotes';
-import { aggregatedQueryRequest, fetchCmsPagesRequest } from '../../api';
+import { aggregatedQueryRequest } from '../../api';
+import { fetchCmsPagesAction } from '../../context/App/cms/actions';
 import useCheckoutFormAppContext from './hooks/useCheckoutFormAppContext';
 import useCheckoutFormCartContext from './hooks/useCheckoutFormCartContext';
 import { __ } from '../../i18n';
@@ -41,7 +42,10 @@ function CheckoutForm() {
       try {
         setPageLoader(true);
         const data = await aggregatedQueryRequest(appDispatch);
-        const loadedCmsPagesContent = await fetchCmsPagesRequest(cmsPagesIds);
+        const loadedCmsPagesContent = await fetchCmsPagesAction(
+          appDispatch,
+          cmsPagesIds
+        );
         setCmsPagesContent(loadedCmsPagesContent);
         await storeAggregatedCartStates(data);
         await storeAggregatedAppStates(data);

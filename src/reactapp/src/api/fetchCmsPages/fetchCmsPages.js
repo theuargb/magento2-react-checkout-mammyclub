@@ -2,7 +2,7 @@ import getQuery from './query';
 import modifier from './modifier';
 import sendRequest from '../sendRequest';
 
-export default async function fetchCmsPages(cmsPagesIds) {
+export default async function fetchCmsPages(dispatch, cmsPagesIds) {
   const variables = {
     firstIdentifier: cmsPagesIds[0],
     secondIdentifier: cmsPagesIds[1],
@@ -11,5 +11,5 @@ export default async function fetchCmsPages(cmsPagesIds) {
 
   const query = getQuery(variables);
 
-  return modifier(await sendRequest(null, { query, variables }));
+  return modifier(await sendRequest(dispatch, { query, variables }));
 }
