@@ -62,7 +62,8 @@ function ShippingMethodList({ cmsHtmlContent }) {
   return (
     <div
       className={`py-4 ${
-        methodCarrierCode === methodList[Object.keys(methodList)[0]]?.carrierCode
+        methodCarrierCode ===
+        methodList[Object.keys(methodList)[0]]?.carrierCode
           ? ''
           : 'border-b-2'
       } border-container-lightner relative`}

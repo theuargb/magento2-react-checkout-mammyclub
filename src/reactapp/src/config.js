@@ -73,7 +73,7 @@ export const config = {
   baseUrl:
     env.baseUrl ||
     RootElement.getBaseUrl() ||
-    'https://mammyclub.perspective.net.ua',
+    'https://new-shop.mammyclub.com',
   signInToken: getConfigFromLocalStorage(activeSource.token),
   hyvaStorageSource: magentoDataSources.hyvaCheckoutCacheStorage,
 };

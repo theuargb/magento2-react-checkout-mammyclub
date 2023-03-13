@@ -12,6 +12,7 @@ import TextInputPhoneMask from '../../common/Form/TextnputPhoneMask';
 import useShippingAddressAppContext from '../hooks/useShippingAddressAppContext';
 import useShippingAddressCartContext from '../hooks/useShippingAddressCartContext';
 import useAddressSaveOnFieldChangeStatus from '../hooks/useAddressSaveOnFieldChangeStatus';
+import InPostGeoWidgetForm from './inPost/InPostGeoWidgetForm';
 
 function ShippingAddressForm({ children }) {
   const { fields, formikData, handleKeyDown } =
@@ -233,6 +234,9 @@ function ShippingAddressForm({ children }) {
               />
             </NovaPoshtaAddressFieldSet>
           </div>
+        )}
+        {selectedShippingMethod === 'inpostpaczkomaty' && (
+          <InPostGeoWidgetForm formikData={formikData} />
         )}
       </div>
     </>
