@@ -20,7 +20,7 @@ function ShippingAddressForm({ children }) {
     useShippingAddressCartContext();
 
   const { isLoggedIn } = useShippingAddressAppContext();
-  const { values } = useFormikContext();
+  const { values, validateForm } = useFormikContext();
   const changeFieldStatusHandler = useAddressSaveOnFieldChangeStatus();
 
   let addressToSave = values?.shipping_address;
@@ -46,6 +46,7 @@ function ShippingAddressForm({ children }) {
       setAddressNeedToUpdate(true);
       setAddressFormSubmited(true);
     }
+    validateForm();
   }, [values]);
 
   useEffect(() => {
