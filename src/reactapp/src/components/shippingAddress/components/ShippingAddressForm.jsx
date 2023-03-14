@@ -24,8 +24,11 @@ const npMethods = ['novaposhta_to_warehouse', 'novaposhta_to_door'];
 function ShippingAddressForm({ children }) {
   const { fields, formikData, handleKeyDown } =
     useShippingAddressFormikContext();
-  const { setAddressNeedToUpdate, isAddressNeedToUpdate } =
-    useShippingAddressCartContext();
+  const {
+    setAddressNeedToUpdate,
+    isAddressNeedToUpdate,
+    cartSelectedShippingMethod,
+  } = useShippingAddressCartContext();
 
   const { isLoggedIn } = useShippingAddressAppContext();
   const { values, validateForm } = useFormikContext();
@@ -149,12 +152,22 @@ function ShippingAddressForm({ children }) {
   };
 
   const isSelectedShippingMethodInPost = useMemo(
-    () => inPostMethods.some((method) => method === selectedShippingMethod),
-    [selectedShippingMethod]
+    () =>
+      inPostMethods.some(
+        (method) =>
+          method === selectedShippingMethod ||
+          method === cartSelectedShippingMethod
+      ),
+    [selectedShippingMethod, cartSelectedShippingMethod]
   );
   const isSelectedShippingMethodNp = useMemo(
-    () => npMethods.some((method) => method === selectedShippingMethod),
-    [selectedShippingMethod]
+    () =>
+      npMethods.some(
+        (method) =>
+          method === selectedShippingMethod ||
+          method === cartSelectedShippingMethod
+      ),
+    [selectedShippingMethod, cartSelectedShippingMethod]
   );
 
   return (

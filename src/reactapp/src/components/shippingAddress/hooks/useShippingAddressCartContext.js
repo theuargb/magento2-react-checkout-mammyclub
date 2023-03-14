@@ -15,6 +15,7 @@ export default function useShippingAddressCartContext() {
       billing_address: cartBillingAddress,
       shipping_address: cartShippingAddress,
       selected_shipping_address: selectedAddressId,
+      selected_shipping_method: cartSelectedShippingMethod,
     } = cart;
     const {
       setCartBillingAddress,
@@ -30,6 +31,7 @@ export default function useShippingAddressCartContext() {
     return {
       cartInfo: cart,
       isAddressNeedToUpdate,
+      cartSelectedShippingMethod,
       selectedAddressId,
       cartBillingAddress,
       cartShippingAddress,
