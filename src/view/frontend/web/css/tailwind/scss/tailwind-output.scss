@@ -1242,8 +1242,16 @@ body {
   top: 0px !important;
 }
 
+.top-2 {
+  top: 0.5rem !important;
+}
+
 .right-0 {
   right: 0px !important;
+}
+
+.left-1 {
+  left: 0.25rem !important;
 }
 
 .z-0 {
@@ -1362,6 +1370,10 @@ body {
   margin-top: 0.125rem !important;
 }
 
+.-mt-1 {
+  margin-top: -0.25rem !important;
+}
+
 .-mt-4 {
   margin-top: -1rem !important;
 }
@@ -1388,6 +1400,10 @@ body {
 
 .mb-0 {
   margin-bottom: 0px !important;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem !important;
 }
 
 .mb-3 {
@@ -1454,6 +1470,10 @@ body {
   display: none !important;
 }
 
+.h-1 {
+  height: 0.25rem !important;
+}
+
 .h-4 {
   height: 1rem !important;
 }
@@ -1500,6 +1520,10 @@ body {
 
 .min-h-screen {
   min-height: 100vh !important;
+}
+
+.w-1 {
+  width: 0.25rem !important;
 }
 
 .w-4 {
@@ -1676,6 +1700,10 @@ body {
   flex-wrap: wrap !important;
 }
 
+.content-center {
+  align-content: center !important;
+}
+
 .items-end {
   align-items: flex-end !important;
 }
@@ -1798,6 +1826,10 @@ body {
 
 .focus\:border-0:focus {
   border-width: 0px !important;
+}
+
+.border-t-0 {
+  border-top-width: 0px !important;
 }
 
 .border-t-2 {
@@ -1932,6 +1964,10 @@ body {
   padding: 0px !important;
 }
 
+.p-1 {
+  padding: 0.25rem !important;
+}
+
 .p-2 {
   padding: 0.5rem !important;
 }
@@ -2041,6 +2077,10 @@ body {
 
 .pl-2 {
   padding-left: 0.5rem !important;
+}
+
+.pl-4 {
+  padding-left: 1rem !important;
 }
 
 .text-left {

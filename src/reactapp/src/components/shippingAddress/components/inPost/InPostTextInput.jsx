@@ -19,7 +19,7 @@ const InPostTextInput = ({ id, name, type, className, label, formikData }) => {
   const value = _get(formSectionValues, relativeFieldName, '') || '';
   return (
     <form onSubmit={formik.handleSubmit}>
-      <label htmlFor={id}>
+      <label htmlFor={id} className="mb-0">
         <p className="text-base text-gray">{label}</p>
 
         <input
@@ -33,6 +33,8 @@ const InPostTextInput = ({ id, name, type, className, label, formikData }) => {
             setFieldTouched(name, newValue);
             setFieldValue(name, newValue);
           }}
+          style={{ textIndent: '0px' }}
+          disabled="true"
         />
       </label>
     </form>

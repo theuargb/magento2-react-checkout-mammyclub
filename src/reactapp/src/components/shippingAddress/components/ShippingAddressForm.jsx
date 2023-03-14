@@ -19,6 +19,7 @@ const inPostMethods = [
   'inpostpaczkomatypobranie',
   'inpostpaczkomatykurier',
 ];
+const npMethods = ['novaposhta_to_warehouse', 'novaposhta_to_door'];
 
 function ShippingAddressForm({ children }) {
   const { fields, formikData, handleKeyDown } =
@@ -147,6 +148,10 @@ function ShippingAddressForm({ children }) {
     () => inPostMethods.some((method) => method === selectedShippingMethod),
     [selectedShippingMethod]
   );
+  const isSelectedShippingMethodNp = useMemo(
+    () => npMethods.some((method) => method === selectedShippingMethod),
+    [selectedShippingMethod]
+  );
 
   return (
     <>
@@ -201,7 +206,7 @@ function ShippingAddressForm({ children }) {
           </div>
         )}
         {children}
-        {selectedShippingMethod !== 'flatrate' && (
+        {isSelectedShippingMethodNp && (
           <NovaPoshtaCitySelect
             formikData={formikData}
             name={fields.city}
