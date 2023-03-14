@@ -44,13 +44,13 @@ const InPostGeoWidgetForm = ({ formikData, type }) => {
 
       setPointSelected(true);
       setMessageOnWidget({
-        message: __('Zapisano punkt'),
+        message: __('The point has been recorded'),
         type: 'success',
       });
     } else if (0 in response?.payment_type) {
       setMessageOnWidget({
         message: __(
-          'Wybrany punkt odbioru nie obsługuje płatności przy odbiorze.'
+          'The selected pickup point does not support payment on delivery'
         ),
         type: 'error',
       });
@@ -65,7 +65,7 @@ const InPostGeoWidgetForm = ({ formikData, type }) => {
 
       setPointSelected(true);
       setMessageOnWidget({
-        message: __('Zapisano punkt'),
+        message: __('The point has been recorded'),
         type: 'success',
       });
     }
