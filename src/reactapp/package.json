@@ -97,6 +97,7 @@
     "prettier": "^2.5.1",
     "react-app-rewired": "^2.1.9",
     "react-dev-utils": "^12.0.0",
-    "tailwindcss": "^2.2.19"
+    "tailwindcss": "^2.2.19",
+    "typescript": "^4.9.5"
   }
 }

@@ -57,6 +57,11 @@ function ShippingAddressForm({ children }) {
     validateForm();
   }, [values]);
 
+  const selectedShippingMethod = useMemo(
+    () => values?.shipping_method?.methodCode,
+    [values]
+  );
+
   useEffect(() => {
     if (isAddressNeedToUpdate) {
       changeFieldStatusHandler(addressToSave, 'blur');
@@ -66,7 +71,6 @@ function ShippingAddressForm({ children }) {
   }, [isAddressNeedToUpdate]);
 
   /*  =======================================================================================  */
-  const selectedShippingMethod = values?.shipping_method?.methodCode;
   const [selectedCityId, setSelectedCityId] = useState('');
   const handleChangeCityId = (id) => {
     setSelectedCityId(id);

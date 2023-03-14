@@ -60,7 +60,7 @@ function InPostAddressFieldSet({ formikData, isPointSelected }) {
         className="border-0 p-0 m-0 text-base  mb-0.5 w-full"
         type="hidden"
       />
-      <p className="text-gray my-2 text-base">{__('Selected Point: ')}</p>
+      <p className="text-gray my-2 text-base">{__('Selected Point:')}</p>
       <ul>
         <li className="relative pl-4 flex flex-wrap content-center align-center mb-0 w-full">
           <span className="absolute left-1 top-2 w-1 h-1 bg-old_green-main flex" />

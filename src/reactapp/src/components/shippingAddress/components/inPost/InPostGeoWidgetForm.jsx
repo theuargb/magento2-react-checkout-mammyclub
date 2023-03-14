@@ -65,11 +65,11 @@ const InPostGeoWidgetForm = ({ formikData, type }) => {
   };
 
   return (
-    <div>
+    <div className="relative pt-5">
       {message?.message && (
-        <div>
+        <div className="absolute -top-2 left-0">
           <p
-            className={`px-2 py-1 ${
+            className={` py-1 ${
               message.type === 'error' ? 'text-red-500' : 'text-green'
             }`}
           >

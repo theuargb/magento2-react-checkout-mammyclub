@@ -34,7 +34,7 @@ const InPostTextInput = ({ id, name, type, className, label, formikData }) => {
             setFieldValue(name, newValue);
           }}
           style={{ textIndent: '0px' }}
-          disabled="true"
+          disabled
         />
       </label>
     </form>
