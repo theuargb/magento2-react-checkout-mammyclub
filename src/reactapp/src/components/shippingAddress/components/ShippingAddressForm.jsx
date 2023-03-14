@@ -260,6 +260,7 @@ function ShippingAddressForm({ children }) {
           <InPostGeoWidgetForm
             formikData={formikData}
             type={selectedShippingMethod === 'inpostpaczkomaty' ? 1 : 0}
+            updateAddressAction={handleAddressFieldOnBlur}
           />
         )}
       </div>

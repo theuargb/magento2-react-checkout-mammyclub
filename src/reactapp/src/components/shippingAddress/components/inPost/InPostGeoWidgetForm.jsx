@@ -6,11 +6,12 @@ import InPostAddressFieldSet from './InPostAddressFieldSet';
 import useShippingAddressFormikContext from '../../hooks/useShippingAddressFormikContext';
 import { __ } from '../../../../i18n';
 
-const InPostGeoWidgetForm = ({ formikData, type }) => {
+const InPostGeoWidgetForm = ({ formikData, type, ...rest }) => {
   const { setFieldValue } = formikData;
   const { fields } = useShippingAddressFormikContext();
   const [message, setMessage] = useState({});
   const [pointSelected, setPointSelected] = useState(false);
+  const { updateAddressAction } = rest;
 
   const setMessageOnWidget = (messageObj) => {
     setMessage(messageObj);
@@ -48,6 +49,9 @@ const InPostGeoWidgetForm = ({ formikData, type }) => {
         type: 'success',
       });
     } else if (0 in response?.payment_type) {
+      setFieldValue(`${fields.street}[0]`, '');
+      setFieldValue(`${fields.street}[1]`, '');
+      setFieldValue(`${fields.street}[2]`, '');
       setMessageOnWidget({
         message: __(
           'The selected pickup point does not support payment on delivery'
@@ -69,6 +73,7 @@ const InPostGeoWidgetForm = ({ formikData, type }) => {
         type: 'success',
       });
     }
+    updateAddressAction();
   };
 
   return (
