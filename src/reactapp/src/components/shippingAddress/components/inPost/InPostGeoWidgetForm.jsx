@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { number } from 'prop-types';
 import { formikDataShape } from '../../../../utils/propTypes';
 import InPostGeoWidget from '../../../../shippingMethods/InPost/components/InPostGeoWidget';
-import setInpostPoint from '../../../../api/cart/setInpostPoint/setInpostPoint';
 import InPostAddressFieldSet from './InPostAddressFieldSet';
 import useShippingAddressFormikContext from '../../hooks/useShippingAddressFormikContext';
 import { __ } from '../../../../i18n';
@@ -21,45 +20,53 @@ const InPostGeoWidgetForm = ({ formikData, type }) => {
   };
 
   const onPointCallback = async (response = null) => {
-    try {
-      const selectedPointData = await setInpostPoint(response, type);
-      if (selectedPointData?.status === 1) {
-        const pointAddress = {
-          line1: selectedPointData?.point_data?.address?.line1,
-          line2: selectedPointData?.point_data?.address?.line2,
-          location_description:
-            selectedPointData?.point_data?.location_description,
-          point_name: selectedPointData?.point_data?.name,
-        };
-        setFieldValue(`${fields.street}[0]`, pointAddress?.line1);
-        setFieldValue(`${fields.street}[1]`, pointAddress?.line2);
-        setFieldValue(
-          `${fields.street}[2]`,
-          `№${pointAddress?.point_name}, ${pointAddress?.location_description}`
-        );
-
-        setPointSelected(true);
-        if (selectedPointData?.message) {
-          setMessageOnWidget({
-            message: selectedPointData?.message,
-            type: 'success',
-          });
-        }
-      } else if (selectedPointData?.message) {
-        setMessageOnWidget({
-          message: selectedPointData?.message,
-          type: 'error',
-        });
-      } else {
-        setMessageOnWidget({
-          message: __('Something went wrong'),
-          type: 'error',
-        });
-      }
-    } catch (error) {
+    if (!response?.address) {
       setMessageOnWidget({
         message: __('Something went wrong'),
         type: 'error',
+      });
+      setPointSelected(false);
+      return;
+    }
+    const pointAddress = {
+      line1: response.address?.line1,
+      line2: response.address?.line2,
+      location_description: response.location_description,
+      point_name: response.name,
+    };
+    if (type === 1) {
+      setFieldValue(`${fields.street}[0]`, pointAddress?.line1);
+      setFieldValue(`${fields.street}[1]`, pointAddress?.line2);
+      setFieldValue(
+        `${fields.street}[2]`,
+        `№${pointAddress?.point_name}, ${pointAddress?.location_description}`
+      );
+
+      setPointSelected(true);
+      setMessageOnWidget({
+        message: __('Zapisano punkt'),
+        type: 'success',
+      });
+    } else if (0 in response?.payment_type) {
+      setMessageOnWidget({
+        message: __(
+          'Wybrany punkt odbioru nie obsługuje płatności przy odbiorze.'
+        ),
+        type: 'error',
+      });
+      setPointSelected(false);
+    } else {
+      setFieldValue(`${fields.street}[0]`, pointAddress?.line1);
+      setFieldValue(`${fields.street}[1]`, pointAddress?.line2);
+      setFieldValue(
+        `${fields.street}[2]`,
+        `№${pointAddress?.point_name}, ${pointAddress?.location_description}`
+      );
+
+      setPointSelected(true);
+      setMessageOnWidget({
+        message: __('Zapisano punkt'),
+        type: 'success',
       });
     }
   };
