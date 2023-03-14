@@ -156,7 +156,7 @@ function ShippingAddressForm({ children }) {
       inPostMethods.some(
         (method) =>
           method === selectedShippingMethod ||
-          method === cartSelectedShippingMethod
+          method === cartSelectedShippingMethod?.methodCode
       ),
     [selectedShippingMethod, cartSelectedShippingMethod]
   );
@@ -165,7 +165,7 @@ function ShippingAddressForm({ children }) {
       npMethods.some(
         (method) =>
           method === selectedShippingMethod ||
-          method === cartSelectedShippingMethod
+          method === cartSelectedShippingMethod?.methodCode
       ),
     [selectedShippingMethod, cartSelectedShippingMethod]
   );
