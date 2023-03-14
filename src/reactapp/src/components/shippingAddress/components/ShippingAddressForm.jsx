@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useFormikContext } from 'formik';
 import { node } from 'prop-types';
 import TextInput from '../../common/Form/TextInput';
@@ -13,6 +13,12 @@ import useShippingAddressAppContext from '../hooks/useShippingAddressAppContext'
 import useShippingAddressCartContext from '../hooks/useShippingAddressCartContext';
 import useAddressSaveOnFieldChangeStatus from '../hooks/useAddressSaveOnFieldChangeStatus';
 import InPostGeoWidgetForm from './inPost/InPostGeoWidgetForm';
+
+const inPostMethods = [
+  'inpostpaczkomaty',
+  'inpostpaczkomatypobranie',
+  'inpostpaczkomatykurier',
+];
 
 function ShippingAddressForm({ children }) {
   const { fields, formikData, handleKeyDown } =
@@ -136,6 +142,12 @@ function ShippingAddressForm({ children }) {
       overscrollBehavior: 'none',
     }),
   };
+
+  const isSelectedShippingMethodInPost = useMemo(
+    () => inPostMethods.some((method) => method === selectedShippingMethod),
+    [selectedShippingMethod]
+  );
+
   return (
     <>
       <div className="">
@@ -235,8 +247,11 @@ function ShippingAddressForm({ children }) {
             </NovaPoshtaAddressFieldSet>
           </div>
         )}
-        {selectedShippingMethod === 'inpostpaczkomaty' && (
-          <InPostGeoWidgetForm formikData={formikData} />
+        {isSelectedShippingMethodInPost && (
+          <InPostGeoWidgetForm
+            formikData={formikData}
+            type={selectedShippingMethod === 'inpostpaczkomaty' ? 1 : 0}
+          />
         )}
       </div>
     </>

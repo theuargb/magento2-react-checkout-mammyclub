@@ -1,18 +1,19 @@
 import React from 'react';
-import { formikDataShape } from '../../../../utils/propTypes';
+import { number } from 'prop-types';
 
+import { formikDataShape } from '../../../../utils/propTypes';
 import InPostGeoWidget from '../../../../shippingMethods/InPost/components/InPostGeoWidget';
 import setInpostPoint from '../../../../api/cart/setInpostPoint/setInpostPoint';
 import InPostAddressFieldSet from './InPostAddressFieldSet';
 import useShippingAddressFormikContext from '../../hooks/useShippingAddressFormikContext';
 
-const InPostGeoWidgetForm = ({ formikData }) => {
+const InPostGeoWidgetForm = ({ formikData, type }) => {
   const { setFieldValue } = formikData;
   const { fields } = useShippingAddressFormikContext();
 
-  const onPointCallback = async (response = null, type = 1) => {
+  const onPointCallback = async (response = null) => {
     if (!response) {
-      response.name = 'LOD140';
+      response.name = 'POP-BIA57';
     }
     const selectedPointData = await setInpostPoint(response, type);
     const pointAddress = {
@@ -25,7 +26,7 @@ const InPostGeoWidgetForm = ({ formikData }) => {
     setFieldValue(`${fields.street}[1]`, pointAddress?.line2);
     setFieldValue(
       `${fields.street}[2]`,
-      `№${point_name}, ${pointAddress?.location_description}`
+      `№${pointAddress?.point_name}, ${pointAddress?.location_description}`
     );
   };
 
@@ -39,6 +40,7 @@ const InPostGeoWidgetForm = ({ formikData }) => {
 
 InPostGeoWidgetForm.propTypes = {
   formikData: formikDataShape.isRequired,
+  type: number.isRequired,
 };
 
 export default InPostGeoWidgetForm;
