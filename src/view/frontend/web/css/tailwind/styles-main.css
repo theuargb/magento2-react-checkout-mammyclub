@@ -1134,6 +1134,8 @@ Add the correct display in Chrome and Safari.
     resize: both !important; }
   .checkout-wrapper .grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .checkout-wrapper .grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
   .checkout-wrapper .grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
   .checkout-wrapper .flex-col {
@@ -1228,9 +1230,15 @@ Add the correct display in Chrome and Safari.
   .checkout-wrapper .border-red-500 {
     --tw-border-opacity: 1 !important;
     border-color: rgba(239, 68, 68, var(--tw-border-opacity)) !important; }
+  .checkout-wrapper .border-green {
+    --tw-border-opacity: 1 !important;
+    border-color: rgba(93, 186, 93, var(--tw-border-opacity)) !important; }
   .checkout-wrapper .border-container {
     --tw-border-opacity: 1 !important;
     border-color: rgba(204, 204, 204, var(--tw-border-opacity)) !important; }
+  .checkout-wrapper .hover\:border-green:hover {
+    --tw-border-opacity: 1 !important;
+    border-color: rgba(93, 186, 93, var(--tw-border-opacity)) !important; }
   .checkout-wrapper .bg-white {
     --tw-bg-opacity: 1 !important;
     background-color: rgba(255, 255, 255, var(--tw-bg-opacity)) !important; }

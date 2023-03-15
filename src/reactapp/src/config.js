@@ -71,14 +71,13 @@ export const config = {
   isDevelopmentMode: nodeEnv === 'development',
   cartId: getConfigFromLocalStorage(activeSource.cartId),
   baseUrl:
-    env.baseUrl ||
-    RootElement.getBaseUrl() ||
-    'https://new-shop.mammyclub.com',
+    env.baseUrl || RootElement.getBaseUrl() || 'http://dev.mammyclub.local',
   signInToken: getConfigFromLocalStorage(activeSource.token),
   hyvaStorageSource: magentoDataSources.hyvaCheckoutCacheStorage,
 };
 
 config.successPageRedirectUrl = `${config.baseUrl}/hyva/reactcheckout/success/`;
+config.przelewy24SuccessRedirectUrl = `${config.baseUrl}/przelewy24/payment/redirect`;
 
 export const LOGIN_FORM = 'login';
 export const CART_ITEMS_FORM = 'items';

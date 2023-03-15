@@ -13,6 +13,8 @@ import usePaymentMethodCartContext from '../hooks/usePaymentMethodCartContext';
 
 const initialValues = {
   code: '',
+  method: null,
+  regulationAccept: null,
 };
 
 const requiredMessage = __('Required');

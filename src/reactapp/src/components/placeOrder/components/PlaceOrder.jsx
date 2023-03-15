@@ -5,9 +5,11 @@ import {
   BILLING_ADDR_FORM,
   SHIPPING_ADDR_FORM,
   CHECKOUT_AGREEMENTS_FORM,
+  PAYMENT_METHOD_FORM,
 } from '../../../config';
 import {
   hasBillingAddressErrors,
+  hasPaymentMethodErrorsPrzelewy,
   hasShippingAddressErrors,
   hasTermsAndConditionsAgreed,
 } from '../utility';
@@ -31,7 +33,6 @@ function PlaceOrder() {
   const { isVirtualCart } = usePlaceOrderCartContext();
   const { setMessage, setErrorMessage, setPageLoader } =
     usePlaceOrderAppContext();
-
   const [isOrderReadyToPlace, setOrderReadyToPlace] = useState(false);
 
   const { isAddressNeedToUpdate } = useShippingAddressCartContext();
@@ -60,6 +61,13 @@ function PlaceOrder() {
     if (hasTermsAndConditionsAgreed(errors)) {
       setErrorMessage(__('Please agree with the terms & conditions'));
       scrollToElement(CHECKOUT_AGREEMENTS_FORM);
+      setPageLoader(false);
+      setOrderReadyToPlace(false);
+      return;
+    }
+    if (hasPaymentMethodErrorsPrzelewy(values?.payment_method)) {
+      setErrorMessage(__('Please select option for payment method'));
+      scrollToElement(PAYMENT_METHOD_FORM);
       setPageLoader(false);
       setOrderReadyToPlace(false);
       return;

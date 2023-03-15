@@ -91,21 +91,36 @@ function CheckoutFormProvider({ children }) {
 
       const orderNumber = _get(order, 'order_number');
       if (orderNumber && config.isProductionMode) {
-        if (selectedPaymentMethod === 'liqpaymagento_liqpay') {
-          setLiqPayReadyToInit(true);
-        } else {
-          setOrderPlacedStatus(true);
-          window.location.replace(config.successPageRedirectUrl);
+        switch (selectedPaymentMethod) {
+          case 'liqpaymagento_liqpay':
+            setLiqPayReadyToInit(true);
+            break;
+          case 'przelewy24':
+            setOrderPlacedStatus(true);
+            window.location.replace(config.przelewy24SuccessRedirectUrl);
+            break;
+          default:
+            setOrderPlacedStatus(true);
+            window.location.replace(config.successPageRedirectUrl);
+            break;
         }
       }
 
       if (orderNumber && config.isDevelopmentMode) {
-        if (selectedPaymentMethod === 'liqpaymagento_liqpay') {
-          setLiqPayReadyToInit(true);
-        } else {
-          setOrderPlacedStatus(true);
-          LocalStorage.clearCheckoutStorage();
-          window.location.replace(config.successPageRedirectUrl);
+        switch (selectedPaymentMethod) {
+          case 'liqpaymagento_liqpay':
+            setLiqPayReadyToInit(true);
+            break;
+          case 'przelewy24':
+            setOrderPlacedStatus(true);
+            LocalStorage.clearCheckoutStorage();
+            window.location.replace(config.przelewy24SuccessRedirectUrl);
+            break;
+          default:
+            setOrderPlacedStatus(true);
+            LocalStorage.clearCheckoutStorage();
+            window.location.replace(config.successPageRedirectUrl);
+            break;
         }
       }
 

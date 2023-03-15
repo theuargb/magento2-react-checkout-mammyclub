@@ -10,10 +10,12 @@ export default function usePaymentMethodCartContext() {
   const methodList = _get(cart, 'available_payment_methods') || {};
   const selectedPaymentMethod = _get(cart, 'selected_payment_method');
   const isVirtualCart = !!_get(cart, 'isVirtualCart');
+  const totalAmount = _get(cart, 'prices.grandTotalAmount');
 
   return {
     methodList,
     isVirtualCart,
+    totalAmount,
     setPaymentMethod,
     selectedPaymentMethod,
     isPaymentAvailable: !_isObjEmpty(methodList),
