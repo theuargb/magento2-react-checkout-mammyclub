@@ -21,6 +21,7 @@ function AvailablePaymentMethods() {
     setFieldTouched(fields.method, true);
     setFieldTouched(fields.regulationAccept, true);
     setSelected(id);
+    console.log(id);
   };
   useEffect(() => {
     getMethods();
