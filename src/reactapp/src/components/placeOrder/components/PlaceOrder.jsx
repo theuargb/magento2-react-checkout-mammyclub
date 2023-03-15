@@ -66,7 +66,6 @@ function PlaceOrder() {
       return;
     }
     if (hasPaymentMethodErrorsPrzelewy(values?.payment_method)) {
-      console.log(values);
       setErrorMessage(__('Please select option for payment method'));
       scrollToElement(PAYMENT_METHOD_FORM);
       setPageLoader(false);
