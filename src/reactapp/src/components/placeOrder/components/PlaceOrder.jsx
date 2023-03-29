@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useFormikContext } from 'formik';
 import useLoginAppContext from '../../login/hooks/useLoginAppContext';
 import {
+  LOGIN_FORM,
   BILLING_ADDR_FORM,
   SHIPPING_ADDR_FORM,
   CHECKOUT_AGREEMENTS_FORM,
   PAYMENT_METHOD_FORM,
 } from '../../../config';
 import {
+  hasLoginErrors,
   hasBillingAddressErrors,
   hasPaymentMethodErrorsPrzelewy,
   hasShippingAddressErrors,
@@ -41,6 +43,16 @@ function PlaceOrder() {
 
   const handlePerformPlaceOrder = async () => {
     setMessage(false);
+
+    if (hasLoginErrors(errors)) {
+      setErrorMessage(__('Please provide your email address.'));
+      focusOnFormErrorElement(LOGIN_FORM, errors.login);
+      scrollToElement(LOGIN_FORM);
+      setOrderReadyToPlace(false);
+      setPageLoader(false);
+      return;
+    }
+
     if (hasShippingAddressErrors(errors?.shipping_address?.phone)) {
       setErrorMessage(__('Please provide your shipping address information.'));
       focusOnPhoneErrorElement();

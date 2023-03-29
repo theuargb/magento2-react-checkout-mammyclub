@@ -10,7 +10,6 @@ import { formikDataShape } from '../../../utils/propTypes';
 import ShippingMethodFormContext from '../context/ShippingMethodFormContext';
 import useShippingMethodAppContext from '../hooks/useShippingMethodAppContext';
 import useShippingMethodCartContext from '../hooks/useShippingMethodCartContext';
-// import { _isObjEmpty } from '../../../utils';
 
 const initialValues = {
   methodCode: '',
@@ -25,12 +24,10 @@ const validationSchema = {
 };
 
 function ShippingMethodFormManager({ children, formikData }) {
-  const { setMessage, setPageLoader, setErrorMessage, setSuccessMessage } =
+  const { setMessage, setPageLoader, setErrorMessage } =
     useShippingMethodAppContext();
 
   const { setShippingMethod } = useShippingMethodCartContext();
-  // const { selectedMethod, setShippingMethod } = useShippingMethodCartContext();
-  // const { setFieldValue } = formikData;
 
   const formSubmit = async (shippingMethod) => {
     setMessage(false);
@@ -42,7 +39,6 @@ function ShippingMethodFormManager({ children, formikData }) {
     try {
       setPageLoader(true);
       await setShippingMethod(shippingMethod);
-      setSuccessMessage(__('Shipping method updated successfully.'));
       setPageLoader(false);
     } catch (error) {
       console.error(error);

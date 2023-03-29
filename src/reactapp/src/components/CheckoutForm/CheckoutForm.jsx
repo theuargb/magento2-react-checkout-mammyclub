@@ -4,6 +4,7 @@ import Login from '../login';
 import Totals from '../totals';
 import CartItemsForm from '../items';
 import PlaceOrder from '../placeOrder';
+import Message from '../common/Message';
 import PageLoader from '../common/Loader';
 import { AddressWrapper } from '../address';
 import PaymentMethod from '../paymentMethod';
@@ -64,6 +65,7 @@ function CheckoutForm() {
 
   return (
     <CheckoutFormWrapper initialData={initialData}>
+      <Message />
       <div className="flex justify-center">
         <div className="container w-full mx-auto py-0 sm:py-2 md:py-5 px-0">
           <div className="hidden md:grid grid-cols-2 gap-x-6 checkout-wrapper">

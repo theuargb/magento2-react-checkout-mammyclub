@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import _get from 'lodash.get';
-import { Form } from 'formik';
+import { Form, useFormikContext } from 'formik';
 import { node } from 'prop-types';
 import { string as YupString, bool as YupBool } from 'yup';
 
@@ -19,6 +19,8 @@ const initialValues = {
   password: '',
   customerWantsToSignIn: false,
 };
+const requiredMessage = __('%1 - required field');
+
 /* Временно добавлена валидация на поле с эмейлом для вывода для вывода ошибки, т.к. сообщение об ошибке
    при не установленном емейле, которое выводилось вверху страницы, сейчас не выводится */
 const validationSchema = {
@@ -39,6 +41,8 @@ const validationSchema = {
   ),
 };
 
+const przelewy24Mehods = ['przelewy24', 'przelewy24_card'];
+
 function LoginFormManager({ children, formikData }) {
   const {
     ajaxLogin,
@@ -47,9 +51,32 @@ function LoginFormManager({ children, formikData }) {
     setErrorMessage,
     setSuccessMessage,
   } = useLoginAppContext();
-  const { cartEmail, setEmailOnGuestCart } = useLoginCartContext();
+  const {
+    cartEmail,
+    setEmailOnGuestCart,
+    selectedPaymentMethodCode: cartPaymentMethod,
+  } = useLoginCartContext();
   const { editMode, setFormToEditMode, setFormToViewMode } = useFormEditMode();
+  const { values } = useFormikContext();
   const { loginFormValues, setFieldTouched } = formikData;
+
+  const selectedPaymentMethod = useMemo(
+    () => values?.payment_method?.code,
+    [values]
+  );
+
+  useEffect(() => {
+    const isPrzelewy24Selected = przelewy24Mehods.some(
+      (method) =>
+        method === cartPaymentMethod || method === selectedPaymentMethod
+    );
+
+    if (isPrzelewy24Selected) {
+      validationSchema.email = YupString()
+        .email(__('Email is invalid'))
+        .required(requiredMessage);
+    }
+  }, [cartPaymentMethod, selectedPaymentMethod]);
 
   /**
    * Sign-in submit is handled here

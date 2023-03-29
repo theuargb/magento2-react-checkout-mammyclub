@@ -49,6 +49,12 @@ export function hasTermsAndConditionsAgreed(errors) {
 
   return !_isObjEmpty(agreementErrors);
 }
+export function hasPaymentMethodErrorsPrzelewy(paymentMethod) {
+  if (paymentMethod.code !== 'przelewy24') {
+    return false;
+  }
+  return !paymentMethod.method || !paymentMethod.regulationAccept;
+}
 
 export function isAddressSame(address1, address2) {
   const {

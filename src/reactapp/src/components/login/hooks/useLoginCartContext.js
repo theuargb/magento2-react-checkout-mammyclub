@@ -15,13 +15,15 @@ export default function useLoginCartContext() {
     getCustomerCartId,
   } = cartActions;
   const cart = _get(cartData, 'cart');
+  const selectedPaymentMethod = _get(cart, 'selected_payment_method');
+  const selectedPaymentMethodCode = _get(selectedPaymentMethod, 'code');
   const cartEmail = _get(cart, 'email', '');
   const cartId = _get(cart, 'id');
 
   return {
     cartId,
     cartEmail,
-
+    selectedPaymentMethodCode,
     // actions
     mergeCarts,
     createEmptyCart,

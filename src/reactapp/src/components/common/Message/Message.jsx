@@ -28,16 +28,16 @@ function Message() {
   }
 
   return (
-    <div className="container sticky z-10 my-4" style={{ top: '20px' }}>
+    <div className="container sticky z-20 my-4 p-0" style={{ top: '20px' }}>
       <div
         className={`relative px-6 py-2 my-4 text-white border-0 rounded ${
-          msgType === 'error' ? 'bg-red-400' : ''
-        } ${msgType === 'success' ? 'bg-green-500' : ''}`}
+          msgType === 'error' ? 'message error bg-red-400' : ''
+        } ${msgType === 'success' ? 'message success bg-green-500' : ''}`}
       >
         <span className="inline-block mr-8 align-middle">{msg}</span>
         <button
           type="button"
-          className="absolute top-0 right-0 mt-2 mr-6 text-2xl font-semibold leading-none outline-none bg-none focus:outline-none"
+          className="absolute top-0 right-0 mt-2 mr-2 text-2xl font-semibold leading-none outline-none bg-none focus:outline-none"
           onClick={() => setMessage(false)}
         >
           <span>×</span>
