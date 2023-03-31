@@ -54,7 +54,7 @@ function PlaceOrder() {
     }
 
     if (hasShippingAddressErrors(errors?.shipping_address?.phone)) {
-      setErrorMessage(__('Please provide your shipping address information.'));
+      setErrorMessage(__('Please provide a phone number.'));
       focusOnPhoneErrorElement();
       scrollToElement(SHIPPING_ADDR_FORM);
       setOrderReadyToPlace(false);
