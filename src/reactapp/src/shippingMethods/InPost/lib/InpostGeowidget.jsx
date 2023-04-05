@@ -1,29 +1,35 @@
-/* eslint-disable */
+import { bool, func, string } from 'prop-types';
 import React, { useEffect, useCallback } from 'react';
+
+const inpostStaticUrl = {
+  sandbox: 'https://sandbox-easy-geowidget-sdk.easypack24.net',
+  live: 'https://geowidget.inpost.pl',
+};
 
 export const InpostGeowidget = ({
   token,
   onPoint,
   language = 'pl',
   config = 'parcelCollect',
+  sandbox = true,
 }) => {
   const callback = useCallback(((e) => onPoint(e), [onPoint]))[0];
 
   useEffect(() => {
-    const css = document.createElement('link'),
-      js = document.createElement('script'),
-      body = document.getElementsByTagName('body')[0];
+    const css = document.createElement('link');
+    const js = document.createElement('script');
+    const body = document.getElementsByTagName('body')[0];
 
     css.rel = 'stylesheet';
-    css.href =
-      'https://sandbox-easy-geowidget-sdk.easypack24.net/inpost-geowidget.css';
-    // css.href = 'https://geowidget.inpost.pl/inpost-geowidget.css';
     css.type = 'text/css';
-
     js.defer = true;
-    js.src =
-      'https://sandbox-easy-geowidget-sdk.easypack24.net/inpost-geowidget.js';
-    // js.src = 'https://geowidget.inpost.pl/inpost-geowidget.js';
+    css.href = `${
+      inpostStaticUrl[sandbox ? 'sandbox' : 'live']
+    }/inpost-geowidget.css`;
+
+    js.src = `${
+      inpostStaticUrl[sandbox ? 'sandbox' : 'live']
+    }/inpost-geowidget.js`;
 
     body.appendChild(css);
     body.appendChild(js);
@@ -46,3 +52,19 @@ export const InpostGeowidget = ({
     />
   );
 };
+
+InpostGeowidget.propTypes = {
+  token: string.isRequired,
+  onPoint: func.isRequired,
+  language: string,
+  config: string,
+  sandbox: bool,
+};
+
+InpostGeowidget.defaultProps = {
+  language: 'pl',
+  config: 'parcelCollect',
+  sandbox: true,
+};
+
+export default InpostGeowidget;

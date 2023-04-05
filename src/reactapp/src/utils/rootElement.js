@@ -16,6 +16,10 @@ const RootElement = {
     return _get(RootElement.getCheckoutConfig(), 'currency', {});
   },
 
+  getInpostMethodConfig() {
+    return _get(RootElement.getCheckoutConfig(), 'inpost_widget', {});
+  },
+
   getFilePath() {
     return _get(RootElement.getElement(), 'dataset.static_file_path', '');
   },

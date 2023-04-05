@@ -74,6 +74,9 @@ class CheckoutConfigProvider implements ArgumentInterface
             'language' => $this->localeResolver->getLocale(),
             'currency' => $this->currencyProvider->getConfig(),
             'defaultCountryId' => $checkoutConfig['defaultCountryId'],
+            'inpost_widget' => array_key_exists('inpost_widget', $checkoutConfig)
+                ? $checkoutConfig['inpost_widget']
+                : null,
         ]);
     }
 }
