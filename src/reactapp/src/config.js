@@ -74,6 +74,7 @@ export const config = {
     env.baseUrl || RootElement.getBaseUrl() || 'http://dev.mammyclub.local',
   signInToken: getConfigFromLocalStorage(activeSource.token),
   hyvaStorageSource: magentoDataSources.hyvaCheckoutCacheStorage,
+  customerAccountUrlKey: '/customer/account/',
 };
 
 config.successPageRedirectUrl = `${config.baseUrl}/hyva/reactcheckout/success/`;

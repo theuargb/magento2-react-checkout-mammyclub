@@ -3,6 +3,7 @@ import _get from 'lodash.get';
 import { node } from 'prop-types';
 import { Formik } from 'formik';
 import { object as YupObject } from 'yup';
+import { pushCustomerAccToBrowserHistory } from '../../utils/frontRedirects';
 
 import CheckoutFormContext from './CheckoutFormContext';
 import useCartContext from '../../hook/useCartContext';
@@ -97,11 +98,13 @@ function CheckoutFormProvider({ children }) {
             break;
           case 'przelewy24':
             setOrderPlacedStatus(true);
-            window.location.replace(config.przelewy24SuccessRedirectUrl);
+            pushCustomerAccToBrowserHistory();
+            window.location.assign(config.przelewy24SuccessRedirectUrl);
             break;
           default:
             setOrderPlacedStatus(true);
-            window.location.replace(config.successPageRedirectUrl);
+            pushCustomerAccToBrowserHistory();
+            window.location.assign(config.successPageRedirectUrl);
             break;
         }
       }
@@ -114,11 +117,13 @@ function CheckoutFormProvider({ children }) {
           case 'przelewy24':
             setOrderPlacedStatus(true);
             LocalStorage.clearCheckoutStorage();
+            pushCustomerAccToBrowserHistory();
             window.location.replace(config.przelewy24SuccessRedirectUrl);
             break;
           default:
             setOrderPlacedStatus(true);
             LocalStorage.clearCheckoutStorage();
+            pushCustomerAccToBrowserHistory();
             window.location.replace(config.successPageRedirectUrl);
             break;
         }

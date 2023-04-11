@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from 'react';
 import { object, string } from 'prop-types';
 import CheckoutFormContext from '../../context/Form/CheckoutFormContext';
 import { config } from '../../config';
+import { pushCustomerAccToBrowserHistory } from '../../utils/frontRedirects';
 
 const LiqPayWidgetForm = ({ liqPayData, orderId }) => {
   const { data, signature } = liqPayData;
@@ -33,14 +34,15 @@ const LiqPayWidgetForm = ({ liqPayData, orderId }) => {
               .then((response) => response.json())
               .then((data) =>
                 setTimeout(() => {
-                  location.replace(data);
+                  pushCustomerAccToBrowserHistory();
+                  window.location.replace.assign(data);
                 }, 10000)
               );
           })
-          .on('liqpay.ready', function (data) {
-          })
+          .on('liqpay.ready', function (data) {})
           .on('liqpay.close', function (data) {
-            window.location.replace(config.successPageRedirectUrl);
+            pushCustomerAccToBrowserHistory();
+            window.location.assign(config.successPageRedirectUrl);
           });
       })();
     }
