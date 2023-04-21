@@ -8,17 +8,17 @@ import { _objToArray } from '../../../utils';
 import usePaymentMethodCartContext from '../hooks/usePaymentMethodCartContext';
 import usePaymentMethodFormContext from '../hooks/usePaymentMethodFormContext';
 import InfoPopups from '../../cmsPages/components/InfoPopups';
-import AvailablePaymentMethods from './Przlewy24/AvailablePaymentMethods/AvailablePaymentMethods';
+// import AvailablePaymentMethods from './Przlewy24/AvailablePaymentMethods/AvailablePaymentMethods';
 
-function PaymentMethodList({ cmsHtmlContent }) {
+function PaymentMethodList({ methodRenderers, cmsHtmlContent }) {
   const { fields, formikData } = usePaymentMethodFormContext();
   const { values } = useFormikContext();
   const { methodList, selectedPaymentMethod } = usePaymentMethodCartContext();
-  const { setFieldValue, setFieldTouched } = formikData;
+  const { paymentValues, setFieldValue, setFieldTouched } = formikData;
   const [isPaymentMethodSaved, saveInitialPaymentMethod] = useState(false);
-  const [przlewy24Selected, setPrzlewy24Selected] = useState(
-    values?.payment_method?.code === 'przelewy24'
-  );
+  // const [przlewy24Selected, setPrzlewy24Selected] = useState(
+  //   values?.payment_method?.code === 'przelewy24'
+  // );
 
   const handlePaymentMethodSelection = async (event) => {
     const methodSelected = _get(methodList, `${event.target.value}.code`);
@@ -28,7 +28,7 @@ function PaymentMethodList({ cmsHtmlContent }) {
     }
     await setFieldValue(fields.code, methodSelected);
     setFieldTouched(fields.code, true);
-    setPrzlewy24Selected(methodSelected === 'przelewy24');
+    // setPrzlewy24Selected(methodSelected === 'przelewy24');
   };
 
   const methodListForSelect = [];
@@ -63,7 +63,27 @@ function PaymentMethodList({ cmsHtmlContent }) {
         onChange={handlePaymentMethodSelection}
         name="paymentMethod"
       />
-      {przlewy24Selected && <AvailablePaymentMethods />}
+      {_objToArray(methodList).map((method) => {
+        const MethodRenderer = methodRenderers[method.code];
+        console.log(paymentValues);
+        return (
+          <div key={method.code}>
+            {MethodRenderer && (
+              <div>
+                <MethodRenderer
+                  method={method}
+                  selected={paymentValues}
+                  actions={{
+                    change: handlePaymentMethodSelection,
+                  }}
+                />
+              </div>
+            )}
+          </div>
+        );
+      })}
+
+      {/* {przlewy24Selected && <AvailablePaymentMethods />} */}
       <InfoPopups
         positionStyles="absolute top-0 right-0 mt-6 mr-6"
         label={__('Payment')}
@@ -76,10 +96,12 @@ function PaymentMethodList({ cmsHtmlContent }) {
 
 PaymentMethodList.propTypes = {
   cmsHtmlContent: object,
+  methodRenderers: object,
 };
 
 PaymentMethodList.defaultProps = {
   cmsHtmlContent: {},
+  methodRenderers: {},
 };
 
 export default PaymentMethodList;

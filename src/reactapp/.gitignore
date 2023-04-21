@@ -11,4 +11,5 @@ src/paymentMethods/*
 !src/paymentMethods/paymentConfig.json
 !src/paymentMethods/customRenderers.js
 !src/paymentMethods/i18nProvider.js
+!src/paymentMethods/przelewy24
 !src/paymentMethods/utility

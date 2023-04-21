@@ -9,4 +9,8 @@
  * include them here as well. That is the only time you need to touch this file.
  */
 
-export default {};
+import przelewy24 from './przelewy24/rendereres';
+
+export default {
+  ...przelewy24,
+};
