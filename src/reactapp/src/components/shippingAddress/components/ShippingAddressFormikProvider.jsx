@@ -63,8 +63,14 @@ const initValidationSchema = {
   street_ref: YupString(),
   city_ref: YupString(),
   company: YupString().nullable(),
-  firstname: YupString().nullable(),
-  lastname: YupString().nullable(),
+  firstname:
+    storeCode === 'pl'
+      ? YupString().required(requiredMessage)
+      : YupString().nullable(),
+  lastname:
+    storeCode === 'pl'
+      ? YupString().required(requiredMessage)
+      : YupString().nullable(),
   street: YupArray().test(
     'street1Required',
     requiredMessage,

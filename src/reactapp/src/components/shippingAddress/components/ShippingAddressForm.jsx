@@ -13,6 +13,7 @@ import useShippingAddressAppContext from '../hooks/useShippingAddressAppContext'
 import useShippingAddressCartContext from '../hooks/useShippingAddressCartContext';
 import useAddressSaveOnFieldChangeStatus from '../hooks/useAddressSaveOnFieldChangeStatus';
 import InPostGeoWidgetForm from './inPost/InPostGeoWidgetForm';
+import { storeCode } from '../../../utils/address';
 
 const inPostMethods = [
   'inpostpaczkomaty',
@@ -177,6 +178,7 @@ function ShippingAddressForm({ children }) {
           name={fields.firstname}
           formikData={formikData}
           label={__('Name')}
+          required={storeCode === 'pl'}
           onKeyDown={handleKeyDown}
           onBlur={handleAddressFieldOnBlur}
           onFocus={handleAddressFieldOnFocus}
@@ -184,6 +186,7 @@ function ShippingAddressForm({ children }) {
         <TextInput
           name={fields.lastname}
           label={__('Lastname')}
+          required={storeCode === 'pl'}
           formikData={formikData}
           onKeyDown={handleKeyDown}
           onBlur={handleAddressFieldOnBlur}
