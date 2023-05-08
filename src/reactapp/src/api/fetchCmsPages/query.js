@@ -1,15 +1,24 @@
-export default function getQuery() {
+/* eslint-disable */
+export default function getQuery(pagesCollection) {
+  let params = '';
+  let query = '';
+  for (const id in pagesCollection) {
+    params = params.concat(`$${id} : String`, ', ').slice(0, -1);
+  }
+
+  for (const id in pagesCollection) {
+    query = query.concat(
+      `
+      ${id}: cmsPage(identifier: $${id}){
+        content
+      }`,
+      ','
+    );
+  }
+
   return `
-      query fetchCmsPages($firstIdentifier: String!, $secondIdentifier: String, $thirdIdentifier: String) {
-        firstPage: cmsPage(identifier: $firstIdentifier) {
-          content
-        }
-        secondPage: cmsPage(identifier: $secondIdentifier) {
-          content
-        }
-        thirdPage: cmsPage(identifier: $thirdIdentifier) {
-          content
-        }
+      query fetchCmsPages(${params}) {
+        ${query}
       }
     `;
 }

@@ -30,11 +30,13 @@ function CheckoutForm() {
 
   const { orderId, storeAggregatedCartStates } = useCheckoutFormCartContext();
 
-  const cmsPagesIds = [
-    'pravyj-sajdbar-chekauta',
-    'kontent-popapa-oplata',
-    'kontent-popapa-dostavka',
-  ];
+  // Collection of CMS blocks. Key - arbitrary name, value - CMS page identifier
+  const cmsPagesIds = {
+    rightSidebar: 'pravyj-sajdbar-chekauta',
+    paymentPopup: 'kontent-popapa-oplata',
+    deliveryPopup: 'kontent-popapa-dostavka',
+    privacyPolicy: 'privacy-policy-block',
+  };
   /**
    * Collect App, Cart data when the page loads.
    */
@@ -89,15 +91,23 @@ function CheckoutForm() {
                   <ShippingAddress>
                     <Login />
                     <ShippingMethodsForm
-                      cmsHtmlContent={cmsPagesContent?.cmsDeliveryPopup}
+                      cmsHtmlContent={
+                        cmsPagesContent && cmsPagesContent?.deliveryPopup
+                      }
                     />
                   </ShippingAddress>
 
                   <PaymentMethod
-                    cmsHtmlContent={cmsPagesContent?.cmsPaymentPopup}
+                    cmsHtmlContent={
+                      cmsPagesContent && cmsPagesContent?.paymentPopup
+                    }
                   />
                   <CustomerNotes />
-                  <PlaceOrder />
+                  <PlaceOrder
+                    cmsHtmlContent={
+                      cmsPagesContent && cmsPagesContent?.privacyPolicy
+                    }
+                  />
                 </AddressWrapper>
               </div>
             </div>
@@ -117,7 +127,11 @@ function CheckoutForm() {
                 <Totals />
                 <CheckoutAgreements />
               </div>
-              <CmsContent cmsHtmlContent={cmsPagesContent?.cmsRightSidebar} />
+              <CmsContent
+                cmsHtmlContent={
+                  cmsPagesContent && cmsPagesContent?.rightSidebar
+                }
+              />
             </StickyRightSidebar>
           </div>
           {pageLoader && <PageLoader />}

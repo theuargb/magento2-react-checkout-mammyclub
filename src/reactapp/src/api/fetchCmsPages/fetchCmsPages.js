@@ -3,11 +3,7 @@ import modifier from './modifier';
 import sendRequest from '../sendRequest';
 
 export default async function fetchCmsPages(dispatch, cmsPagesIds) {
-  const variables = {
-    firstIdentifier: cmsPagesIds[0],
-    secondIdentifier: cmsPagesIds[1],
-    thirdIdentifier: cmsPagesIds[2],
-  };
+  const variables = { ...cmsPagesIds };
 
   const query = getQuery(variables);
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { object } from 'prop-types';
 import { useFormikContext } from 'formik';
 import useLoginAppContext from '../../login/hooks/useLoginAppContext';
 import {
@@ -26,9 +27,9 @@ import {
   scrollToElement,
   focusOnPhoneErrorElement,
 } from '../../../utils/form';
-import TermsInfo from './TermsInfo';
+import CmsContent from '../../cmsPages/CmsContent';
 
-function PlaceOrder() {
+function PlaceOrder({ cmsHtmlContent }) {
   const validateThenPlaceOrder = usePlaceOrder();
   const { values, errors } = useFormikContext();
   const saveEmailAddressInfo = useEmailInfoSave();
@@ -115,7 +116,7 @@ function PlaceOrder() {
 
   return (
     <div className="flex items-center justify-between pt-4 px-4">
-      <TermsInfo />
+      <CmsContent cmsHtmlContent={cmsHtmlContent} />
       <button
         onClick={() => setOrderReadyToPlace(true)}
         className="orange-but"
@@ -126,5 +127,12 @@ function PlaceOrder() {
     </div>
   );
 }
+PlaceOrder.propTypes = {
+  cmsHtmlContent: object,
+};
+
+PlaceOrder.defaultProps = {
+  cmsHtmlContent: {},
+};
 
 export default PlaceOrder;
