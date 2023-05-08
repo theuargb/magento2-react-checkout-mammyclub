@@ -4,7 +4,6 @@ import {
   string as YupString,
   boolean as YupBoolean,
 } from 'yup';
-import _get from 'lodash.get';
 import { Form } from 'formik';
 import { node } from 'prop-types';
 
@@ -71,16 +70,12 @@ const initValidationSchema = {
     storeCode === 'pl'
       ? YupString().required(requiredMessage)
       : YupString().nullable(),
-  street: YupArray().test(
-    'street1Required',
-    requiredMessage,
-    (value) => !!_get(value, 0)
-  ),
+  street: YupArray(),
   phone: YupString()
     .matches(phoneRegExp, 'Require correct number entered')
     .required(requiredMessage),
   zipcode: YupString().nullable(),
-  city: YupString().required(requiredMessage),
+  city: YupString().nullable(),
   region: YupString().nullable(),
   country: YupString().required(requiredMessage),
   isSameAsShipping: YupBoolean(),

@@ -67,6 +67,9 @@ function TextInput({
           setFieldTouched(name, newValue);
           setFieldValue(name, newValue);
           actions.saveAddress();
+          if (newValue.trim().length > 0) {
+            event.target.classList.remove('border-dashed', 'border-red-500');
+          }
         }}
         className={`form-input ${
           hasError ? 'border-dashed border-red-500' : ''

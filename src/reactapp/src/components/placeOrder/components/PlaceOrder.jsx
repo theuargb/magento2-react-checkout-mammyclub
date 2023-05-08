@@ -4,14 +4,12 @@ import { useFormikContext } from 'formik';
 import useLoginAppContext from '../../login/hooks/useLoginAppContext';
 import {
   LOGIN_FORM,
-  BILLING_ADDR_FORM,
   SHIPPING_ADDR_FORM,
   CHECKOUT_AGREEMENTS_FORM,
   PAYMENT_METHOD_FORM,
 } from '../../../config';
 import {
   hasLoginErrors,
-  hasBillingAddressErrors,
   hasPaymentMethodErrorsPrzelewy,
   hasShippingAddressErrors,
   hasTermsAndConditionsAgreed,
@@ -20,7 +18,6 @@ import { __ } from '../../../i18n';
 import useEmailInfoSave from '../hooks/useEmailInfoSave';
 import usePlaceOrderAppContext from '../hooks/usePlaceOrderAppContext';
 import usePlaceOrder from '../hooks/usePlaceOrder';
-import usePlaceOrderCartContext from '../hooks/usePlaceOrderCartContext';
 import useShippingAddressCartContext from '../../shippingAddress/hooks/useShippingAddressCartContext';
 import {
   focusOnFormErrorElement,
@@ -33,7 +30,6 @@ function PlaceOrder({ cmsHtmlContent }) {
   const validateThenPlaceOrder = usePlaceOrder();
   const { values, errors } = useFormikContext();
   const saveEmailAddressInfo = useEmailInfoSave();
-  const { isVirtualCart } = usePlaceOrderCartContext();
   const { setMessage, setErrorMessage, setPageLoader } =
     usePlaceOrderAppContext();
   const [isOrderReadyToPlace, setOrderReadyToPlace] = useState(false);
@@ -54,18 +50,17 @@ function PlaceOrder({ cmsHtmlContent }) {
       return;
     }
 
-    if (hasShippingAddressErrors(errors?.shipping_address?.phone)) {
-      setErrorMessage(__('Please provide a phone number.'));
-      focusOnPhoneErrorElement();
-      scrollToElement(SHIPPING_ADDR_FORM);
-      setOrderReadyToPlace(false);
-      setPageLoader(false);
-      return;
-    }
-
-    if (hasBillingAddressErrors(errors, values, isVirtualCart)) {
-      setErrorMessage(__('Please provide your billing address information.'));
-      focusOnFormErrorElement(BILLING_ADDR_FORM, errors);
+    if (hasShippingAddressErrors(errors)) {
+      if (errors?.shipping_address?.phone) {
+        setErrorMessage(__('Please provide a phone number.'));
+        focusOnPhoneErrorElement();
+        scrollToElement(SHIPPING_ADDR_FORM);
+      } else {
+        setErrorMessage(
+          __('Please provide your shipping address information.')
+        );
+        focusOnFormErrorElement(SHIPPING_ADDR_FORM, errors?.shipping_address);
+      }
       setOrderReadyToPlace(false);
       setPageLoader(false);
       return;
