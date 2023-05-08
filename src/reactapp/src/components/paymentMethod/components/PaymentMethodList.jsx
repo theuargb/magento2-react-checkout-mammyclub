@@ -65,7 +65,6 @@ function PaymentMethodList({ methodRenderers, cmsHtmlContent }) {
       />
       {_objToArray(methodList).map((method) => {
         const MethodRenderer = methodRenderers[method.code];
-        console.log(paymentValues);
         return (
           <div key={method.code}>
             {MethodRenderer && (
