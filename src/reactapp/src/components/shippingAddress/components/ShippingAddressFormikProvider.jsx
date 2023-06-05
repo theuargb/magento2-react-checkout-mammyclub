@@ -30,6 +30,7 @@ import ShippingAddressFormContext from '../context/ShippingAddressFormikContext'
 import useShippingAddressAppContext from '../hooks/useShippingAddressAppContext';
 import useShippingAddressCartContext from '../hooks/useShippingAddressCartContext';
 import useFillDefaultAddresses from '../hooks/useFillDefaultAddresses';
+import RootElement from '../../../utils/rootElement';
 
 /* eslint-disable */
 const phoneRegExp =
@@ -62,14 +63,12 @@ const initValidationSchema = {
   street_ref: YupString(),
   city_ref: YupString(),
   company: YupString().nullable(),
-  firstname:
-    storeCode === 'pl'
-      ? YupString().required(requiredMessage)
-      : YupString().nullable(),
-  lastname:
-    storeCode === 'pl'
-      ? YupString().required(requiredMessage)
-      : YupString().nullable(),
+  firstname: RootElement.getNameFieldsValidationRules()?.isFirstNameRequired
+    ? YupString().required(requiredMessage)
+    : YupString().nullable(),
+  lastname: RootElement.getNameFieldsValidationRules()?.isLastNameRequired
+    ? YupString().required(requiredMessage)
+    : YupString().nullable(),
   street: YupArray(),
   phone: YupString()
     .matches(phoneRegExp, 'Require correct number entered')

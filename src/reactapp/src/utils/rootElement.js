@@ -55,6 +55,19 @@ const RootElement = {
 
     return RootElement.checkoutConfig;
   },
+
+  getNameFieldsValidationRules() {
+    return {
+      isFirstNameRequired: _get(
+        RootElement.getCheckoutConfig(),
+        'isFirstNameRequired'
+      ),
+      isLastNameRequired: _get(
+        RootElement.getCheckoutConfig(),
+        'isSecondNameRequired'
+      ),
+    };
+  },
 };
 
 export default RootElement;
