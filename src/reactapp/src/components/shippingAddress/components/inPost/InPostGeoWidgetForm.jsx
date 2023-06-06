@@ -35,7 +35,7 @@ const InPostGeoWidgetForm = ({ formikData, cod, ...rest }) => {
       location_description: response.location_description,
       point_name: response.name,
     };
-    if (cod) {
+    if (!cod) {
       setFieldValue(`${fields.street}[0]`, pointAddress?.line1);
       setFieldValue(`${fields.street}[1]`, pointAddress?.line2);
       setFieldValue(
