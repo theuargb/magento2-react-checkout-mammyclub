@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { number } from 'prop-types';
+import { bool } from 'prop-types';
 import { formikDataShape } from '../../../../utils/propTypes';
 import InPostGeoWidget from '../../../../shippingMethods/InPost/components/InPostGeoWidget';
 import InPostAddressFieldSet from './InPostAddressFieldSet';
 import useShippingAddressFormikContext from '../../hooks/useShippingAddressFormikContext';
 import { __ } from '../../../../i18n';
 
-const InPostGeoWidgetForm = ({ formikData, type, ...rest }) => {
+const InPostGeoWidgetForm = ({ formikData, cod, ...rest }) => {
   const { setFieldValue } = formikData;
   const { fields } = useShippingAddressFormikContext();
   const [message, setMessage] = useState({});
@@ -35,7 +35,7 @@ const InPostGeoWidgetForm = ({ formikData, type, ...rest }) => {
       location_description: response.location_description,
       point_name: response.name,
     };
-    if (type === 1) {
+    if (cod) {
       setFieldValue(`${fields.street}[0]`, pointAddress?.line1);
       setFieldValue(`${fields.street}[1]`, pointAddress?.line2);
       setFieldValue(
@@ -100,7 +100,7 @@ const InPostGeoWidgetForm = ({ formikData, type, ...rest }) => {
 
 InPostGeoWidgetForm.propTypes = {
   formikData: formikDataShape.isRequired,
-  type: number.isRequired,
+  cod: bool.isRequired,
 };
 
 export default InPostGeoWidgetForm;

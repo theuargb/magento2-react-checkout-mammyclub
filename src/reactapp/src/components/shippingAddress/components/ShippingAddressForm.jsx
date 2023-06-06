@@ -279,7 +279,7 @@ function ShippingAddressForm({ children }) {
         {isSelectedShippingMethodInPost && (
           <InPostGeoWidgetForm
             formikData={formikData}
-            type={selectedShippingMethod === 'inpostpaczkomaty' ? 1 : 0}
+            cod={selectedShippingMethod === 'inpostpaczkomatypobranie'}
             updateAddressAction={handleAddressFieldOnBlur}
           />
         )}
