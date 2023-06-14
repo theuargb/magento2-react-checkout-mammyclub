@@ -1,90 +1,66 @@
 import React from 'react';
-import { bool } from 'prop-types';
 import useShippingAddressFormikContext from '../../hooks/useShippingAddressFormikContext';
 import { __ } from '../../../../i18n';
 import { formikDataShape } from '../../../../utils/propTypes';
-import InPostTextInput from './InPostTextInput';
+import TextInput from '../../../common/Form/TextInput';
 
-function InPostAddressFieldSet({ formikData, isPointSelected }) {
-  const { fields, shippingValues } = useShippingAddressFormikContext();
-  if (!isPointSelected) {
-    return (
-      <div className="-mt-1 border-container-lightner border-2 mb-2 border-t-0 p-1">
-        <p className="text-gray my-2 text-base">
-          {__('Point is not selected')}
-        </p>
-        <InPostTextInput
-          name={`${fields.street}[0]`}
-          id="line1"
+function InPostAddressFieldSet({ formikData, ...rest }) {
+  const { fields } = useShippingAddressFormikContext();
+  const { onBlur, onFocus } = rest;
+  return (
+    <div>
+      <div className="w-full grow-1">
+        <TextInput
+          label={__('City')}
+          name={fields.city}
+          id="cityInPost"
           formikData={formikData}
-          className="border-0 p-0 m-0 text-base  mb-0.5 w-full"
-          type="hidden"
-        />
-        <InPostTextInput
-          name={`${fields.street}[1]`}
-          id="line1"
-          formikData={formikData}
-          className="border-0 p-0 m-0 text-base  mb-0.5 w-full"
-          type="hidden"
-        />
-        <InPostTextInput
-          name={`${fields.street}[2]`}
-          id="location_description"
-          formikData={formikData}
-          className="border-0 p-0 m-0 text-base  mb-0.5 w-full"
-          type="hidden"
+          className="border-2 w-full form-input"
+          onBlur={onBlur}
+          onFocus={onFocus}
         />
       </div>
-    );
-  }
-  return (
-    <div className="-mt-1 border-container-lightner border-2 mb-2 border-t-0 p-1">
-      <InPostTextInput
-        name={`${fields.street}[0]`}
-        id="line1"
-        formikData={formikData}
-        className="border-0 p-0 m-0 text-base  mb-0.5 w-full"
-        type="hidden"
-      />
-      <InPostTextInput
-        name={`${fields.street}[1]`}
-        id="line1"
-        formikData={formikData}
-        className="border-0 p-0 m-0 text-base  mb-0.5 w-full"
-        type="hidden"
-      />
-      <InPostTextInput
-        name={`${fields.street}[2]`}
-        id="location_description"
-        formikData={formikData}
-        className="border-0 p-0 m-0 text-base  mb-0.5 w-full"
-        type="hidden"
-      />
-      <p className="text-gray my-2 text-base">{__('Selected Point:')}</p>
-      <ul>
-        <li className="relative pl-4 flex flex-wrap content-center align-center mb-0 w-full">
-          <span className="absolute left-1 top-2 w-1 h-1 bg-old_green-main flex" />
-          <p className="text-base  mb-2 w-full">{shippingValues.street[0]}</p>
-        </li>
-        <li className="relative pl-4 flex flex-wrap content-center align-center mb-0 w-full">
-          <span className="absolute left-1 top-2 w-1 h-1 bg-old_green-main flex" />
-          <p className="text-base  mb-2 w-full">{shippingValues.street[1]}</p>
-        </li>
-        <li className="relative pl-4 flex flex-wrap content-center align-center mb-0 w-full">
-          <span className="absolute left-1 top-2 w-1 h-1 bg-old_green-main flex" />
-          <p className="text-base  mb-2 w-full">{shippingValues.street[2]}</p>
-        </li>
-      </ul>
+      <div className="flex justify-between space-x-2 items-end pb-3 -mt-1">
+        <div className="w-full grow-1">
+          <TextInput
+            label={__('Street')}
+            name={`${fields.street}[0]`}
+            id="streetInPost"
+            formikData={formikData}
+            className="border-2 w-full form-input"
+            onBlur={onBlur}
+            onFocus={onFocus}
+          />
+        </div>
+        <div className="basis-1/5 grow-1">
+          <TextInput
+            label={__('House')}
+            name={`${fields.street}[1]`}
+            id="houseNumberInpost"
+            formikData={formikData}
+            className="border-2 w-full form-input"
+            onBlur={onBlur}
+            onFocus={onFocus}
+          />
+        </div>
+        <div className="basis-1/5 grow-1">
+          <TextInput
+            label={__('Apartment')}
+            name={`${fields.street}[2]`}
+            id="apartInPost"
+            formikData={formikData}
+            className="border-2 w-full form-input"
+            onBlur={onBlur}
+            onFocus={onFocus}
+          />
+        </div>
+      </div>
     </div>
   );
 }
 
 InPostAddressFieldSet.propTypes = {
   formikData: formikDataShape.isRequired,
-  isPointSelected: bool,
-};
-InPostAddressFieldSet.defaultProps = {
-  isPointSelected: false,
 };
 
 export default InPostAddressFieldSet;

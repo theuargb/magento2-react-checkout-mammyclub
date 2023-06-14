@@ -14,13 +14,8 @@ import useShippingAddressCartContext from '../hooks/useShippingAddressCartContex
 import useAddressSaveOnFieldChangeStatus from '../hooks/useAddressSaveOnFieldChangeStatus';
 import InPostGeoWidgetForm from './inPost/InPostGeoWidgetForm';
 import RootElement from '../../../utils/rootElement';
-
-const inPostMethods = [
-  'inpostpaczkomaty',
-  'inpostpaczkomatypobranie',
-  'inpostpaczkomatykurier',
-];
-const npMethods = ['novaposhta_to_warehouse', 'novaposhta_to_door'];
+import { getCurrentShipingMethod } from '../utility/getCurrentShipingMethod';
+import InPostAddressFieldSet from './inPost/InPostAddressFieldSet';
 
 function ShippingAddressForm({ children }) {
   const { fields, formikData, handleKeyDown } =
@@ -152,23 +147,9 @@ function ShippingAddressForm({ children }) {
     }),
   };
 
-  const isSelectedShippingMethodInPost = useMemo(
-    () =>
-      inPostMethods.some(
-        (method) =>
-          method === selectedShippingMethod ||
-          method === cartSelectedShippingMethod?.methodCode
-      ),
-    [selectedShippingMethod, cartSelectedShippingMethod]
-  );
-  const isSelectedShippingMethodNp = useMemo(
-    () =>
-      npMethods.some(
-        (method) =>
-          method === selectedShippingMethod ||
-          method === cartSelectedShippingMethod?.methodCode
-      ),
-    [selectedShippingMethod, cartSelectedShippingMethod]
+  const currentShippingMethod = getCurrentShipingMethod(
+    selectedShippingMethod,
+    cartSelectedShippingMethod?.methodCode
   );
 
   return (
@@ -230,7 +211,9 @@ function ShippingAddressForm({ children }) {
           </div>
         )}
         {children}
-        {isSelectedShippingMethodNp && (
+        {/* TODO: refactoring hardcoded shippingMethod checks */}
+        {/* Nova poshta fieldsets */}
+        {currentShippingMethod === 'np' && (
           <NovaPoshtaCitySelect
             formikData={formikData}
             name={fields.city}
@@ -241,7 +224,6 @@ function ShippingAddressForm({ children }) {
             onFocus={handleAddressFieldOnFocus}
           />
         )}
-
         {selectedShippingMethod === 'novaposhta_to_warehouse' && (
           <div className="pb-4">
             <NovaPoshtaWarehouseSelect
@@ -276,13 +258,26 @@ function ShippingAddressForm({ children }) {
             </NovaPoshtaAddressFieldSet>
           </div>
         )}
-        {isSelectedShippingMethodInPost && (
+        {/* ======================================================= */}
+
+        {/* InPost fieldsets */}
+        {currentShippingMethod === 'inpost' && (
           <InPostGeoWidgetForm
             formikData={formikData}
             cod={selectedShippingMethod === 'inpostpaczkomatypobranie'}
             updateAddressAction={handleAddressFieldOnBlur}
           />
         )}
+        {currentShippingMethod === 'inpost-kurier' && (
+          <div>
+            <InPostAddressFieldSet
+              formikData={formikData}
+              onBlur={handleAddressFieldOnBlur}
+              onFocus={handleAddressFieldOnFocus}
+            />
+          </div>
+        )}
+        {/* ======================================================= */}
       </div>
     </>
   );

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { bool } from 'prop-types';
 import { formikDataShape } from '../../../../utils/propTypes';
 import InPostGeoWidget from '../../../../shippingMethods/InPost/components/InPostGeoWidget';
-import InPostAddressFieldSet from './InPostAddressFieldSet';
+import InPostPointFieldSet from './InPostPointFieldSet';
 import useShippingAddressFormikContext from '../../hooks/useShippingAddressFormikContext';
 import { __ } from '../../../../i18n';
 
@@ -90,7 +90,7 @@ const InPostGeoWidgetForm = ({ formikData, cod, ...rest }) => {
         </div>
       )}
       <InPostGeoWidget onPointCallback={onPointCallback} />
-      <InPostAddressFieldSet
+      <InPostPointFieldSet
         formikData={formikData}
         isPointSelected={pointSelected}
       />
