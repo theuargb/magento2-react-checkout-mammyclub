@@ -14,6 +14,13 @@ function InPostPointFieldSet({ formikData, isPointSelected }) {
           {__('Point is not selected')}
         </p>
         <InPostTextInput
+          name={fields.city}
+          id="location_city"
+          formikData={formikData}
+          className="border-0 p-0 m-0 text-base  mb-0.5 w-full"
+          type="hidden"
+        />
+        <InPostTextInput
           name={`${fields.street}[0]`}
           id="line1"
           formikData={formikData}
@@ -21,15 +28,8 @@ function InPostPointFieldSet({ formikData, isPointSelected }) {
           type="hidden"
         />
         <InPostTextInput
-          name={`${fields.street}[1]`}
-          id="line1"
-          formikData={formikData}
-          className="border-0 p-0 m-0 text-base  mb-0.5 w-full"
-          type="hidden"
-        />
-        <InPostTextInput
-          name={`${fields.street}[2]`}
-          id="location_description"
+          name={fields.zipcode}
+          id="location_postcode"
           formikData={formikData}
           className="border-0 p-0 m-0 text-base  mb-0.5 w-full"
           type="hidden"
@@ -40,6 +40,13 @@ function InPostPointFieldSet({ formikData, isPointSelected }) {
   return (
     <div className="-mt-1 border-container-lightner border-2 mb-2 border-t-0 p-1">
       <InPostTextInput
+        name={fields.city}
+        id="location_city"
+        formikData={formikData}
+        className="border-0 p-0 m-0 text-base  mb-0.5 w-full"
+        type="hidden"
+      />
+      <InPostTextInput
         name={`${fields.street}[0]`}
         id="line1"
         formikData={formikData}
@@ -47,15 +54,8 @@ function InPostPointFieldSet({ formikData, isPointSelected }) {
         type="hidden"
       />
       <InPostTextInput
-        name={`${fields.street}[1]`}
-        id="line1"
-        formikData={formikData}
-        className="border-0 p-0 m-0 text-base  mb-0.5 w-full"
-        type="hidden"
-      />
-      <InPostTextInput
-        name={`${fields.street}[2]`}
-        id="location_description"
+        name={fields.zipcode}
+        id="location_postcode"
         formikData={formikData}
         className="border-0 p-0 m-0 text-base  mb-0.5 w-full"
         type="hidden"
@@ -64,15 +64,15 @@ function InPostPointFieldSet({ formikData, isPointSelected }) {
       <ul>
         <li className="relative pl-4 flex flex-wrap content-center align-center mb-0 w-full">
           <span className="absolute left-1 top-2 w-1 h-1 bg-old_green-main flex" />
+          <p className="text-base  mb-2 w-full">{shippingValues.city}</p>
+        </li>
+        <li className="relative pl-4 flex flex-wrap content-center align-center mb-0 w-full">
+          <span className="absolute left-1 top-2 w-1 h-1 bg-old_green-main flex" />
           <p className="text-base  mb-2 w-full">{shippingValues.street[0]}</p>
         </li>
         <li className="relative pl-4 flex flex-wrap content-center align-center mb-0 w-full">
           <span className="absolute left-1 top-2 w-1 h-1 bg-old_green-main flex" />
-          <p className="text-base  mb-2 w-full">{shippingValues.street[1]}</p>
-        </li>
-        <li className="relative pl-4 flex flex-wrap content-center align-center mb-0 w-full">
-          <span className="absolute left-1 top-2 w-1 h-1 bg-old_green-main flex" />
-          <p className="text-base  mb-2 w-full">{shippingValues.street[2]}</p>
+          <p className="text-base  mb-2 w-full">{shippingValues.zipcode}</p>
         </li>
       </ul>
     </div>

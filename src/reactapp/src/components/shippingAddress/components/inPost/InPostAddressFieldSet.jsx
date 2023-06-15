@@ -20,7 +20,7 @@ function InPostAddressFieldSet({ formikData, ...rest }) {
           onFocus={onFocus}
         />
       </div>
-      <div className="flex justify-between space-x-2 items-end pb-3 -mt-1">
+      <div className="flex justify-between space-x-2 items-end -mt-1">
         <div className="w-full grow-1">
           <TextInput
             label={__('Street')}
@@ -48,6 +48,19 @@ function InPostAddressFieldSet({ formikData, ...rest }) {
             label={__('Apartment')}
             name={`${fields.street}[2]`}
             id="apartInPost"
+            formikData={formikData}
+            className="border-2 w-full form-input"
+            onBlur={onBlur}
+            onFocus={onFocus}
+          />
+        </div>
+      </div>
+      <div className="pb-3 -mt-1">
+        <div className="w-full">
+          <TextInput
+            label={__('Zipcode')}
+            name={fields.zipcode}
+            id="zipcodeInPost"
             formikData={formikData}
             className="border-2 w-full form-input"
             onBlur={onBlur}

@@ -3,13 +3,13 @@ import env from '../../../utils/env';
 import RootElement from '../../../utils/rootElement';
 import modifier from './modifier';
 
-export default async function setInpostPoint(widgetResponseData, type = 1) {
+export default async function setInpostPoint(widgetResponseData, cod = false) {
   const baseUrl = config?.baseUrl;
   const saveSelectedAddressUrl = '/inpost/select/index';
 
   const data = {
     point_name: widgetResponseData?.name || 'WAW171M',
-    type,
+    type: cod ? 0 : 1,
   };
   const dataString = `point_name=${data?.point_name}&type=${data?.type}`;
 

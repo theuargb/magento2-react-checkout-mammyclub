@@ -5,6 +5,7 @@ import InPostGeoWidget from '../../../../shippingMethods/InPost/components/InPos
 import InPostPointFieldSet from './InPostPointFieldSet';
 import useShippingAddressFormikContext from '../../hooks/useShippingAddressFormikContext';
 import { __ } from '../../../../i18n';
+import setInpostPoint from '../../../../api/cart/setInpostPoint/setInpostPoint';
 
 const InPostGeoWidgetForm = ({ formikData, cod, ...rest }) => {
   const { setFieldValue } = formikData;
@@ -35,45 +36,44 @@ const InPostGeoWidgetForm = ({ formikData, cod, ...rest }) => {
       location_description: response.location_description,
       point_name: response.name,
     };
-    if (!cod) {
-      setFieldValue(`${fields.street}[0]`, pointAddress?.line1);
-      setFieldValue(`${fields.street}[1]`, pointAddress?.line2);
-      setFieldValue(
-        `${fields.street}[2]`,
-        `№${pointAddress?.point_name}, ${pointAddress?.location_description}`
-      );
+    const splittedLine = pointAddress.line2.split(' ');
+    const postCodeFromLine = splittedLine[0];
+    const cityFromLine = splittedLine[1];
 
-      setPointSelected(true);
+    try {
+      // request to Select controller, set point_name to shippingAddress
+      const selectedPointData = await setInpostPoint(response, cod);
+      // set response data to fields
+      if (selectedPointData?.status === 1) {
+        setFieldValue(fields.city, cityFromLine);
+        setFieldValue(`${fields.street}[0]`, pointAddress?.line1);
+        setFieldValue(fields.zipcode, postCodeFromLine);
+
+        setPointSelected(true);
+        setMessageOnWidget({
+          message: __('The point has been recorded'),
+          type: 'success',
+        });
+      } else {
+        setFieldValue(fields.city, '');
+        setFieldValue(`${fields.street}[0]`, '');
+        setFieldValue(fields.zipcode, '');
+        setMessageOnWidget({
+          message: __(
+            'The selected pickup point does not support payment on delivery'
+          ),
+          type: 'error',
+        });
+        setPointSelected(false);
+      }
+      // trigger request to update Shipping Address in cart
+      updateAddressAction();
+    } catch (error) {
       setMessageOnWidget({
-        message: __('The point has been recorded'),
-        type: 'success',
-      });
-    } else if (0 in response?.payment_type) {
-      setFieldValue(`${fields.street}[0]`, '');
-      setFieldValue(`${fields.street}[1]`, '');
-      setFieldValue(`${fields.street}[2]`, '');
-      setMessageOnWidget({
-        message: __(
-          'The selected pickup point does not support payment on delivery'
-        ),
+        message: __('Something went wrong'),
         type: 'error',
       });
-      setPointSelected(false);
-    } else {
-      setFieldValue(`${fields.street}[0]`, pointAddress?.line1);
-      setFieldValue(`${fields.street}[1]`, pointAddress?.line2);
-      setFieldValue(
-        `${fields.street}[2]`,
-        `№${pointAddress?.point_name}, ${pointAddress?.location_description}`
-      );
-
-      setPointSelected(true);
-      setMessageOnWidget({
-        message: __('The point has been recorded'),
-        type: 'success',
-      });
     }
-    updateAddressAction();
   };
 
   return (
