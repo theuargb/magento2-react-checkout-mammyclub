@@ -9,6 +9,7 @@ import { Field } from 'formik';
 import { _replace } from '../../../utils';
 import { formikDataShape } from '../../../utils/propTypes';
 import { __ } from '../../../i18n';
+import RootElement from '../../../utils/rootElement';
 
 function TextInputPhoneMask({
   id,
@@ -41,6 +42,8 @@ function TextInputPhoneMask({
   const { onBlur } = rest;
   const [fieldInFocus, setFocusState] = useState(false);
   const hasError = hasFieldError && hasFieldTouched && !fieldInFocus;
+
+  const phoneMaskConfig = RootElement.getPhoneMaskConfig();
 
   const handleFieldBlur = () => {
     setFocusState(false);
@@ -120,7 +123,7 @@ function TextInputPhoneMask({
               hasError ? 'border-dashed border-red-500' : ''
             } ${className} ${width || 'w-full'}`}
             {...rest}
-            mask={__('+389(99)999-99-99')}
+            mask={phoneMaskConfig?.phone_mask}
             type="tel"
             onChange={(event) => {
               const newValue = event.target.value;
@@ -128,7 +131,7 @@ function TextInputPhoneMask({
               setFieldValue(name, newValue);
               actions.saveAddress();
               setFocusState(true);
-              if (newValue !== __('+380(__)___-__-__')) {
+              if (newValue !== phoneMaskConfig?.phone_mask_placeholder) {
                 event.target.classList.remove(
                   'border-dashed',
                   'border-red-500'

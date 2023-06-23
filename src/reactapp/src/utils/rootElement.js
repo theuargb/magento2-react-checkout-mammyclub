@@ -8,6 +8,10 @@ const RootElement = {
     return RootElement.elem;
   },
 
+  getPhoneMaskConfig() {
+    return _get(RootElement.getCheckoutConfig(), 'phone_mask');
+  },
+
   getLanguage() {
     return _get(RootElement.getCheckoutConfig(), 'language');
   },

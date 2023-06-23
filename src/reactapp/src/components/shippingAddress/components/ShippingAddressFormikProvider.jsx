@@ -11,7 +11,6 @@ import {
   // initialCountry,
   isCartAddressValid,
   isValidCustomerAddressId,
-  storeCode,
 } from '../../../utils/address';
 import { __ } from '../../../i18n';
 import { _toString } from '../../../utils';
@@ -33,10 +32,7 @@ import useFillDefaultAddresses from '../hooks/useFillDefaultAddresses';
 import RootElement from '../../../utils/rootElement';
 
 /* eslint-disable */
-const phoneRegExp =
-  storeCode === 'pl'
-    ? /^((\+)?(4)?(8)?[\- ]?)?(\(?\d{2}\)?[\- ]?)?\d{3}[\- ]?\d{2}[\- ]?\d{2}$/
-    : /^((\+)?(3)?(8)?(0)?[\- ]?)?(\(?\d{2}\)?[\- ]?)?\d{3}[\- ]?\d{2}[\- ]?\d{2}$/;
+const phoneRegExp = RootElement.getPhoneMaskConfig()?.phone_mask_regex;
 /* eslint-enable */
 
 const initialValues = {
