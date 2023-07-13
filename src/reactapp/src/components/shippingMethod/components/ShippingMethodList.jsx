@@ -15,6 +15,7 @@ function ShippingMethodList({ cmsHtmlContent }) {
     setFieldValue,
     selectedMethod,
     setFieldTouched,
+    formSectionValues,
   } = useShippingMethodFormContext();
   const { methodsAvailable, methodList } = useShippingMethodCartContext();
   const { carrierCode: methodCarrierCode, methodCode: methodMethodCode } =
@@ -38,11 +39,18 @@ function ShippingMethodList({ cmsHtmlContent }) {
     setShippingMethodChangeByUser(true);
     await submitHandler({ carrierCode, methodCode });
   };
+  console.log(selectedMethod);
+
   /*  Сохранение метода доставки.
-  Если пользователем не будет выбран метод доставки, то методом доставки останется первый доступный */
+  Если пользователем не будет выбран метод доставки и в корзине он еще не содержится, то методом доставки останется первый доступный */
   /* eslint-disable */
   useMemo(() => {
-    if (!isShippingMethodChangeByUser && methodsAvailable) {
+    if (
+      !isShippingMethodChangeByUser &&
+      methodCarrierCode === '' &&
+      methodMethodCode === '' &&
+      methodsAvailable
+    ) {
       setFieldTouched(fields.carrierCode, true);
       setFieldTouched(fields.methodCode, true);
       const methodListKeys = Object.keys(methodList);
@@ -51,8 +59,14 @@ function ShippingMethodList({ cmsHtmlContent }) {
 
       setFieldValue(SHIPPING_METHOD, { carrierCode, methodCode });
       submitHandler({ carrierCode, methodCode });
+    } else if (methodCarrierCode && methodMethodCode) {
+      if (
+        formSectionValues.carrierCode !== methodCarrierCode &&
+        formSectionValues.methodCode !== methodMethodCode
+      )
+        setFieldValue(SHIPPING_METHOD, { methodCarrierCode, methodMethodCode });
     }
-  }, [methodsAvailable]);
+  }, [methodsAvailable, methodCarrierCode, methodMethodCode]);
   /*  ========================================================================================  */
 
   if (!methodsAvailable) {
@@ -73,6 +87,7 @@ function ShippingMethodList({ cmsHtmlContent }) {
         name="shippingMethod"
         options={_objToArray(methodList)}
         onChange={handleShippingMethodSelection}
+        selectedMethod={selectedMethod}
       />
       <InfoPopups
         positionStyles="absolute top-0 right-0 mt-6 pr-2"

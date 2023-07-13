@@ -43,7 +43,12 @@ function ShippingMethodSelect({
           const methodName = option.methodTitle;
 
           return (
-            <option key={option.value} value={option.id} className="p-0 m-0">
+            <option
+              key={option.value}
+              value={option.id}
+              className="p-0 m-0"
+              selected={rest.selectedMethod.methodCode === option.methodCode}
+            >
               {methodName}
             </option>
           );

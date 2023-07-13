@@ -3,15 +3,14 @@ import env from '../../../utils/env';
 import RootElement from '../../../utils/rootElement';
 import modifier from './modifier';
 
-export default async function setInpostPoint(widgetResponseData, cod = false) {
+export default async function setInpostPoint(widgetResponseData) {
   const baseUrl = config?.baseUrl;
-  const saveSelectedAddressUrl = '/inpost/select/index';
+  const saveSelectedAddressUrl = '/inpost/locker/save';
 
   const data = {
-    point_name: widgetResponseData?.name || 'WAW171M',
-    type: cod ? 0 : 1,
+    inpost_locker_id: widgetResponseData?.name,
   };
-  const dataString = `point_name=${data?.point_name}&type=${data?.type}`;
+  const dataString = `inpost_locker_id=${data?.inpost_locker_id}`;
 
   const storeCode = env.storeCode || RootElement.getStoreCode();
 

@@ -12,8 +12,8 @@ import useShippingMethodAppContext from '../hooks/useShippingMethodAppContext';
 import useShippingMethodCartContext from '../hooks/useShippingMethodCartContext';
 
 const initialValues = {
-  methodCode: '',
-  carrierCode: '',
+  methodCode: null,
+  carrierCode: null,
 };
 
 const requiredMessage = __('Required');
