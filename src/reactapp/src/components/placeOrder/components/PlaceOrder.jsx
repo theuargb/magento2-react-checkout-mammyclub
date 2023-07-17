@@ -55,6 +55,9 @@ function PlaceOrder({ cmsHtmlContent }) {
         setErrorMessage(__('Please provide a phone number.'));
         focusOnPhoneErrorElement();
         scrollToElement(SHIPPING_ADDR_FORM);
+      } else if (errors?.shipping_address?.new_customer_email) {
+        setErrorMessage(__('Email is invalid'));
+        focusOnFormErrorElement(SHIPPING_ADDR_FORM, errors?.shipping_address);
       } else {
         setErrorMessage(
           __('Please provide your shipping address information.')

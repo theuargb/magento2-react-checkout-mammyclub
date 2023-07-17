@@ -50,6 +50,7 @@ function LoginFormManager({ children, formikData }) {
     setPageLoader,
     setErrorMessage,
     setSuccessMessage,
+    isLoggedIn,
   } = useLoginAppContext();
   const {
     cartEmail,
@@ -71,7 +72,7 @@ function LoginFormManager({ children, formikData }) {
         method === cartPaymentMethod || method === selectedPaymentMethod
     );
 
-    if (isPrzelewy24Selected) {
+    if (isPrzelewy24Selected && !isLoggedIn) {
       validationSchema.email = YupString()
         .email(__('Email is invalid'))
         .required(requiredMessage);

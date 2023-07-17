@@ -39,7 +39,6 @@ function ShippingMethodList({ cmsHtmlContent }) {
     setShippingMethodChangeByUser(true);
     await submitHandler({ carrierCode, methodCode });
   };
-  console.log(selectedMethod);
 
   /*  Сохранение метода доставки.
   Если пользователем не будет выбран метод доставки и в корзине он еще не содержится, то методом доставки останется первый доступный */

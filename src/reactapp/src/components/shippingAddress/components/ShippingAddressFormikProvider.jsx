@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useMemo } from 'react';
 import {
   array as YupArray,
   string as YupString,
   boolean as YupBoolean,
 } from 'yup';
-import { Form } from 'formik';
+import { Form, useFormikContext } from 'formik';
 import { node } from 'prop-types';
 
 import {
@@ -80,6 +80,8 @@ const initValidationSchema = {
 const addressIdInCache = _toString(LocalStorage.getCustomerShippingAddressId());
 const initAddressId = addressIdInCache || CART_SHIPPING_ADDRESS;
 
+const przelewy24Mehods = ['przelewy24', 'przelewy24_card'];
+
 function ShippingAddressFormikProvider({ children, formikData }) {
   const { setFieldValue, selectedRegion, selectedCountry, setFieldTouched } =
     formikData;
@@ -90,6 +92,32 @@ function ShippingAddressFormikProvider({ children, formikData }) {
   const [customerAddressSelected, setCustomerAddressSelected] = useState(
     isValidCustomerAddressId(addressIdInCache)
   );
+
+  const editModeContext = useFormEditMode();
+  const { customerAddressList, isLoggedIn } = useShippingAddressAppContext();
+  const { cartShippingAddress } = useShippingAddressCartContext();
+  const { setFormToViewMode } = editModeContext;
+
+  // hardcoded check for pzelewy24 ( only when this payment method is selected - email shouldnt be null )
+  const { values } = useFormikContext();
+  const selectedPaymentMethod = useMemo(
+    () => values?.payment_method?.code,
+    [values]
+  );
+  useEffect(() => {
+    const isPrzelewy24Selected = przelewy24Mehods.some(
+      (method) => method === selectedPaymentMethod
+    );
+
+    if (isPrzelewy24Selected && isLoggedIn) {
+      initValidationSchema.new_customer_email = YupString()
+        .email(__('Email is invalid'))
+        .required(requiredMessage);
+    }
+  }, [selectedPaymentMethod]);
+
+  // ====================================================================================================
+
   const validationSchema = useRegionValidation(
     selectedCountry,
     initValidationSchema
@@ -100,10 +128,7 @@ function ShippingAddressFormikProvider({ children, formikData }) {
     setSelectedAddress,
     setCustomerAddressSelected,
   });
-  const editModeContext = useFormEditMode();
-  const { customerAddressList } = useShippingAddressAppContext();
-  const { cartShippingAddress } = useShippingAddressCartContext();
-  const { setFormToViewMode } = editModeContext;
+
   const regionData = useRegionData(selectedCountry, selectedRegion);
   const cartHasShippingAddress = isCartAddressValid(cartShippingAddress);
 
