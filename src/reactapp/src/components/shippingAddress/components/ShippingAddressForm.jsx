@@ -19,8 +19,11 @@ import InPostAddressFieldSet from './inPost/InPostAddressFieldSet';
 function ShippingAddressForm({ children }) {
   const { fields, formikData, handleKeyDown } =
     useShippingAddressFormikContext();
-  const { setAddressNeedToUpdate, isAddressNeedToUpdate } =
-    useShippingAddressCartContext();
+  const {
+    setAddressNeedToUpdate,
+    isAddressNeedToUpdate,
+    cartSelectedShippingMethod,
+  } = useShippingAddressCartContext();
 
   const { isLoggedIn } = useShippingAddressAppContext();
   const { values, validateForm } = useFormikContext();
@@ -53,12 +56,12 @@ function ShippingAddressForm({ children }) {
   }, [values]);
 
   const selectedShippingMethodMethodCode = useMemo(
-    () => values?.shipping_method?.methodCode,
-    [values]
+    () => cartSelectedShippingMethod?.methodCode,
+    [cartSelectedShippingMethod]
   );
   const selectedShippingMethodCarrierCode = useMemo(
-    () => values?.shipping_method?.carrierCode,
-    [values]
+    () => cartSelectedShippingMethod?.carrierCode,
+    [cartSelectedShippingMethod]
   );
 
   useEffect(() => {

@@ -86,7 +86,7 @@ function ShippingMethodList({ cmsHtmlContent }) {
         name="shippingMethod"
         options={_objToArray(methodList)}
         onChange={handleShippingMethodSelection}
-        selectedMethod={selectedMethod}
+        selectedMethodId={selectedMethodId}
       />
       <InfoPopups
         positionStyles="absolute top-0 right-0 mt-6 pr-2"
