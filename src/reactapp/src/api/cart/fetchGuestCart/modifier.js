@@ -13,11 +13,11 @@ import { modifyBillingAddressData } from '../setBillingAddress/modifier';
 function modifyCartItemsData(cartItems) {
   return cartItems.reduce((accumulator, item) => {
     const { id, quantity, prices, product, configurable_options } = item;
-    const priceAmount = _get(prices, 'price.value');
+    const priceAmount = _get(prices, 'price_including_tax.value');
     const price = formatPrice(priceAmount);
     const basePriceAmount = _get(prices,'base_price.value');
     const basePrice = formatPrice(basePriceAmount);
-    const rowTotalAmount = _get(prices, 'row_total.value');
+    const rowTotalAmount = _get(prices, 'row_total_including_tax.value');
     const rowTotal = formatPrice(rowTotalAmount);
     const productId = _get(product, 'id');
     const productSku = _get(product, 'sku');

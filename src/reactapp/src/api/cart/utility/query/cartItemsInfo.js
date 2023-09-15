@@ -7,11 +7,11 @@ items {
       value
       currency
     }
-    price {
+    price_including_tax {
       value
       currency
     }
-    row_total {
+    row_total_including_tax {
       value
       currency
     }

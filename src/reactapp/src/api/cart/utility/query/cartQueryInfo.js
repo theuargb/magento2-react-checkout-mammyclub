@@ -49,6 +49,9 @@ const cartQueryInfo = `
       row_total {
         value
       }
+      row_total_including_tax{
+        value
+      }
     }
     product {
       id
