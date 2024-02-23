@@ -19,6 +19,11 @@ prices {
       value
     }
   }
+  applied_taxes {
+    label
+    amount {
+      value
+    }
 }
 `;
 

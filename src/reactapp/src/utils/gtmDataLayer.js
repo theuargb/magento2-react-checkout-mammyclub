@@ -31,7 +31,7 @@ const gtmDataLayer = {
       currency: currency.code,
       coupon: appliedCoupon,
       shipping: selected_shipping_method.amount,
-      tax: taxAmount,
+      tax:  prices?.taxApplied?.amount?.value,
       new_customer: !isLoggedIn,
       items:
         cartItemsArray.length &&
