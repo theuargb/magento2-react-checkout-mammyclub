@@ -71,7 +71,7 @@ export const config = {
   isDevelopmentMode: nodeEnv === 'development',
   cartId: getConfigFromLocalStorage(activeSource.cartId),
   baseUrl:
-    env.baseUrl || RootElement.getBaseUrl() || 'http://dev.mammyclub.local',
+    env.baseUrl || RootElement.getBaseUrl() || 'https://pl.mammyclub.com',
   signInToken: getConfigFromLocalStorage(activeSource.token),
   hyvaStorageSource: magentoDataSources.hyvaCheckoutCacheStorage,
   customerAccountUrlKey: '/customer/account/',

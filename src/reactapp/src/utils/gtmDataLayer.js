@@ -31,7 +31,7 @@ const gtmDataLayer = {
       currency: currency.code,
       coupon: appliedCoupon,
       shipping: selected_shipping_method.amount,
-      tax:  prices?.taxApplied?.amount?.value,
+      tax: this.getTaxAmountFromAllTax(prices?.taxApplied),
       new_customer: !isLoggedIn,
       items:
         cartItemsArray.length &&
@@ -49,6 +49,15 @@ const gtmDataLayer = {
           };
         }),
     };
+  },
+  getTaxAmountFromAllTax(appliedTax) {
+    let aggregatedTax = 0;
+
+    appliedTax.map((tax) => {
+      aggregatedTax += tax?.amount?.value;
+    });
+
+    return aggregatedTax;
   },
 };
 export default gtmDataLayer;
