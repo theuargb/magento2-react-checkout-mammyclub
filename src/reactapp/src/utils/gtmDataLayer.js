@@ -22,12 +22,11 @@ const gtmDataLayer = {
     const { items, prices, appliedCoupon, selected_shipping_method, email } =
       cartData;
     const cartItemsArray = Object.values(items);
-    const taxAmount = prices?.subTotalAmount - prices?.subTotalAmountWoTax;
     const currency = RootElement.getCurrency();
 
     return {
       transaction_id: orderNumber,
-      value: prices?.subTotalAmount,
+      value: prices?.grandTotalAmount,
       currency: currency.code,
       coupon: appliedCoupon,
       shipping: selected_shipping_method.amount,
