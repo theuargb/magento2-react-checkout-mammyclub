@@ -15,10 +15,11 @@ function modifyCartItemsData(cartItems) {
     const { id, quantity, prices, product, configurable_options } = item;
     const priceAmount = _get(prices, 'price_including_tax.value');
     const price = formatPrice(priceAmount);
-    const basePriceAmount = _get(prices,'base_price.value');
+    const basePriceAmount = _get(prices, 'base_price.value');
     const basePrice = formatPrice(basePriceAmount);
     const rowTotalAmount = _get(prices, 'row_total_including_tax.value');
     const rowTotal = formatPrice(rowTotalAmount);
+    const discount = _get(prices, 'discounts');
     const productId = _get(product, 'id');
     const productSku = _get(product, 'sku');
     const productName = _get(product, 'name');
@@ -34,6 +35,7 @@ function modifyCartItemsData(cartItems) {
       quantity,
       priceAmount,
       price,
+      discount,
       basePrice,
       isOnSale,
       rowTotal,
@@ -55,6 +57,7 @@ function modifyCartItemsData(cartItems) {
 function modifyCartPricesData(cartPrices) {
   const grandTotal = _get(cartPrices, 'grand_total', {});
   const subTotal = _get(cartPrices, 'subtotal_including_tax', {});
+  const subTotalWoTax = _get(cartPrices, 'subtotal_excluding_tax', {});
   const discountPrices = _get(cartPrices, 'discounts', []) || [];
   const discounts = discountPrices.map((discount) => ({
     label: discount.label,
@@ -63,10 +66,12 @@ function modifyCartPricesData(cartPrices) {
   }));
   const grandTotalAmount = _get(grandTotal, 'value');
   const subTotalAmount = _get(subTotal, 'value');
+  const subTotalAmountWoTax = _get(subTotalWoTax, 'value');
 
   return {
     discounts,
     hasDiscounts: !_isArrayEmpty(discountPrices),
+    subTotalAmountWoTax,
     subTotal: formatPrice(subTotalAmount),
     subTotalAmount,
     grandTotal: formatPrice(grandTotalAmount),

@@ -15,7 +15,15 @@ items {
       value
       currency
     }
+    discounts {
+      label
+      amount {
+        value
+      }
+    }
+
   }
+  
   ... on SimpleCartItem {
     product {
       id

@@ -4,6 +4,10 @@ prices {
     value
     currency
   }
+  subtotal_excluding_tax {
+    value
+    currency
+  }
   subtotal_including_tax {
     value
     currency

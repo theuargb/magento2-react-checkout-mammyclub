@@ -10,6 +10,7 @@ import useCartContext from '../../hook/useCartContext';
 import useAppContext from '../../hook/useAppContext';
 import { config } from '../../config';
 import LocalStorage from '../../utils/localStorage';
+import gtmDataLayer from '../../utils/gtmDataLayer';
 
 function prepareFormInitValues(sections) {
   const initValues = {};
@@ -54,8 +55,8 @@ function CheckoutFormProvider({ children }) {
    */
   const [paymentActionList, setPaymentActions] = useState({});
 
-  const { placeOrder } = useCartContext();
-  const { setPageLoader } = useAppContext();
+  const { placeOrder, cart } = useCartContext();
+  const { setPageLoader, isLoggedIn } = useAppContext();
 
   const [liqPayReadyToInit, setLiqPayReadyToInit] = useState(false);
   const [isLiqPaySuccess, setLiqPayStatus] = useState(false);
@@ -92,6 +93,12 @@ function CheckoutFormProvider({ children }) {
 
       const orderNumber = _get(order, 'order_number');
       if (orderNumber && config.isProductionMode) {
+        gtmDataLayer.pushDataLayerCartData(
+          'purchase',
+          cart,
+          orderNumber,
+          isLoggedIn
+        );
         switch (selectedPaymentMethod) {
           case 'liqpaymagento_liqpay':
             setLiqPayReadyToInit(true);
@@ -110,6 +117,12 @@ function CheckoutFormProvider({ children }) {
       }
 
       if (orderNumber && config.isDevelopmentMode) {
+        gtmDataLayer.pushDataLayerCartData(
+          'purchase',
+          cart,
+          orderNumber,
+          isLoggedIn
+        );
         switch (selectedPaymentMethod) {
           case 'liqpaymagento_liqpay':
             setLiqPayReadyToInit(true);
