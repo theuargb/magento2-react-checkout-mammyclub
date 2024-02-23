@@ -7,16 +7,12 @@ const gtmDataLayer = {
     if (window.dataLayer) {
       window.dataLayer.push({
         event: eventName,
-        ecommerce: this.getDataLayerContent(
-          eventName,
-          cartData,
-          (orderNumber = null)
-        ),
+        ecommerce: this.getDataLayerContent(eventName, cartData, orderNumber),
       });
     }
   },
 
-  getDataLayerContent(eventName, cartData, orderNumber = null, isLoggedIn) {
+  getDataLayerContent(eventName, cartData, orderNumber, isLoggedIn) {
     switch (eventName) {
       case 'purchase':
         return this.getPurchaseGtmData(cartData, orderNumber, isLoggedIn);
@@ -46,7 +42,6 @@ const gtmDataLayer = {
             price: item?.priceAmount,
             discount: item?.discount?.amount?.value || 0,
             currency,
-            item_category: '???',
             quantity: item?.quantity,
             item_brand: item?.productSku,
             item_variant: item?.productConfigurableOptions,
@@ -54,6 +49,6 @@ const gtmDataLayer = {
           };
         }),
     };
-  }
+  },
 };
 export default gtmDataLayer;
