@@ -24,6 +24,7 @@ prices {
     amount {
       value
     }
+  }
 }
 `;
 
