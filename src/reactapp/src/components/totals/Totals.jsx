@@ -23,7 +23,7 @@ function Totals() {
     <div className="p-0 mt-0">
       <div>
         <div className="space-y-3">
-          <div className="px-4 py-3 text-xl font-bold text-gray">
+          <div className="px-4 py-3 text-xl font-bold text-gray text-right">
             <span className="text-lg text-gray">
               {__('Delivery cost:\u00A0')}
             </span>
