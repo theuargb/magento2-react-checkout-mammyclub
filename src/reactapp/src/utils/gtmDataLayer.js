@@ -38,7 +38,7 @@ const gtmDataLayer = {
           return {
             item_name: item?.productName,
             item_id: item?.productId,
-            price: item?.priceAmount,
+            price: item?.priceAmount?.toString(),
             discount: item?.discount?.amount?.value || 0,
             currency: currency?.code,
             item_category: item?.lastProductCategory,
