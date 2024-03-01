@@ -1,4 +1,5 @@
 import _get from 'lodash.get';
+import { isEmpty } from 'lodash';
 
 import {
   modifyShippingMethods,
@@ -27,8 +28,17 @@ function modifyCartItemsData(cartItems) {
     const canonicalUrl = _get(product, 'canonical_url');
     const productSmallImgUrl = _get(product, 'small_image.url');
     const productSmallWebpImgUrl = _get(product, 'small_image.url_webp');
+    const productBrand = _get(product,'brand_name');
+    const productCategories = _get(product, 'categories');
     const productConfigurableOptions = configurable_options;
     const isOnSale = priceAmount < basePriceAmount;
+
+    let lastProductCategory;
+    if(!isEmpty(productCategories)){
+      lastProductCategory = productCategories[productCategories.length - 1]?.name;
+    }
+
+    console.log(lastProductCategory, productBrand);
 
     accumulator[id] = {
       id,
@@ -48,6 +58,8 @@ function modifyCartItemsData(cartItems) {
       productSmallImgUrl,
       productConfigurableOptions,
       productSmallWebpImgUrl,
+      lastProductCategory,
+      productBrand
     };
 
     return accumulator;

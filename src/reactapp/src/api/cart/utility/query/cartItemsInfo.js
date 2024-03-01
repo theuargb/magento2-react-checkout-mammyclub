@@ -35,6 +35,10 @@ items {
         url_webp
       }
       canonical_url
+      categories{
+        name
+      }
+      brand_name
     }
   }
 
@@ -49,6 +53,10 @@ items {
         url_webp
       }
       canonical_url
+      categories{
+        name
+      }
+      brand_name
     }
   }
 
@@ -63,6 +71,10 @@ items {
         url_webp
       }
       canonical_url
+      categories{
+        name
+      }
+      brand_name
     }
   }
 
@@ -77,6 +89,10 @@ items {
         url_webp
       }
       canonical_url
+      categories{
+        name
+      }
+      brand_name
     }
 
     parent: product {
@@ -107,6 +123,10 @@ items {
         url_webp
       }
       canonical_url
+      categories{
+        name
+      }
+      brand_name
     }
 
     bundle_options {
