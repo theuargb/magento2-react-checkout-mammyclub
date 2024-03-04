@@ -139,6 +139,9 @@ function TextInputPhoneMask({
               }
             }}
             onBlur={handleFieldBlur}
+            onFocus={(event) => {
+              event.target.removeAttribute('readonly');
+            }}
           />
         )}
       />
