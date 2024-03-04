@@ -156,6 +156,7 @@ function BillingAddressForm() {
           label={__('Phone')}
           name={fields.phone}
           formikData={formikData}
+          autocomplete="off"
           onKeyDown={handleKeyDown}
           placeholder={__('+32 000 000 000')}
         />

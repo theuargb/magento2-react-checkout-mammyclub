@@ -179,6 +179,7 @@ function ShippingAddressForm({ children }) {
           id="shipping_address.phone"
           required
           label={__('Phone (required)')}
+          autocomplete="off"
           name={fields.phone}
           formikData={formikData}
           onKeyDown={handleKeyDown}
