@@ -69,8 +69,12 @@ const initValidationSchema = {
   phone: YupString()
     .matches(phoneRegExp, 'Require correct number entered')
     .required(requiredMessage),
-  zipcode: YupString().nullable(),
-  city: YupString().nullable(),
+  zipcode: window.location.host.includes('angelprof')
+    ? YupString().required()
+    : YupString().nullable(),
+  city: window.location.host.includes('angelprof')
+    ? YupString().required()
+    : YupString().nullable(),
   region: YupString().nullable(),
   country: YupString().required(requiredMessage),
   isSameAsShipping: YupBoolean(),

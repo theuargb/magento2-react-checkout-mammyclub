@@ -7,9 +7,6 @@ import InPostTextInput from './InPostTextInput';
 
 function InPostPointFieldSet({ formikData, isPointSelected }) {
   const { fields, shippingValues } = useShippingAddressFormikContext();
-  const website = window.location.host.includes('angelprof')
-    ? 'angelprof'
-    : undefined;
   if (!isPointSelected) {
     return (
       <div className="-mt-1 border-container-lightner border-2 mb-2 border-t-0 p-1">
@@ -19,7 +16,7 @@ function InPostPointFieldSet({ formikData, isPointSelected }) {
         <InPostTextInput
           name={fields.city}
           id="location_city"
-          required={website === 'angelprof'}
+          required={window.location.host.includes('angelprof')}
           formikData={formikData}
           className="border-0 p-0 m-0 text-base  mb-0.5 w-full"
           type="hidden"
@@ -27,7 +24,7 @@ function InPostPointFieldSet({ formikData, isPointSelected }) {
         <InPostTextInput
           name={`${fields.street}[0]`}
           id="line1"
-          required={website === 'angelprof'}
+          required={window.location.host.includes('angelprof')}
           formikData={formikData}
           className="border-0 p-0 m-0 text-base  mb-0.5 w-full"
           type="hidden"
